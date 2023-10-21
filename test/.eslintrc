@@ -1,10 +1,7 @@
 {
   "extends": ["eslint:recommended", "airbnb"],
   "rules": {
-    "linebreak-style": [
-      "error",
-      "windows"
-    ],
+    "linebreak-style": 0,
     "comma-dangle": ["error", "always-multiline"],
     "quotes": [2, "single", { "avoidEscape": true }],
     "no-plusplus": "off",
