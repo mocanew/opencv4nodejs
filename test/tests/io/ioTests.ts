@@ -92,7 +92,7 @@ export default function (ctxt: TestContext) {
         getOptionalArg: () => flags,
         expectOutput: (enc: Uint8Array) => {
           const encPrefix = enc.slice(0, pngPrefixLength);
-          const lennaPrefix = getLennaBase64Buf().slice(0, pngPrefixLength);
+          const lennaPrefix = getLennaBase64Buf().subarray(0, pngPrefixLength);
           expect(encPrefix).to.deep.equal(lennaPrefix);
         },
       });
@@ -114,7 +114,7 @@ export default function (ctxt: TestContext) {
         getOptionalArg: () => flags,
         expectOutput: (enc: Uint8Array) => {
           const encPrefix = enc.slice(0, jpgPrefixLength);
-          const lennaPrefix = getGotBase64Buf().slice(0, jpgPrefixLength);
+          const lennaPrefix = getGotBase64Buf().subarray(0, jpgPrefixLength);
           expect(encPrefix).to.deep.equal(lennaPrefix);
         },
       });

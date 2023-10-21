@@ -665,7 +665,7 @@ export default function (args: TestContext) {
 
     describe('connectedComponentsWithStats', () => {
       const expectOutput = (res: { labels: Mat, stats: Mat, centroids: Mat }, dut: Mat, args2: Parameters<Mat['connectedComponentsWithStats']>) => {
-        const assertType = ((args2 as any)[1] === cv.CV_16U || (args2[0] && args2[0].ltype === cv.CV_16U)) ? cv.CV_16U : cv.CV_32S;
+        const assertType = ((args2 as unknown as [number, number])[1] === cv.CV_16U || (args2[0] && args2[0].ltype === cv.CV_16U)) ? cv.CV_16U : cv.CV_32S;
         expect(res).to.have.property('labels').instanceOf(cv.Mat);
         expect(res).to.have.property('stats').instanceOf(cv.Mat);
         expect(res).to.have.property('centroids').instanceOf(cv.Mat);

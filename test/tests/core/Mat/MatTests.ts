@@ -97,7 +97,7 @@ export default function (args: TestContext) {
       assertDataDeepEquals(new cv.Mat(2, 2, cv.CV_8U, data, 2).getDataAsArray(), expected);
     });
 
-    const bigBuffer = Buffer.concat([data.slice(0, 2), data.slice(0, 1), data.slice(2), data.slice(0, 1)]);
+    const bigBuffer = Buffer.concat([data.subarray(0, 2), data.subarray(0, 1), data.subarray(2), data.subarray(0, 1)]);
 
     it('should work constructable from rows, cols, type, data linesize 3', () => {
       assertDataDeepEquals(new cv.Mat(2, 2, cv.CV_8U, bigBuffer, 3).getDataAsArray(), expected);
@@ -267,7 +267,7 @@ export default function (args: TestContext) {
       [0, 0, 0],
     ], cv.CV_8U);
 
-    const srcData = Buffer.from([1,2,3,4,5,6]);
+    const srcData = Buffer.from([1, 2, 3, 4, 5, 6]);
 
     describe('sync', () => {
       it('should copy the buffer into Mat', () => {
@@ -278,7 +278,6 @@ export default function (args: TestContext) {
         ], matC1.getDataAsArray());
       });
     });
-
   });
 
   describe('discrete transform', () => {
