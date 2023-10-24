@@ -58,6 +58,10 @@ export class TestContext {
    * lerna cached image resized too 250
    */
   private lerna250?: Mat;
+
+  /**
+   * lerna cached Mask image resized too 512 threshold at 128 (CV_8U)
+   */
   private maskLerna512?: Mat;
 
   public dataPrefix = '../data';
@@ -72,10 +76,11 @@ export class TestContext {
 
   public getTestMask: () => Mat = () => {
     if (!this.maskLerna512) {
-      this.maskLerna512 = (new this.cv.Mat([[0],[255]], this.cv.CV_8U)).resize(512, 512).threshold(128, 255, this.cv.CV_8U);
+      this.maskLerna512 = (new this.cv.Mat([[0], [255]], this.cv.CV_8U)).resize(512, 512).threshold(128, 255, this.cv.CV_8U);
     }
     return this.maskLerna512;
   };
+
   /**
    * @returns lerna image resize to a 250 px square
    */

@@ -54,7 +54,7 @@ export default function (args: TestContext) {
       if (msec === 83) { // openCV 3.4.6 and below
         expect(msec).to.equal(83);
       } else { // openCV 3.4.8 and over
-        expect(msec).to.equal(1001);
+        expect(msec).to.equal(1001, `OpenCV V3.4.8 and over (current V${cv.getVersionString()}), should return 1001`);
       }
       expect(wasSet).to.equal(true);
     });
