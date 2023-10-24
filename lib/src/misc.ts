@@ -9,6 +9,20 @@ export type MatTypes = typeof allTypes[number];
  */
 export default function (cv: typeof openCV): void {
     /**
+     * Check declaration and doc in cv.d.ts
+     */ 
+    cv.getVersion = function(): [number, number, number] {
+        return [cv.getVersionMajor(), cv.getVersionMinor(), cv.getVersionRevision()]
+    }
+
+    /**
+     * Check declaration and doc in cv.d.ts
+     */ 
+    cv.getVersionString = function(): string {
+        return `${cv.getVersionMajor()}.${cv.getVersionMinor()}.${cv.getVersionRevision()}`;
+    }
+
+    /**
      * Convert a Mat type to string for easy read
      * non Natif code
      * @param type Mat type as int value
