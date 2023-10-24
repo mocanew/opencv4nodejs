@@ -52,7 +52,8 @@ jobs:
           # - 3.4.16
         node_version:
           # - 16
-          - 18
+          # - 18
+          - 20
         architecture:
           - x64
     steps:
