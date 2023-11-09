@@ -763,4 +763,24 @@ export default function (args: TestContext) {
     describe('Solve y = x equation on Id = X Id', makeTest([[1, 0, 0], [0, 1, 0], [0, 0, 1]], [[1, 0, 0], [0, 1, 0], [0, 0, 1]], cv.DECOMP_LU, [[1, 0, 0], [0, 1, 0], [0, 0, 1]]));
     describe('Solve y = x equation on Id = X Id', makeTest([[1, 2], [3, 4]], [[5, 6], [7, 8]], cv.DECOMP_LU, [[-3, -4], [4, 5]]));
   });
+
+  describe('magnitude', () => {
+    const x = new cv.Mat([[0, 1]], cv.CV_8U);
+    const y = new cv.Mat([[0, -1]], cv.CV_8U);
+
+    const expectOutput = (res: Mat) => {
+      expect(res).to.be.instanceOf(cv.Mat);
+    };
+
+    generateAPITests({
+      getDut: () => cv,
+      hasAsync: true,
+      methodName: 'magnitude',
+      getRequiredArgs: () => ([
+        x, y,
+      ]),
+      expectOutput,
+    });
+  });
+
 }
