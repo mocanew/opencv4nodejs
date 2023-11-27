@@ -765,8 +765,8 @@ export default function (args: TestContext) {
   });
 
   describe('magnitude', () => {
-    const x = new cv.Mat([[0, 1]], cv.CV_8U);
-    const y = new cv.Mat([[0, -1]], cv.CV_8U);
+    const x = new cv.Mat([[0, 1]], cv.CV_32F);
+    const y = new cv.Mat([[0, -1]], cv.CV_32F);
 
     const expectOutput = (res: Mat) => {
       expect(res).to.be.instanceOf(cv.Mat);
