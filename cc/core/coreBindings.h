@@ -285,6 +285,7 @@ namespace CoreBindings {
 		};
 	};
 
+	/*
 	class Magnitude: public CvBinding {
 	public:
 		void setup() {
@@ -297,6 +298,7 @@ namespace CoreBindings {
 			};
 		};
 	};
+	*/
 
 }
 

@@ -65,8 +65,8 @@ NAN_MODULE_INIT(Core::Init) {
   Nan::SetMethod(target, "solve", Solve);
   Nan::SetMethod(target, "solveAsync", SolveAsync);
 
-  Nan::SetMethod(target, "magnitude", Magnitude);
-  Nan::SetMethod(target, "magnitudeAsync", MagnitudeAsync);
+  // Nan::SetMethod(target, "magnitude", Magnitude);
+  // Nan::SetMethod(target, "magnitudeAsync", MagnitudeAsync);
 
   Nan::SetMethod(target, "getTickFrequency", GetTickFrequency);
   Nan::SetMethod(target, "getTickCount", GetTickCount);
@@ -407,13 +407,13 @@ NAN_METHOD(Core::SolveAsync) {
 	FF::asyncBinding<CoreBindings::Solve>("Core", "Solve", info);
 }
 
-NAN_METHOD(Core::Magnitude) {
-  FF::syncBinding<CoreBindings::Magnitude>("Core", "Magnitude", info);
-}
+// NAN_METHOD(Core::Magnitude) {
+//   FF::syncBinding<CoreBindings::Magnitude>("Core", "Magnitude", info);
+// }
 
-NAN_METHOD(Core::MagnitudeAsync) {
-  FF::asyncBinding<CoreBindings::Magnitude>("Core", "Magnitude", info);
-}
+// NAN_METHOD(Core::MagnitudeAsync) {
+//   FF::asyncBinding<CoreBindings::Magnitude>("Core", "Magnitude", info);
+// }
 
 NAN_METHOD(Core::GetTickFrequency) {
   info.GetReturnValue().Set(FF::IntConverter::wrap(cv::getTickFrequency()));
