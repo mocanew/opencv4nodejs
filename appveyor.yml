@@ -80,6 +80,7 @@ build: false
 test_script:
   - python --version
   - node --version
+  - choco install python --version=%PYTHON_VERSION% -y
   - npm install -g pnpm@8.15.3
   # - pnpm install -g node-gyp
   - cd c:\projects\opencv4nodejs
