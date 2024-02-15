@@ -33,7 +33,7 @@ environment:
   matrix:
     - 
       OPENCVV: "%OPENCV4_N0%"
-      NODEV: 16
+      NODEV: 20
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     #- 
     #  OPENCVV: "%OPENCV4_N1%"
@@ -51,7 +51,7 @@ environment:
 
     - 
       OPENCVV: "%OPENCV4_N0%"
-      NODEV: 16
+      NODEV: 20
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     #- 
     #  OPENCVV: "%OPENCV4_N1%"
