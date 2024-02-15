@@ -25,8 +25,8 @@ environment:
   # OPENCV4_N2: 4.5.1 #
   # OPENCV3_N0: 4.5.0 #
 
-  PYTHON_VERSION: 3.8
-  PYTHON: "C:\\Python38-x64"
+  PYTHON_VERSION: 3.9
+  PYTHON: "C:\\Python39-x64"
   # use self build
   OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
 
@@ -78,6 +78,7 @@ install:
 build: false
 
 test_script:
+  - python --version
   - node --version
   - npm install -g pnpm@8.15.3
   # - pnpm install -g node-gyp
