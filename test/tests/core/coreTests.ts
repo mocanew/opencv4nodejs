@@ -764,7 +764,6 @@ export default function (args: TestContext) {
     describe('Solve y = x equation on Id = X Id', makeTest([[1, 2], [3, 4]], [[5, 6], [7, 8]], cv.DECOMP_LU, [[-3, -4], [4, 5]]));
   });
 
-  /*
   describe('magnitude', () => {
     const x = new cv.Mat([[0, 1]], cv.CV_32F);
     const y = new cv.Mat([[0, -1]], cv.CV_32F);
@@ -783,6 +782,5 @@ export default function (args: TestContext) {
       expectOutput,
     });
   });
-  */
 
 }

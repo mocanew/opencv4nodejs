@@ -285,8 +285,7 @@ namespace CoreBindings {
 		};
 	};
 
-	/*
-	class Magnitude: public CvBinding {
+	class Magnitude : public CvBinding {
 	public:
 		void setup() {
 			auto x = req<Mat::Converter>();
@@ -298,7 +297,6 @@ namespace CoreBindings {
 			};
 		};
 	};
-	*/
 
 }
 
