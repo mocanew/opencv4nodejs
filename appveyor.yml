@@ -25,15 +25,15 @@ environment:
   # OPENCV4_N2: 4.5.1 #
   # OPENCV3_N0: 4.5.0 #
 
-  PYTHON_VERSION: 3.8
-  PYTHON: "C:\\Python38-x64"
+  PYTHON_VERSION: 3.9
+  PYTHON: "C:\\Python39-x64"
   # use self build
   OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
 
   matrix:
     - 
       OPENCVV: "%OPENCV4_N0%"
-      NODEV: 16
+      NODEV: 20
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2022
     #- 
     #  OPENCVV: "%OPENCV4_N1%"
@@ -51,7 +51,7 @@ environment:
 
     - 
       OPENCVV: "%OPENCV4_N0%"
-      NODEV: 16
+      NODEV: 20
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
     #- 
     #  OPENCVV: "%OPENCV4_N1%"
@@ -78,8 +78,10 @@ install:
 build: false
 
 test_script:
+  - python --version
   - node --version
-  - npm install -g pnpm@8.6.2
+  # - choco install python --version=%PYTHON_VERSION% -y
+  - npm install -g pnpm@8.15.3
   # - pnpm install -g node-gyp
   - cd c:\projects\opencv4nodejs
   - pnpm install --frozen-lockfile
