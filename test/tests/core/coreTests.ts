@@ -765,11 +765,15 @@ export default function (args: TestContext) {
   });
 
   describe('magnitude', () => {
-    const x = new cv.Mat([[0, 1]], cv.CV_32F);
-    const y = new cv.Mat([[0, -1]], cv.CV_32F);
+    const x = new cv.Mat([[2,0],[0,-2]], cv.CV_32F);
+    const y = new cv.Mat([[0,1],[-1,0]], cv.CV_32F);
 
     const expectOutput = (res: Mat) => {
       expect(res).to.be.instanceOf(cv.Mat);
+      // Yields: [[2, 1],[1, 2]]
+      expect(res.at(0,0).to.equal(2))
+      expect(res.at(0,1).to.equal(1))
+      expect(res.at(1,1).to.equal(2))
     };
 
     generateAPITests({
