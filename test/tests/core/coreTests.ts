@@ -771,9 +771,9 @@ export default function (args: TestContext) {
     const expectOutput = (res: Mat) => {
       expect(res).to.be.instanceOf(cv.Mat);
       // Yields: [[2, 1],[1, 2]]
-      expect(res.at(0,0).to.equal(2))
-      expect(res.at(0,1).to.equal(1))
-      expect(res.at(1,1).to.equal(2))
+      expect(res.at(0,0)).to.equal(2)
+      expect(res.at(0,1)).to.equal(1)
+      expect(res.at(1,1)).to.equal(2)
     };
 
     generateAPITests({
