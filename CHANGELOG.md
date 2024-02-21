@@ -1,5 +1,8 @@
 # changelog
 
+## Version 6.5.3
+-  add cv.magnitude [PR-118](https://github.com/UrielCh/opencv4nodejs/pull/118)
+
 ## Version 6.5.2
 - fix typing error
 
