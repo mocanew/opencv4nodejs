@@ -220,3 +220,6 @@ export function minAsync(src1: Mat, src2: Mat, dst: Mat): Promise<Mat>;
 
 export function max(src1: Mat, src2: Mat, dst: Mat): Mat;
 export function maxAsync(src1: Mat, src2: Mat, dst: Mat): Promise<Mat>;
+
+export function magnitude(x: Mat, y: Mat, magnitude: Mat): Mat;
+export function magnitudeAsync(x: Mat, y: Mat, magnitude: Mat): Promise<Mat>;

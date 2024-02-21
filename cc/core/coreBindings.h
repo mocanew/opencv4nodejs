@@ -285,6 +285,19 @@ namespace CoreBindings {
 		};
 	};
 
+	class Magnitude : public CvBinding {
+	public:
+		void setup() {
+			auto x = req<Mat::Converter>();
+			auto y = req<Mat::Converter>();
+			auto magnitude = ret<Mat::Converter>("magnitude");
+
+			executeBinding = [=]() {
+				cv::magnitude(x->ref(), y->ref(), magnitude->ref());
+			};
+		};
+	};
+
 }
 
 #endif
