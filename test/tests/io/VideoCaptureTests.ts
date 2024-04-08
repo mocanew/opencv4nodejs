@@ -53,6 +53,8 @@ export default function (args: TestContext) {
       // depending of openCV version, result can be 83 or 1001
       if (msec === 83) { // openCV 3.4.6 and below
         expect(msec).to.equal(83);
+      } else if (msec === 1000) {
+        expect(msec).to.equal(1000);
       } else { // openCV 3.4.8 and over
         expect(msec).to.equal(1001, `OpenCV V3.4.8 and over (current V${cv.getVersionString()}), should return 1001`);
       }
@@ -68,8 +70,10 @@ export default function (args: TestContext) {
       const msec = cap.get(cv.CAP_PROP_POS_MSEC) | 0;
       if (msec === 83) { // openCV 3.4.6 and below
         expect(msec).to.equal(83);
-      } else { // openCV 3.4.8 and over
+      } else if (msec === 1001) { // openCV 3.7.0 +
         expect(msec).to.equal(1001);
+      } else {
+        expect(msec).to.equal(1000);
       }
       expect(wasSet).to.equal(true);
       return true;
