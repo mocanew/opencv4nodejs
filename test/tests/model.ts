@@ -138,3 +138,10 @@ export class TestContext {
     return `${this.dataPrefix}/traffic.mp4`;
   };
 }
+
+const singleton = new TestContext(realCV);
+
+export function getTestContext(): TestContext {
+  return singleton;
+}
+// static singleton: TestContext;

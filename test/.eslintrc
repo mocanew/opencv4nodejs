@@ -12,13 +12,13 @@
     "no-underscore-dangle": 0,
     "no-nested-ternary": 0,
     "radix": 0,
-
     // unit tests only
     "max-len" : 0,
     "no-new" : 0,
     "no-unused-expressions": 0,
-    "prefer-spread": 0
-
+    "prefer-spread": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-explicit-any": 0
   },
   "env": {
     "es6": true,
