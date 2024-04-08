@@ -122,7 +122,7 @@
 		],
 
 		"cflags" : [
-			"-std=c++14"
+			"-std=c++17"
 		],
 		"cflags!" : [
 			"-fno-exceptions"
@@ -136,7 +136,7 @@
 		],
 		"xcode_settings": {
 			"OTHER_CFLAGS": [
-				"-std=c++14",
+				"-std=c++17",
 				"-stdlib=libc++"
 			],
 			"GCC_ENABLE_CPP_EXCEPTIONS": "YES",
