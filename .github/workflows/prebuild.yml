@@ -76,9 +76,6 @@ jobs:
       run: |
         choco install OpenCV -y --version ${{ matrix.opencv_version }}
 
-    - name: look for OpenCV
-      run: |
-        dir c:/tools/opencv/build/x64/vc16
     - name: add path to PATH environment variable
       uses: myci-actions/export-env-var-powershell@1
       with:
