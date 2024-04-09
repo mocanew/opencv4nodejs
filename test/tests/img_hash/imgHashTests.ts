@@ -1,10 +1,13 @@
-import { expect } from 'chai';
+import chai, { expect } from 'chai';
+import chaiArrays from 'chai-arrays';
 import { PHash } from '../../../typings';
 import { generateAPITests } from '../../utils/generateAPITests';
-import { TestContext } from '../model';
+import { getTestContext } from '../model';
 
-export default (args: TestContext) => (ImgHash: typeof PHash) => {
-  const { getTestImg } = args;
+chai.use(chaiArrays);
+
+export default () => (ImgHash: typeof PHash) => {
+  const { getTestImg } = getTestContext();
 
   describe('constructor', () => {
     it('is constructable without args', () => {

@@ -6,14 +6,14 @@ settings:
 
 dependencies:
   '@u4/opencv-build':
-    specifier: 0.7.8
-    version: 0.7.8
+    specifier: ^0.8.3
+    version: 0.8.3
   '@u4/tiny-glob':
     specifier: ^0.3.2
     version: 0.3.2
   nan:
-    specifier: ^2.18.0
-    version: 2.18.0
+    specifier: ^2.19.0
+    version: 2.19.0
   node-gyp:
     specifier: ^10.0.1
     version: 10.0.1
@@ -374,8 +374,8 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@u4/opencv-build@0.7.8:
-    resolution: {integrity: sha512-5f+osZgNi5YnBsDKB7l/y4DCRwbjrKeAj1zTKYeUO0C7IeFMd7eG2bK/78vTGQuALWs2lk7bU1VUwIeHfpKEBw==}
+  /@u4/opencv-build@0.8.3:
+    resolution: {integrity: sha512-MtJB2Khu4L+HjBEzdyzEJFteb12NMWjHPTH7vhZqcAbTAwbguewzY5wyqvNdeYfF93xTAvqf5nLwnNJ9z90Fzg==}
     hasBin: true
     dependencies:
       '@u4/tiny-glob': 0.3.2
@@ -2266,8 +2266,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /nan@2.18.0:
-    resolution: {integrity: sha512-W7tfG7vMOGtD30sHoZSSc/JVYiyDPEyQVso/Zz+/uQd0B0L46gtC+pHha5FFMRpil6fm/AoEcRWyOVi4+E/f8w==}
+  /nan@2.19.0:
+    resolution: {integrity: sha512-nO1xXxfh/RWNxfd/XPfbIfFk5vgLsAxUR9y5O0cHMJu/AW9U95JLXqthYHjEp+8gQ5p96K9jUp8nbVOxCdRbtw==}
     dev: false
 
   /natural-compare@1.4.0:

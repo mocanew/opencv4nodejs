@@ -333,8 +333,8 @@ or use OPENCV4NODEJS_* env variable.`);
                 `CV_VERSION_REVISION=${cvVersion[2]}`,
                 ...OPENCV4NODEJS_DEFINES
             ],
-            "cStandard": "c11",
-            "cppStandard": "c++11",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
             // "compilerArgs": [ "-std=c++11" ]
         };
         if (process.platform === 'win32') {
@@ -361,6 +361,10 @@ or use OPENCV4NODEJS_* env variable.`);
         console.log('');
     }
     else {
+        // for (const key in process.env) {
+        //     if (key.startsWith('OPENCV'))
+        //         console.log(`export ${key}=${process.env[key]}`);
+        // }
         const child = child_process.exec(nodegypCmd, { maxBuffer: Infinity, cwd }, function (error /*, stdout, stderr*/) {
             // fs.unlinkSync(realGyp);
             const bin = buildOptions.extra.electron ? 'electron-rebuild' : 'node-gyp';

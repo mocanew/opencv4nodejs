@@ -1,8 +1,8 @@
 import type openCV from '@u4/opencv4nodejs';
-import { generateAPITests, getDefaultAPITestOpts } from './generateAPITests';
+import { generateAPITests, getDefaultAPITestOpts, PartialAPITestOpts } from './generateAPITests';
 import { APITestOpts } from '../tests/model';
 
-const generateClassMethodTestsFactory = (cv: typeof openCV) => (opts: Partial<APITestOpts>) => {
+const generateClassMethodTestsFactory = (cv: typeof openCV) => (opts: PartialAPITestOpts) => {
   const {
     getClassInstance,
     classNameSpace,

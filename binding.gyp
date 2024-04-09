@@ -120,14 +120,15 @@
 			"cc/highgui/highgui.cc",
 			"cc/highgui/highguiConstants.cc",
 		],
-
 		"cflags" : [
-			"-std=c++14"
+			"-std=c++17"
 		],
 		"cflags!" : [
+			"-std=c++17",
 			"-fno-exceptions"
 		],
 		"cflags_cc!": [
+			"-std=c++17",
 			"-fno-rtti",
 			"-fno-exceptions"
 		],
@@ -136,7 +137,7 @@
 		],
 		"xcode_settings": {
 			"OTHER_CFLAGS": [
-				"-std=c++14",
+				"-std=c++17",
 				"-stdlib=libc++"
 			],
 			"GCC_ENABLE_CPP_EXCEPTIONS": "YES",
@@ -175,7 +176,6 @@
 				"cflags": ["--coverage"],
 				"ldflags": ["--coverage"]
 			},
-    }
-
+    	}
 	}]
 }

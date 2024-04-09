@@ -11,5 +11,5 @@
     "declarationMap": true,
   },
   //"files": [ "./install/install.ts", "./install/parseEnv.ts" ]
-  "include": [ "./install/*.ts", "./lib/**/*.ts" ]
+  "include": [ "./install/*.ts", "./lib/**/*.ts"]
 }
