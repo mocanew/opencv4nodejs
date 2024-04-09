@@ -22,43 +22,30 @@ export const getDefaultAPITestOpts = (opts: PartialAPITestOpts): APITestOpts => 
 // eslint-disable-next-line no-unused-vars
 type DoneError = (err?: unknown) => void;
 
-export const generateAPITests = (opts: PartialAPITestOpts): void => {
-  const {
-    getDut,
-    methodName,
-    methodNameSpace,
-    expectOutput,
-    getOptionalArg,
-    getOptionalArgsMap,
-    hasAsync,
-    otherSyncTests,
-    otherAsyncCallbackedTests,
-    otherAsyncPromisedTests,
-    beforeHook,
-    afterHook,
-  } = getDefaultAPITestOpts(opts);
+export const generateAPITests = (opts_: PartialAPITestOpts): void => {
+  const opts = getDefaultAPITestOpts(opts_);
 
-  const methodNameAsync = `${methodName}Async`;
+  const methodNameAsync = `${opts.methodName}Async`;
   const getRequiredArgs = opts.getRequiredArgs || getEmptyArray;
-  const getOptionalArgs = getOptionalArg
-    ? () => [getOptionalArg()]
-    : (getOptionalArgsMap
-      ? () => getOptionalArgsMap().map((kv: [string, any]) => kv[1])
+  const getOptionalArgs = opts.getOptionalArg
+    ? () => [opts.getOptionalArg()]
+    : (opts.getOptionalArgsMap
+      ? () => opts.getOptionalArgsMap().map((kv: [string, any]) => kv[1])
       : getEmptyArray
     );
   const getOptionalArgsObject = () => {
     const optionalArgsObject: {[key: string]: any} = {};
-    getOptionalArgsMap().forEach(([k, v]: [string, any]) => { optionalArgsObject[k] = v; });
+    opts.getOptionalArgsMap().forEach(([k, v]: [string, any]) => { optionalArgsObject[k] = v; });
     return optionalArgsObject;
   };
   const prefix = opts.prefix ? `${opts.prefix} ` : '';
   const hasRequiredArgs = !!opts.getRequiredArgs;
-  const hasOptArgs = !!getOptionalArg || !!getOptionalArgsMap;
-  const hasOptArgsObject = !!getOptionalArgsMap;
+  const hasOptArgs = !!opts.getOptionalArg || !!opts.getOptionalArgsMap;
+  const hasOptArgsObject = !!opts.getOptionalArgsMap;
 
   const expectAsyncOutput = (done: DoneError, dut: OpenCV, args: any[], res: any) => {
     try {
-      expectOutput(res, dut, args);
+      opts.expectOutput(res, dut, args);
       done();
     } catch (err2) {
       done(err2);
@@ -76,14 +63,14 @@ export const generateAPITests = (opts: PartialAPITestOpts): void => {
   const expectOutputPromisified = (done: DoneError, dut: OpenCV, args: any[]) => (res: any) => expectAsyncOutput(done, dut, args, res);
 
   const generateTests = (type: 'callbacked' | 'promised' | 'sync') => {
-    const method = (type === 'sync') ? methodName : methodNameAsync;
+    const method = (type === 'sync') ? opts.methodName : methodNameAsync;
     const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
-    const getErrPrefix = () => `${(methodNameSpace ? `${methodNameSpace}::` : '')}${capitalize(method)} - Error:`;
+    const getErrPrefix = () => `${(opts.methodNameSpace ? `${opts.methodNameSpace}::` : '')}${capitalize(method)} - Error:`;
     const typeErrMsg = (argN: number) => `${getErrPrefix()} expected argument ${argN} to be of type`;
     const propErrMsg = (prop: string) => `${getErrPrefix()} expected property ${prop} to be of type`;
 
     const expectSuccess = (args: any[], done: DoneError) => {
-      const dut = getDut();
+      const dut = opts.getDut();
       switch (type) {
         case 'promised': // Use Promise
           return dut[method].apply(dut, args)
@@ -94,13 +81,13 @@ export const generateAPITests = (opts: PartialAPITestOpts): void => {
           return dut[method].apply(dut, args);
         default: // Use Sync
           const result = dut[method].apply(dut, args);
-          expectOutput(result, dut, args);
+          opts.expectOutput(result, dut, args);
           return done();
       }
     };
 
     const expectError = (args: any[], errMsg: string, done: DoneError) => {
-      const dut = getDut();
+      const dut = opts.getDut();
       switch (type) {
         case 'promised': // Use Promise
         return dut[method].apply(dut, args)
@@ -160,7 +147,7 @@ export const generateAPITests = (opts: PartialAPITestOpts): void => {
         });
 
         it(`${prefix}should throw if opt arg object prop invalid`, (done: DoneError) => {
-          const prop = getOptionalArgsMap()[0][0];
+          const prop = opts.getOptionalArgsMap()[0][0];
           const args = getRequiredArgs().slice().concat({
             [prop]: undefined,
           });
@@ -171,52 +158,52 @@ export const generateAPITests = (opts: PartialAPITestOpts): void => {
   };
 
   describe('sync', () => {
-    if (beforeHook) {
-      beforeEach(() => beforeHook());
+    if (opts.beforeHook) {
+      beforeEach(() => opts.beforeHook());
     }
-    if (afterHook) {
-      afterEach(() => afterHook());
+    if (opts.afterHook) {
+      afterEach(() => opts.afterHook());
     }
 
     if (hasRequiredArgs) {
-      funcShouldRequireArgs(() => getDut()[methodName]());
+      funcShouldRequireArgs(() => opts.getDut()[opts.methodName]());
     }
 
     generateTests('sync');
 
-    otherSyncTests();
+    opts.otherSyncTests();
   });
 
-  if (hasAsync) {
+  if (opts.hasAsync) {
     describe(`${prefix}async`, () => {
       if (hasRequiredArgs) {
-        asyncFuncShouldRequireArgs(() => getDut()[methodNameAsync]());
+        asyncFuncShouldRequireArgs(() => opts.getDut()[methodNameAsync]());
       }
 
       describe(`${prefix}callbacked`, () => {
-        if (beforeHook) {
-          beforeEach(() => beforeHook());
+        if (opts.beforeHook) {
+          beforeEach(() => opts.beforeHook());
         }
-        if (afterHook) {
-          afterEach(() => afterHook());
+        if (opts.afterHook) {
+          afterEach(() => opts.afterHook());
         }
 
         generateTests('callbacked');
 
-        otherAsyncCallbackedTests();
+        opts.otherAsyncCallbackedTests();
       });
 
       describe(`${prefix}promisified`, () => {
-        if (beforeHook) {
-          beforeEach(() => beforeHook());
+        if (opts.beforeHook) {
+          beforeEach(() => opts.beforeHook());
         }
-        if (afterHook) {
-          afterEach(() => afterHook());
+        if (opts.afterHook) {
+          afterEach(() => opts.afterHook());
         }
 
         generateTests('promised');
 
-        otherAsyncPromisedTests();
+        opts.otherAsyncPromisedTests();
       });
     });
   }

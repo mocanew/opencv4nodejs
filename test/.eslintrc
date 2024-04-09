@@ -11,11 +11,7 @@
   "plugins": [
     "@typescript-eslint"
   ],
-  "extends": [
-    "eslint:recommended",
-    "airbnb",
-    "plugin:@typescript-eslint/recommended",
-  ],
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/eslint-recommended", "plugin:@typescript-eslint/recommended"],
   "rules": {
     "linebreak-style": 0,
     "comma-dangle": ["error", "always-multiline"],
@@ -40,13 +36,5 @@
     "es6": true,
     "node": true,
     "mocha": true
-  },
-  "settings": {
-    "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
-    },
-    "import/resolver": {
-      "typescript": {} // This helps ESLint resolve import paths for TypeScript files
-    }
   }
 }
