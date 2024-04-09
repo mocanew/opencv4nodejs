@@ -83,7 +83,7 @@ if (toTest.io) {
       const pngPrefixLength = 18;
 
       const ext = '.png';
-      const flags = [cv.IMWRITE_PNG_COMPRESSION];
+      const flags = [cv.IMWRITE_PNG_COMPRESSION, 75];
       generateAPITests({
         prefix: 'io imencode png',
         getDut: () => cv,
@@ -105,7 +105,7 @@ if (toTest.io) {
       const jpgPrefixLength = 12;
 
       const ext = '.jpg';
-      const flags = [cv.IMWRITE_JPEG_QUALITY];
+      const flags = [cv.IMWRITE_JPEG_QUALITY, 75];
       generateAPITests({
         prefix: 'io imencode jpg',
         getDut: () => cv,

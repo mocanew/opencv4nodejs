@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@u4/opencv-build':
-    specifier: 0.8.1
-    version: 0.8.1
+    specifier: ^0.8.3
+    version: 0.8.3
   '@u4/tiny-glob':
     specifier: ^0.3.2
     version: 0.3.2
@@ -374,8 +374,8 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@u4/opencv-build@0.8.1:
-    resolution: {integrity: sha512-M77A6PvGpGGrEvgNB2yPEyl4r24GUo+8AvR5q+r3Scm4bU5Uxl7J3zClJPMB7bbtkkfcMWdVPnB3vYu3tM044Q==}
+  /@u4/opencv-build@0.8.3:
+    resolution: {integrity: sha512-MtJB2Khu4L+HjBEzdyzEJFteb12NMWjHPTH7vhZqcAbTAwbguewzY5wyqvNdeYfF93xTAvqf5nLwnNJ9z90Fzg==}
     hasBin: true
     dependencies:
       '@u4/tiny-glob': 0.3.2

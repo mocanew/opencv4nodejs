@@ -120,14 +120,15 @@
 			"cc/highgui/highgui.cc",
 			"cc/highgui/highguiConstants.cc",
 		],
-
 		"cflags" : [
 			"-std=c++17"
 		],
 		"cflags!" : [
+			"-std=c++17",
 			"-fno-exceptions"
 		],
 		"cflags_cc!": [
+			"-std=c++17",
 			"-fno-rtti",
 			"-fno-exceptions"
 		],
@@ -175,7 +176,6 @@
 				"cflags": ["--coverage"],
 				"ldflags": ["--coverage"]
 			},
-    }
-
+    	}
 	}]
 }
