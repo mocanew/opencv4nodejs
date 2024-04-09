@@ -19,6 +19,8 @@ if (toTest.io) {
   const {
     cv,
     getTestImagePath,
+    getLennaPngPath,
+    getGotJpgPath,
   } = getTestContext();
 
   let lenna: Mat;
@@ -31,11 +33,11 @@ if (toTest.io) {
   // let imageData: Buffer;
   // let imageDataCopy: Buffer;
 
-  const lennaBase64File = fs.readFileSync(path.join(__dirname, 'data/lennaBase64.json'), { encoding: 'utf8', flag: 'r' });
-  const gotBase64File = fs.readFileSync(path.join(__dirname, 'data/gotBase64.json'), { encoding: 'utf8', flag: 'r' });
   before(() => {
-    lenna = cv.imread(getTestImagePath(true));
-    got = cv.imread(getTestImagePath(false));
+    lenna = cv.imread(getLennaPngPath());
+    got = cv.imread(getGotJpgPath());
+    const lennaBase64File = fs.readFileSync(path.join(__dirname, 'data/lennaBase64.json'), { encoding: 'utf8', flag: 'r' });
+    const gotBase64File = fs.readFileSync(path.join(__dirname, 'data/gotBase64.json'), { encoding: 'utf8', flag: 'r' });
     lennaBase64Buf = Buffer.from(JSON.parse(lennaBase64File).data, 'base64');
     gotBase64Buf = Buffer.from(JSON.parse(gotBase64File).data, 'base64');
     // imageData = fs.readFileSync(getTestImagePath(true));
@@ -124,8 +126,6 @@ if (toTest.io) {
 
   describe('io imdecode', () => {
     describe('io imdecode sync', () => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore:next-line
       funcShouldRequireArgs(cv.imdecode);
 
       it('should decode png', () => {

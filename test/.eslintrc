@@ -1,5 +1,21 @@
 {
-  "extends": ["eslint:recommended", "airbnb"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "project": "./tsconfig.json"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+  ],
   "rules": {
     "linebreak-style": 0,
     "comma-dangle": ["error", "always-multiline"],
@@ -24,5 +40,13 @@
     "es6": true,
     "node": true,
     "mocha": true
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {} // This helps ESLint resolve import paths for TypeScript files
+    }
   }
 }

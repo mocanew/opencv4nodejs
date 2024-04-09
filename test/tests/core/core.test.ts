@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 import { Mat, Point2, Point3 } from '@u4/opencv4nodejs';
 import asyncHooks from 'async_hooks';
-import { getTestContext } from '../model';
+import { getTestContext, TestContext } from '../model';
 import {
   assertPropsWithValue,
   expectToBeVec2,
@@ -26,8 +26,9 @@ if (toTest.core) {
   const {
     cv,
     generateClassMethodTests,
-    getNodeMajorVersion,
   } = args;
+
+  const {getNodeMajorVersion} = TestContext;
 
   const partitionTests = (createInstance: () => Point2) => {
     it('should return labels and numLabels', () => {

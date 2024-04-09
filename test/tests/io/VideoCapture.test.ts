@@ -4,8 +4,9 @@ import { expect } from 'chai';
 import * as path from 'path';
 import { assertMetaData } from '../../utils/matTestUtils';
 import { getTestContext } from '../model';
+import toTest from '../toTest';
 
-export default function () {
+if (toTest.io && !process.env.DOCKER_BUILD && !process.env.BINDINGS_DEBUG) {
   const { cv, getTestVideoPath } = getTestContext();
 
   describe('constructor', () => {

@@ -1,6 +1,3 @@
-/* eslint-disable arrow-body-style */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-unused-vars */
 import { cv as realCV, Mat } from '@u4/opencv4nodejs';
 import fs from 'fs';
 import path from 'path';
@@ -9,28 +6,31 @@ import generateClassMethodTestsFactory from '../utils/generateClassMethodTests';
 export type OpenCV = typeof realCV
 
 export interface APITestOpts {
-    prefix?: string,
-    getDut?: () => any,
-    methodName?: string,
-    methodNameSpace?: string,
-    expectOutput?: (res: any, dut: any, args: any) => void,
-    getOptionalArg?: () => any,
-    getOptionalArgsMap?: () => { [key: string]: any },
 
-    getClassInstance: () => any,
+    getDut: () => any,
+    methodName: string,
+    getRequiredArgs?: () => any[], // optional
+    getOptionalArg?: () => any, // optional
+    getOptionalArgsMap?: () => { [key: string]: any }, // optional
+    prefix?: string, // optional
+    methodNameSpace?: string, // optional
+
+    // eslint-disable-next-line no-unused-vars
+    expectOutput?: (res: any, dut: any, args: any) => void,
+
+    getClassInstance?: () => any,
     classNameSpace?: string,
 
-    getRequiredArgs?: () => any[],
     // getOptionalParamsMap?: () => Array<[string, any]|[string]|[number]>,
     getOptionalParams?: () => Array<string | number>,
     getOptionalParamsMap?: () => Array<[string, any]>,
 
-    hasAsync: boolean,
-    otherSyncTests: () => void,
-    otherAsyncCallbackedTests: () => void,
-    otherAsyncPromisedTests: () => void,
-    beforeHook: () => void,
-    afterHook: () => void
+    hasAsync?: boolean,
+    otherSyncTests?: () => void,
+    otherAsyncCallbackedTests?: () => void,
+    otherAsyncPromisedTests?: () => void,
+    beforeHook?: (() => void) | null,
+    afterHook?: (() => void) | null,
 }
 
 const matTypeNames = [
@@ -64,7 +64,14 @@ export class TestContext {
    */
   private maskLerna512?: Mat;
 
-  public dataPrefix = '../data';
+  public get dataPrefix(): string {
+    return path.join(__dirname, '..', '..', 'data');
+//     return path.join(__dirname, 'io', 'data');
+  }
+
+  constructor(public cv: OpenCV) {
+    this.generateClassMethodTests = generateClassMethodTestsFactory(cv);
+  }
 
   public getTestImg: () => Mat = () => {
     if (!this.lerna512) {
@@ -99,10 +106,6 @@ export class TestContext {
     return this.people360;
   };
 
-  constructor(public cv: OpenCV) {
-    this.generateClassMethodTests = generateClassMethodTestsFactory(cv);
-  }
-
   public generateIts = (msg: string, testFunc: (type: number) => void, exclusions = new Set<string>()): void => {
     return matTypeNames.filter((type) => !exclusions.has(type)).forEach((type) => {
       it(`${type} ${msg}`, () => testFunc(this.cv[type]));
@@ -123,8 +126,7 @@ export class TestContext {
     return this.cv.version.major === major && this.cv.version.minor === minor && this.cv.version.revision === revision;
   };
 
-  // eslint-disable-next-line class-methods-use-this
-  public getNodeMajorVersion = (): number => {
+  public static getNodeMajorVersion = (): number => {
     return parseInt(process.version.split('.')[0].slice(1));
   };
 
@@ -132,6 +134,14 @@ export class TestContext {
 
   public getTestImagePath = (isPng = true): string => {
     return this.dataPrefix + (isPng ? '/Lenna.png' : '/got.jpg');
+  };
+
+  public getLennaPngPath = (): string => {
+    return `${this.dataPrefix}/Lenna.png`;
+  };
+
+  public getGotJpgPath = (): string => {
+    return `${this.dataPrefix}/got.jpg`;
   };
 
   public getTestVideoPath = (): string => {
