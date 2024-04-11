@@ -98,7 +98,7 @@ namespace FF {
 		}
 
 		static bool prop(Type* val, const char* prop, v8::Local<v8::Object> opts) {
-			if (!FF::HasOwnProperty(opts, prop)) {
+			if (!FF::hasOwnProperty(opts, prop)) {
 				Nan::ThrowError(FF::newString(
 					std::string("expected object to have property: ") 
 					+ std::string(prop)
@@ -112,7 +112,7 @@ namespace FF {
 		static bool optProp(Type* val, const char* prop, v8::Local<v8::Object> opts) {
 			Nan::TryCatch tryCatch;
 			if (
-				FF::HasOwnProperty(opts, prop)
+				FF::hasOwnProperty(opts, prop)
 				&& ConverterImpl::unwrap(val, Nan::Get(opts, Nan::New(prop).ToLocalChecked()).ToLocalChecked())
 				) {
 				if (tryCatch.HasCaught()) {

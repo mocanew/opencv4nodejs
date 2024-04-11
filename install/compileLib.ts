@@ -22,7 +22,6 @@ function log(level: LogLevels | string, prefix: string, message: string, ...args
       npmlog.log(level, prefix, message, ...args);
 }
 
-
 function toBool(value?: string | boolean | number | null) {
     if (!value)
         return false;
