@@ -1,5 +1,9 @@
 # changelog
 
+## Version 6.6.0
+- update gcc flag to enable C++ 17
+- fix code to support latest onpenCV version up to 4.9
+
 ## Version 6.5.3
 -  add cv.magnitude [PR-118](https://github.com/UrielCh/opencv4nodejs/pull/118)
 -  documentation [PR-108](https://github.com/UrielCh/opencv4nodejs/pull/108)
