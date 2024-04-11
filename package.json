@@ -55,7 +55,7 @@
     "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild"
   },
   "dependencies": {
-    "@u4/opencv-build": "^0.8.3",
+    "@u4/opencv-build": "^0.8.4",
     "@u4/tiny-glob": "^0.3.2",
     "nan": "^2.19.0",
     "node-gyp": "^10.1.0",
@@ -64,7 +64,7 @@
   },
   "devDependencies": {
     "@types/mri": "^1.1.5",
-    "@types/node": "^20.12.6",
+    "@types/node": "^20.12.7",
     "@types/npmlog": "^7.0.0",
     "@types/progress": "^2.0.7",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
@@ -79,7 +79,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "progress": "^2.0.3",
     "rimraf": "^4.4.1",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.5"
   },
   "files": [
     "cc",

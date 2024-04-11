@@ -34,6 +34,6 @@
     "chai-arrays": "^2.2.0",
     "rimraf": "^4.4.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.5"
   }
 }
