@@ -34,6 +34,7 @@ namespace FF {
 		T* ptr() {
 			return &val;
 		}
+		virtual ~Value() {}
 	private:
 		T val;
 	};
@@ -54,6 +55,8 @@ namespace FF {
 			return name;
 		}
 
+		virtual ~NamedValue() {}
+
 	private:
 		std::string name;
 	};
@@ -68,6 +71,8 @@ namespace FF {
 		bool unwrapArg(int argN, Nan::NAN_METHOD_ARGS_TYPE info) {
 			return Converter::arg(argN, super::super::ptr(), info);
 		}
+
+		virtual ~Arg() {};
 	};
 
 	template <class Converter>
@@ -89,6 +94,8 @@ namespace FF {
 		bool assertType(v8::Local<v8::Value> jsVal) {
 			return Converter::assertType(jsVal);
 		}
+
+		virtual ~OptArg() {}
 	};
 
 	class BindingBase {

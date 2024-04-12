@@ -22,7 +22,8 @@ namespace CascadeClassifierBindings {
   public:
     cv::CascadeClassifier classifier;
     bool isGpu;
-  
+    virtual ~DetectMultiScaleWorker() {}
+
     DetectMultiScaleWorker(cv::CascadeClassifier classifier, bool isGpu = false) {
       this->classifier = classifier;
       this->isGpu = isGpu;

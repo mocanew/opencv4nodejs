@@ -12,6 +12,7 @@ namespace HOGDescriptorBindings {
     ComputeWorker(	std::shared_ptr<cv::HOGDescriptor> hog) {
       this->hog = hog;
     }
+    virtual ~ComputeWorker() {}
 
     cv::Mat img;
     cv::Size2d winStride;
@@ -62,6 +63,7 @@ namespace HOGDescriptorBindings {
     ComputeGradientWorker(std::shared_ptr<cv::HOGDescriptor> self) {
       this->self = self;
     }
+    virtual ~ComputeGradientWorker() {}
 
     cv::Mat img;
     cv::Size2d paddingTL = cv::Size2d();
@@ -114,6 +116,7 @@ namespace HOGDescriptorBindings {
     DetectWorker(std::shared_ptr<cv::HOGDescriptor> self) {
       this->self = self;
     }
+    virtual ~DetectWorker() {}
 
     cv::Mat img;
     double hitThreshold = 0;
@@ -172,6 +175,7 @@ namespace HOGDescriptorBindings {
     DetectROIWorker(std::shared_ptr<cv::HOGDescriptor> self) {
       this->self = self;
     }
+    virtual ~DetectROIWorker() {}
 
     cv::Mat img;
     std::vector<cv::Point> locations;
@@ -229,6 +233,7 @@ namespace HOGDescriptorBindings {
     DetectMultiScaleWorker(std::shared_ptr<cv::HOGDescriptor> self) {
       this->self = self;
     }
+    virtual ~DetectMultiScaleWorker() {}
 
     cv::Mat img;
     double hitThreshold = 0;
@@ -294,6 +299,7 @@ namespace HOGDescriptorBindings {
     DetectMultiScaleROIWorker(std::shared_ptr<cv::HOGDescriptor> self) {
       this->self = self;
     }
+    virtual ~DetectMultiScaleROIWorker() {}
 
     cv::Mat img;
     std::vector<cv::DetectionROI> locations;
@@ -344,6 +350,7 @@ namespace HOGDescriptorBindings {
     GroupRectanglesWorker(std::shared_ptr<cv::HOGDescriptor> self) {
       this->self = self;
     }
+    virtual ~GroupRectanglesWorker() {}
 
     std::vector<cv::Rect> rectList;
     std::vector<double> weights;

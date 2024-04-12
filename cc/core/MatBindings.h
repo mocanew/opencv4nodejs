@@ -67,6 +67,7 @@ namespace MatBindings {
         Mat::Converter::optArg(1, &mask, info)
       );
     }
+    virtual ~SetToWorker() {}
   };
 
   class PushBack : public CvBinding {
@@ -78,6 +79,7 @@ namespace MatBindings {
 			  res->ref().push_back(mat->ref());
 		  };
 	  };
+		virtual ~PushBack() {}
   };
 
   class PopBack : public CvBinding {
@@ -89,6 +91,7 @@ namespace MatBindings {
 			  res->ref().pop_back(num->ref());
 		  };
 	  };
+		virtual ~PopBack() {}
   };
 
   struct GetDataWorker : CatchCvExceptionWorker {
@@ -122,6 +125,7 @@ namespace MatBindings {
       free(data);
       return copyData;
     }
+    virtual ~GetDataWorker() {}
   };
 
   class Copy : public CvBinding {
@@ -134,6 +138,7 @@ namespace MatBindings {
 			  self.copyTo(dst->ref(), mask->ref());
 		  };
 	  };
+    virtual ~Copy() {}
   };
 
   class CopyTo : public CvBinding {
@@ -148,6 +153,7 @@ namespace MatBindings {
 			  dstRet->ref() = dst->ref();
 		  };
 	  };
+    virtual ~CopyTo() {}
   };
 
   class ConvertTo : public CvBinding {
@@ -162,6 +168,7 @@ namespace MatBindings {
 			  self.convertTo(dst->ref(), rtype->ref(), alpha->ref(), beta->ref());
 		  };
 	  };
+    virtual ~ConvertTo() {}
   };
 
   class PadToSquare : public CvBinding {
@@ -185,6 +192,7 @@ namespace MatBindings {
 			  self.copyTo(roi);
 		  };
 	  };
+    virtual ~PadToSquare() {}
   };
 
   // TODO
@@ -228,6 +236,7 @@ namespace MatBindings {
     bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
       return FF::IntConverter::optArg(0, &flags, info);
     }
+		virtual ~DCTWorker() {}
   };
 
   struct DFTWorker : public DTWorker {
@@ -264,6 +273,7 @@ namespace MatBindings {
         FF::IntConverter::optProp(&nonzeroRows, "nonzeroRows", opts)
       );
     }
+    virtual ~DFTWorker() {}
   };
 
   struct OpWithCodeWorker : public CatchCvExceptionWorker {
@@ -302,6 +312,7 @@ namespace MatBindings {
       cv::flip(self, dst, code);
       return "";
     }
+    virtual ~FlipWorker() {}
   };
 
   struct CopyMakeBorderWorker : public CatchCvExceptionWorker {
@@ -372,6 +383,7 @@ namespace MatBindings {
 				)
 			);
 	  }
+    virtual ~CopyMakeBorderWorker() {}
   };
 
   
@@ -385,9 +397,9 @@ namespace MatBindings {
       cv::rotate(self, dst, code);
       return "";
     }
+    virtual ~RotateWorker() {}
   };
 #endif
-
 
 }
 

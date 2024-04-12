@@ -37,6 +37,7 @@ namespace ImgprocBindings {
         FF::IntConverter::arg(3, &thickness, info)
       );
     }
+	virtual ~GetTextSizeWorker() {}
   };
 
 #if CV_VERSION_GREATER_EQUAL(3, 2, 0)
@@ -74,6 +75,7 @@ namespace ImgprocBindings {
 			  FF::BoolConverter::optArg(4, &L2gradient, info)
 			  );
 	  }
+	  virtual ~CannyWorker() {}
   };
 #endif
 
@@ -84,6 +86,8 @@ namespace ImgprocBindings {
     cv::Mat userColor;
     int colormap;
     bool useUserColor = 0;
+
+	virtual ~ApplyColorMapWorker() {}
 
     bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
 #if CV_VERSION_GREATER_EQUAL(3, 3, 0)
@@ -122,6 +126,7 @@ namespace ImgprocBindings {
   // since 4.0.0 cv::undistortPoints has been moved from imgproc to calib3d
   class UndistortPoints : public CvBinding {
   public:
+	  virtual ~UndistortPoints() {}
 	  void setup() {
 		  auto srcPoints = req<Point2::ArrayWithCastConverter<cv::Point2f>>();
 		  auto cameraMatrix = req<Mat::Converter>();
@@ -137,6 +142,7 @@ namespace ImgprocBindings {
 
   class GoodFeaturesToTrack : public CvClassMethodBinding<Mat> {
   public:
+	  virtual ~GoodFeaturesToTrack() {}
 	  void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {
 		  auto maxCorners = req<FF::IntConverter>();
 		  auto qualityLevel = req<FF::DoubleConverter>();
@@ -162,6 +168,7 @@ namespace ImgprocBindings {
 
   class Blur : public CvClassMethodBinding<Mat> {
   public:
+	  virtual ~Blur() {}
 	  void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {
 		  auto kSize = req<Size::Converter>();
 		  auto anchor = opt<Point2::Converter>("anchor", cv::Point2d());
@@ -180,6 +187,7 @@ namespace ImgprocBindings {
 
   class GaussianBlur : public CvClassMethodBinding<Mat> {
   public:
+	  virtual ~GaussianBlur() {}
 	  void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {
 		  auto kSize = req<Size::Converter>();
 		  auto sigmaX = req<FF::DoubleConverter>();
@@ -195,6 +203,7 @@ namespace ImgprocBindings {
 
   class MedianBlur : public CvClassMethodBinding<Mat> {
   public:
+	  virtual ~MedianBlur() {}
 	  void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {
 		  auto kSize = req<FF::IntConverter>();
 		  auto blurMat = ret<Mat::Converter>("blurMat");
@@ -207,7 +216,8 @@ namespace ImgprocBindings {
 
 	class Accumulate : public CvBinding {
 	public:
-		void setup() {
+	  virtual ~Accumulate() {}
+	  void setup() {
 			auto src = req<Mat::Converter>();
 			auto dst = req<Mat::Converter>();
 			auto mask = opt<Mat::Converter>("mask", cv::noArray().getMat());
@@ -222,6 +232,7 @@ namespace ImgprocBindings {
 
 	class AccumulateProduct : public CvBinding {
 	public:
+	  virtual ~AccumulateProduct() {}
 		void setup() {
 			auto src1 = req<Mat::Converter>();
 			auto src2 = req<Mat::Converter>();
@@ -239,6 +250,7 @@ namespace ImgprocBindings {
 
 	class AccumulateSquare : public CvBinding {
 	public:
+	  virtual ~AccumulateSquare() {}
 		void setup() {
 			auto src = req<Mat::Converter>();
 			auto dst = req<Mat::Converter>();
@@ -255,6 +267,7 @@ namespace ImgprocBindings {
 
 	class AccumulateWeighted : public CvBinding {
 	public:
+	  virtual ~AccumulateWeighted() {}
 		void setup() {
 			auto src = req<Mat::Converter>();
 			auto dst = req<Mat::Converter>();
@@ -272,6 +285,7 @@ namespace ImgprocBindings {
 
   class CalcHist : public CvBinding {
   public:
+	  virtual ~CalcHist() {}
     void setup() {
 
       auto src = req<Mat::Converter>();

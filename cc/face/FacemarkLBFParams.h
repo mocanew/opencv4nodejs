@@ -35,7 +35,7 @@ public:
   FF_ACCESSORS(verbose, FF::BoolConverter);
 
   static NAN_GETTER(pupils_getter) {
-	  Nan::ObjectWrap::Unwrap<FacemarkLBFParams>(info.This())->self.pupils;
+	  // Nan::ObjectWrap::Unwrap<FacemarkLBFParams>(info.This())->self.pupils;
 	  v8::Local<v8::Array> jsArr = Nan::New<v8::Array>(2);
 	  for (uint i = 0; i < jsArr->Length(); i++) {
 		  Nan::Set(jsArr, i, FF::IntArrayConverter::wrap(

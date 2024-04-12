@@ -13,6 +13,7 @@ namespace DnnBindings {
 
     cv::dnn::Net net;
 
+    virtual ~ReadNetFromDarknetWorker() {}
     std::string executeCatchCvExceptionWorker() {
       net = cv::dnn::readNetFromDarknet(cfgFile, darknetModelFile);
       if (net.empty()) {
@@ -45,6 +46,8 @@ public:
   std::string framework = "";
 
   cv::dnn::Net net;
+
+  virtual ~ReadNetWorker() {}
 
   std::string executeCatchCvExceptionWorker() {
     net = cv::dnn::readNet(model, config, framework);
@@ -87,6 +90,8 @@ public:
 
     cv::dnn::Net net;
 
+    virtual ~ReadNetFromONNXWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       net = cv::dnn::readNetFromONNX(onnxFile);
       if (net.empty()) {
@@ -111,6 +116,8 @@ public:
     std::string configFile = "";
 
     cv::dnn::Net net;
+
+    virtual ~ReadNetFromTensorflowWorker() {}
 
     std::string executeCatchCvExceptionWorker() {
 #if CV_VERSION_GREATER_EQUAL(3, 4, 0)
@@ -144,6 +151,8 @@ public:
 
     cv::dnn::Net net;
 
+    virtual ~ReadNetFromCaffeWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       net = cv::dnn::readNetFromCaffe(prototxt, modelFile);
       if (net.empty()) {
@@ -173,6 +182,7 @@ public:
     BlobFromImageWorker(bool isSingleImage = true) {
       this->isSingleImage = isSingleImage;
     }
+    virtual ~BlobFromImageWorker() {}
 
     cv::Mat image;
     std::vector<cv::Mat> images;
@@ -253,6 +263,8 @@ public:
     std::vector<int> indices;
     float eta = 1.0f;
     int top_k = 0;
+
+    virtual ~NMSBoxes() {}
 
     std::string executeCatchCvExceptionWorker() {
       cv::dnn::NMSBoxes(bboxes, scores, score_threshold, nms_threshold, indices);

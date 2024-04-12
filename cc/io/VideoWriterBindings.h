@@ -37,6 +37,7 @@ namespace VideoWriterBindings {
 	  GetWorker(cv::VideoWriter self) {
 		  this->self = self;
 	  }
+    virtual ~GetWorker() {}
 	  int prop;
 	  double val;
 
@@ -62,6 +63,7 @@ namespace VideoWriterBindings {
 	  SetWorker(cv::VideoWriter self) {
 		  this->self = self;
 	  }
+    virtual ~SetWorker() {}
 
 	  // required fn args
 	  int prop;
@@ -91,6 +93,8 @@ namespace VideoWriterBindings {
 
     int code;
 
+    virtual ~FourccWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       code = cv::VideoWriter::fourcc(fourcc.at(0), fourcc.at(1), fourcc.at(2), fourcc.at(3));
       return "";
@@ -111,6 +115,7 @@ namespace VideoWriterBindings {
     WriteWorker(cv::VideoWriter writer) {
       this->writer = writer;
     }
+    virtual ~WriteWorker() {}
 
     cv::Mat frame;
 

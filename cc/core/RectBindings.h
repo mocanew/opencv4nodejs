@@ -35,6 +35,7 @@ namespace RectBindings {
       outRect = rect & rect2;
       return "";
     }
+    virtual ~AndWorker() {}
   };
   
   struct OrWorker : public LogicOpWorker {
@@ -46,6 +47,7 @@ namespace RectBindings {
       outRect = rect | rect2;
       return "";
     }
+    virtual ~OrWorker() {}
   };
   
   struct ToSquareWorker : CatchCvExceptionWorker {
@@ -71,6 +73,7 @@ namespace RectBindings {
     v8::Local<v8::Value> getReturnValue() {
       return Rect::Converter::wrap(outRect);
     }
+    virtual ~ToSquareWorker() {}
   };
   
   struct PadWorker : CatchCvExceptionWorker {
@@ -109,6 +112,7 @@ namespace RectBindings {
     v8::Local<v8::Value> getReturnValue() {
       return Rect::Converter::wrap(outRect);
     }
+    virtual ~PadWorker() {}
   };
   
   struct RescaleWorker : CatchCvExceptionWorker {
@@ -135,9 +139,9 @@ namespace RectBindings {
     v8::Local<v8::Value> getReturnValue() {
       return Rect::Converter::wrap(outRect);
     }
+    virtual ~RescaleWorker() {}
   };
   
-
 }
 
 #endif

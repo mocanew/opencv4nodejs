@@ -11,6 +11,7 @@ namespace MatXimgprocBindings {
     GuidedFilterWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~GuidedFilterWorker() {}
 
     cv::Mat guide;
     int radius;

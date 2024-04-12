@@ -11,7 +11,8 @@ namespace VideoCaptureBindings {
 		GetWorker(cv::VideoCapture self) {
 			this->self = self;
 		}
-		int prop;
+	  virtual ~GetWorker() {}
+   	int prop;
 		double val;
 
     bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
@@ -36,6 +37,7 @@ namespace VideoCaptureBindings {
     ReadWorker(cv::VideoCapture self) {
       this->self = self;
     }
+	  virtual ~ReadWorker() {}
     cv::Mat frame;
 
     std::string executeCatchCvExceptionWorker() {
@@ -54,6 +56,7 @@ namespace VideoCaptureBindings {
     SetWorker(cv::VideoCapture self) {
       this->self = self;
     }
+	  virtual ~SetWorker() {}
 
     // required fn args
     int prop;

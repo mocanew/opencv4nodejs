@@ -11,6 +11,7 @@ namespace ContourBindings {
 		ApproxPolyDPWorker(std::vector<cv::Point2i>  self) {
 			this->self = self;
 		}
+        virtual ~ApproxPolyDPWorker() {}
 
 		double epsilon;
 		bool closed;

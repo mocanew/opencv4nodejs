@@ -11,9 +11,14 @@ namespace FacemarkBindings {
   struct LoadModelWorker : public CatchCvExceptionWorker {
   public:
     cv::Ptr<cv::face::Facemark> self;
-    LoadModelWorker(cv::Ptr<cv::face::Facemark> self) { this->self = self; }
+    LoadModelWorker(cv::Ptr<cv::face::Facemark> self) {
+      this->self = self;
+    }
 
+    virtual ~LoadModelWorker() {}
+    
     std::string model;
+
 
     std::string executeCatchCvExceptionWorker() {
       self->loadModel(model);
@@ -28,7 +33,11 @@ namespace FacemarkBindings {
   struct FitWorker : public CatchCvExceptionWorker {
   public:
 	  cv::Ptr<cv::face::Facemark> self;
-	  FitWorker(cv::Ptr<cv::face::Facemark> self) { this->self = self; }
+	  FitWorker(cv::Ptr<cv::face::Facemark> self) {
+      this->self = self;
+    }
+    virtual ~FitWorker() {}
+
 
 	  cv::Mat image;
 	  std::vector<cv::Rect> faces;

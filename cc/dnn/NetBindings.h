@@ -11,6 +11,7 @@ namespace NetBindings {
     SetInputWorker(cv::dnn::Net self) {
       this->self = self;
     }
+    virtual ~SetInputWorker() {}
 
     cv::Mat blob;
     std::string name = "";
@@ -40,6 +41,7 @@ namespace NetBindings {
     ForwardWorker(cv::dnn::Net self) {
       this->self = self;
     }
+    virtual ~ForwardWorker() {}
 
     std::string outputName = "";
     std::vector<std::string> outBlobNames;
@@ -85,6 +87,7 @@ namespace NetBindings {
     GetLayerNamesWorker(cv::dnn::Net self) {
       this->self = self;
     }
+    virtual ~GetLayerNamesWorker() {}
 
     std::vector<std::string> returnValue;
 
@@ -108,6 +111,7 @@ namespace NetBindings {
     GetUnconnectedOutLayersWorker(cv::dnn::Net self) {
       this->self = self;
     }
+    virtual ~GetUnconnectedOutLayersWorker() {}
   
     std::vector<int> layerIndexes;
 

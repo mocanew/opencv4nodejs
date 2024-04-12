@@ -23,6 +23,8 @@ namespace Calib3dBindings {
 		cv::Mat mask;
 		cv::Mat homography;
 
+    virtual ~FindHomographyWorker() {}
+
 		std::string executeCatchCvExceptionWorker() {
 			homography = cv::findHomography(srcPoints, dstPoints, method, ransacReprojThreshold, mask, maxIters, confidence);
 			return "";
@@ -84,6 +86,8 @@ namespace Calib3dBindings {
     cv::Mat dt3dr2;
     cv::Mat dt3dt2;
   
+    virtual ~ComposeRTWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       cv::composeRT(rvec1, tvec1, rvec2, tvec2, rvec3, tvec3, dr3dr1, dr3dt1, dr3dr2, dr3dt2, dt3dr1, dt3dt1, dt3dr2, dt3dt2);
       return "";
@@ -148,6 +152,7 @@ namespace Calib3dBindings {
     bool useExtrinsicGuess = false;
     int flags = cv::SOLVEPNP_ITERATIVE;
   
+    virtual ~SolvePnPWorker() {}
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::solvePnP(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec, tvec, useExtrinsicGuess, flags);
       return "";
@@ -183,10 +188,11 @@ namespace Calib3dBindings {
     int iterationsCount = 100;
     float reprojectionError = 8.0;
     double confidence = 0.99;
-    int flags = cv::SOLVEPNP_ITERATIVE;
-  
+    int flags = cv::SOLVEPNP_ITERATIVE;  
     std::vector<int> inliers;
   
+      virtual ~SolvePnPRansacWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::solvePnPRansac(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvec, tvec, useExtrinsicGuess, iterationsCount, reprojectionError, confidence, inliers, flags);
       return "";
@@ -240,6 +246,8 @@ namespace Calib3dBindings {
     std::vector<cv::Point2d> imagePoints;
     cv::Mat jacobian;
   
+    virtual ~ProjectPointsWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       cv::projectPoints(objectPoints, rvec, tvec, cameraMatrix, distCoeffs, imagePoints, jacobian, aspectRatio);
       return "";
@@ -274,10 +282,11 @@ namespace Calib3dBindings {
     std::vector<std::vector<cv::Point3f>> objectPoints;
     std::vector<std::vector<cv::Point2f>> imagePoints;
     cv::Size2d imageSize;
-    double aspectRatio = 1.0;
-  
+    double aspectRatio = 1.0;  
     cv::Mat returnValue;
   
+    virtual ~InitCameraMatrix2DWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::initCameraMatrix2D(objectPoints, imagePoints, imageSize, aspectRatio);
       return "";
@@ -321,6 +330,8 @@ namespace Calib3dBindings {
     cv::Mat E;
     cv::Mat F;
   
+    virtual ~StereoCalibrateWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::stereoCalibrate(objectPoints, imagePoints1, imagePoints2, cameraMatrix1, distCoeffs1, cameraMatrix2, distCoeffs2, imageSize, R, T, E, F, flags, criteria);
       return "";
@@ -383,6 +394,7 @@ namespace Calib3dBindings {
     cv::Mat H1;
     cv::Mat H2;
   
+    virtual ~StereoRectifyUncalibratedWorker() {}
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::stereoRectifyUncalibrated(points1, points2, F, imgSize, H1, H2, threshold);
       return "";
@@ -423,6 +435,8 @@ namespace Calib3dBindings {
     cv::Mat F;
     cv::Mat mask;
   
+    virtual ~FindFundamentalMatWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       F = cv::findFundamentalMat(points1, points2, method, param1, param2, mask);
       return "";
@@ -477,6 +491,8 @@ namespace Calib3dBindings {
     cv::Mat E;
     cv::Mat mask = cv::noArray().getMat();
   
+    virtual ~FindEssentialMatWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       E = cv::findEssentialMat(points1, points2, focal, pp, method, prob, threshold, mask);
       return "";
@@ -535,6 +551,8 @@ namespace Calib3dBindings {
     cv::Mat R;
     cv::Vec3d T;
   
+    virtual ~RecoverPoseWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::recoverPose(E, points1, points2, R, T, focal, pp, mask);
       return "";
@@ -586,6 +604,8 @@ namespace Calib3dBindings {
   
     std::vector<cv::Point3d> lines;
   
+    virtual ~ComputeCorrespondEpilinesWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       cv::computeCorrespondEpilines(points, whichImage, F, lines);
       return "";
@@ -614,6 +634,8 @@ namespace Calib3dBindings {
   
     cv::Rect2d returnValue;
   
+    virtual ~GetValidDisparityROIWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::getValidDisparityROI(roi1, roi2, minDisparity, numberOfDisparities, SADWindowSize);
       return "";
@@ -645,6 +667,8 @@ namespace Calib3dBindings {
     cv::Mat out;
     cv::Mat inliers;
   
+    virtual ~EstimateAffine3DWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::estimateAffine3D(src, dst, out, inliers, ransacThreshold, confidence);
       return "";
@@ -694,6 +718,8 @@ namespace Calib3dBindings {
   
     double returnValue;
   
+    virtual ~SampsonDistanceWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::sampsonDistance(pt1, pt2, F);
       return "";
@@ -729,6 +755,8 @@ namespace Calib3dBindings {
     cv::Mat _rvecs;
     cv::Mat _tvecs;
   
+    virtual ~CalibrateCameraWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs, rvecs, tvecs, flags, criteria);
       return "";
@@ -781,6 +809,8 @@ namespace Calib3dBindings {
     cv::Mat stdDeviationsExtrinsics;
     std::vector<double> perViewErrors;
   
+    virtual ~CalibrateCameraExtendedWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::calibrateCamera(objectPoints, imagePoints, imageSize, cameraMatrix, distCoeffs, rvecs, tvecs, stdDeviationsIntrinsics, stdDeviationsExtrinsics, perViewErrors, flags, criteria);
       return "";
@@ -808,6 +838,8 @@ namespace Calib3dBindings {
     cv::Mat out;
     cv::Mat inliers;
   
+    virtual ~EstimateAffine2DWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       out = cv::estimateAffine2D(from, to, inliers, method, ransacReprojThreshold, maxIters, confidence, refineIters);
       return "";
@@ -854,6 +886,7 @@ namespace Calib3dBindings {
   };
   
   struct EstimateAffinePartial2DWorker : public EstimateAffine2DWorker {
+    virtual ~EstimateAffinePartial2DWorker() {}
     std::string executeCatchCvExceptionWorker() {
       out = cv::estimateAffinePartial2D(from, to, inliers, method, ransacReprojThreshold, maxIters, confidence, refineIters);
       return "";
@@ -870,6 +903,8 @@ namespace Calib3dBindings {
     std::vector<cv::Mat> rvecs;
     std::vector<cv::Mat> tvecs;
   
+    virtual ~SolveP3PWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       returnValue = cv::solveP3P(objectPoints, imagePoints, cameraMatrix, distCoeffs, rvecs, tvecs, flags);
       return "";
@@ -896,6 +931,8 @@ namespace Calib3dBindings {
   // since 4.0.0 cv::undistortPoints has been moved from imgproc to calib3d
   class UndistortPoints : public CvBinding {
   public:
+    virtual ~UndistortPoints() {}
+
 	  void setup() {
 		  auto srcPoints = req<Point2::ArrayWithCastConverter<cv::Point2f>>();
 		  auto cameraMatrix = req<Mat::Converter>();

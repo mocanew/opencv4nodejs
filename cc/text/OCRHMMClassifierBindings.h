@@ -12,6 +12,8 @@ namespace OCRHMMClassifierBindings {
     EvalWorker(cv::Ptr <cv::text::OCRHMMDecoder::ClassifierCallback> classifier) {
       this->classifier = classifier;
     }
+
+    virtual ~EvalWorker() {}
   
     cv::Mat img;
     std::vector<int> clazz;
@@ -34,7 +36,6 @@ namespace OCRHMMClassifierBindings {
       return Mat::Converter::arg(0, &img, info);
     }
   };
-  
 
 }
 

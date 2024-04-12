@@ -6,7 +6,7 @@
 #ifndef __FF_SURFDETECTOR_H__
 #define __FF_SURFDETECTOR_H__
 
-class SURFDetector : public FeatureDetector, public FF::ObjectWrapTemplate<SURFDetector, cv::Ptr<cv::xfeatures2d::SURF>> {
+class SURFDetector final : public FeatureDetector, public FF::ObjectWrapTemplate<SURFDetector, cv::Ptr<cv::xfeatures2d::SURF>> {
 public:
 	static Nan::Persistent<v8::FunctionTemplate> constructor;
 
@@ -50,6 +50,7 @@ public:
 				);
 			};
 		};
+        virtual ~Constructor() {}
 	};
 };
 

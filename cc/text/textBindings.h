@@ -20,6 +20,7 @@ namespace TextBindings {
   };
 
   struct LoadOCRHMMClassifierNMWorker : public LoadOCRHMMClassifierWorker {
+    virtual ~LoadOCRHMMClassifierNMWorker() {}
     std::string executeCatchCvExceptionWorker() {
       classifier = cv::text::loadOCRHMMClassifierNM(file);
       return "";
@@ -30,6 +31,7 @@ namespace TextBindings {
 #if CV_VERSION_GREATER_EQUAL(3, 1, 0)
 
   struct LoadOCRHMMClassifierCNNWorker : public LoadOCRHMMClassifierWorker {
+    virtual ~LoadOCRHMMClassifierCNNWorker() {}
     std::string executeCatchCvExceptionWorker() {
       classifier = cv::text::loadOCRHMMClassifierCNN(file);
       return "";
@@ -42,6 +44,8 @@ namespace TextBindings {
     std::vector<std::string> lexicon;
 
     cv::Mat transition_probabilities_table;
+
+    virtual ~CreateOCRHMMTransitionsTableWorker() {}
 
     std::string executeCatchCvExceptionWorker() {
       cv::text::createOCRHMMTransitionsTable(vocabulary, lexicon, transition_probabilities_table);

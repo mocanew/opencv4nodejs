@@ -19,6 +19,7 @@ namespace CoreBindings {
 				cv::cartToPolar(x->ref(), y->ref(), magnitude->ref(), angle->ref(), angleInDegrees->ref());
 			};
 		};
+		virtual ~CartToPolar() {}
 	};
 
 	class PolarToCart : public CvBinding {
@@ -34,6 +35,7 @@ namespace CoreBindings {
 				cv::polarToCart(magnitude->ref(), angle->ref(), x->ref(), y->ref(), angleInDegrees->ref());
 			};
 		};
+		virtual ~PolarToCart() {}
 	};
 
 	/* Mat Core Class Methods */
@@ -52,6 +54,7 @@ namespace CoreBindings {
 				cv::addWeighted(self->ref(), alpha->ref(), src2->ref(), beta->ref(), gamma->ref(), dst->ref(), dtype->ref());
 			};
 		};
+		virtual ~AddWeighted() {}
 	};
 
 	class MinMaxLoc : public CvClassMethodBinding<Mat> {
@@ -67,6 +70,7 @@ namespace CoreBindings {
 				cv::minMaxLoc(self->ref(), minVal->ptr(), maxVal->ptr(), minLoc->ptr(), maxLoc->ptr(), mask->ref());
 			};
 		};
+		virtual ~MinMaxLoc() {}
 	};
 
 	class FindNonZero : public CvClassMethodBinding<Mat> {
@@ -78,6 +82,7 @@ namespace CoreBindings {
 				cv::findNonZero(self->ref(), idx->ref());
 			};
 		};
+		virtual ~FindNonZero() {}
 	};
 
 	class CountNonZero : public CvClassMethodBinding<Mat> {
@@ -89,6 +94,7 @@ namespace CoreBindings {
 				num->ref() = cv::countNonZero(self->ref());
 			};
 		};
+		virtual ~CountNonZero() {}
 	};
 
 	class Split : public CvClassMethodBinding<Mat> {
@@ -100,6 +106,7 @@ namespace CoreBindings {
 				cv::split(self->ref(), mv->ref());
 			};
 		};
+		virtual ~Split() {}
 	};
 
 	class MulSpectrums : public CvClassMethodBinding<Mat> {
@@ -114,6 +121,7 @@ namespace CoreBindings {
 				cv::mulSpectrums(self->ref(), mat2->ref(), dst->ref(), flags->ref(), conjB->ref());
 			};
 		};
+		virtual ~MulSpectrums() {}
 	};
 
 	class Transform : public CvClassMethodBinding<Mat> {
@@ -126,6 +134,7 @@ namespace CoreBindings {
 				cv::transform(self->ref(), dst->ref(), m->ref());
 			};
 		};
+		virtual ~Transform() {}
 	};
 
 	class PerspectiveTransform : public CvClassMethodBinding<Mat> {
@@ -138,6 +147,7 @@ namespace CoreBindings {
 				cv::perspectiveTransform(self->ref(), dst->ref(), m->ref());
 			};
 		};
+		virtual ~PerspectiveTransform() {}
 	};
 
 	class Sum : public CvClassMethodBinding<Mat> {
@@ -165,6 +175,7 @@ namespace CoreBindings {
 				return Nan::Undefined();
 			}
 		}
+		virtual ~Sum() {}
 	};
 
 	class ConvertScaleAbs : public CvClassMethodBinding<Mat> {
@@ -178,6 +189,7 @@ namespace CoreBindings {
 				cv::convertScaleAbs(self->ref(), dst->ref(), alpha->ref(), beta->ref());
 			};
 		};
+		virtual ~ConvertScaleAbs() {}
 	};
 
 	class Mean : public CvClassMethodBinding<Mat> {
@@ -190,6 +202,7 @@ namespace CoreBindings {
 				mean->ref() = cv::mean(self->ref(), mask->ref());
 			};
 		};
+		virtual ~Mean() {}
 	};
 
 	class MeanStdDev : public CvClassMethodBinding<Mat> {
@@ -203,6 +216,7 @@ namespace CoreBindings {
 				cv::meanStdDev(self->ref(), mean->ref(), stddev->ref(), mask->ref());
 			};
 		};
+		virtual ~MeanStdDev() {}
 	};
 
 	class Reduce : public CvClassMethodBinding<Mat> {
@@ -217,6 +231,7 @@ namespace CoreBindings {
 				cv::reduce(self->ref(), result->ref(), dim->ref(), rtype->ref(), dtype->ref());
 			};
 		};
+		virtual ~Reduce() {}
 	};
 
 	class Min: public CvBinding {
@@ -230,6 +245,7 @@ namespace CoreBindings {
 				cv::min(src1->ref(), src2->ref(), dest->ref());
 			};
 		};
+		virtual ~Min() {}
 	};
 
 	class Max: public CvBinding {
@@ -243,6 +259,7 @@ namespace CoreBindings {
 				cv::max(src1->ref(), src2->ref(), dest->ref());
 			};
 		};
+		virtual ~Max() {}
 	};
 
 	class Eigen : public CvClassMethodBinding<Mat> {
@@ -254,6 +271,7 @@ namespace CoreBindings {
 				cv::eigen(self->ref(), eigenvalues->ref());
 			};
 		};
+		virtual ~Eigen() {}
 	};
 
 	class Solve : public CvClassMethodBinding<Mat> {
@@ -267,6 +285,7 @@ namespace CoreBindings {
 				cv::solve(self->ref(), mat2->ref(), dst->ref(), flags->ref());
 			};
 		};
+		virtual ~Solve() {}
 	};
 
 	class Normalize : public CvClassMethodBinding<Mat> {
@@ -283,6 +302,7 @@ namespace CoreBindings {
 				cv::normalize(self->ref(), dst->ref(), alpha->ref(), beta->ref(), normType->ref(), dtype->ref(), mask->ref());
 			};
 		};
+		virtual ~Normalize() {}
 	};
 
 	class Magnitude : public CvBinding {
@@ -296,6 +316,7 @@ namespace CoreBindings {
 				cv::magnitude(x->ref(), y->ref(), magnitude->ref());
 			};
 		};
+		virtual ~Magnitude() {}
 	};
 
 }

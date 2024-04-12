@@ -28,6 +28,8 @@ namespace ImgHashBaseBindings {
       return (FF::UcharArrayConverter::arg(0, &hashOne, info) ||
         FF::UcharArrayConverter::arg(1, &hashTwo, info));
     }
+
+    virtual ~CompareWorker() {}
   };
 
   struct ComputeWorker : public CatchCvExceptionWorker {
@@ -56,6 +58,7 @@ namespace ImgHashBaseBindings {
       return (FF::UcharArrayConverter::optArg(1, &outputArr, info));
     }
     
+    virtual ~ComputeWorker() {}
   };
 
 }

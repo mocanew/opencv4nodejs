@@ -9,6 +9,8 @@ namespace SVMBindings {
   public:
     cv::Ptr<cv::ml::SVM> svm;
   
+    virtual ~TrainFromTrainDataWorker() {}
+    
     TrainFromTrainDataWorker(cv::Ptr<cv::ml::SVM> svm) {
       this->svm = svm;
     }
@@ -39,7 +41,9 @@ namespace SVMBindings {
   struct TrainFromMatWorker : CatchCvExceptionWorker {
   public:
     cv::Ptr<cv::ml::SVM> svm;
-  
+
+    virtual ~TrainFromMatWorker() {}
+
     TrainFromMatWorker(cv::Ptr<cv::ml::SVM> svm) {
       this->svm = svm;
     }
@@ -72,6 +76,8 @@ namespace SVMBindings {
   public:
     cv::Ptr<cv::ml::SVM> svm;
   
+    virtual ~TrainAutoWorker() {}
+
     TrainAutoWorker(cv::Ptr<cv::ml::SVM> svm) {
       this->svm = svm;
     }
