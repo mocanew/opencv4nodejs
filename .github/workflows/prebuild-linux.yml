@@ -56,13 +56,6 @@ jobs:
         sudo apt update
         sudo apt install libopencv-dev
         
-    - uses: pnpm/action-setup@v3
-      name: Install pnpm
-      with:
-        version: 8
-        run_install: |
-         - recursive: false
-    
     - run: pnpm install --frozen-lockfile
           
     - name: pnpm run prepack
