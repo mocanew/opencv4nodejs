@@ -23,7 +23,7 @@ jobs:
       - name: Install libopencv
         run: sudo apt-get install -y libopencv-dev libopencv-features2d-dev
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
         with:
           version: 8.15.3
       - uses: actions/setup-node@v4
