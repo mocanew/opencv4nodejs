@@ -22,7 +22,7 @@
     "@types/mri": "^1.2.0",
     "@types/node": "^20.12.7",
     "@types/progress": "^2.0.7",
-    "rimraf": "^4.4.0",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
