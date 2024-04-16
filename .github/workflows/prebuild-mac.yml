@@ -1,4 +1,4 @@
-name: Use openCV from Apt
+name: Use openCV from Brew
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
       - "test/**"
       - "typings/**"
       - "package.json"
-      - ".github/workflows/prebuild-linux.yml"
+      - ".github/workflows/prebuild-mac.yml"
   pull_request:
     branches: [ "master" ]
     paths:
@@ -20,7 +20,7 @@ on:
       - "test/**"
       - "typings/**"
       - "package.json"
-      - ".github/workflows/prebuild-linux.yml"
+      - ".github/workflows/prebuild-mac.yml"
 
 env:
   OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
@@ -30,7 +30,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     strategy:
       matrix:
         opencv_version:
@@ -41,18 +41,18 @@ jobs:
           - 20
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4        
     - name: Install Node.js ${{ matrix.node_version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node_version }}
         cache: 'pnpm'
-
+      
     - name: Install OpenCV ${{ matrix.opencv_version }}
       run: |
-        sudo apt update
-        sudo apt install libopencv-dev
-        
+        brew install opencv@${{ matrix.opencv_version }}
+
+
     - uses: pnpm/action-setup@v3
       name: Install pnpm
       with:
@@ -60,7 +60,7 @@ jobs:
         run_install: |
          - recursive: true
            args: [--strict-peer-dependencies]
-    
+
     - name: pnpm run prepack
       run: pnpm run prepack
 

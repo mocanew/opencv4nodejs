@@ -10,7 +10,7 @@ on:
       - "test/**"
       - "typings/**"
       - "package.json"
-      - ".github/workflows/win64-prebuild.yml"
+      - ".github/workflows/prebuild-win64.yml"
   pull_request:
     branches: [ "master" ]
     paths:
@@ -20,7 +20,7 @@ on:
       - "test/**"
       - "typings/**"
       - "package.json"
-      - ".github/workflows/win64-prebuild.yml"
+      - ".github/workflows/prebuild-win64.yml"
 
 env:
   # Path to the solution file relative to the root of the project.
