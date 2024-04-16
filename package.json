@@ -63,7 +63,6 @@
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
-    "@types/mri": "^1.2.0",
     "@types/node": "^20.12.7",
     "@types/npmlog": "^7.0.0",
     "@types/progress": "^2.0.7",
