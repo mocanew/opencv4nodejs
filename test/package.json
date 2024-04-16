@@ -22,15 +22,15 @@
   "license": "MIT",
   "dependencies": {
     "@u4/opencv4nodejs": "link:..",
-    "chai": "^4.3.7",
+    "chai": "^4.4.1",
     "istanbul": "^0.4.5",
-    "mocha": "^10.2.0"
+    "mocha": "^10.4.0"
   },
   "devDependencies": {
     "@types/chai": "^4.3.14",
     "@types/chai-arrays": "^2.0.3",
     "@types/mocha": "^9.1.1",
-    "@types/node": "^20.12.6",
+    "@types/node": "^20.12.7",
     "chai-arrays": "^2.2.0",
     "rimraf": "^4.4.1",
     "ts-node": "^10.9.2",
