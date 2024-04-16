@@ -2,17 +2,17 @@
 	"targets": [{
 		"target_name": "opencv4nodejs",
 		"defines": [
-			"<!@(node ./bin/install.js OPENCV4NODEJS_DEFINES)",
+			"<!@(node ./install/parseEnv.js OPENCV4NODEJS_DEFINES)",
 		],
 		"include_dirs" : [
-			"<!@(node ./bin/install.js OPENCV4NODEJS_INCLUDES)",
+			"<!@(node ./install/parseEnv.js OPENCV4NODEJS_INCLUDES)",
 			"cc",
 			"cc/core",
 			"<!(node -e \"require('nan')\")",
 			"cc/native-node-utils",
 		],
 		"libraries": [
-			"<!@(node ./bin/install.js OPENCV4NODEJS_LIBRARIES)",
+			"<!@(node ./install/parseEnv.js OPENCV4NODEJS_LIBRARIES)",
 		],
 		"sources": [
 			"cc/opencv4nodejs.cc",
@@ -121,16 +121,16 @@
 			"cc/highgui/highguiConstants.cc",
 		],
 		"cflags" : [
-			"-std=c++17",
+			"-std=c++17"
 		],
 		"cflags!" : [
 			"-std=c++17",
-			"-fno-exceptions",
+			"-fno-exceptions"
 		],
 		"cflags_cc!": [
 			"-std=c++17",
 			"-fno-rtti",
-			"-fno-exceptions",
+			"-fno-exceptions"
 		],
 		"ldflags" : [
 			"-Wl,-rpath,'$$ORIGIN'"
@@ -162,10 +162,6 @@
 			}],
 	        ["OS==\"mac\"",
 	          {
-				 "cflags": [
-	                 "-std=c++17",
-    	             "-Wno-error=deprecated-declarations"
-	            ],
 	            "link_settings": {
 	              "libraries": [
 					"-Wl,-rpath,@loader_path/../../../opencv-build/opencv/build/lib"

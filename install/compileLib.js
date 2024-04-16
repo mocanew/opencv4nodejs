@@ -9,7 +9,7 @@ const commons_js_1 = require("../lib/commons.js");
 const pc = require("picocolors");
 const path = require("path");
 const os_1 = require("os");
-const tiny_glob_1 = require("@u4/tiny-glob");
+const glob_1 = require("glob");
 const cvloader_js_1 = require("../lib/cvloader.js");
 const defaultDir = '/usr/local';
 const defaultLibDir = `${defaultDir}/lib`;
@@ -280,7 +280,7 @@ or use OPENCV4NODEJS_* env variable.`);
         return;
     }
     // see https://github.com/nodejs/node-gyp#command-options for all flags
-    let flags = '';
+    let flags = ' -f binding_old.gyp';
     // process.env.JOBS=JOBS;
     flags += ` --jobs ${JOBS}`;
     // --target not mapped
@@ -335,8 +335,8 @@ or use OPENCV4NODEJS_* env variable.`);
         // const nan = require('nan');
         // const nativeNodeUtils = require('native-node-utils');
         // const pblob = promisify(blob)
-        const openCvModuleInclude = await (0, tiny_glob_1.default)(path.join(builder.env.opencvSrc, 'modules', '*', 'include'));
-        const openCvContribModuleInclude = await (0, tiny_glob_1.default)(path.join(builder.env.opencvContribSrc, 'modules', '*', 'include'));
+        const openCvModuleInclude = (0, glob_1.globSync)(path.join(builder.env.opencvSrc, 'modules', '*', 'include').replace(/\\/g, '/'));
+        const openCvContribModuleInclude = (0, glob_1.globSync)(path.join(builder.env.opencvContribSrc, 'modules', '*', 'include').replace(/\\/g, '/'));
         const cvVersion = builder.env.opencvVersion.split('.');
         const config = {
             "name": "opencv4nodejs",
