@@ -123,9 +123,23 @@ function getOPENCV4NODEJS_INCLUDES(env) {
     if (OPENCV_INCLUDE_DIR) {
         explicitIncludeDir = (0, commons_js_1.resolvePath)(OPENCV_INCLUDE_DIR);
     }
-    const includes = env.isAutoBuildDisabled
-        ? (explicitIncludeDir ? [explicitIncludeDir] : getDefaultIncludeDirs(env))
-        : [(0, commons_js_1.resolvePath)(env.opencvInclude), (0, commons_js_1.resolvePath)(env.opencv4Include)];
+    let includes = [];
+    if (env.isAutoBuildDisabled) {
+        if (explicitIncludeDir) {
+            if (explicitIncludeDir.endsWith('opencv4')) {
+                includes = [explicitIncludeDir, path.resolve(explicitIncludeDir, '..')];
+            }
+            else {
+                includes = [explicitIncludeDir, path.resolve(explicitIncludeDir, 'opencv4')];
+            }
+        }
+        else {
+            includes = getDefaultIncludeDirs(env);
+        }
+    }
+    else {
+        includes = [(0, commons_js_1.resolvePath)(env.opencvInclude), (0, commons_js_1.resolvePath)(env.opencv4Include)];
+    }
     log('info', 'install', `${os_1.EOL}Setting the following includes:`);
     includes.forEach(inc => log('info', 'includes', pc.green(inc)));
     return includes;
