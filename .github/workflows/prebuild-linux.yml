@@ -2,7 +2,7 @@ name: Use openCV from Apt
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
     paths:
       - "cc/**"
       - "install/**"

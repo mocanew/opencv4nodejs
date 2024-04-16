@@ -1,8 +1,8 @@
-name: Build using prebuild openCV
+name: Use openCV from Chocolatey
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
     paths:
       - "cc/**"
       - "install/**"

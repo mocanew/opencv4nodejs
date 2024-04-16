@@ -2,7 +2,7 @@ name: Use openCV from Brew
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
     paths:
       - "cc/**"
       - "install/**"
