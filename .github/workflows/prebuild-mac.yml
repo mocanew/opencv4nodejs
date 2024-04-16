@@ -55,15 +55,11 @@ jobs:
       run: |
         brew install opencv@${{ matrix.opencv_version }}
 
-
     - name: run pnpm install
       run: pnpm install --frozen-lockfile
 
     - name: pnpm run prepack
       run: pnpm run prepack
-
-    - name: debug
-      run: node ./bin/install.js OPENCV4NODEJS_INCLUDES
 
     - name: build native code
       run: npx node-gyp rebuild
