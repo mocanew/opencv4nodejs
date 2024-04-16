@@ -71,7 +71,7 @@ jobs:
         cache: 'pnpm'
     
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
     - name: Install OpenCV
       run: |
@@ -88,6 +88,9 @@ jobs:
 
     - name: pnpm run prepack
       run: pnpm run prepack
+
+    - name: build native code
+      run: node-gyp rebuild
 
     - name: install deps in test
       working-directory: ./test
