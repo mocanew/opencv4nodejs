@@ -6,8 +6,7 @@
 #define __FF_BINDING_H__
 
 namespace FF {
-
-	static void executeSyncBinding(std::shared_ptr<ISyncWorker> worker, std::string methodName, Nan::NAN_METHOD_ARGS_TYPE info) {
+	static inline void executeSyncBinding(std::shared_ptr<ISyncWorker> worker, std::string methodName, Nan::NAN_METHOD_ARGS_TYPE info) {
 		FF::TryCatch tryCatch(methodName);
 		if (worker->applyUnwrappers(info)) {
 			return tryCatch.reThrow();
@@ -22,7 +21,7 @@ namespace FF {
 		info.GetReturnValue().Set(worker->getReturnValue(info));
 	}
 
-	static void executeAsyncBinding(std::shared_ptr<IAsyncWorker> worker, std::string methodName, Nan::NAN_METHOD_ARGS_TYPE info) {
+	static inline void executeAsyncBinding(std::shared_ptr<IAsyncWorker> worker, std::string methodName, Nan::NAN_METHOD_ARGS_TYPE info) {
 		FF::TryCatch tryCatch(methodName);
 		if (!hasArg(info, info.Length() - 1) || !info[info.Length() - 1]->IsFunction()) {
 			tryCatch.throwError("callback function required");

@@ -3,6 +3,19 @@
 #ifndef __FF_ABSTRACT_CONVERTER_H__
 #define __FF_ABSTRACT_CONVERTER_H__
 
+/**
+ * @brief used by 
+ * - IntConverter, 
+ * - UintConverter,
+ * - LongConverter,
+ * - UlongConverter,
+ * - CharConverter,
+ * - UcharConverter,
+ * - BoolConverter,
+ * - DoubleConverter,
+ * - FloatConverter,
+ * - StringConverter
+ */
 namespace FF {
 
 	/*
@@ -85,7 +98,7 @@ namespace FF {
 		}
 
 		static bool prop(Type* val, const char* prop, v8::Local<v8::Object> opts) {
-			if (!Nan::HasOwnProperty(opts, Nan::New(prop).ToLocalChecked()).FromJust()) {
+			if (!FF::hasOwnProperty(opts, prop)) {
 				Nan::ThrowError(FF::newString(
 					std::string("expected object to have property: ") 
 					+ std::string(prop)
@@ -99,7 +112,7 @@ namespace FF {
 		static bool optProp(Type* val, const char* prop, v8::Local<v8::Object> opts) {
 			Nan::TryCatch tryCatch;
 			if (
-				Nan::HasOwnProperty(opts, Nan::New(prop).ToLocalChecked()).FromJust()
+				FF::hasOwnProperty(opts, prop)
 				&& ConverterImpl::unwrap(val, Nan::Get(opts, Nan::New(prop).ToLocalChecked()).ToLocalChecked())
 				) {
 				if (tryCatch.HasCaught()) {

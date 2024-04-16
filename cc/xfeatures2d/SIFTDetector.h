@@ -72,6 +72,7 @@ public:
 				self->sigma = sigma->ref();
 			};
 		};
+		virtual ~Constructor() {}
 	};
 };
 

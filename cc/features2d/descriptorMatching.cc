@@ -113,6 +113,7 @@ public:
 	MatchWorker(cv::Ptr<cv::DescriptorMatcher> _matcher) {
 		this->matcher = _matcher;
 	}
+    virtual ~MatchWorker() {}
 
 	cv::Mat descFrom;
 	cv::Mat descTo;

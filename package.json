@@ -38,7 +38,7 @@
   "scripts": {
     "build": "tsc --pretty --project .",
     "prepack": "npm run build",
-    "install": "node bin/install.js auto",
+    "install_old": "node bin/install.js auto",
     "install_Mac": "CXXFLAGS=\"-std=c++17 -Wno-c++11-narrowing -Wno-c++17-extensions -Wno-c++17-attribute-extensions\" node ./bin/install.js --version 4.5.3 build",
     "install_default": "node bin/install.js rebuild",
     "install_ubuntu": "echo call: sudo apt install libopencv-dev; build-opencv --incDir /usr/include/opencv4/ --libDir /lib/x86_64-linux-gnu/ --binDir=/usr/bin/ --nobuild rebuild",
@@ -55,31 +55,30 @@
     "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild"
   },
   "dependencies": {
-    "@u4/opencv-build": "^0.8.3",
-    "@u4/tiny-glob": "^0.3.2",
+    "@u4/opencv-build": "^0.9.0",
+    "glob": "^10.3.12",
     "nan": "^2.19.0",
     "node-gyp": "^10.1.0",
     "npmlog": "^7.0.1",
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
-    "@types/mri": "^1.1.5",
-    "@types/node": "^20.12.6",
+    "@types/node": "^20.12.7",
     "@types/npmlog": "^7.0.0",
     "@types/progress": "^2.0.7",
-    "@typescript-eslint/eslint-plugin": "^7.0.2",
-    "@typescript-eslint/parser": "^7.0.2",
-    "axios": "^1.4.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.0",
+    "@typescript-eslint/parser": "^7.7.0",
+    "axios": "^1.6.8",
     "cross-env": "^7.0.3",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "progress": "^2.0.3",
     "rimraf": "^4.4.1",
-    "typescript": "^5.4.4"
+    "typescript": "^5.4.5"
   },
   "files": [
     "cc",

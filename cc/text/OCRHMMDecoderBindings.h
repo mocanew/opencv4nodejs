@@ -36,6 +36,7 @@ namespace OCRHMMDecoderBindings {
     BaseRunWorker(cv::Ptr<cv::text::OCRHMMDecoder> decoder) {
       this->decoder = decoder;
     }
+    virtual ~BaseRunWorker() {}
   
     cv::Mat img;
     int min_confidence;
@@ -49,6 +50,7 @@ namespace OCRHMMDecoderBindings {
   public:
     RunWorker(cv::Ptr<cv::text::OCRHMMDecoder> decoder) : BaseRunWorker(decoder) {
     }
+    virtual ~RunWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
   #if CV_VERSION_GREATER_EQUAL(3, 1, 0)

@@ -12,6 +12,7 @@ namespace MatImgprocBindings {
     BaseResizeWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~BaseResizeWorker() {}
   
     cv::Mat dst;
   
@@ -24,6 +25,7 @@ namespace MatImgprocBindings {
   public:
     RescaleWorker(cv::Mat self) : BaseResizeWorker(self) {
     }
+    virtual ~RescaleWorker() {}
   
     double factor;
   
@@ -101,6 +103,7 @@ namespace MatImgprocBindings {
   public:
     ResizeToMaxWorker(cv::Mat self) : BaseResizeWorker(self) {
     }
+    virtual ~ResizeToMaxWorker() {}
   
     int maxRowsOrCols;
   
@@ -126,6 +129,7 @@ namespace MatImgprocBindings {
     ThresholdWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~ThresholdWorker() {}
   
     double thresh;
     double maxVal;
@@ -158,7 +162,8 @@ namespace MatImgprocBindings {
     AdaptiveThresholdWorker(cv::Mat mat) {
       this->mat = mat;
     }
-  
+    virtual ~AdaptiveThresholdWorker() {}
+
     double maxVal;
     int adaptiveMethod;
     int thresholdType;
@@ -194,6 +199,7 @@ namespace MatImgprocBindings {
     InRangeWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~InRangeWorker() {}
   
     double lower;
     double upper;
@@ -235,6 +241,7 @@ namespace MatImgprocBindings {
     CvtColorWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~CvtColorWorker() {}
   
     int code;
     int dstCn = 0;
@@ -269,7 +276,8 @@ namespace MatImgprocBindings {
     BgrToGrayWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~BgrToGrayWorker() {}
+
     int code;
   
     cv::Mat dst;
@@ -292,12 +300,13 @@ namespace MatImgprocBindings {
       this->mat = mat;
       this->size = cv::Size2d(mat.cols, mat.rows);
     }
+    virtual ~WarpWorker() {}
   
     cv::Mat transformationMatrix;
     cv::Size2d size;
     int flags = cv::INTER_LINEAR;
     int borderMode = cv::BORDER_CONSTANT;
-	cv::Vec3d borderValue = cv::Vec3d();
+  	cv::Vec3d borderValue = cv::Vec3d();
   
     cv::Mat warpedMat;
   
@@ -362,6 +371,7 @@ namespace MatImgprocBindings {
       this->mat = mat;
       this->withOp = withOp;
     }
+    virtual ~MorphWorker() {}
   
     cv::Mat kernel;
   
@@ -411,6 +421,7 @@ namespace MatImgprocBindings {
   struct ErodeWorker : public MorphWorker {
     ErodeWorker(cv::Mat mat) : MorphWorker(mat) {
     }
+    virtual ~ErodeWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
       cv::erode(mat, resultMat, kernel, anchor, iterations, borderType, cv::morphologyDefaultBorderValue());
@@ -421,6 +432,7 @@ namespace MatImgprocBindings {
   struct DilateWorker : public MorphWorker {
     DilateWorker(cv::Mat mat) : MorphWorker(mat) {
     }
+    virtual ~DilateWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
       cv::dilate(mat, resultMat, kernel, anchor, iterations, borderType, cv::morphologyDefaultBorderValue());
@@ -432,6 +444,7 @@ namespace MatImgprocBindings {
   public:
     MorphologyExWorker(cv::Mat mat) : MorphWorker(mat, true) {
     }
+    virtual ~MorphologyExWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
       cv::morphologyEx(mat, resultMat, op, kernel, anchor, iterations, borderType, cv::morphologyDefaultBorderValue());
@@ -445,7 +458,8 @@ namespace MatImgprocBindings {
     DistanceTransformWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~DistanceTransformWorker() {}
+
     int distanceType;
     int maskSize;
     int dstType = CV_32F;
@@ -478,6 +492,7 @@ namespace MatImgprocBindings {
   struct DistanceTransformWithLabelsWorker : public DistanceTransformWorker {
     DistanceTransformWithLabelsWorker(cv::Mat self) : DistanceTransformWorker(self) {
     }
+    virtual ~DistanceTransformWithLabelsWorker() {}
   
     int labelType = cv::DIST_LABEL_CCOMP;
     cv::Mat labels;
@@ -507,7 +522,8 @@ namespace MatImgprocBindings {
     ConnectedComponentsWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~ConnectedComponentsWorker() {}
+
     int connectivity = 8;
     int ltype = CV_32S;
   
@@ -561,6 +577,7 @@ namespace MatImgprocBindings {
       Nan::Set(ret, Nan::New("centroids").ToLocalChecked(), Mat::Converter::wrap(centroids));
       return ret;
     }
+    virtual ~ConnectedComponentsWithStatsWorker() {}
   };
   
   struct GrabCutWorker : public CatchCvExceptionWorker {
@@ -576,8 +593,7 @@ namespace MatImgprocBindings {
     cv::Mat fgdModel;
     int iterCount;
     int mode = cv::GC_EVAL;
-  
-  
+
     std::string executeCatchCvExceptionWorker() {
       cv::grabCut(self, mask, rect, bgdModel, fgdModel, iterCount, mode);
       return "";
@@ -602,6 +618,7 @@ namespace MatImgprocBindings {
         FF::IntConverter::optArg(5, &mode, info)
       );
     }
+    virtual ~GrabCutWorker() {}
   };
   
   struct WatershedWorker : public CatchCvExceptionWorker {
@@ -627,6 +644,7 @@ namespace MatImgprocBindings {
         Mat::Converter::arg(0, &markers, info)
       );
     }
+    virtual ~WatershedWorker() {}
   };
   
   struct MomentsWorker : public CatchCvExceptionWorker {
@@ -654,6 +672,7 @@ namespace MatImgprocBindings {
         FF::BoolConverter::optArg(0, &binaryImage, info)
       );
     }
+    virtual ~MomentsWorker() {}
   };
   
   struct FindContoursWorker : public CatchCvExceptionWorker {
@@ -699,6 +718,7 @@ namespace MatImgprocBindings {
         Point2::Converter::optArg(2, &offset, info)
       );
     }
+    virtual ~FindContoursWorker() {}
   };
   
   struct DrawWorker : public CatchCvExceptionWorker {
@@ -748,6 +768,7 @@ namespace MatImgprocBindings {
         FF::IntConverter::optProp(&shift, "shift", opts)
       );
     }
+    virtual ~DrawWorker() {}
   };
   
   struct DrawLineWorker : public DrawWorker {
@@ -772,6 +793,7 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return 2;
     }
+    virtual ~DrawLineWorker() {}
   };
   
   struct DrawArrowedLineWorker : public DrawWorker {
@@ -811,6 +833,7 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return 2;
     }
+    virtual ~DrawArrowedLineWorker() {}
   };
   
   struct DrawRectangleWorker : public DrawWorker {
@@ -849,6 +872,7 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return isArgRect ? 1 : 2;
     }
+    virtual ~DrawRectangleWorker() {}
   };
   
   struct DrawCircleWorker : public DrawWorker {
@@ -873,6 +897,7 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return 2;
     }
+    virtual ~DrawCircleWorker() {}
   };
   
   struct DrawEllipseWorker : public DrawWorker {
@@ -917,6 +942,7 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return isArgBox ? 1 : 5;
     }
+    virtual ~DrawEllipseWorker() {}
   };
   
   struct DrawPolylinesWorker : public DrawWorker {
@@ -941,6 +967,7 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return 2;
     }
+    virtual ~DrawPolylinesWorker() {}
   };
   
   struct DrawFillPolyWorker : public DrawWorker {
@@ -978,6 +1005,7 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return 1;
     }
+    virtual ~DrawFillPolyWorker() {}
   };
   
   struct DrawFillConvexPolyWorker : public DrawWorker {
@@ -1000,11 +1028,13 @@ namespace MatImgprocBindings {
     int getDrawParamsIndex() {
       return 1;
     }
+    virtual ~DrawFillConvexPolyWorker() {}
   };
   
   struct PutTextWorker : public DrawWorker {
     PutTextWorker(cv::Mat self) : DrawWorker(self) {
     }
+    virtual ~PutTextWorker() {}
   
     std::string text;
     cv::Point2d org;
@@ -1052,6 +1082,7 @@ namespace MatImgprocBindings {
     MatchTemplateWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~MatchTemplateWorker() {}
   
     cv::Mat templ;
     int method;
@@ -1087,6 +1118,7 @@ namespace MatImgprocBindings {
     CannyWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~CannyWorker() {}
   
     double threshold1;
     double threshold2;
@@ -1140,6 +1172,7 @@ namespace MatImgprocBindings {
       this->mat = mat;
       this->hasKsize = hasKsize;
     }
+    virtual ~SobelScharrWorker() {}
   
     int ddepth;
     int dx;
@@ -1191,6 +1224,7 @@ namespace MatImgprocBindings {
   struct SobelWorker : SobelScharrWorker {
     SobelWorker(cv::Mat mat, bool hasKsize) : SobelScharrWorker(mat, hasKsize) {
     }
+    virtual ~SobelWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
       cv::Sobel(mat, resultMat, ddepth, dx, dy, ksize, scale, delta, borderType);
@@ -1201,6 +1235,7 @@ namespace MatImgprocBindings {
   struct ScharrWorker : SobelScharrWorker {
     ScharrWorker(cv::Mat mat, bool hasKsize) : SobelScharrWorker(mat, hasKsize) {
     }
+    virtual ~ScharrWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
       cv::Scharr(mat, resultMat, ddepth, dx, dy, scale, delta, borderType);
@@ -1215,6 +1250,7 @@ namespace MatImgprocBindings {
     LaplacianWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~LaplacianWorker() {}
   
     int ddepth;
     int ksize = 1;
@@ -1270,6 +1306,7 @@ namespace MatImgprocBindings {
       this->mat = mat;
       this->isUp = isUp;
     }
+    virtual ~PyrWorker() {}
   
     cv::Size2d size = cv::Size2d();
     int borderType = cv::BORDER_DEFAULT;
@@ -1321,6 +1358,7 @@ namespace MatImgprocBindings {
     BuildPyramidWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~BuildPyramidWorker() {}
   
     int maxlevel;
     int borderType = cv::BORDER_DEFAULT;
@@ -1352,6 +1390,7 @@ namespace MatImgprocBindings {
     HoughLinesWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~HoughLinesWorker() {}
   
     double rho;
     double theta;
@@ -1408,6 +1447,7 @@ namespace MatImgprocBindings {
   public:
     HoughLinesPWorker(cv::Mat mat) : HoughLinesWorker(mat) {
     }
+    virtual ~HoughLinesPWorker() {}
   
     double minLineLength = 0;
     double maxLineGap = 0;
@@ -1450,6 +1490,7 @@ namespace MatImgprocBindings {
     HoughCirclesWorker(cv::Mat mat) {
       this->mat = mat;
     }
+    virtual ~HoughCirclesWorker() {}
   
     int method;
     double dp;
@@ -1508,6 +1549,7 @@ namespace MatImgprocBindings {
     EqualizeHistWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~EqualizeHistWorker() {}
   
     cv::Mat dst;
   
@@ -1527,6 +1569,7 @@ namespace MatImgprocBindings {
     CompareHistWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~CompareHistWorker() {}
   
     cv::Mat H2;
     int method;
@@ -1556,6 +1599,7 @@ namespace MatImgprocBindings {
     FloodFillWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~FloodFillWorker() {}
   
     cv::Point2d seedPoint;
     double newVal1 = 0;
@@ -1636,6 +1680,7 @@ namespace MatImgprocBindings {
     BilateralFilterWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~BilateralFilterWorker() {}
   
     int d;
     double sigmaColor;
@@ -1674,6 +1719,7 @@ namespace MatImgprocBindings {
     BoxFilterWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~BoxFilterWorker() {}
   
     int ddepth;
     cv::Size2d ksize;
@@ -1725,6 +1771,7 @@ namespace MatImgprocBindings {
   public:
     SqrBoxFilterWorker(cv::Mat self) : BoxFilterWorker(self) {
     }
+    virtual ~SqrBoxFilterWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
       cv::sqrBoxFilter(self, dst, ddepth, ksize, anchor, normalize, borderType);
@@ -1738,6 +1785,7 @@ namespace MatImgprocBindings {
     Filter2DWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~Filter2DWorker() {}
   
     int ddepth;
     cv::Mat kernel;
@@ -1791,6 +1839,7 @@ namespace MatImgprocBindings {
     SepFilter2DWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~SepFilter2DWorker() {}
   
     int ddepth;
     cv::Mat kernelX;
@@ -1846,6 +1895,7 @@ namespace MatImgprocBindings {
     CornerHarrisWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~CornerHarrisWorker() {}
   
     int blockSize;
     int ksize;
@@ -1884,6 +1934,7 @@ namespace MatImgprocBindings {
     CornerSubPixWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~CornerSubPixWorker() {}
   
     std::vector<cv::Point2f> corners;
     cv::Size2d winSize;
@@ -1916,7 +1967,8 @@ namespace MatImgprocBindings {
     BaseCornerEigenValWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~BaseCornerEigenValWorker() {}
+
     int blockSize;
     int ksize = 3;
     int borderType = cv::BORDER_DEFAULT;
@@ -1956,8 +2008,9 @@ namespace MatImgprocBindings {
   struct CornerMinEigenValWorker : public BaseCornerEigenValWorker {
   public:
     CornerMinEigenValWorker(cv::Mat self) : BaseCornerEigenValWorker(self) {
-    }
-  
+    }  
+    virtual ~CornerMinEigenValWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       cv::cornerMinEigenVal(self, dst, blockSize, ksize, borderType);
       return "";
@@ -1968,6 +2021,7 @@ namespace MatImgprocBindings {
   public:
     CornerEigenValsAndVecsWorker(cv::Mat self) : BaseCornerEigenValWorker(self) {
     }
+    virtual ~CornerEigenValsAndVecsWorker() {}
   
     std::string executeCatchCvExceptionWorker() {
       cv::cornerEigenValsAndVecs(self, dst, blockSize, ksize, borderType);
@@ -1981,6 +2035,7 @@ namespace MatImgprocBindings {
     IntegralWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~IntegralWorker() {}
   
     int sdepth = -1;
     int sqdepth = -1;
@@ -2028,6 +2083,7 @@ namespace MatImgprocBindings {
 	  DrawContoursWorker(cv::Mat self) {
 		  this->self = self;
 	  }
+    virtual ~DrawContoursWorker() {}
 
 	  std::vector<std::vector<cv::Point2i>> contours;
 	  int contourIdx;
@@ -2095,6 +2151,7 @@ namespace MatImgprocBindings {
 			  cv::undistort(self, undistortedMat->ref(), cameraMatrix->ref(), distCoeffs->ref());
 		  };
 	  };
+    virtual ~Undistort() {}
   };
 #endif
 }

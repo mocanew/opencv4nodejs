@@ -16,6 +16,8 @@ namespace MatCalib3dBindings {
     cv::Mat dst;
     cv::Mat jacobian;
   
+    virtual ~RodriguesWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       cv::Rodrigues(self, dst, jacobian);
       return "";
@@ -35,6 +37,7 @@ namespace MatCalib3dBindings {
     RQDecomp3x3Worker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~RQDecomp3x3Worker() {}
   
     cv::Vec3d returnValue;
     cv::Mat mtxR;
@@ -66,6 +69,7 @@ namespace MatCalib3dBindings {
     DecomposeProjectionMatrixWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~DecomposeProjectionMatrixWorker() {}
   
     cv::Mat cameraMatrix;
     cv::Mat rotMatrix;
@@ -98,7 +102,8 @@ namespace MatCalib3dBindings {
     MatMulDerivWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~MatMulDerivWorker() {}
+
     cv::Mat B;
   
     cv::Mat dABdA;
@@ -129,6 +134,7 @@ namespace MatCalib3dBindings {
     FindChessboardCornersWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~FindChessboardCornersWorker() {}
   
     cv::Size2d patternSize;
     int flags = cv::CALIB_CB_ADAPTIVE_THRESH + cv::CALIB_CB_NORMALIZE_IMAGE;
@@ -167,7 +173,8 @@ namespace MatCalib3dBindings {
     DrawChessboardCornersWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~DrawChessboardCornersWorker() {}
+
     cv::Size2d patternSize;
     std::vector<cv::Point2f> corners;
     bool patternWasFound;
@@ -193,6 +200,7 @@ namespace MatCalib3dBindings {
     Find4QuadCornerSubpixWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~Find4QuadCornerSubpixWorker() {}
   
     std::vector<cv::Point2f> corners;
     cv::Size2d region_size;
@@ -222,7 +230,8 @@ namespace MatCalib3dBindings {
     CalibrationMatrixValuesWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~CalibrationMatrixValuesWorker() {}
+
     cv::Size2d imageSize;
     double apertureWidth;
     double apertureHeight;
@@ -263,6 +272,7 @@ namespace MatCalib3dBindings {
     StereoRectifyWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~StereoRectifyWorker() {}
   
     std::vector<double> distCoeffs1;
     cv::Mat cameraMatrix2;
@@ -338,6 +348,7 @@ namespace MatCalib3dBindings {
     Rectify3CollinearWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~Rectify3CollinearWorker() {}
   
     std::vector<double> distCoeffs1;
     cv::Mat cameraMatrix2;
@@ -414,6 +425,7 @@ namespace MatCalib3dBindings {
     GetOptimalNewCameraMatrixWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~GetOptimalNewCameraMatrixWorker() {}
   
     std::vector<double> distCoeffs;
     cv::Size2d imageSize;
@@ -470,6 +482,7 @@ namespace MatCalib3dBindings {
     DecomposeEssentialMatWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~DecomposeEssentialMatWorker() {}
   
     cv::Mat R1;
     cv::Mat R2;
@@ -495,6 +508,7 @@ namespace MatCalib3dBindings {
     TriangulatePointsWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~TriangulatePointsWorker() {}
   
     cv::Mat projMatr2;
     std::vector<cv::Point2d> projPoints1;
@@ -526,7 +540,8 @@ namespace MatCalib3dBindings {
     CorrectMatchesWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~CorrectMatchesWorker() {}
+
     std::vector<cv::Point2f> points1;
     std::vector<cv::Point2f> points2;
   
@@ -559,7 +574,8 @@ namespace MatCalib3dBindings {
     FilterSpecklesWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~FilterSpecklesWorker() {}
+
     double newVal;
     int maxSpeckleSize;
     double maxDiff;
@@ -589,6 +605,7 @@ namespace MatCalib3dBindings {
     ValidateDisparityWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~ValidateDisparityWorker() {}
   
     cv::Mat cost;
     int minDisparity;
@@ -627,6 +644,7 @@ namespace MatCalib3dBindings {
     ReprojectImageTo3DWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~ReprojectImageTo3DWorker() {}
   
     cv::Mat Q;
     bool handleMissingValues = false;
@@ -675,6 +693,7 @@ namespace MatCalib3dBindings {
     DecomposeHomographyMatWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~DecomposeHomographyMatWorker() {}
   
     cv::Mat K;
   
@@ -711,6 +730,7 @@ namespace MatCalib3dBindings {
     FindEssentialMatWorker(cv::Mat self) {
       this->self = self;
     }
+    virtual ~FindEssentialMatWorker() {}
   
     std::vector<cv::Point2f> points1;
     std::vector<cv::Point2f> points2;
@@ -768,7 +788,8 @@ namespace MatCalib3dBindings {
     RecoverPoseWorker(cv::Mat self) {
       this->self = self;
     }
-  
+    virtual ~RecoverPoseWorker() {}
+
     cv::Mat E;
     std::vector<cv::Point2f> points1;
     std::vector<cv::Point2f> points2;
@@ -812,6 +833,7 @@ namespace MatCalib3dBindings {
   // since 4.0.0 cv::undistort has been moved from imgproc to calib3d
   class Undistort : public CvBinding {
   public:
+    virtual ~Undistort() {}
 	  void setup(cv::Mat self) {
 		  auto cameraMatrix = req<Mat::Converter>();
 		  auto distCoeffs = req<Mat::Converter>();

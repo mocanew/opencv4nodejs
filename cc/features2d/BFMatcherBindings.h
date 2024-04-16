@@ -6,13 +6,14 @@
 
 namespace BFMatcherBindings {
 
-struct MatchWorker : public CatchCvExceptionWorker {
+    struct MatchWorker : public CatchCvExceptionWorker {
     public:
         cv::BFMatcher bfmatcher;
 
         MatchWorker(cv::BFMatcher _bfmatcher) {
             this->bfmatcher = _bfmatcher;
         }
+        virtual ~MatchWorker() {}
 
         cv::Mat descFrom;
         cv::Mat descTo;
@@ -31,16 +32,17 @@ struct MatchWorker : public CatchCvExceptionWorker {
         v8::Local<v8::Value> getReturnValue() {
             return DescriptorMatch::ArrayConverter::wrap(dmatches);
         }
+
     };
 
-
-struct MatchKnnWorker : public CatchCvExceptionWorker {
+    struct MatchKnnWorker : public CatchCvExceptionWorker {
     public:
         cv::BFMatcher bfmatcher;
 
         MatchKnnWorker(cv::BFMatcher _bfmatcher) {
             this->bfmatcher = _bfmatcher;
         }
+        virtual ~MatchKnnWorker() {}
 
         cv::Mat descFrom;
         cv::Mat descTo;
@@ -61,8 +63,7 @@ struct MatchKnnWorker : public CatchCvExceptionWorker {
         v8::Local<v8::Value> getReturnValue() {
             return DescriptorMatch::ArrayOfArraysConverter::wrap(dmatches);
         }
-};
-
+    };
 }
 
 #endif

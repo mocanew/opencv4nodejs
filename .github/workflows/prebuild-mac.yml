@@ -1,0 +1,73 @@
+name: Use openCV from Brew
+
+on:
+  push:
+    branches: [ "master", "dev" ]
+    paths:
+      - "cc/**"
+      - "install/**"
+      - "lib/**"
+      - "test/**"
+      - "typings/**"
+      - "package.json"
+      - ".github/workflows/prebuild-mac.yml"
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - "cc/**"
+      - "install/**"
+      - "lib/**"
+      - "test/**"
+      - "typings/**"
+      - "package.json"
+      - ".github/workflows/prebuild-mac.yml"
+
+env:
+  OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        opencv_version:
+          - 4
+        node_version:
+          # - 16
+          # - 18
+          - 20
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v3
+      with:
+        version: 8
+    - name: Install Node.js ${{ matrix.node_version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node_version }}
+        cache: 'pnpm'
+
+    - name: Install OpenCV ${{ matrix.opencv_version }}
+      run: |
+        brew install opencv@${{ matrix.opencv_version }}
+
+    - name: run pnpm install
+      run: pnpm install --frozen-lockfile
+
+    - name: pnpm run prepack
+      run: pnpm run prepack
+
+    - name: build native code
+      run: npx node-gyp rebuild
+
+    - name: install deps in test
+      working-directory: ./test
+      run: pnpm install --frozen-lockfile
+
+    - name: run test-appveyor test
+      working-directory: ./test
+      run: pnpm run test-appveyor

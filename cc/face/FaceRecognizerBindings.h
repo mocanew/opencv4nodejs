@@ -35,6 +35,7 @@ namespace FaceRecognizerBindings {
     TrainWorker(cv::Ptr<cv::face::FaceRecognizer> self) {
       this->self = self;
     }
+    virtual ~TrainWorker() {}
   
     std::vector<cv::Mat> images;
     std::vector<int> labels;
@@ -58,6 +59,7 @@ namespace FaceRecognizerBindings {
     PredictWorker(cv::Ptr<cv::face::FaceRecognizer> self) {
       this->self = self;
     }
+    virtual ~PredictWorker() {}
   
     cv::Mat image;
     int label;

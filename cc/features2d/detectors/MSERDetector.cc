@@ -66,6 +66,8 @@ public:
         this->det = det;
     }
 
+    virtual ~DetectRegionsWorker() {}
+
     cv::Mat img;
     std::vector<std::vector<cv::Point>> regions;
     std::vector<cv::Rect> mser_bbox;

@@ -16,6 +16,8 @@ namespace PhotoBindings {
 
 		cv::Mat returnValue;
 
+    virtual ~FastNlMeansDenoisingColoredWorker() {}
+
 		std::string executeCatchCvExceptionWorker() {
 			cv::fastNlMeansDenoisingColored(src, returnValue, h, hColor, templateWindowSize, searchWindowSize);
 			return "";
@@ -65,6 +67,8 @@ namespace PhotoBindings {
   
     // function return value
     cv::Mat dst;
+
+    virtual ~InpaintWorker() {}
   
     bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
       return (
@@ -90,6 +94,7 @@ namespace PhotoBindings {
 
   class SeamlessClone : public CvClassMethodBinding<Mat> {
   public:
+    virtual ~SeamlessClone() {}
     void createBinding(std::shared_ptr<FF::Value<cv::Mat>> self) {
       auto dst = req<Mat::Converter>();
       auto mask = req<Mat::Converter>();

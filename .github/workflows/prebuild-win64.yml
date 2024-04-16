@@ -1,8 +1,8 @@
-name: Build using prebuild openCV
+name: Use openCV from Chocolatey
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev" ]
     paths:
       - "cc/**"
       - "install/**"
@@ -10,7 +10,7 @@ on:
       - "test/**"
       - "typings/**"
       - "package.json"
-      - ".github/workflows/prebuild.yml"
+      - ".github/workflows/prebuild-win64.yml"
   pull_request:
     branches: [ "master" ]
     paths:
@@ -20,7 +20,7 @@ on:
       - "test/**"
       - "typings/**"
       - "package.json"
-      - ".github/workflows/prebuild.yml"
+      - ".github/workflows/prebuild-win64.yml"
 
 env:
   # Path to the solution file relative to the root of the project.
@@ -30,6 +30,7 @@ env:
   # OPENCV_LIB_DIR: c:\tools\opencv\build\x64\vc14\lib
   # OPENCV_BIN_DIR: c:\tools\opencv\build\x64\vc14\bin
   OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
+  OPENCV_BUILD_ROOT: D:\a\opencv\
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
@@ -45,9 +46,9 @@ jobs:
       matrix:
         opencv_version:
           - 4.9.0
-          - 4.8.0
-          - 4.7.0
-          - 4.6.0
+          # - 4.8.0
+          # - 4.7.0
+          # - 4.6.0
           # - 4.5.5 # 2019-12-23 ubuntu 22.04
           ###- 4.5.1 # raspberry Pi version
           # - 4.2.0 # 2019-12-23 ubuntu 20.04
@@ -60,9 +61,9 @@ jobs:
           - x64
     steps:
     - uses: actions/checkout@v3
-    - uses: pnpm/action-setup@v2
+    - uses: pnpm/action-setup@v3
       with:
-        version: 8.15.3
+        version: 8
     - uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node_version }}
@@ -70,23 +71,25 @@ jobs:
         cache: 'pnpm'
     
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
     - name: Install OpenCV
       run: |
-        choco install OpenCV -y --version ${{ matrix.opencv_version }}
-
-    - name: add path to PATH environment variable
-      uses: myci-actions/export-env-var-powershell@1
-      with:
-       name: PATH
-       value: $env:PATH;$env:OPENCV_BIN_DIR
+        choco install opencv -y --version ${{ matrix.opencv_version }}
+    # - name: add path to PATH environment variable
+    #   uses: myci-actions/export-env-var-powershell@1
+    #   with:
+    #    name: PATH
+    #    value: $env:PATH;$env:OPENCV_BIN_DIR
      
     - name: run pnpm install
       run: pnpm install --frozen-lockfile
 
     - name: pnpm run prepack
       run: pnpm run prepack
+
+    - name: build native code
+      run: npx node-gyp rebuild
 
     - name: install deps in test
       working-directory: ./test

@@ -11,6 +11,8 @@ namespace IoBindings {
     int flags = cv::IMREAD_COLOR;
     cv::Mat img;
 
+    virtual ~ImreadWorker() {}
+
     std::string executeCatchCvExceptionWorker() {
       img = cv::imread(path, flags);
       if (img.rows == 0 && img.cols == 0) {
@@ -37,6 +39,7 @@ namespace IoBindings {
     std::string path;
     cv::Mat img;
     std::vector<int> flags;
+    virtual ~ImwriteWorker() {}
 
     std::string executeCatchCvExceptionWorker() {
       cv::imwrite(path, img);
@@ -60,6 +63,8 @@ namespace IoBindings {
     std::vector<int> flags;
     char *data;
     size_t dataSize;
+
+    virtual ~ImencodeWorker() {}
 
     std::string executeCatchCvExceptionWorker() {
       std::vector<uchar> dataVec;
@@ -92,6 +97,8 @@ namespace IoBindings {
     cv::Mat img;
     char *data;
     size_t dataSize;
+
+    virtual ~ImdecodeWorker() {}
 
     std::string executeCatchCvExceptionWorker() {
       std::vector<uchar> vec(dataSize);

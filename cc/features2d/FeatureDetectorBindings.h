@@ -11,7 +11,8 @@ namespace FeatureDetectorBindings {
     DetectWorker(cv::Ptr<cv::FeatureDetector> _det) {
       this->det = _det;
     }
-  
+    virtual ~DetectWorker() {}
+
     cv::Mat img;
     cv::Mat mask;
     std::vector<cv::KeyPoint> kps;
@@ -42,6 +43,7 @@ namespace FeatureDetectorBindings {
     ComputeWorker(cv::Ptr<cv::FeatureDetector> _det) {
       this->det = _det;
     }
+    virtual ~ComputeWorker() {}
   
     cv::Mat img;
     std::vector<cv::KeyPoint> kps;
