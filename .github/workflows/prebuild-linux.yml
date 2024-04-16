@@ -46,7 +46,7 @@ jobs:
       with:
         version: 8
     - name: Install Node.js ${{ matrix.node_version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node_version }}
         cache: 'pnpm'
@@ -67,6 +67,9 @@ jobs:
           
     - name: pnpm run prepack
       run: pnpm run prepack
+
+    - name: build native code
+      run: npx node-gyp rebuild
 
     - name: install deps in test
       working-directory: ./test
