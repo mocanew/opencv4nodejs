@@ -1,0 +1,64 @@
+name: Use openCV from Apt
+
+on:
+  push:
+    branches: [ "master" ]
+    paths:
+      - "cc/**"
+      - "install/**"
+      - "lib/**"
+      - "test/**"
+      - "typings/**"
+      - "package.json"
+      - ".github/workflows/linux-prebuild.yml"
+  pull_request:
+    branches: [ "master" ]
+    paths:
+      - "cc/**"
+      - "install/**"
+      - "lib/**"
+      - "test/**"
+      - "typings/**"
+      - "package.json"
+      - ".github/workflows/linux-prebuild.yml"
+
+env:
+  OPENCV4NODEJS_DISABLE_AUTOBUILD: 1
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        opencv_version:
+          - 4
+        node_version:
+          # - 16
+          # - 18
+          - 20
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install OpenCV ${{ matrix.opencv_version }}
+      run: |
+        sudo apt update
+        sudo apt install libopencv-dev
+        
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node_version }}
+        cache: 'pnpm'
+
+    - name: pnpm run prepack
+      run: pnpm run prepack
+
+    - name: install deps in test
+      working-directory: ./test
+      run: pnpm install --frozen-lockfile
+
+    - name: run test-appveyor test
+      working-directory: ./test
+      run: pnpm run test-appveyor
