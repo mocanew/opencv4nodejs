@@ -85,14 +85,11 @@ jobs:
     - name: run pnpm install
       run: pnpm install --frozen-lockfile
 
-    - name: install node-gyp
-      run: pnpm install -g node-gyp
-
     - name: pnpm run prepack
       run: pnpm run prepack
 
     - name: build native code
-      run: node-gyp rebuild
+      run: npx node-gyp rebuild
 
     - name: install deps in test
       working-directory: ./test
