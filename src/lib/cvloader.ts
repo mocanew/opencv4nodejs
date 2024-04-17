@@ -112,10 +112,11 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   // resolve haarcascade files
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { haarCascades, lbpCascades } = opencvBuild as any;
+  const xmlDir = path.join(__dirname, '..', '..', 'src', 'lib');
   Object.keys(haarCascades).forEach(
-    key => opencvBuild[key] = resolvePath(path.join(__dirname, 'haarcascades'), haarCascades[key]));
+    key => opencvBuild[key] = resolvePath(path.join(xmlDir, 'haarcascades'), haarCascades[key]));
   Object.keys(lbpCascades).forEach(
-    key => opencvBuild[key] = resolvePath(path.join(__dirname, 'lbpcascades'), lbpCascades[key]));
+    key => opencvBuild[key] = resolvePath(path.join(xmlDir, 'lbpcascades'), lbpCascades[key]));
   return opencvBuild;
 }
 

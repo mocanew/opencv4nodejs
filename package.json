@@ -90,17 +90,12 @@
   },
   "files": [
     "cc",
-    "install/*.js",
-    "install/*.d.ts",
-    "install/*.map",
-    "lib/**/*.xml",
-    "lib/**/*.js",
-    "lib/**/*.d.ts",
-    "lib/**/*.map",
+    "cjs",
+    "esm",
+    "src/**/*.xml",
     "bin/*.js",
     "typings",
     "binding.gyp",
-    "binding_old.gyp",
-    "tsconfig.json"
+    "binding_old.gyp"
   ]
 }
