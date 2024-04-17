@@ -33,7 +33,8 @@
     "build-opencv": "bin/install.js"
   },
   "homepage": "https://github.com/UrielCh/opencv4nodejs#readme",
-  "main": "./lib/opencv4nodejs.js",
+  "main": "./cjs/lib/opencv4nodejs.js",
+  "module": "./esm/lib/opencv4nodejs.js",
   "typings": "./typings/index.d.ts",
   "scripts": {
     "build": "tsc --pretty --project . && tsc --pretty --project tsconfig-esm.json",
