@@ -1,7 +1,7 @@
-import makeDrawUtils from './drawUtils.js';
-import deprecations from './deprecations.js';
+import makeDrawUtils from './drawUtils';
+import deprecations from './deprecations';
 import * as OpenCV from '../..';
-import misc from './misc.js';
+import misc from './misc';
 
 export default function(cv: typeof OpenCV) {
   // add functions

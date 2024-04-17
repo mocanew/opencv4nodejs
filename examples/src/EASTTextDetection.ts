@@ -1,6 +1,6 @@
 import path from 'path';
 import { cv, drawBlueRect, getCachedFile, getResourcePath, wait4key } from './utils';
-import { Mat, Rect } from '@u4/opencv4nodejs';
+import type { Mat, Rect } from '@u4/opencv4nodejs';
 
 /**
  * Text detection simple code example.

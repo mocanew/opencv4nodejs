@@ -1,6 +1,6 @@
 import * as assert from 'assert';
 import type * as openCV from '../..'
-import { Mat } from '../..';
+import type { Mat } from '../..';
 
 export default function (cv: typeof openCV) {
   // deprecate wrapper for the old calcHist API

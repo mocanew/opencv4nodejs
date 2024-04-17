@@ -1,4 +1,4 @@
-import { Mat, Rect } from '@u4/opencv4nodejs';
+import type { Mat, Rect } from '@u4/opencv4nodejs';
 import { cv } from '../utils';
 
 export type Prediction = {
