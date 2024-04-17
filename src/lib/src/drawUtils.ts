@@ -1,5 +1,5 @@
-import type * as openCV from '../../..';
-import { Mat, Rect, Vec3 } from '../../..';
+import type * as openCV from '../../../typings/index';
+import { Mat, Rect, Vec3 } from '../../../typings/index';
 
 export interface TextParams {
   fontType: number;

@@ -660,7 +660,7 @@ try {
 ## With TypeScript
 
 ``` javascript
-import * as cv from '@u4/opencv4nodejs'
+import cv from '@u4/opencv4nodejs'
 ```
 
 Check out the TypeScript [examples](https://github.com/urielch/opencv4nodejs/tree/master/examples).

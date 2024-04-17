@@ -1,10 +1,10 @@
 import { OpenCVBuilder, type OpenCVBuildEnvParams } from '@u4/opencv-build';
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 import { isElectronWebpack, resolvePath } from './commons';
-import * as pc from 'picocolors'
+import pc from 'picocolors'
 import { info } from 'npmlog';
-import type * as openCV from '../..';
+import type * as openCV from '../../typings/index';
 declare type OpenCVType = typeof openCV;
 
 const logDebug = process.env.OPENCV4NODES_DEBUG_REQUIRE ? info : () => { /* ignore */ }
@@ -45,14 +45,14 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   let opencvBuild: OpenCVType = null;
   let requirePath = '';
   if (isElectronWebpack()) {
-    requirePath = '../build/Release/opencv4nodejs.node';
+    requirePath = '../../build/Release/opencv4nodejs.node';
   } else {
-    requirePath = path.join(__dirname, '../build/Debug/opencv4nodejs.node');
+    requirePath = path.join(__dirname, '../../build/Debug/opencv4nodejs.node');
     if (!fs.existsSync(requirePath)) {
-      requirePath = path.join(__dirname, '../build/Release/opencv4nodejs.node');
+      requirePath = path.join(__dirname, '../../build/Release/opencv4nodejs.node');
     }
     requirePath = requirePath.replace(/\.node$/, '');
-    // path.join(__dirname, process.env.BINDINGS_DEBUG ? '../build/Debug/opencv4nodejs' : '../build/Release/opencv4nodejs')
+    // path.join(__dirname, process.env.BINDINGS_DEBUG ? '../../build/Debug/opencv4nodejs' : '../../build/Release/opencv4nodejs')
   }
   try {
     logDebug('require', `require path is ${pc.yellow(requirePath)}`)

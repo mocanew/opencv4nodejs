@@ -1,19 +1,20 @@
-import { type OpencvModule, OpenCVBuilder, OpenCVBuildEnv, type OpenCVBuildEnvParams, args2Option, genHelp } from '@u4/opencv-build'
-import * as child_process from 'child_process'
-import * as fs from 'fs'
-import * as npmlog from 'npmlog'
-import { LogLevels } from 'npmlog'
-import { resolvePath } from '../lib/commons'
-import * as pc from 'picocolors'
-import * as path from 'path'
-import { EOL } from 'os'
+import type { OpencvModule, OpenCVBuildEnvParams } from '@u4/opencv-build';
+import { OpenCVBuilder, OpenCVBuildEnv, args2Option, genHelp } from '@u4/opencv-build';
+import child_process from 'child_process';
+import fs from 'fs';
+import npmlog from 'npmlog';
+import { LogLevels } from 'npmlog';
+import { resolvePath } from '../lib/commons';
+import pc from 'picocolors';
+import path from 'path';
+import { EOL } from 'os';
 import { globSync } from "glob";
-import { getOpenCV } from '../lib/cvloader'
+import { getOpenCV } from '../lib/cvloader';
 
-const defaultDir = '/usr/local'
-const defaultLibDir = `${defaultDir}/lib`
-const defaultIncludeDir = `${defaultDir}/include`
-const defaultIncludeDirOpenCV4 = `${defaultIncludeDir}/opencv4`
+const defaultDir = '/usr/local';
+const defaultLibDir = `${defaultDir}/lib`;
+const defaultIncludeDir = `${defaultDir}/include`;
+const defaultIncludeDirOpenCV4 = `${defaultIncludeDir}/opencv4`;
 
 let silenceMode = false;
 

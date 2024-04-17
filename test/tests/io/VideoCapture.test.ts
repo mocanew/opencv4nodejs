@@ -1,7 +1,7 @@
 /* eslint-disable no-bitwise */
 import { VideoCapture } from '@u4/opencv4nodejs';
 import { expect } from 'chai';
-import * as path from 'path';
+import path from 'path';
 import { assertMetaData } from '../../utils/matTestUtils';
 import { getTestContext } from '../model';
 import toTest from '../toTest';

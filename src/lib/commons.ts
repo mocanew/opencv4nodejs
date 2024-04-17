@@ -1,4 +1,4 @@
-import * as path from 'path'
+import path from 'path'
 
 export function resolvePath(filePath?: string, file?: string): string {
   if (!filePath) {

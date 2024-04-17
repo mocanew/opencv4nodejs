@@ -1,8 +1,8 @@
 import { type OpenCVBuildEnvParams } from '@u4/opencv-build';
 import promisify from './promisify';
-import extendWithJsSources from './src';
+import extendWithJsSources from './src/index';
 import { getOpenCV } from './cvloader';
-import type * as openCV from '../..';
+import type * as openCV from '../../typings/index';
 declare type OpenCVType = typeof openCV;
 
 function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
