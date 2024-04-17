@@ -432,7 +432,7 @@ or use OPENCV4NODEJS_* env variable.`)
         //     if (key.startsWith('OPENCV'))
         //         console.log(`export ${key}=${process.env[key]}`);
         // }
-        const child = child_process.exec(nodegypCmd, { maxBuffer: Infinity, cwd }, function (error/*, stdout, stderr*/) {
+        const child = child_process.exec(nodegypCmd, { maxBuffer: Infinity, cwd }, function callNodegypCmd(error/*, stdout, stderr*/) {
             // fs.unlinkSync(realGyp);
             const bin = buildOptions.extra.electron ? 'electron-rebuild' : 'node-gyp';
             if (error) {

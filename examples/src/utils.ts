@@ -40,7 +40,7 @@ export function getCachedFile(localName: string, url: string, opts?: { notice?: 
         complete: '=',
         incomplete: ' ',
         renderThrottle: 1,
-        total: parseInt(totalLength),
+        total: parseInt(totalLength, 10),
       });
       data.on('data', (chunk: Buffer) => progressBar.tick(chunk.length));
     }

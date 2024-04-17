@@ -9,14 +9,14 @@ const isAsyncFn = (fn: (...args: any[]) => any) => {
   }
 };
 
-const promisify = (fn: () => any) => function (...params: any[]) {
+const promisify = (fn: () => any) => function toPromise(...params: any[]) {
   if (isFn(params[params.length - 1])) {
     return fn.apply(this, params);
   }
 
   return new Promise((resolve, reject) => {
     const args = Array.prototype.slice.call(params);
-    args.push(function(err: Error, res: any) {
+    args.push(function pomisifyed(err: Error, res: any) {
       if (err) {
         return reject(err);
       }
