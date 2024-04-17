@@ -3,12 +3,12 @@ import * as child_process from 'child_process'
 import * as fs from 'fs'
 import * as npmlog from 'npmlog'
 import { LogLevels } from 'npmlog'
-import { resolvePath } from '../lib/commons.js'
+import { resolvePath } from '../lib/commons'
 import * as pc from 'picocolors'
 import * as path from 'path'
 import { EOL } from 'os'
 import { globSync } from "glob";
-import { getOpenCV } from '../lib/cvloader.js'
+import { getOpenCV } from '../lib/cvloader'
 
 const defaultDir = '/usr/local'
 const defaultLibDir = `${defaultDir}/lib`

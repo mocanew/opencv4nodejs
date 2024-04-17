@@ -36,7 +36,7 @@
   "main": "./lib/opencv4nodejs.js",
   "typings": "./typings/index.d.ts",
   "scripts": {
-    "build": "tsc --pretty --project .",
+    "build": "tsc --pretty --project . && tsc --pretty --project tsconfig-esm.json",
     "prepack": "npm run build",
     "install_old": "node bin/install.js auto",
     "install_Mac": "CXXFLAGS=\"-std=c++17 -Wno-c++11-narrowing -Wno-c++17-extensions -Wno-c++17-attribute-extensions\" node ./bin/install.js --version 4.5.3 build",

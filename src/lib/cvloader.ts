@@ -4,7 +4,7 @@ import * as path from 'path';
 import { isElectronWebpack, resolvePath } from './commons.js';
 import * as pc from 'picocolors'
 import { info } from 'npmlog';
-import type * as openCV from '..';
+import type * as openCV from '../..';
 declare type OpenCVType = typeof openCV;
 
 const logDebug = process.env.OPENCV4NODES_DEBUG_REQUIRE ? info : () => { /* ignore */ }

@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "ES2019",
-    "module": "commonjs",
     "strict": false,
     "esModuleInterop": false,
     "noImplicitReturns": true,
@@ -9,7 +8,9 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "declarationMap": true,
+    "outDir": "cjs",
+    "module": "commonjs",
   },
   //"files": [ "./install/install.ts", "./install/parseEnv.ts" ]
-  "include": [ "./install/*.ts", "./lib/**/*.ts"]
+  "include": [ "src/**/*.ts"]
 }

@@ -2,7 +2,7 @@ import { type OpenCVBuildEnvParams } from '@u4/opencv-build';
 import promisify from './promisify.js';
 import extendWithJsSources from './src';
 import { getOpenCV } from './cvloader.js';
-import type * as openCV from '..';
+import type * as openCV from '../..';
 declare type OpenCVType = typeof openCV;
 
 function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
@@ -23,7 +23,7 @@ function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   return cvObj;
 }
 
-const cv = loadOpenCV({ prebuild: 'latestBuild' });
+export const cv = loadOpenCV({ prebuild: 'latestBuild' });
 const defExport = { cv };
 // duplicate all export for retro-compatibility
 for (const key in cv) {
@@ -31,4 +31,7 @@ for (const key in cv) {
 }
 defExport['cv'] = cv;
 
-export = defExport;
+// export cv;
+export default defExport;
+
+//export = defExport;
