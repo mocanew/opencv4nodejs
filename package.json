@@ -1,6 +1,6 @@
 {
   "name": "@u4/opencv4nodejs",
-  "version": "7.0.0-alpha-2",
+  "version": "7.0.0-alpha-4",
   "description": "Asynchronous OpenCV 3.x / 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -60,7 +60,8 @@
     "lint": "eslint examples/**/*.ts src/**/*.ts typings/**/*.ts ",
     "clean": "node-gyp clean",
     "cleanjs": "rimraf {examples}/**/*.{d.ts,js,map} {cjs,esm}/{lib,install}",
-    "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild"
+    "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild",
+    "publish-next": "npm publish --dry-run --tag next"
   },
   "dependencies": {
     "@u4/opencv-build": "^0.9.1",

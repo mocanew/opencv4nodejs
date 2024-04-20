@@ -1,15 +1,10 @@
 {
+  "extends": "./tsconfig-common.json",
   "compilerOptions": {
-    "target": "ES2019",
-    "strict": false,
-    "esModuleInterop": true,
-    "noImplicitReturns": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
+    "declarationDir": "types",
     "outDir": "cjs",
-    "module": "commonjs",
   },
-  "include": [ "src/**/*.ts"]
 }

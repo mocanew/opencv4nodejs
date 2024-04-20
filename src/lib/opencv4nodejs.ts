@@ -3,6 +3,8 @@ import promisify from './promisify';
 import extendWithJsSources from './src/index';
 import { getOpenCV } from './cvloader';
 import type * as openCV from '../../typings/index';
+export type * as openCV from '../../typings/index';
+
 declare type OpenCVType = typeof openCV;
 
 function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
@@ -31,7 +33,5 @@ for (const key in cv) {
 }
 defExport['cv'] = cv;
 
-// export cv;
 export default defExport;
 
-//export = defExport;

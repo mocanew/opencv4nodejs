@@ -1,11 +1,11 @@
 {
-    "extends": "./tsconfig.json",
+    "extends": "./tsconfig-common.json",
     "compilerOptions": {
-      "module": "ESNext",
+      "module": "Node16",
       "declaration": false,
       "declarationMap": false,
       "outDir": "esm",
-      "moduleResolution": "Node",
+      "moduleResolution": "Node16",
     },
   }
   
