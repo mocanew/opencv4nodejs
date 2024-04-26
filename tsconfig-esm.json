@@ -2,9 +2,9 @@
     "extends": "./tsconfig-common.json",
     "compilerOptions": {
       "module": "Node16",
-      // "declaration": false,
+      "declaration": true,
       // "declarationMap": false,
-      // "declarationDir": "types",
+      "declarationDir": "types",
       "outDir": "esm",
       "moduleResolution": "Node16",
     },

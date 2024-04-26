@@ -2,9 +2,9 @@
   "extends": "./tsconfig-common.json",
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": true,
-    "declarationMap": true,
-    "declarationDir": "types",
+    "declaration": false,
+    // "declarationMap": false,
+    // "declarationDir": "types",
     "outDir": "cjs",
     "moduleResolution": "Node10",
   },
