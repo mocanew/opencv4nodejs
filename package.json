@@ -18,9 +18,9 @@
   ],
   "exports": {
     ".": {
+      "types": "./typings/index.d.ts",
       "require": "./cjs/lib/opencv4nodejs.js",
-      "import": "./esm/lib/opencv4nodejs.js",
-      "types": "./typings/index.d.ts"
+      "import": "./esm/lib/opencv4nodejs.js"
     }
   },
   "contributors": [
