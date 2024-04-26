@@ -1,9 +1,8 @@
-import type { OpencvModule, OpenCVBuildEnvParams } from '@u4/opencv-build';
+import { Log, Platfrm, StaticTools } from '@u4/opencv-build';
+import type { OpencvModule, OpenCVBuildEnvParams, LogLevels } from '@u4/opencv-build';
 import { OpenCVBuilder, OpenCVBuildEnv, args2Option, genHelp } from '@u4/opencv-build';
 import child_process from 'child_process';
 import fs from 'fs';
-import npmlog from 'npmlog';
-import { LogLevels } from 'npmlog';
 import { resolvePath } from '../lib/commons';
 import pc from 'picocolors';
 import path from 'path';
@@ -19,8 +18,8 @@ const defaultIncludeDirOpenCV4 = `${defaultIncludeDir}/opencv4`;
 let silenceMode = false;
 
 function log(level: LogLevels | string, prefix: string, message: string, ...args: unknown[]): void {
-    if (!OpenCVBuildEnv.silence)
-      npmlog.log(level, prefix, message, ...args);
+    if (!Log.silence)
+        Log.log(level, prefix, message, ...args);
 }
 
 function toBool(value?: string | boolean | number | null) {
@@ -38,9 +37,9 @@ function toBool(value?: string | boolean | number | null) {
 /**
  * @returns global system include paths
  */
-function getDefaultIncludeDirs(env: OpenCVBuildEnv) {
+function getDefaultIncludeDirs(/*env: OpenCVBuildEnv*/) {
     log('info', 'install', 'OPENCV_INCLUDE_DIR is not set, looking for default include dir')
-    if (env.isWin) {
+    if (Platfrm.isWindows) {
         throw new Error('OPENCV_INCLUDE_DIR has to be defined on windows when auto build is disabled')
     }
     return [defaultIncludeDir, defaultIncludeDirOpenCV4]
@@ -49,9 +48,9 @@ function getDefaultIncludeDirs(env: OpenCVBuildEnv) {
 /**
  * @returns return a path like /usr/local/lib
  */
-function getDefaultLibDir(env: OpenCVBuildEnv) {
+function getDefaultLibDir(/*env: OpenCVBuildEnv*/) {
     log('info', 'install', 'OPENCV_LIB_DIR is not set, looking for default lib dir')
-    if (env.isWin) {
+    if (Platfrm.isWindows) {
         throw new Error('OPENCV_LIB_DIR has to be defined on windows when auto build is disabled')
     }
     return defaultLibDir
@@ -62,7 +61,7 @@ function getDefaultLibDir(env: OpenCVBuildEnv) {
  */
 function getLibDir(env: OpenCVBuildEnv): string {
     if (env.isAutoBuildDisabled) {
-        return resolvePath(process.env.OPENCV_LIB_DIR) || getDefaultLibDir(env);
+        return resolvePath(process.env.OPENCV_LIB_DIR) || getDefaultLibDir();
     } else {
         const dir = resolvePath(env.opencvLibDir);
         if (!dir) {
@@ -80,7 +79,7 @@ function getLibDir(env: OpenCVBuildEnv): string {
  * @returns 
  */
 function getOPENCV4NODEJS_LIBRARIES(env: OpenCVBuildEnv, libDir: string, libsFoundInDir: OpencvModule[]): string[] {
-    const libs = env.isWin
+    const libs = Platfrm.isWindows
         ? libsFoundInDir.map(lib => resolvePath(lib.libPath))
         // dynamically link libs if not on windows
         : ['-L' + libDir]
@@ -140,7 +139,7 @@ function getOPENCV4NODEJS_INCLUDES(env: OpenCVBuildEnv): string[] {
                 includes = [explicitIncludeDir, path.resolve(explicitIncludeDir, 'opencv4')];
             }
         } else {
-            includes = getDefaultIncludeDirs(env);
+            includes = getDefaultIncludeDirs();
         }
     } else {
         includes = [resolvePath(env.opencvInclude), resolvePath(env.opencv4Include)];
@@ -180,8 +179,8 @@ export async function compileLib(args: string[]) {
     const buildOptions: OpenCVBuildEnvParams = args2Option(args)
 
     if (actionOriginal === 'list') {
-        const buildDir = OpenCVBuildEnv.getBuildDir(buildOptions);
-        const builds = OpenCVBuildEnv.listBuild(buildDir);
+        const buildDir = StaticTools.getBuildDir(buildOptions);
+        const builds = StaticTools.listBuild(buildDir);
         if (!builds.length) {
             console.log(`${pc.red('NO Build available on your system in')} ${pc.green(buildDir)}`);
         } else {
@@ -203,11 +202,11 @@ export async function compileLib(args: string[]) {
 
     if (actionOriginal.startsWith('OPENCV4NODEJS_')) {
         silenceMode = true;
-        OpenCVBuildEnv.silence = true;
+        Log.silence = true;
     }
 
     const env = process.env;
-    const npmEnv = OpenCVBuildEnv.readEnvsFromPackageJson() || {};
+    const npmEnv = StaticTools.readEnvsFromPackageJson() || {};
     let action = actionOriginal;
     if (actionOriginal === 'auto') {
         try {
@@ -237,7 +236,7 @@ export async function compileLib(args: string[]) {
     }
 
     if (buildOptions.disableAutoBuild || toBool(env.OPENCV4NODEJS_DISABLE_AUTOBUILD) || npmEnv.disableAutoBuild) {
-        const summery = OpenCVBuildEnv.autoLocatePrebuild();
+        const summery = StaticTools.autoLocatePrebuild();
         if (!silenceMode) {
             log('info', 'envAutodetect', `autodetect ${pc.green('%d')} changes`, summery.changes)
             for (const txt of summery.summery) {

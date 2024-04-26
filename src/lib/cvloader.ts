@@ -1,13 +1,12 @@
-import { OpenCVBuilder, type OpenCVBuildEnvParams } from '@u4/opencv-build';
+import { pc, Log, OpenCVBuilder, type OpenCVBuildEnvParams } from '@u4/opencv-build';
 import fs from 'fs';
 import path from 'path';
 import { isElectronWebpack, resolvePath } from './commons';
-import pc from 'picocolors'
-import { info } from 'npmlog';
 import type * as openCV from '../../typings/index';
+
 declare type OpenCVType = typeof openCV;
 
-const logDebug = process.env.OPENCV4NODES_DEBUG_REQUIRE ? info : () => { /* ignore */ }
+const logDebug = process.env.OPENCV4NODES_DEBUG_REQUIRE ? (prefix: string, message: string, ...args: unknown[]) => Log.log('info', prefix, message, ...args) : () => { /* ignore */ }
 
 function tryGetOpencvBinDir(builder: OpenCVBuilder) {
   if (process.env.OPENCV_BIN_DIR) {

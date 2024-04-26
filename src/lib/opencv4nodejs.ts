@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type OpenCVBuildEnvParams } from '@u4/opencv-build';
 import promisify from './promisify';
 import extendWithJsSources from './src/index';
@@ -26,10 +27,10 @@ function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
 }
 
 export const cv = loadOpenCV({ prebuild: 'latestBuild' });
-const defExport = { cv };
+const defExport: { [key: string]: any } = { cv };
 // duplicate all export for retro-compatibility
 for (const key in cv) {
-  defExport[key] = cv[key];
+  defExport[key] = (cv)[key];
 }
 defExport['cv'] = cv;
 

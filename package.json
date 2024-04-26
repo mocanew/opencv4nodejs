@@ -61,19 +61,18 @@
     "clean": "node-gyp clean",
     "cleanjs": "rimraf {examples}/**/*.{d.ts,js,map} {cjs,esm}/{lib,install}",
     "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild",
+    "checkExports": "npx @arethetypeswrong/cli $(npm pack)",
     "publish-next": "npm publish --dry-run --tag next"
   },
   "dependencies": {
-    "@u4/opencv-build": "^0.9.1",
+    "@u4/opencv-build": "1.0.0-alpha2",
     "glob": "^10.3.12",
     "nan": "^2.19.0",
     "node-gyp": "^10.1.0",
-    "npmlog": "^7.0.1",
     "picocolors": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
-    "@types/npmlog": "^7.0.0",
     "@types/progress": "^2.0.7",
     "@typescript-eslint/eslint-plugin": "^7.7.0",
     "@typescript-eslint/parser": "^7.7.0",

@@ -6,5 +6,6 @@
     "declarationMap": true,
     "declarationDir": "types",
     "outDir": "cjs",
+    "moduleResolution": "Node10",
   },
 }

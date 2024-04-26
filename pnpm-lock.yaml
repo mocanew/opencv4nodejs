@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@u4/opencv-build':
-    specifier: ^0.9.1
-    version: 0.9.1
+    specifier: 1.0.0-alpha2
+    version: 1.0.0-alpha2
   glob:
     specifier: ^10.3.12
     version: 10.3.12
@@ -17,9 +17,6 @@ dependencies:
   node-gyp:
     specifier: ^10.1.0
     version: 10.1.0
-  npmlog:
-    specifier: ^7.0.1
-    version: 7.0.1
   picocolors:
     specifier: ^1.0.0
     version: 1.0.0
@@ -28,9 +25,6 @@ devDependencies:
   '@types/node':
     specifier: ^20.12.7
     version: 20.12.7
-  '@types/npmlog':
-    specifier: ^7.0.0
-    version: 7.0.0
   '@types/progress':
     specifier: ^2.0.7
     version: 2.0.7
@@ -87,6 +81,17 @@ packages:
     dependencies:
       regenerator-runtime: 0.14.1
     dev: true
+
+  /@deno/shim-deno-test@0.5.0:
+    resolution: {integrity: sha512-4nMhecpGlPi0cSzT67L+Tm+GOJqvuk8gqHBziqcUQOarnuIax1z96/gJHCSIz2Z0zhxE6Rzwb3IZXPtFh51j+w==}
+    dev: false
+
+  /@deno/shim-deno@0.19.1:
+    resolution: {integrity: sha512-8hYIpmDqpG76sn+UY1853RCi+CI7ZWz9tt37nfyDL8rwr6xbW0+GHUwCLcsGbh1uMIKURuJy6xtrIcnW+a0duA==}
+    dependencies:
+      '@deno/shim-deno-test': 0.5.0
+      which: 4.0.0
+    dev: false
 
   /@eslint-community/eslint-utils@4.4.0(eslint@8.57.0):
     resolution: {integrity: sha512-1/sA4dwrzBAyeUoQ6oxahHKmrZvsnLCg4RfxW3ZFGGmQkSNQPFNLV9CUEFQP1x9EYXHTo5p6xdhZM1Ne9p/AfA==}
@@ -215,12 +220,6 @@ packages:
     resolution: {integrity: sha512-wq0cICSkRLVaf3UGLMGItu/PtdY7oaXaI/RVU+xliKVOtRna3PRY57ZDfztpDL0n11vfymMUnXv8QwYCO7L1wg==}
     dependencies:
       undici-types: 5.26.5
-    dev: true
-
-  /@types/npmlog@7.0.0:
-    resolution: {integrity: sha512-hJWbrKFvxKyWwSUXjZMYTINsSOY6IclhvGOZ97M8ac2tmR9hMwmTnYaMdpGhvju9ctWLTPhCS+eLfQNluiEjQQ==}
-    dependencies:
-      '@types/node': 20.12.7
     dev: true
 
   /@types/progress@2.0.7:
@@ -365,14 +364,14 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: true
 
-  /@u4/opencv-build@0.9.1:
-    resolution: {integrity: sha512-28SOPrP6y47CWexaOe1ALuygByPaqrnz5Lkwhn7yHak7IlXWC9bnG5mwvx6G/xR+WjFUjmegjGIGPJGT1VVgzg==}
+  /@u4/opencv-build@1.0.0-alpha2:
+    resolution: {integrity: sha512-GhLSQZvui/xK8AtztUKd/wq6o0P2e0/NoqC6k6yFBbhd/0Pzi6rQaQ3877ioB7/KLd4x6JXrcaOBdYc6b0GzPA==}
     hasBin: true
     dependencies:
+      '@deno/shim-deno': 0.19.1
       glob: 10.3.12
       npmlog: 7.0.1
-      picocolors: 1.0.0
-      rimraf: 4.4.1
+      rimraf: 5.0.5
     dev: false
 
   /@ungap/structured-clone@1.2.0:
@@ -1353,6 +1352,7 @@ packages:
 
   /fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
+    dev: true
 
   /function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
@@ -1441,16 +1441,6 @@ packages:
       once: 1.4.0
       path-is-absolute: 1.0.1
     dev: true
-
-  /glob@9.3.5:
-    resolution: {integrity: sha512-e1LleDykUz2Iu+MTYdkSsuWX8lvAjAcs0Xef0lNIu0S2wOAzuTxCJtcd9S3cijlwYF18EsU3rzb8jPVobxDh9Q==}
-    engines: {node: '>=16 || 14 >=14.17'}
-    dependencies:
-      fs.realpath: 1.0.0
-      minimatch: 8.0.4
-      minipass: 4.2.8
-      path-scurry: 1.10.2
-    dev: false
 
   /globals@13.24.0:
     resolution: {integrity: sha512-AhO5QUcj8llrbG09iWhPU2B204J1xnPeL8kQmVorSsy+Sjj1sk8gIyh6cUocGmH4L0UuhAJy+hJMRA4mgA4mFQ==}
@@ -1969,13 +1959,6 @@ packages:
       brace-expansion: 1.1.11
     dev: true
 
-  /minimatch@8.0.4:
-    resolution: {integrity: sha512-W0Wvr9HyFXZRGIDgCicunpQ299OKXs9RgZfaukz4qAW/pJhcpUfupc9c+OObPOFueNy8VSrZgEmDtk6Kh4WzDA==}
-    engines: {node: '>=16 || 14 >=14.17'}
-    dependencies:
-      brace-expansion: 2.0.1
-    dev: false
-
   /minimatch@9.0.4:
     resolution: {integrity: sha512-KqWh+VchfxcMNRAJjj2tnsSJdNbHsVgnkBhTNrW7AjVo6OvLtxw8zfT9oLw1JSohlFzJ8jCoTgaoXvJ+kHt6fw==}
     engines: {node: '>=16 || 14 >=14.17'}
@@ -2030,11 +2013,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       yallist: 4.0.0
-    dev: false
-
-  /minipass@4.2.8:
-    resolution: {integrity: sha512-fNzuVyifolSLFL4NzpF+wEF4qrgqaaKX0haXPQEdQ7NKAN+WecoKMHV09YcuL/DHxrUsYQOK3MiuDf7Ip2OXfQ==}
-    engines: {node: '>=8'}
     dev: false
 
   /minipass@5.0.0:
@@ -2392,21 +2370,12 @@ packages:
       glob: 7.2.3
     dev: true
 
-  /rimraf@4.4.1:
-    resolution: {integrity: sha512-Gk8NlF062+T9CqNGn6h4tls3k6T1+/nXdOcSZVikNVtlRdYpA7wRJJMoXmuvOnLW844rPjdQ7JgXCYM6PPC/og==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dependencies:
-      glob: 9.3.5
-    dev: false
-
   /rimraf@5.0.5:
     resolution: {integrity: sha512-CqDakW+hMe/Bz202FPEymy68P+G50RfMQK+Qo5YUqc9SPipvbGjCGKd0RSKEelbsfQuw3g5NZDSrlZZAJurH1A==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       glob: 10.3.12
-    dev: true
 
   /run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
