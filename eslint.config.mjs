@@ -24,6 +24,7 @@ export default tseslint.config(
     "no-async-promise-executor": 0,
     "radix": 1,
     "no-undef": 0,
+    "no-case-declarations": 0,
     // unit tests only
     // "max-len" : 0,
     // "no-new" : 0,

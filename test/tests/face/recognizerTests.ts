@@ -12,7 +12,7 @@ export default (args0: TestContext) => (args: string[], values: number[], Recogn
       props[arg] = values[i];
     });
 
-    /* eslint-disable new-parens */
+     
     it('is constructable from args', () => {
       expect(() => new (Recognizer.bind.apply(Recognizer, [null].concat(values)))).to.not.throw();
     });

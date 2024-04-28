@@ -17,7 +17,7 @@ export function kmeans(data: Point3[], k: number, termCriteria: TermCriteria, at
 
 // template<typename _Tp , class _EqPredicate >
 // int 	partition (const std::vector< _Tp > &_vec, std::vector< int > &labels, _EqPredicate predicate=_EqPredicate())
-export function partition(data: Point2[], predicate: (pt1: Point2, pt2: Point2) => boolean): { labels: number[], numLabels: number };
+export function partition(data: Array<Point2 | Vec2>, predicate: (pt1: Point2 | Vec2, pt2: Point2 | Vec2) => boolean): { labels: number[], numLabels: number };
 export function partition(data: Point3[], predicate: (pt1: Point3, pt2: Point3) => boolean): { labels: number[], numLabels: number };
 export function partition(data: Vec2[], predicate: (vec1: Vec2, vec2: Vec2) => boolean): { labels: number[], numLabels: number };
 export function partition(data: Vec3[], predicate: (vec1: Vec3, vec2: Vec3) => boolean): { labels: number[], numLabels: number };

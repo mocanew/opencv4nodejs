@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+ 
 import { expect } from 'chai';
 import { assertPropsWithValue, expectFloat } from '../../utils/testUtils';
 import { getTestContext } from '../model';

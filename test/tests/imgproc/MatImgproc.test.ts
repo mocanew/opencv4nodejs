@@ -902,7 +902,7 @@ if (toTest.imgproc) {
           ['apertureSize', 5],
           ['L2gradient', true],
         ]),
-        expectOutput: (binImg) => {
+        expectOutput: (binImg: any) => {
           assertMetaData(binImg)(img.rows, img.cols, cv.CV_8U);
         },
       });
@@ -995,7 +995,7 @@ if (toTest.imgproc) {
           ['size', sizeDown],
           ['borderType', cv.BORDER_REFLECT],
         ]),
-        expectOutput: (outImg) => assertMetaData(outImg)(sizeDown.height, sizeDown.width, cv.CV_8UC3),
+        expectOutput: (outImg: any) => assertMetaData(outImg)(sizeDown.height, sizeDown.width, cv.CV_8UC3),
       });
     });
 
@@ -1008,7 +1008,7 @@ if (toTest.imgproc) {
           ['size', sizeUp],
           ['borderType', cv.BORDER_DEFAULT],
         ]),
-        expectOutput: (outImg) => assertMetaData(outImg)(sizeUp.height, sizeUp.width, cv.CV_8UC3),
+        expectOutput: (outImg: any) => assertMetaData(outImg)(sizeUp.height, sizeUp.width, cv.CV_8UC3),
       });
     });
 
@@ -1016,7 +1016,7 @@ if (toTest.imgproc) {
       const expectOutput = (pyramid: Mat[]) => {
         expect(pyramid).to.be.an('array').lengthOf(4);
         pyramid.forEach((outImg, i) => {
-          /* eslint-disable no-restricted-properties */
+           
           const scale = 1 / 2 ** i;
           expect(outImg).to.be.instanceOf(cv.Mat);
           assertMetaData(outImg)(img.rows * scale, img.cols * scale, cv.CV_8UC3);
@@ -1383,7 +1383,7 @@ if (toTest.imgproc) {
           zeroZone,
           criteria,
         ]),
-        expectOutput: (adjustedCorners) => {
+        expectOutput: (adjustedCorners: unknown) => {
           expect(adjustedCorners).to.be.an('array').lengthOf(corners.length);
         },
       });
@@ -1431,7 +1431,7 @@ if (toTest.imgproc) {
           ['sdepth', cv.CV_64F],
           ['sqdepth', cv.CV_64F],
         ]),
-        expectOutput: (res) => {
+        expectOutput: (res: unknown) => {
           expect(res).to.have.property('sum').to.be.instanceOf(cv.Mat);
           expect(res).to.have.property('sqsum').to.be.instanceOf(cv.Mat);
           expect(res).to.have.property('tilted').to.be.instanceOf(cv.Mat);
@@ -1504,7 +1504,7 @@ if (toTest.imgproc) {
         methodName: 'undistort',
         methodNameSpace: 'Mat',
         getRequiredArgs: () => ([cameraMatrix, distCoeffs]),
-        expectOutput: (res) => {
+        expectOutput: (res: unknown) => {
           expect(res).to.be.instanceOf(cv.Mat);
         },
       });

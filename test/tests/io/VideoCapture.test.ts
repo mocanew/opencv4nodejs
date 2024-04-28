@@ -1,4 +1,4 @@
-/* eslint-disable no-bitwise */
+ 
 import { VideoCapture } from '@u4/opencv4nodejs';
 import { expect } from 'chai';
 import path from 'path';

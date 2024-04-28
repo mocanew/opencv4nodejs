@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { expect } from 'chai';
-import { Mat, Point2, Point3 } from '@u4/opencv4nodejs';
+import { Mat, Point2, Point3, Vec2 } from '@u4/opencv4nodejs';
 import asyncHooks from 'async_hooks';
 import { getTestContext, TestContext } from '../model';
 import {
@@ -30,7 +30,7 @@ if (toTest.core) {
 
   const {getNodeMajorVersion} = TestContext;
 
-  const partitionTests = (createInstance: () => Point2) => {
+  const partitionTests = (createInstance: () => Point2 | Vec2) => {
     it('should return labels and numLabels', () => {
       const { labels, numLabels } = cv.partition([createInstance(), createInstance()], () => true);
 
@@ -79,27 +79,25 @@ if (toTest.core) {
     });
 
     describe('Vec2 input', () => {
-    // @ts-ignore
-      partitionTests(() => new cv.Vec2(0, 0));
+      partitionTests(() => {
+        return new cv.Vec2(0, 0);
+      });
     });
 
     describe('Vec3 input', () => {
-    // @ts-ignore
       partitionTests(() => new cv.Vec3(0, 0, 0));
     });
 
     describe('Vec4 input', () => {
-    // @ts-ignore
       partitionTests(() => new cv.Vec4(0, 0, 0, 0));
     });
 
     describe('Vec6 input', () => {
-    // @ts-ignore
       partitionTests(() => new cv.Vec6(0, 0, 0, 0, 0, 0));
     });
 
     describe('Mat input', () => {
-    // @ts-ignore
+      // @ts-ignore
       partitionTests(() => new cv.Mat());
     });
   });
@@ -282,7 +280,7 @@ if (toTest.core) {
       it('should trigger `init` callback in async_hooks', () => {
         let typeFound = false;
         const hook = asyncHooks.createHook({
-        // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
           init: (_asyncId, type, _triggerAsyncId, _resource) => {
             if (type.indexOf('opencv4nodejs') === 0) {
               typeFound = true;
@@ -295,7 +293,7 @@ if (toTest.core) {
         const createInstance = () => new cv.Point2(0, 0);
         const num = 5;
         const instances = Array(num).fill(0).map(() => createInstance());
-        // eslint-disable-next-line no-unused-vars
+         
         // const { labels, numLabels } =
         cv.partition(instances, () => true);
         expect(typeFound).to.be.equal(true);
@@ -698,7 +696,7 @@ if (toTest.core) {
         classNameSpace: 'Mat',
         methodNameSpace: 'Core',
         getRequiredArgs: () => ([dim, rtype, dtype]),
-        // eslint-disable-next-line no-unused-vars
+         
         expectOutput: (res) => {
           expect(res).to.be.instanceOf(cv.Mat);
           expect(res.getDataAsArray()).to.eql(expectedResults);
@@ -724,7 +722,7 @@ if (toTest.core) {
         methodName: 'eigen',
         classNameSpace: 'Mat',
         methodNameSpace: 'Core',
-        // eslint-disable-next-line no-unused-vars
+         
         expectOutput: (res: Mat) => {
           expect(res).to.be.instanceOf(cv.Mat);
           const arrayRes = res.getDataAsArray();
@@ -755,7 +753,7 @@ if (toTest.core) {
           ['flags', flags],
         ]),
         getRequiredArgs: () => ([m2]),
-        // eslint-disable-next-line no-unused-vars
+         
         expectOutput: (res: Mat) => {
           expect(res).to.be.instanceOf(cv.Mat);
           const arrayRes = res.getDataAsArray();
