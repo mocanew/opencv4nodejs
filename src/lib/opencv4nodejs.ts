@@ -5,6 +5,7 @@ import extendWithJsSources from './src/index.js';
 import { getOpenCV } from './cvloader.js';
 import type * as openCV from '../../typings/index.js';
 export type * as openCV from '../../typings/index.js';
+export { getDirName, getRequire } from "./meta.js"
 
 declare type OpenCVType = typeof openCV;
 
