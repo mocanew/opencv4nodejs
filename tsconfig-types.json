@@ -3,12 +3,9 @@
       "./tsconfig-common.json"
     ],
     "compilerOptions": {
-      "module": "es2020",
-      "target": "es2020",
-      "lib": [
-        "es2020"
-      ],
-      "outDir": "esm",
+      "emitDeclarationOnly": true,
+      "declaration": true,
+      "declarationDir": "types",
       "moduleResolution": "node"
     }
   }

@@ -46,6 +46,7 @@
   "typings": "./typings/index.d.ts",
   "scripts": {
     "build": "tsc --pretty --project tsconfig.json && tsc --pretty --project tsconfig-esm.json",
+    "build-types": "rimraf types && tsc --pretty --project tsconfig-types.json",
     "prepack": "npm run build",
     "install_old": "node bin/install.js auto",
     "install_Mac": "CXXFLAGS=\"-std=c++17 -Wno-c++11-narrowing -Wno-c++17-extensions -Wno-c++17-attribute-extensions\" node ./bin/install.js --version 4.5.3 build",
@@ -60,7 +61,7 @@
     "do-rebuild": "npm run build && node bin/install.js --version 4.6.0 --jobs MAX rebuild",
     "lint": "eslint examples/**/*.ts src/**/*.ts typings/**/*.ts ",
     "clean": "node-gyp clean",
-    "cleanjs": "rimraf {examples}/**/*.{d.ts,js,map} {cjs,esm}/{lib,install} types",
+    "cleanjs": "rimraf {examples}/**/*.{d.ts,js,map} {cjs,esm}/{lib,install}",
     "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild",
     "checkExports": "npx @arethetypeswrong/cli $(npm pack)",
     "publish-next": "npm publish --dry-run --tag next"

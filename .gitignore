@@ -59,5 +59,4 @@ cjs/install/
 cjs/lib/
 esm/install/
 esm/lib/
-types/
 u4-opencv4nodejs-*.tgz
