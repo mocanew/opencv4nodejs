@@ -1,8 +1,9 @@
 import { pc, Log, OpenCVBuilder, type OpenCVBuildEnvParams } from '@u4/opencv-build';
 import fs from 'fs';
 import path from 'path';
-import { isElectronWebpack, resolvePath } from './commons';
-import type * as openCV from '../../typings/index';
+import { isElectronWebpack, resolvePath } from './commons.js';
+import type * as openCV from '../../typings/index.js';
+import { getDirName, getRequire } from './meta.js';
 
 declare type OpenCVType = typeof openCV;
 
@@ -46,16 +47,18 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   if (isElectronWebpack()) {
     requirePath = '../../build/Release/opencv4nodejs.node';
   } else {
-    requirePath = path.join(__dirname, '../../build/Debug/opencv4nodejs.node');
+    const dirname = getDirName();
+    requirePath = path.join(dirname, '../../build/Debug/opencv4nodejs.node');
     if (!fs.existsSync(requirePath)) {
-      requirePath = path.join(__dirname, '../../build/Release/opencv4nodejs.node');
+      requirePath = path.join(dirname, '../../build/Release/opencv4nodejs.node');
     }
     requirePath = requirePath.replace(/\.node$/, '');
     // path.join(__dirname, process.env.BINDINGS_DEBUG ? '../../build/Debug/opencv4nodejs' : '../../build/Release/opencv4nodejs')
   }
   try {
     logDebug('require', `require path is ${pc.yellow(requirePath)}`)
-    opencvBuild = require(requirePath);
+      opencvBuild = getRequire()(requirePath);
+
   } catch (err) {
     // err.code === 'ERR_DLOPEN_FAILED'
     logDebug('require', `failed to require cv with exception: ${pc.red(err.toString())}`)
@@ -77,7 +80,7 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
     }
     logDebug('require', 'process.env.path: ' + process.env.path)
     try {
-      opencvBuild = require(requirePath);
+        opencvBuild = getRequire()(requirePath);
     } catch (e) {
       if (e instanceof Error) {
         let msg = '';
@@ -111,7 +114,8 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   // resolve haarcascade files
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { haarCascades, lbpCascades } = opencvBuild as any;
-  const xmlDir = path.join(__dirname, '..', '..', 'src', 'lib');
+  const dirname = getDirName();
+  const xmlDir = path.join(dirname, '..', '..', 'src', 'lib');
   Object.keys(haarCascades).forEach(
     key => opencvBuild[key] = resolvePath(path.join(xmlDir, 'haarcascades'), haarCascades[key]));
   Object.keys(lbpCascades).forEach(
