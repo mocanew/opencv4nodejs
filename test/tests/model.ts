@@ -1,8 +1,8 @@
 import { cv as realCV, Mat } from '@u4/opencv4nodejs';
 import fs from 'fs';
 import path from 'path';
-import generateClassMethodTestsFactory from '../utils/generateClassMethodTests';
-import { fileURLToPath } from 'url';
+import { getDirName } from '@u4/opencv4nodejs';
+import generateClassMethodTestsFactory from '../utils/generateClassMethodTests.js';
 
 export type OpenCV = typeof realCV
 
@@ -44,17 +44,6 @@ const matTypeNames = [
   'CV_64FC1', 'CV_64FC2', 'CV_64FC3', 'CV_64FC4',
 ] as const;
 
-
-export function getDirName(): string {
-  if ('__dirname' in globalThis) {
-      return globalThis.__dirname;
-    } else {
-      // @ts-ignore
-      return fileURLToPath(new URL('.', import.meta.url));
-    }    
-}
-
-
 export class TestContext {
   /**
    * lerna cached image
@@ -86,7 +75,7 @@ export class TestContext {
 
   public getTestImg: () => Mat = () => {
     if (!this.lerna512) {
-      const file = path.resolve(getDirName(), '../utils/Lenna.data');
+      const file = path.resolve(getDirName(), '../../test/utils/Lenna.data');
       this.lerna512 = new this.cv.Mat(fs.readFileSync(file), 512, 512, this.cv.CV_8UC3);
     }
     return this.lerna512;

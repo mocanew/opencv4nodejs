@@ -2,11 +2,11 @@ import { expect } from 'chai';
 import {
   CalibrationMatrixValues, CorrectMatchesRet, DecomposeEssentialMatRet, DecomposeHomographyMatRet, DecomposeProjectionMatrixRet, Mat, OptimalNewCameraMatrix, RqDecomp3x3Ret, StereoRectify, Vec3,
 } from '@u4/opencv4nodejs';
-import { getTestContext } from '../model';
-import { assertMetaData } from '../../utils/matTestUtils';
-import { expectToBeVec2, expectToBeVec3, expectToBeVec4 } from '../../utils/testUtils';
-import { generateAPITests } from '../../utils/generateAPITests';
-import toTest from '../toTest';
+import { getTestContext } from '../model.js';
+import { assertMetaData } from '../../utils/matTestUtils.js';
+import { expectToBeVec2, expectToBeVec3, expectToBeVec4 } from '../../utils/testUtils.js';
+import { generateAPITests } from '../../utils/generateAPITests.js';
+import toTest from '../toTest.js';
 
 if (toTest.calib3d) {
   const {

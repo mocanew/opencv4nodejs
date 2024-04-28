@@ -1,13 +1,14 @@
 {
   "name": "opencv4nodejs_test",
   "version": "1.1.0",
+  "type": "module",
   "scripts": {
-    "test": "mocha -r ts-node/register --timeout 30000 ./tests/**/*.test.ts",
-    "test2": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.test.ts'",
-    "test3": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/simple.test.ts'",
-    "testIO": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/io/**/*.ts'",
-    "testIOIO": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/io/io.test.ts'",
-    "testCore": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/core/core.test.ts'",
+    "test": "ts-mocha  ./tests/**/*.test.ts",
+    "test2": "ts-mocha 'tests/**/*.test.ts'",
+    "test3": "ts-mocha  'tests/**/simple.test.ts'",
+    "testIO": "ts-mocha  'tests/io/**/*.ts'",
+    "testIOIO": "ts-mocha  'tests/io/io.test.ts'",
+    "testCore": "ts-mocha  'tests/core/core.test.ts'",
     "test-appveyor": "set APPVEYOR_BUILD=true && mocha -r ts-node/register --timeout 30000 ./tests/**/*.test.ts",
     "test-docker": "DOCKER_BUILD=true mocha -r ts-node/register --timeout 60000 ./tests/**/*.test.ts",
     "test-externalMemTrackingOther": "mocha -r ts-node/register --timeout 30000 ./externalMemTracking/other/index.test.ts",
@@ -33,6 +34,7 @@
     "@types/node": "^20.12.7",
     "chai-arrays": "^2.2.0",
     "rimraf": "^5.0.5",
+    "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }

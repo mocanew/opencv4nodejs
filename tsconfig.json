@@ -8,4 +8,8 @@
     "outDir": "cjs",
     "moduleResolution": "Node10",
   },
+  "include": [
+    "./**/*.ts",
+    "../install/*.ts",
+    "../lib/**/*.ts"  ]
 }
