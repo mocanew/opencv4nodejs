@@ -95,6 +95,7 @@
     "src/**/*.xml",
     "bin/*.js",
     "typings",
+    "types",
     "binding.gyp",
     "binding_old.gyp"
   ]
