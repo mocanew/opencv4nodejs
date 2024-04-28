@@ -45,7 +45,7 @@ function decode(scores: Mat, geometry: Mat, confThreshold = MIN_CONFIDENCE) {
         startX,
         startY,
         endX - startX,
-        endY - startY
+        endY - startY,
       ));
       confidences.push(score);
     }
@@ -81,7 +81,8 @@ async function detection(modelPath: string, imgAbsPath: string): Promise<void> {
   const indices = cv.NMSBoxes(
     boxes,
     confidences,
-    MIN_CONFIDENCE, NMS_THRESHOLD
+    MIN_CONFIDENCE,
+    NMS_THRESHOLD,
   );
 
   indices.forEach((i) => {
@@ -90,7 +91,7 @@ async function detection(modelPath: string, imgAbsPath: string): Promise<void> {
       rect.x * widthRatio,
       rect.y * heightRatio,
       rect.width * widthRatio,
-      rect.height * heightRatio
+      rect.height * heightRatio,
     )
     drawBlueRect(img, imgRect);
   });

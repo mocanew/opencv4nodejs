@@ -79,10 +79,11 @@ export const generateAPITests = (opts_: PartialAPITestOpts): void => {
         case 'callbacked': // Use Callback
           args.push(expectOutputCallbacked(done, dut, args));
           return dut[method].apply(dut, args);
-        default: // Use Sync
+        default: {// Use Sync
           const result = dut[method].apply(dut, args);
           opts.expectOutput(result, dut, args);
           return done();
+        }
       }
     };
 

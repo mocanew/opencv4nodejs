@@ -139,7 +139,8 @@ export const drawRectAroundBlobs = (binaryImg: Mat, dstImg: Mat, minPxSize: numb
       dstImg.drawRectangle(
         new cv.Point2(x1, y1),
         new cv.Point2(x2, y2),
-        blue, thickness
+        blue,
+        thickness,
       );
     }
   }
@@ -150,7 +151,7 @@ export const drawRect = (image: Mat, rect: Rect, color: Vec3, opts = { thickness
     rect,
     color,
     opts.thickness,
-    cv.LINE_8
+    cv.LINE_8,
   );
 
 const { HEADLESS } = process.env;

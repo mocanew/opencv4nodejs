@@ -4,7 +4,7 @@ import { FeatureDetector, Mat } from '@u4/opencv4nodejs';
 const detectAndComputeAsync = (det: FeatureDetector, img: Mat) =>
   det.detectAsync(img)
     .then(kps => det.computeAsync(img, kps)
-      .then(desc => ({ kps, desc }))
+      .then(desc => ({ kps, desc })),
     );
 
 const img1 = cv.imread(getResourcePath('s0.jpg'));
@@ -55,14 +55,14 @@ async function asyncMatch() {
         .then(allResults =>
           cv.matchBruteForceAsync(
             allResults[0].desc,
-            allResults[1].desc
+            allResults[1].desc,
           )
             .then(matches => ({
               matches,
               kps1: allResults[0].kps,
               kps2: allResults[1].kps,
-            }))
-        )
+            })),
+        ),
     );
   for (let i = 0; i < promises.length; i++) {
     try {
@@ -72,7 +72,7 @@ async function asyncMatch() {
         img2,
         result.kps1,
         result.kps2,
-        result.matches
+        result.matches,
       );
       const title = `Detector ${detectorNames[i]}`
       cv.imshow(title, drawMatchesImg);

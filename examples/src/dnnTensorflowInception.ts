@@ -102,7 +102,7 @@ async function main() {
       img,
       { x: 0, y: 0 },
       predictions.map(p => ({ text: p, fontSize: 0.5, thickness: 1 })),
-      alpha
+      alpha,
     );
     cv.imshow('img', img);
     await wait4key();

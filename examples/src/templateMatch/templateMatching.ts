@@ -17,7 +17,7 @@ const findWaldo = async () => {
     new cv.Rect(x, y, waldoMat.cols, waldoMat.rows),
     new cv.Vec3(0, 255, 0),
     2,
-    cv.LINE_8
+    cv.LINE_8,
   );
 
   const windowName = 'We\'ve found Waldo!';

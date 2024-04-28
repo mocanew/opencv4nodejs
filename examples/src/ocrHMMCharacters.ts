@@ -45,7 +45,7 @@ export async function ocrHMMCharacters() {
         (clazz: number, i: number) => ({
           class: vocabulary[clazz],
           confidence: confidences[i],
-        })
+        }),
       )
       .filter(prediction => prediction.confidence > minConfidence);
 

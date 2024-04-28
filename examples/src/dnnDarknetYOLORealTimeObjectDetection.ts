@@ -62,7 +62,7 @@ class dnnDarknetYOLORealTimeObjectDetection {
             boxes,
             confidences,
             this.minConfidence,
-            this.nmsThreshold
+            this.nmsThreshold,
           );
 
           indices.forEach(i => {

@@ -59,7 +59,7 @@ const runDetectDishesExample = async (net: Net) => {
       fontSize: 0.8,
       color: classColors[className],
     })),
-    alpha
+    alpha,
   );
 
   Object.keys(classColors).forEach((className) => {

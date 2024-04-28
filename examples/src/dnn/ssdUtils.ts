@@ -14,17 +14,17 @@ export function extractResults(outputBlob: Mat, imgDimensions: { rows: number, c
       const confidence = outputBlob.at(i, 2);
       const bottomLeft = new cv.Point2(
         outputBlob.at(i, 3) * imgDimensions.cols,
-        outputBlob.at(i, 6) * imgDimensions.rows
+        outputBlob.at(i, 6) * imgDimensions.rows,
       );
       const topRight = new cv.Point2(
         outputBlob.at(i, 5) * imgDimensions.cols,
-        outputBlob.at(i, 4) * imgDimensions.rows
+        outputBlob.at(i, 4) * imgDimensions.rows,
       );
       const rect = new cv.Rect(
         bottomLeft.x,
         topRight.y,
         topRight.x - bottomLeft.x,
-        bottomLeft.y - topRight.y
+        bottomLeft.y - topRight.y,
       );
 
       return ({ classLabel, confidence, rect });

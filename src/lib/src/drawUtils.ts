@@ -118,7 +118,7 @@ function insertText(boxImg: Mat, text: string, origin: { x: number, y: number },
         pt = pt.add(new cv.Point2(0, getLineHeight(textLine)))
         insertText(boxImg, textLine.text, pt, opts)
         pt = pt.add(new cv.Point2(0, linePadding))
-      }
+      },
     )
     boxImg.copyTo(img.getRegion(rect))
     return img
