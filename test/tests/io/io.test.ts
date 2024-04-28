@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import { expect } from 'chai';
 import { Mat } from '@u4/opencv4nodejs';
-import { getTestContext } from '../model';
-import { assertDataDeepEquals, assertMetaData } from '../../utils/matTestUtils';
+import { getDirName, getTestContext } from '../model.js';
+import { assertDataDeepEquals, assertMetaData } from '../../utils/matTestUtils.js';
 import {
   clearTmpData,
   fileExists,
@@ -36,8 +36,8 @@ if (toTest.io) {
   before(() => {
     lenna = cv.imread(getLennaPngPath());
     got = cv.imread(getGotJpgPath());
-    const lennaBase64File = fs.readFileSync(path.join(__dirname, 'data/lennaBase64.json'), { encoding: 'utf8', flag: 'r' });
-    const gotBase64File = fs.readFileSync(path.join(__dirname, 'data/gotBase64.json'), { encoding: 'utf8', flag: 'r' });
+    const lennaBase64File = fs.readFileSync(path.join(getDirName(), 'data/lennaBase64.json'), { encoding: 'utf8', flag: 'r' });
+    const gotBase64File = fs.readFileSync(path.join(getDirName(), 'data/gotBase64.json'), { encoding: 'utf8', flag: 'r' });
     lennaBase64Buf = Buffer.from(JSON.parse(lennaBase64File).data, 'base64');
     gotBase64Buf = Buffer.from(JSON.parse(gotBase64File).data, 'base64');
     // imageData = fs.readFileSync(getTestImagePath(true));
