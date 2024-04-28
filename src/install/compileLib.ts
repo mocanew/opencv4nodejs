@@ -3,12 +3,12 @@ import type { OpencvModule, OpenCVBuildEnvParams, LogLevels } from '@u4/opencv-b
 import { OpenCVBuilder, OpenCVBuildEnv, args2Option, genHelp } from '@u4/opencv-build';
 import child_process from 'child_process';
 import fs from 'fs';
-import { resolvePath } from '../lib/commons';
 import pc from 'picocolors';
 import path from 'path';
 import { EOL } from 'os';
 import { globSync } from "glob";
-import { getOpenCV } from '../lib/cvloader';
+import { resolvePath } from '../lib/commons.js';
+import { getOpenCV } from '../lib/cvloader.js';
 
 const defaultDir = '/usr/local';
 const defaultLibDir = `${defaultDir}/lib`;

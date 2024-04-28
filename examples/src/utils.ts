@@ -62,11 +62,21 @@ export function getCachedFile(localName: string, url: string, opts?: { notice?: 
   })
 }
 
+
+let _dirname = '.';
+try {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  _dirname = fileURLToPath(new URL('.', import.meta.url));
+} catch {
+  _dirname = __dirname;
+}
+
 /**
  * add some helpter for examples TS
  */
 
-export const dataPath = path.resolve(__dirname, '..', '..', 'data');
+export const dataPath = path.resolve(_dirname, '..', '..', 'data');
 
 // export const getDataFilePath = (fileName: string): string => {
 //   const fullpath = path.resolve(dataPath, fileName)

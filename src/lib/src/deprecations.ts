@@ -1,6 +1,6 @@
 import assert from 'assert';
-import type * as openCV from '../../../typings/index'
-import type { Mat } from '../../../typings/index';
+import type * as openCV from '../../../typings/index.js'
+import type { Mat } from '../../../typings/index.js';
 
 export default function (cv: typeof openCV) {
   // deprecate wrapper for the old calcHist API

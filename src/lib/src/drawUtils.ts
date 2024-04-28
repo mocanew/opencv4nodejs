@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import type * as openCV from '../../../typings/index';
-import { Mat, Rect, Vec3 } from '../../../typings/index';
+import type * as openCV from '../../../typings/index.js';
+import { Mat, Rect, Vec3 } from '../../../typings/index.js';
 
 export interface TextParams {
   fontType: number;

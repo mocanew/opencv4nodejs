@@ -1,7 +1,7 @@
-import makeDrawUtils from './drawUtils';
-import deprecations from './deprecations';
-import * as OpenCV from '../../../typings/index';
-import misc from './misc';
+import makeDrawUtils from './drawUtils.js';
+import deprecations from './deprecations.js';
+import * as OpenCV from '../../../typings/index.js';
+import misc from './misc.js';
 
 export default function extendWithJsSources(cv: typeof OpenCV) {
   // add functions
