@@ -19,9 +19,6 @@ dependencies:
     version: 10.4.0
 
 devDependencies:
-  '@types/chai':
-    specifier: ^4.3.14
-    version: 4.3.14
   '@types/chai-arrays':
     specifier: ^2.0.3
     version: 2.0.3
