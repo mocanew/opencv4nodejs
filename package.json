@@ -61,6 +61,7 @@
     "do-rebuild": "npm run build && node bin/install.js --version 4.6.0 --jobs MAX rebuild",
     "lint": "eslint examples/**/*.ts src/**/*.ts typings/**/*.ts ",
     "clean": "node-gyp clean",
+    "rebuild": "node-gyp rebuild",
     "cleanjs": "rimraf {examples}/**/*.{d.ts,js,map} {cjs,esm}/{lib,install}",
     "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild",
     "checkExports": "npx @arethetypeswrong/cli $(npm pack)",
