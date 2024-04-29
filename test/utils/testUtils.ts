@@ -8,7 +8,6 @@ import {
   Vec3,
   Vec4,
 } from '@u4/opencv4nodejs';
-import type Chai from 'chai';
 
 export const assertError = (func: () => any, msg: string): void => {
   let errMsg = '';

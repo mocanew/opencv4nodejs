@@ -53,7 +53,6 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
       requirePath = path.join(dirname, '../../build/Release/opencv4nodejs.node');
     }
     requirePath = requirePath.replace(/\.node$/, '');
-    // path.join(__dirname, process.env.BINDINGS_DEBUG ? '../../build/Debug/opencv4nodejs' : '../../build/Release/opencv4nodejs')
   }
   try {
     logDebug('require', `require path is ${pc.yellow(requirePath)}`)

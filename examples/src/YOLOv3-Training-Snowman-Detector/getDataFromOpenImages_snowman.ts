@@ -1,4 +1,4 @@
-import { getCachedFile } from "../utils";
+import { getCachedFile, getExampleDirname } from "../utils";
 import fs from 'fs';
 import path from 'path';
 // import rimraf from 'rimraf';
@@ -14,7 +14,7 @@ async function getDataFromOpenImages_snowman() {
     const runMode = "train";
     const classes = ["Snowman"];
 
-    const dataPath = __dirname; //  "../../data/dnn/openimages";
+    const dataPath = getExampleDirname("YOLOv3-Training-Snowman-Detector"); //  "../../data/dnn/openimages";
     const JPEGImages = path.join(dataPath, 'JPEGImages');
     const labels = path.join(dataPath, 'labels');
 

@@ -4,7 +4,7 @@ import mri from "mri";
 import fs from "fs";
 import path from "path";
 import assert from 'assert';
-import { cv } from "../utils";
+import { cv, getExampleDirname } from "../utils";
 import { Net, Mat, VideoCapture, VideoWriter, Size, Point2, Vec3, Rect } from '@u4/opencv4nodejs';
 
 // # Usage example:  python3 object_detection_yolo.py --video=run.mp4
@@ -41,8 +41,8 @@ const classes = fs.readFileSync(classesFile, { encoding: 'utf8' }).trim().split(
 
 //  Give the configuration and weight files for the model and load the network using them.
 
-const modelConfiguration = path.join(__dirname, 'darknet-yolov3.cfg');
-const modelWeights = path.join(__dirname, 'weights', 'darknet-yolov3_final.weights'); // "/data-ssd/sunita/snowman/darknet-yolov3_final.weights";
+const modelConfiguration = getExampleDirname("YOLOv3-Training-Snowman-Detector", 'darknet-yolov3.cfg');
+const modelWeights = getExampleDirname("YOLOv3-Training-Snowman-Detector", 'weights', 'darknet-yolov3_final.weights'); // "/data-ssd/sunita/snowman/darknet-yolov3_final.weights";
 
 const net = cv.readNetFromDarknet(modelConfiguration, modelWeights)
 if (args.device == "cpu") {

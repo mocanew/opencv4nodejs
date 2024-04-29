@@ -1,7 +1,7 @@
 import fs from 'fs';
 import mri from 'mri';
 import { Mat, Net, Point2, Rect, Size, Vec3, VideoCapture } from '@u4/opencv4nodejs';
-import { cv, getCachedFile, wait4key } from '../utils';
+import { cv, getCachedFile, getExampleDirname, wait4key } from '../utils';
 import path from 'path';
 import NetIdentifier from './NetIdentifier';
 
@@ -48,16 +48,16 @@ if (args.help) {
 }
 
 const main = async () => {
-    const faceProto = path.resolve(__dirname, "opencv_face_detector.pbtxt")
-    const faceModel = await getCachedFile(path.resolve(__dirname, "opencv_face_detector_uint8.pb"), 'https://github.com/spmallick/learnopencv/raw/master/AgeGender/opencv_face_detector_uint8.pb')
+    const faceProto = getExampleDirname("AgeGender", "opencv_face_detector.pbtxt")
+    const faceModel = await getCachedFile(getExampleDirname("AgeGender", "opencv_face_detector_uint8.pb"), 'https://github.com/spmallick/learnopencv/raw/master/AgeGender/opencv_face_detector_uint8.pb')
 
-    const ageProto = path.resolve(__dirname, "age_deploy.prototxt")
+    const ageProto = getExampleDirname("AgeGender", "age_deploy.prototxt")
     // 44 MB file
-    const ageModel = path.resolve(__dirname, "age_net.caffemodel") // https://www.dropbox.com/s/xfb20y596869vbb/age_net.caffemodel?dl=0
+    const ageModel = getExampleDirname("AgeGender", "age_net.caffemodel") // https://www.dropbox.com/s/xfb20y596869vbb/age_net.caffemodel?dl=0
 
-    const genderProto = path.resolve(__dirname, "gender_deploy.prototxt")
+    const genderProto = getExampleDirname("AgeGender", "gender_deploy.prototxt")
     // 44 MB file
-    const genderModel = path.resolve(__dirname, "gender_net.caffemodel") // https://www.dropbox.com/s/iyv483wz7ztr9gh/gender_net.caffemodel?dl=0
+    const genderModel = getExampleDirname("AgeGender", "gender_net.caffemodel") // https://www.dropbox.com/s/iyv483wz7ztr9gh/gender_net.caffemodel?dl=0
 
     const MODEL_MEAN_VALUES = new Vec3(78.4263377603, 87.7689143744, 114.895847746)
 

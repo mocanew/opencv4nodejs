@@ -100,7 +100,7 @@ export class TestContext {
 
   public getPeoplesTestImg: () => Mat = () => {
     if (!this.people360) {
-      const file = path.resolve(__dirname, '../utils/people.data');
+      const file = path.resolve(getDirName(), '../../test/utils/people.data');
       this.people360 = new this.cv.Mat(fs.readFileSync(file), 360, 640, this.cv.CV_8UC3);
     }
     return this.people360;

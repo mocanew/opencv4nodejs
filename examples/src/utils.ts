@@ -9,9 +9,23 @@ import crypto from 'crypto';
 
 export const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
+export function getExampleDirname(...names: string[]) {
+  let dir = '.';
+  try {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    dir = fileURLToPath(new URL('.', import.meta.url));
+  } catch {
+    dir = __dirname;
+  }
+  if (!names.length)
+    return dir;
+  return path.resolve(dir, ...names);
+}
+
 export function getCachedFile(localName: string, url: string, opts?: { notice?: string, noProgress?: boolean }): Promise<string> {
   opts = opts || {};
-  const localFile = path.resolve(__dirname, localName);
+  const localFile = getExampleDirname(localName);
   if (fs.existsSync(localFile)) {
     return Promise.resolve(localFile);
   }
@@ -62,21 +76,11 @@ export function getCachedFile(localName: string, url: string, opts?: { notice?: 
   })
 }
 
-
-let _dirname = '.';
-try {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  _dirname = fileURLToPath(new URL('.', import.meta.url));
-} catch {
-  _dirname = __dirname;
-}
-
 /**
  * add some helpter for examples TS
  */
 
-export const dataPath = path.resolve(_dirname, '..', '..', 'data');
+export const dataPath = getExampleDirname('..', '..', 'data');
 
 // export const getDataFilePath = (fileName: string): string => {
 //   const fullpath = path.resolve(dataPath, fileName)

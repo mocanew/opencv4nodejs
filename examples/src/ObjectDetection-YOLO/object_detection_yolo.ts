@@ -2,7 +2,7 @@ import { assert } from 'console';
 import fs from 'fs';
 import mri from 'mri';
 import { Mat, Net, Point2, Rect, Size, Vec3, VideoCapture, VideoWriter } from '@u4/opencv4nodejs';
-import { cv, getCachedFile } from '../utils';
+import { cv, getCachedFile, getExampleDirname } from '../utils';
 import path from 'path';
 
 // ported from https://github.com/spmallick/learnopencv/blob/master/ObjectDetection-YOLO/object_detection_yolo.py
@@ -28,12 +28,12 @@ const device = args.device || 'cpu';
 
 async function main() {
     // # Load names of classes
-    const classesFile = path.resolve(__dirname, "coco.names");
+    const classesFile = getExampleDirname("ObjectDetection-YOLO", "coco.names");
     // classes = None
     const classes = fs.readFileSync(classesFile, 'utf8').split(/[\r\n]+/);
 
     // Give the configuration and weight files for the model and load the network using them.
-    const modelConfiguration = path.resolve(__dirname, "yolov3.cfg")
+    const modelConfiguration = getExampleDirname("ObjectDetection-YOLO", "yolov3.cfg")
     const modelWeights = await getCachedFile("yolov3.weights", 'https://pjreddie.com/media/files/yolov3.weights')
 
     const net: Net = cv.readNetFromDarknet(modelConfiguration, modelWeights)
