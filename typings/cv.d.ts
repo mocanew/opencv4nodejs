@@ -200,5 +200,9 @@ export const lbpCascades: {
 };
 export const HOGHistogramNormType: { L2Hys: string};
 // TODO Fill this types
-export const KeyPointMatch: Function;
-export const StatModel: Function;
+export class KeyPointMatch {
+  distance: number;
+  kpTo?: Object;
+  kpFrom?: Object;
+}
+export class StatModel {}

@@ -12,8 +12,8 @@ export const delay = (ms: number): Promise<void> => new Promise(resolve => setTi
 
 export function getExampleDirname(...names: string[]) {
   let dir = '.';
-  // dir = fileURLToPath(new URL('.', import.meta.url));
-  dir = __dirname;
+  dir = fileURLToPath(new URL('.', import.meta.url));
+  // dir = __dirname;
   if (!names.length)
     return dir;
   return path.resolve(dir, ...names);

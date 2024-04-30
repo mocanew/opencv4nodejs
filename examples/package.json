@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "example for opencv4nodejs",
   "main": "src/EASTTextDetection.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "clean": "rimraf src/**/*.js src/**/*.map *.js.map *.js *.log"
   },

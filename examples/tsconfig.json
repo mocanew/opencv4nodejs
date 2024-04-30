@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "commonjs",
+    "module": "ES2022",
     "moduleResolution": "node",                       /* Specify how TypeScript looks up a file from a given module specifier. */
     "inlineSourceMap": true,
     "esModuleInterop": true,
