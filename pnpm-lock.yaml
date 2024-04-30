@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@u4/opencv-build':
-    specifier: 1.0.0-alpha2
-    version: 1.0.0-alpha2
+    specifier: 1.0.0
+    version: 1.0.0
   eslint:
     specifier: ^9.1.1
     version: 9.1.1
@@ -345,8 +345,8 @@ packages:
       eslint-visitor-keys: 3.4.3
     dev: false
 
-  /@u4/opencv-build@1.0.0-alpha2:
-    resolution: {integrity: sha512-GhLSQZvui/xK8AtztUKd/wq6o0P2e0/NoqC6k6yFBbhd/0Pzi6rQaQ3877ioB7/KLd4x6JXrcaOBdYc6b0GzPA==}
+  /@u4/opencv-build@1.0.0:
+    resolution: {integrity: sha512-3/sBGebF0/UtQCq6YjCMhNSIS7tBQoqIBEFcgrl4wlk4g4rQg51ko0n31Lk5EYY25NXL0rKpyh3c8exH6wvHkQ==}
     hasBin: true
     dependencies:
       '@deno/shim-deno': 0.19.1

@@ -69,7 +69,7 @@
     "publish-next": "npm publish --dry-run --tag next"
   },
   "dependencies": {
-    "@u4/opencv-build": "1.0.0-alpha2",
+    "@u4/opencv-build": "1.0.0",
     "eslint": "^9.1.1",
     "glob": "^10.3.12",
     "nan": "^2.19.0",
