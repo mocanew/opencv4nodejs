@@ -172,8 +172,33 @@ export function maxAsync(src1: Mat, src2: Mat, dst: Mat): Promise<Mat>;
 export function magnitude(x: Mat, y: Mat, magnitude: Mat): Mat;
 export function magnitudeAsync(x: Mat, y: Mat, magnitude: Mat): Promise<Mat>;
 
-export const haarCascades: any;
-export const lbpCascades: any;
-export const KeyPointMatch: any;
-export const StatModel: any;
-export const HOGHistogramNormType: any;
+export const haarCascades: {
+  HAAR_EYE: string;
+  HAAR_EYE_TREE_EYEGLASSES: string;
+  HAAR_FRONTALCATFACE: string;
+  HAAR_FRONTALCATFACE_EXTENDED: string;
+  HAAR_FRONTALFACE_ALT: string;
+  HAAR_FRONTALFACE_ALT2: string;
+  HAAR_FRONTALFACE_ALT_TREE: string;
+  HAAR_FRONTALFACE_DEFAULT: string;
+  HAAR_FULLBODY: string;
+  HAAR_LEFTEYE_2SPLITS: string;
+  HAAR_LICENCE_PLATE_RUS_16STAGES: string;
+  HAAR_LOWERBODY: string;
+  HAAR_PROFILEFACE: string;
+  HAAR_RIGHTEYE_2SPLITS: string;
+  HAAR_RUSSIAN_PLATE_NUMBER: string;
+  HAAR_SMILE: string;
+  HAAR_UPPERBODY: string;
+};
+export const lbpCascades: {
+  LBP_FRONTALCATFACE: string;
+  LBP_FRONTALFACE: string;
+  LBP_FRONTALFACE_IMPROVED: string;
+  LBP_PROFILEFACE: string;
+  LBP_SILVERWARE: string;
+};
+export const HOGHistogramNormType: { L2Hys: string};
+// TODO Fill this types
+export const KeyPointMatch: Function;
+export const StatModel: Function;
