@@ -1,7 +1,7 @@
 import { pc, Log, OpenCVBuilder, type OpenCVBuildEnvParams } from '@u4/opencv-build';
 import fs from 'fs';
 import path from 'path';
-import { isElectronWebpack, resolvePath } from './commons.js';
+import { isElectronWebpack } from './commons.js';
 import type * as openCV from '../../typings/index.js';
 import { getDirName, getRequire } from './meta.js';
 
@@ -9,7 +9,7 @@ declare type OpenCVType = typeof openCV;
 
 const logDebug = process.env.OPENCV4NODES_DEBUG_REQUIRE ? (prefix: string, message: string, ...args: unknown[]) => Log.log('info', prefix, message, ...args) : () => { /* ignore */ }
 
-function tryGetOpencvBinDir(builder: OpenCVBuilder) {
+function tryGetOpencvBinDir(builder: OpenCVBuilder): string {
   if (process.env.OPENCV_BIN_DIR) {
     logDebug('tryGetOpencvBinDir', `${pc.yellow('OPENCV_BIN_DIR')} environment variable is set`)
     return process.env.OPENCV_BIN_DIR
@@ -34,7 +34,7 @@ function tryGetOpencvBinDir(builder: OpenCVBuilder) {
     return builder.env.opencvBinDir as string
   }
   logDebug('tryGetOpencvBinDir', 'failed to find opencv binary environment variable in package.json')
-  return null
+  return "";
 }
 
 export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
@@ -42,7 +42,7 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
     opt = { prebuild: 'latestBuild' }
   const builder = new OpenCVBuilder(opt);
 
-  let opencvBuild: OpenCVType = null;
+  let opencvBuild: OpenCVType | null = null;
   let requirePath = '';
   if (isElectronWebpack()) {
     requirePath = '../../build/Release/opencv4nodejs.node';
@@ -109,16 +109,8 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
       throw e;
     }
   }
-
-  // resolve haarcascade files
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { haarCascades, lbpCascades } = opencvBuild as any;
-  const dirname = getDirName();
-  const xmlDir = path.join(dirname, '..', '..', 'src', 'lib');
-  Object.keys(haarCascades).forEach(
-    key => opencvBuild[key] = resolvePath(path.join(xmlDir, 'haarcascades'), haarCascades[key]));
-  Object.keys(lbpCascades).forEach(
-    key => opencvBuild[key] = resolvePath(path.join(xmlDir, 'lbpcascades'), lbpCascades[key]));
+  if (!opencvBuild)
+    throw new Error('Failed to require opencv4nodejs.node');
   return opencvBuild;
 }
 

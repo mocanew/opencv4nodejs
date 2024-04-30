@@ -17,10 +17,11 @@ const args = mri(process.argv.slice(2), { default: { device: 'cpu' }, alias: { h
 
 if (args.help) {
     console.log('Object Detection using YOLO in OPENCV');
-    console.log('--device Device to perform inference on \'cpu\' or \'gpu\'. (default is cpu)');
+    console.log('--device Device to perform inference on \'cpu\' or \'cuda\' or \'opencl\'. (default is cpu)');
     console.log('--image  Path to image file.');
     console.log('--video  Path to video file.');
-    process.exit(0);
+    console.log('OpenCV getBuildInformation:', cv.getBuildInformation());
+   process.exit(0);
 }
 
 const device = args.device || 'cpu';
@@ -41,7 +42,11 @@ async function main() {
         net.setPreferableBackend(cv.DNN_BACKEND_OPENCV)
         net.setPreferableTarget(cv.DNN_TARGET_CPU)
         console.log('Using CPU device.')
-    } else if (device == 'gpu') {
+    } else if (device == 'opencl' ) {
+        net.setPreferableBackend(cv.DNN_BACKEND_OPENCV)
+        net.setPreferableTarget(cv.DNN_TARGET_OPENCL)
+        console.log('Using GPU device.')
+    } else if (device == 'gpu' || device == 'cuda' ) {
         net.setPreferableBackend(cv.DNN_BACKEND_CUDA)
         net.setPreferableTarget(cv.DNN_TARGET_CUDA)
         console.log('Using GPU device.')

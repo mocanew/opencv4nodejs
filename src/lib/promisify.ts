@@ -16,6 +16,7 @@ const promisify = (fn: (...args: any[]) => any) => function toPromise(this: any,
 
   return new Promise((resolve, reject) => {
     const args = Array.prototype.slice.call(params);
+    // add a param to convert callback to promise
     args.push(function pomisifyed(err: Error, res: any) {
       if (err) {
         return reject(err);

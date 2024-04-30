@@ -69,8 +69,8 @@ environment:
 install:
   - cmd: choco install OpenCV -y --version %OPENCVV%
   - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_INCLUDE_DIR=c:\tools\opencv\build\include
-  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_LIB_DIR=c:\tools\opencv\build\x64\vc14\lib
-  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_BIN_DIR=c:\tools\opencv\build\x64\vc14\bin
+  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_LIB_DIR=c:\tools\opencv\build\x64\vc16\lib
+  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_BIN_DIR=c:\tools\opencv\build\x64\vc16\bin
   - if not "%BUILD_TASK%" == "ENVS" SET PATH=%PATH%;%OPENCV_BIN_DIR%;
   - ps: Install-Product node $env:NODEV x64
   # - node --version

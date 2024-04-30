@@ -8,6 +8,7 @@ export default function extendWithJsSources(cv: typeof OpenCV) {
   makeDrawUtils(cv);
   // add functions
   misc(cv);
+  // add wrapper on calcHist function
   deprecations(cv);
   return cv;
 }

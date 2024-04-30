@@ -1,8 +1,11 @@
+import path from 'node:path';
 import { type OpenCVBuildEnvParams } from '@u4/opencv-build';
 import promisify from './promisify.js';
-import extendWithJsSources from './src/index.js';
+import extendWithJsSources from './ext/index.js';
 import { getOpenCV } from './cvloader.js';
 import type * as openCV from '../../typings/index.js';
+import { getDirName } from './meta.js';
+import { resolvePath } from './commons.js';
 
 export type * as openCV from '../../typings/index.js';
 export { getDirName, getRequire } from "./meta.js"
@@ -10,6 +13,7 @@ export { getDirName, getRequire } from "./meta.js"
 declare type OpenCVType = typeof openCV;
 
 function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
+  // load native binding
   const cvBase = getOpenCV(opt);
   // check the presence of any expected symbol, to ensure the library is loaded
   if (!cvBase.accumulate) {
@@ -18,7 +22,15 @@ function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   if (!cvBase.blur) {
     throw Error('failed to load opencv basic blur not found.')
   }
-  
+
+  // resolve haarcascade and lbpCascades files paths
+  const { haarCascades, lbpCascades } = cvBase;
+  const dirname = getDirName();
+  const xmlDir = path.join(dirname, '..', '..', 'src', 'lib');
+  Object.keys(haarCascades).forEach(
+    key => cvBase[key] = resolvePath(path.join(xmlDir, 'haarcascades'), haarCascades[key]));
+  Object.keys(lbpCascades).forEach(
+    key => cvBase[key] = resolvePath(path.join(xmlDir, 'lbpcascades'), lbpCascades[key]));
   // promisify async methods
   let cvObj = promisify<OpenCVType>(cvBase);
   cvObj = extendWithJsSources(cvObj);
@@ -30,15 +42,18 @@ function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
 
 export const cv = loadOpenCV({ prebuild: 'latestBuild' });
 
-// const allExports = Object.keys(cv);
-// // .filter(key => key !== 'cv' && !key.includes('"'));
-// console.log('\n\n');
-// while (allExports.length) {
-//   const keys = allExports.splice(0, 15);
-//   console.log(`const { ${keys} } = cv;`);
-//   console.log(`export { ${keys} };`);
-// }
-// console.log('\n\n');
+function dumpExports() {
+  let allExports = Object.keys(cv);
+  allExports = allExports.filter(key => !key.includes('"'));
+  console.log('\n\n');
+  while (allExports.length) {
+    const keys = allExports.splice(0, 15);
+    console.log(`const { ${keys} } = cv;`);
+    console.log(`export { ${keys} };`);
+  }
+  console.log('\n\n'); 
+}
+// dumpExports();
 
 //////////////
 //// GENERATED code
@@ -169,11 +184,11 @@ const { getVersion,getVersionString,toMatTypeName,getScoreMax,dropOverlappingZon
 export { getVersion,getVersionString,toMatTypeName,getScoreMax,dropOverlappingZone };
 
 // TODO FIX this export mess
-export const AGAST = cv['"AGAST"'];
-export const AKAZE = cv['"AKAZE"'] as { DESCRIPTOR_KAZE: 3, DESCRIPTOR_MLDB_UPRIGHT: 4, DESCRIPTOR_MLDB: 5 };
-export const KAZE = cv['"KAZE"'];
-export const FAST = cv['"FAST"'];
-export const ORB = cv['"ORB"'];
+export const AGAST = (cv as any)['"AGAST"'];
+export const AKAZE = (cv as any)['"AKAZE"'] as { DESCRIPTOR_KAZE: 3, DESCRIPTOR_MLDB_UPRIGHT: 4, DESCRIPTOR_MLDB: 5 };
+export const KAZE = (cv as any)['"KAZE"'];
+export const FAST = (cv as any)['"FAST"'];
+export const ORB = (cv as any)['"ORB"'];
 
 export default cv;
 
