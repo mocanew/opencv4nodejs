@@ -11,6 +11,7 @@ declare type OpenCVType = typeof openCV;
 
 function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   const cvBase = getOpenCV(opt);
+  // check the presence of any expected symbol, to ensure the library is loaded
   if (!cvBase.accumulate) {
     throw Error('failed to load opencv basic accumulate not found.')
   }
@@ -28,13 +29,9 @@ function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
 }
 
 export const cv = loadOpenCV({ prebuild: 'latestBuild' });
-// const defExport: { [key: string]: any } = { cv };
-// duplicate all export for retro-compatibility
-// for (const key in cv) {
-//   defExport[key] = cv[key];
-// }
 
-// const allExports = Object.keys(defExport).filter(key => key !== 'cv' && !key.includes('"'));
+// const allExports = Object.keys(cv);
+// // .filter(key => key !== 'cv' && !key.includes('"'));
 // console.log('\n\n');
 // while (allExports.length) {
 //   const keys = allExports.splice(0, 15);
@@ -171,9 +168,12 @@ export { HAAR_LEFTEYE_2SPLITS,HAAR_LICENCE_PLATE_RUS_16STAGES,HAAR_LOWERBODY,HAA
 const { getVersion,getVersionString,toMatTypeName,getScoreMax,dropOverlappingZone } = cv;
 export { getVersion,getVersionString,toMatTypeName,getScoreMax,dropOverlappingZone };
 
-// defExport['cv'] = cv;
-// const {Vec3} = defExport;
-// export {Vec3}; 
-// export * from defExport;
+// TODO FIX this export mess
+export const AGAST = cv['"AGAST"'];
+export const AKAZE = cv['"AKAZE"'] as { DESCRIPTOR_KAZE: 3, DESCRIPTOR_MLDB_UPRIGHT: 4, DESCRIPTOR_MLDB: 5 };
+export const KAZE = cv['"KAZE"'];
+export const FAST = cv['"FAST"'];
+export const ORB = cv['"ORB"'];
+
 export default cv;
 

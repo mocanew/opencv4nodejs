@@ -2,7 +2,7 @@ import assert from 'assert';
 import type * as openCV from '../../../typings/index.js'
 import type { Mat } from '../../../typings/index.js';
 
-export default function (cv: typeof openCV) {
+export default function (cv: typeof openCV): void {
   // deprecate wrapper for the old calcHist API
   const _calcHist = cv.calcHist;
   cv.calcHist = function calcHist(img: Mat, histAxes: { channel: number, bins: number, ranges: [number, number] }[], mask?: Mat) {
