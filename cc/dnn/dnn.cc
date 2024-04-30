@@ -48,6 +48,10 @@ NAN_MODULE_INIT(Dnn::Init) {
   FF_CONST_TYPE(DNN_TARGET_HDDL, cv::dnn::DNN_TARGET_HDDL)
 #endif
 
+#if CV_VERSION_GREATER_EQUAL(4, 8, 0)
+  FF_CONST_TYPE(DNN_BACKEND_WEBNN, cv::dnn::DNN_BACKEND_WEBNN)
+#endif
+
 
   Net::Init(target);
 

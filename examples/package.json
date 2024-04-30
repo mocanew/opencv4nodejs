@@ -5,7 +5,7 @@
   "main": "src/EASTTextDetection.js",
   "type": "module",
   "scripts": {
-    "clean": "rimraf src/**/*.js src/**/*.map *.js.map *.js *.log"
+    "clean": "rimraf src/*.js src/**/*.js src/**/*.map *.js.map *.js *.log"
   },
   "author": "",
   "license": "MIT",

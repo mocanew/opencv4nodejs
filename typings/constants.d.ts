@@ -86,7 +86,7 @@ export const DNN_BACKEND_OPENCV: number;
 export const DNN_BACKEND_INFERENCE_ENGINE: number;
 export const DNN_BACKEND_HALIDE: number;
 export const DNN_BACKEND_CUDA: number;
-
+export const DNN_BACKEND_WEBNN: number;
 export const DNN_TARGET_CPU: number;
 export const DNN_TARGET_OPENCL: number;
 export const DNN_TARGET_OPENCL_FP16: number;
