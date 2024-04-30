@@ -230,9 +230,10 @@ export async function compileLib(args: string[]) {
             action = 'rebuild';
         }
     }
+    const extra = buildOptions.extra || {};
 
-    if (buildOptions.extra.jobs) {
-        JOBS = buildOptions.extra.jobs;
+    if (extra.jobs) {
+        JOBS = extra.jobs;
     }
 
     if (buildOptions.disableAutoBuild || toBool(env.OPENCV4NODEJS_DISABLE_AUTOBUILD) || npmEnv.disableAutoBuild) {
@@ -245,14 +246,15 @@ export async function compileLib(args: string[]) {
         }
     }
 
-    if (buildOptions.extra['dry-run'] || buildOptions.extra['dryrun']) {
+    if (extra['dry-run'] || extra['dryrun']) {
         dryRun = true;
     }
 
     if (!silenceMode) {
-        for (const K in ['autoBuildFlags']) {
+        const K = 'autoBuildFlags' as const;
+        // for (const K in ['autoBuildFlags'] as const) {
            if (buildOptions[K]) console.log(`using ${K}:`, buildOptions[K]);
-        }
+        // }
     }
 
     try {
@@ -309,7 +311,7 @@ or use OPENCV4NODEJS_* env variable.`)
 
 
     if (silenceMode) {
-        const outputs = process.env[actionOriginal].split(/[\n;]/);
+        const outputs = (process.env[actionOriginal] || '').split(/[\n;]/);
         outputs.forEach(o => console.log(o));
         return;
     }
@@ -325,7 +327,7 @@ or use OPENCV4NODEJS_* env variable.`)
     // --verbose, --loglevel=verbose	Log most progress to console
     // --silent, --loglevel=silent	Don't log anything to console
 
-    if (process.env.BINDINGS_DEBUG || buildOptions.extra['debug'])
+    if (process.env.BINDINGS_DEBUG || extra['debug'])
         flags += ' --debug';
     else
         flags += ' --release';
@@ -336,12 +338,12 @@ or use OPENCV4NODEJS_* env variable.`)
 
     // const arch = 'x86_64' / 'x64'
     // flags += --arch=${arch} --target_arch=${arch}
-    const cmdOptions = buildOptions.extra['node-gyp-options'] || '';
+    const cmdOptions = extra['node-gyp-options'] || '';
     flags += ` ${cmdOptions}`;
 
-    const nodegyp = buildOptions.extra.electron ? 'electron-rebuild' : 'node-gyp';
+    const nodegyp = extra.electron ? 'electron-rebuild' : 'node-gyp';
     let nodegypCmd = '';
-    for (const dir of process.env.PATH.split(path.delimiter)) {
+    for (const dir of (process.env.PATH || '').split(path.delimiter)) {
         nodegypCmd = getExistingBin(dir, nodegyp);
         if (nodegypCmd) {
             // no need to use full path
@@ -376,7 +378,7 @@ or use OPENCV4NODEJS_* env variable.`)
 
     log('info', 'install', `Spawning in directory:${cwd} node-gyp process: ${nodegypCmd}`)
 
-    if (buildOptions.extra.vscode) {
+    if (extra.vscode) {
         // const nan = require('nan');
         // const nativeNodeUtils = require('native-node-utils');
         // const pblob = promisify(blob)
@@ -433,7 +435,7 @@ or use OPENCV4NODEJS_* env variable.`)
         // }
         const child = child_process.exec(nodegypCmd, { maxBuffer: Infinity, cwd }, function callNodegypCmd(error/*, stdout, stderr*/) {
             // fs.unlinkSync(realGyp);
-            const bin = buildOptions.extra.electron ? 'electron-rebuild' : 'node-gyp';
+            const bin = extra.electron ? 'electron-rebuild' : 'node-gyp';
             if (error) {
                 console.log(`error: `, error);
                 log('error', 'install', `${bin} failed and return ${error.name} ${error.message} return code: ${error.code}`);

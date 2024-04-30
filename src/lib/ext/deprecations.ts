@@ -1,11 +1,10 @@
 import assert from 'assert';
 import type * as openCV from '../../../typings/index.js'
-import type { Mat } from '../../../typings/index.js';
 
 let cv: typeof openCV;
-let _calcHist: (img: Mat, histAxes: openCV.HistAxes[], mask?: Mat) => Mat;
+let _calcHist: (img: openCV.Mat, histAxes: openCV.HistAxes[], mask?: openCV.Mat) => openCV.Mat;
 
-function calcHist(img: Mat, histAxes: { channel: number, bins: number, ranges: [number, number] }[], mask?: Mat) {
+function calcHist(img: openCV.Mat, histAxes: { channel: number, bins: number, ranges: [number, number] }[], mask?: openCV.Mat) {
   assert(img instanceof cv.Mat, 'Imgproc::CalcHist - Error: expected argument 0 to be of type Mat');
   assert(Array.isArray(histAxes), 'Imgproc::CalcHist - Error: expected argument 1 to be of type array of HistAxes');
 
