@@ -9,3 +9,4 @@ import { Mat } from '../Mat.d';
 // Applies a user colormap on a given image. More...
 
 export function applyColorMap(src: Mat, colormap: number | Mat): Mat;
+export function applyColorMapAsync(src: Mat, colormap: number | Mat): Promise<Mat>;

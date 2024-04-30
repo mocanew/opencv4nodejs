@@ -38,6 +38,7 @@ export function calcHist(img: Mat, histAxes: HistAxes[], mask?: Mat): Mat;
 export function calcHistAsync(img: Mat, histAxes: HistAxes[], mask?: Mat): Promise<Mat>;
 
 export function canny(dx: Mat, dy: Mat, threshold1: number, threshold2: number, L2gradient?: boolean): Mat;
+export function cannyAsync(dx: Mat, dy: Mat, threshold1: number, threshold2: number, L2gradient?: boolean): Promise<Mat>;
 
 export function computeCorrespondEpilines(points: Point2[], whichImage: number, F: Mat): Vec3[];
 export function computeCorrespondEpilinesAsync(points: Point2[], whichImage: number, F: Mat): Promise<Vec3[]>;
@@ -48,6 +49,7 @@ export function drawKeyPoints(img: Mat, keyPoints: KeyPoint[]): Mat;
 export function drawMatches(img1: Mat, img2: Mat, keyPoints1: KeyPoint[], keyPoints2: KeyPoint[], matches: DescriptorMatch[]): Mat;
 
 export function fastNlMeansDenoisingColored(src: Mat, h?: number, hColor?: number, templateWindowSize?: number, searchWindowSize?: number): Mat;
+export function fastNlMeansDenoisingColoredAsync(src: Mat, h?: number, hColor?: number, templateWindowSize?: number, searchWindowSize?: number): Promise<Mat>;
 export function inpaint(src: Mat, mask: Mat, inpaintRadius: number, flags: number): Mat;
 export function inpaintAsync(src: Mat, mask: Mat, inpaintRadius: number, flags: number): Promise<Mat>;
 
@@ -169,3 +171,9 @@ export function maxAsync(src1: Mat, src2: Mat, dst: Mat): Promise<Mat>;
 
 export function magnitude(x: Mat, y: Mat, magnitude: Mat): Mat;
 export function magnitudeAsync(x: Mat, y: Mat, magnitude: Mat): Promise<Mat>;
+
+export const haarCascades: any;
+export const lbpCascades: any;
+export const KeyPointMatch: any;
+export const StatModel: any;
+export const HOGHistogramNormType: any;

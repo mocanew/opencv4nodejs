@@ -220,7 +220,6 @@ if (toTest.imgproc) {
     });
 
     describe('matchShapes', () => {
-      // @ts-expect-error multuple variable name depending on openCV version
       const method = cvVersionGreaterEqual(4, 0, 0) ? cv.CONTOURS_MATCH_I1 : cv.CV_CONTOURS_MATCH_I1;
       it('should return zero for same shapes', () => {
         const similarity = leftmostContour.matchShapes(leftmostContour, method);
