@@ -11,13 +11,8 @@ export const delay = (ms: number): Promise<void> => new Promise(resolve => setTi
 
 export function getExampleDirname(...names: string[]) {
   let dir = '.';
-  try {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    dir = fileURLToPath(new URL('.', import.meta.url));
-  } catch {
-    dir = __dirname;
-  }
+  // dir = fileURLToPath(new URL('.', import.meta.url));
+  dir = __dirname;
   if (!names.length)
     return dir;
   return path.resolve(dir, ...names);
