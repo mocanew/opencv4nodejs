@@ -31,10 +31,16 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
           cache: 'pnpm'
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run prepack
-      - run: cd test && pnpm install --frozen-lockfile
-      - run: cd test && pnpm run test
+      - name: Install dependencies using pnpm
+        run: pnpm install --frozen-lockfile
+      - name: build CJS + ESM files
+        run: pnpm run prepack
+      - name: build native modules using node-gyp
+        run: pnpm run rebuild
+      - name: Prepare tests
+        run: cd test && pnpm install --frozen-lockfile
+      - name: run tests
+        run: cd test && pnpm run test
       - run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
