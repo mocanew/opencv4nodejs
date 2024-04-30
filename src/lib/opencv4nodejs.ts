@@ -28,9 +28,9 @@ function loadOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
   const dirname = getDirName();
   const xmlDir = path.join(dirname, '..', '..', 'src', 'lib');
   Object.keys(haarCascades).forEach(
-    key => cvBase[key] = resolvePath(path.join(xmlDir, 'haarcascades'), haarCascades[key]));
+    key => (cvBase as any)[key] = resolvePath(path.join(xmlDir, 'haarcascades'), haarCascades[key as keyof typeof haarCascades]));
   Object.keys(lbpCascades).forEach(
-    key => cvBase[key] = resolvePath(path.join(xmlDir, 'lbpcascades'), lbpCascades[key]));
+    key => (cvBase as any)[key] = resolvePath(path.join(xmlDir, 'lbpcascades'), lbpCascades[key as keyof typeof lbpCascades]));
   // promisify async methods
   let cvObj = promisify<OpenCVType>(cvBase);
   cvObj = extendWithJsSources(cvObj);

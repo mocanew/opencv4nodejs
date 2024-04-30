@@ -60,7 +60,7 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
 
   } catch (err) {
     // err.code === 'ERR_DLOPEN_FAILED'
-    logDebug('require', `failed to require cv with exception: ${pc.red(err.toString())}`)
+    logDebug('require', `failed to require cv with exception: ${pc.red((err as Error).toString())}`)
     logDebug('require', 'attempting to add opencv binaries to path')
 
     if (!process.env.path) {

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "declaration": false,
-    "strict": false,
+    "strict": true,
     // "declarationMap": false,
     // "declarationDir": "types",
     "outDir": "cjs",
