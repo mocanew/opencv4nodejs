@@ -1,6 +1,6 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import { Mat } from '@u4/opencv4nodejs';
-import { cv } from './utils';
+import { cv } from './utils.js';
 
 // a - z
 export const lccs: Array<string> = Array(26).fill(97).map((v, i) => v + i).map(ascii => String.fromCharCode(ascii));
@@ -13,7 +13,7 @@ const getBoundingRect = (component: number[]) => new cv.Rect(
   component[cv.CC_STAT_LEFT],
   component[cv.CC_STAT_TOP],
   component[cv.CC_STAT_WIDTH],
-  component[cv.CC_STAT_HEIGHT]
+  component[cv.CC_STAT_HEIGHT],
 );
 
 const getLetterBoundingRect = (img: Mat, isIorJ?: boolean) => {
@@ -46,7 +46,7 @@ const getLetterBoundingRect = (img: Mat, isIorJ?: boolean) => {
       xLeft,
       dotComponent[cv.CC_STAT_TOP],
       Math.max(letterRect.width, dotRectXRight - xLeft),
-      (letterRectYBottom - dotComponent[cv.CC_STAT_TOP])
+      (letterRectYBottom - dotComponent[cv.CC_STAT_TOP]),
     );
   }
 
@@ -65,7 +65,7 @@ export const centerLetterInImage = (img: Mat, isIorJ?: boolean) => {
     offX,
     offY,
     rect.width,
-    rect.height
+    rect.height,
   );
 
   const centered = new cv.Mat(img.rows, img.cols, img.type, [255, 255, 255]);
@@ -78,7 +78,7 @@ export const saveConfusionMatrix = (
   testDataFiles: string[][],
   predict: (mat: Mat, isIorJ: boolean) => number,
   numTestImagesPerClass: number,
-  outputFile: string
+  outputFile: string,
 ) => {
   const confusionMat = new cv.Mat(26, 26, cv.CV_64F, 0);
   testDataFiles.forEach((files: string[], label: number) => {
@@ -91,7 +91,7 @@ export const saveConfusionMatrix = (
 
   const confusionMatMatrix = [[''].concat(lccs)].concat(
     confusionMat.div(numTestImagesPerClass)
-      .getDataAsArray().map((col: number[], l: number) => [lccs[l]].concat(col.map((v: number) => '' + Math.round(v * 100) / 100)))
+      .getDataAsArray().map((col: number[], l: number) => [lccs[l]].concat(col.map((v: number) => '' + Math.round(v * 100) / 100))),
   );
 
   const csvRows = confusionMatMatrix.map(cols => cols.join(';'));

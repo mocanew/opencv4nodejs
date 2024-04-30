@@ -1,4 +1,4 @@
-import { cv, grabFrames, drawRectAroundBlobs, getResourcePath } from './utils';
+import { cv, grabFrames, drawRectAroundBlobs, getResourcePath } from './utils.js';
 
 const bgSubtractor = new cv.BackgroundSubtractorMOG2();
 
@@ -10,7 +10,7 @@ grabFrames(getResourcePath('traffic.mp4'), delay, (frame) => {
   const dilated = foreGroundMask.dilate(
     cv.getStructuringElement(cv.MORPH_ELLIPSE, new cv.Size(4, 4)),
     new cv.Point2(-1, -1),
-    iterations
+    iterations,
   );
   const blurred = dilated.blur(new cv.Size(10, 10));
   const thresholded = blurred.threshold(200, 255, cv.THRESH_BINARY);

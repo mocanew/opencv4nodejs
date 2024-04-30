@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { cv, getResourcePath } from '../utils';
+import fs from 'node:fs';
+import path from 'node:path';
+import { cv, getResourcePath } from '../utils.js';
 
 export default function () {
   const modelPath = path.resolve(path.join(getResourcePath('dnn'), 'facenet'));

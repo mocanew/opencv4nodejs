@@ -1,6 +1,6 @@
 {
   "name": "@u4/opencv4nodejs",
-  "version": "7.0.0-alpha",
+  "version": "7.0.0",
   "description": "Asynchronous OpenCV 3.x / 4.x nodejs bindings with JavaScript and TypeScript API.",
   "keywords": [
     "opencv",
@@ -16,6 +16,14 @@
     "async",
     "typescript"
   ],
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "types": "./typings/index.d.ts",
+      "require": "./cjs/lib/opencv4nodejs.js",
+      "import": "./esm/lib/opencv4nodejs.js"
+    }
+  },
   "contributors": [
     "Uriel Chemouni <uchemouni@gmail.com> (https://uriel.ovh/)",
     "justadudewhohacks (https://github.com/justadudewhohacks)"
@@ -33,10 +41,13 @@
     "build-opencv": "bin/install.js"
   },
   "homepage": "https://github.com/UrielCh/opencv4nodejs#readme",
-  "main": "./lib/opencv4nodejs.js",
+  "main": "./cjs/lib/opencv4nodejs.js",
+  "module": "./esm/lib/opencv4nodejs.js",
   "typings": "./typings/index.d.ts",
   "scripts": {
-    "build": "tsc --pretty --project .",
+    "build": "tsc --pretty --project tsconfig.json && tsc --pretty --project tsconfig-esm.json && npm run copyfile",
+    "build-types": "rimraf types && tsc --pretty --project tsconfig-types.json",
+    "copyfile": "shx cp extra/meta.mjs esm/lib/meta.js && shx cp extra/meta.cjs cjs/lib/meta.js",
     "prepack": "npm run build",
     "install_old": "node bin/install.js auto",
     "install_Mac": "CXXFLAGS=\"-std=c++17 -Wno-c++11-narrowing -Wno-c++17-extensions -Wno-c++17-attribute-extensions\" node ./bin/install.js --version 4.5.3 build",
@@ -49,50 +60,43 @@
     "samples": "cd examples && pnpm install && npm run build && node ./src/templateMatch/multiMatchBench.js && node ./src/templateMatch/multiMatchColision.js && node ./src/applyColorMap.js && node ./src/asyncMatchFeatures.js && node ./src/faceDetect/asyncFaceDetection.js",
     "do-build": "npm run build && node bin/install.js --version 4.6.0 --jobs MAX build",
     "do-rebuild": "npm run build && node bin/install.js --version 4.6.0 --jobs MAX rebuild",
-    "lint": "eslint examples/**/*.ts lib/**/*.ts typings/**/*.ts ",
+    "lint": "eslint examples/**/*.ts src/**/*.ts typings/**/*.ts ",
     "clean": "node-gyp clean",
-    "cleanjs": "rimraf {install,lib,examples}/**/*.{d.ts,js,map}",
-    "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild"
+    "rebuild": "node-gyp rebuild",
+    "cleanjs": "rimraf {examples}/**/*.{d.ts,js,map} {cjs,esm}/{lib,install}",
+    "build-debug": "npm run build && BINDINGS_DEBUG=true node bin/install.js rebuild",
+    "checkExports": "npx @arethetypeswrong/cli $(npm pack)",
+    "publish-next": "npm publish --dry-run --tag next"
   },
   "dependencies": {
-    "@u4/opencv-build": "^0.9.1",
+    "@u4/opencv-build": "1.0.0",
+    "eslint": "^9.1.1",
     "glob": "^10.3.12",
     "nan": "^2.19.0",
     "node-gyp": "^10.1.0",
-    "npmlog": "^7.0.1",
-    "picocolors": "^1.0.0"
+    "picocolors": "^1.0.0",
+    "typescript-eslint": "^7.8.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.1.1",
     "@types/node": "^20.12.7",
-    "@types/npmlog": "^7.0.0",
     "@types/progress": "^2.0.7",
-    "@typescript-eslint/eslint-plugin": "^7.7.0",
-    "@typescript-eslint/parser": "^7.7.0",
     "axios": "^1.6.8",
     "cross-env": "^7.0.3",
-    "eslint": "^8.57.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.34.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "progress": "^2.0.3",
     "rimraf": "^5.0.5",
+    "shx": "^0.3.4",
     "typescript": "^5.4.5"
   },
   "files": [
     "cc",
-    "install/*.js",
-    "install/*.d.ts",
-    "install/*.map",
-    "lib/**/*.xml",
-    "lib/**/*.js",
-    "lib/**/*.d.ts",
-    "lib/**/*.map",
+    "cjs",
+    "esm",
+    "src/**/*.xml",
     "bin/*.js",
     "typings",
+    "types",
     "binding.gyp",
-    "binding_old.gyp",
-    "tsconfig.json"
+    "binding_old.gyp"
   ]
 }

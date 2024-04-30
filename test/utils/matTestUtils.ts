@@ -10,7 +10,7 @@ const normalizeValue = (val: number | Vec4 | Array<number>) => ((val as Vec4).x 
   : ((val as Array<number>).length !== 4 ? [undefined, (val as number[])[0], (val as number[])[1], (val as number[])[2]] : val)
 );
 
-// eslint-disable-next-line no-unused-vars
+ 
 type Comparator<T> = (a: T, b: T) => boolean;
 
 export const AssertMatValueEquals = (cmpFunc: Comparator<number | number[] | Vec4>) => (val0: number | number[], val1: number | number[]): void => {
@@ -41,7 +41,7 @@ export const assertDataDeepEquals = (data0: any, data1: any): void => {
   assert(dangerousDeepEquals(data0, data1), 'mat data not equal');
 };
 
-// eslint-disable-next-line no-unused-vars
+ 
 type CompareInts = (a: number, b: number) => void;
 
 export const MatValuesComparator = (mat0: Mat, mat1: Mat) => (cmpFunc: CompareInts): void => {

@@ -23,7 +23,7 @@ if (toTest.tracking) {
   } = getTestContext();
 
   const TrackerTestGenerator = (getTestImg2: () => Mat) => (trackerName: TrackerNames) => {
-    // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const newTracker = (_arg2?: unknown) => new cv[trackerName]();
     const newTrackerParams = () => {
       if (trackerName === 'TrackerBoosting' || trackerName === 'TrackerKCF' || trackerName === 'TrackerMIL') {

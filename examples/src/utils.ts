@@ -1,17 +1,27 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import cv, { Mat, Rect, Vec3 } from '@u4/opencv4nodejs';
 export { default as cv } from '@u4/opencv4nodejs';
 import Axios from 'axios';
 import ProgressBar from 'progress';
 import pc from 'picocolors';
-import crypto from 'crypto';
 
 export const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 
+export function getExampleDirname(...names: string[]) {
+  let dir = '.';
+  dir = fileURLToPath(new URL('.', import.meta.url));
+  // dir = __dirname;
+  if (!names.length)
+    return dir;
+  return path.resolve(dir, ...names);
+}
+
 export function getCachedFile(localName: string, url: string, opts?: { notice?: string, noProgress?: boolean }): Promise<string> {
   opts = opts || {};
-  const localFile = path.resolve(__dirname, localName);
+  const localFile = getExampleDirname(localName);
   if (fs.existsSync(localFile)) {
     return Promise.resolve(localFile);
   }
@@ -40,7 +50,7 @@ export function getCachedFile(localName: string, url: string, opts?: { notice?: 
         complete: '=',
         incomplete: ' ',
         renderThrottle: 1,
-        total: parseInt(totalLength),
+        total: parseInt(totalLength, 10),
       });
       data.on('data', (chunk: Buffer) => progressBar.tick(chunk.length));
     }
@@ -66,7 +76,7 @@ export function getCachedFile(localName: string, url: string, opts?: { notice?: 
  * add some helpter for examples TS
  */
 
-export const dataPath = path.resolve(__dirname, '..', '..', 'data');
+export const dataPath = getExampleDirname('..', '..', 'data');
 
 // export const getDataFilePath = (fileName: string): string => {
 //   const fullpath = path.resolve(dataPath, fileName)
@@ -129,7 +139,8 @@ export const drawRectAroundBlobs = (binaryImg: Mat, dstImg: Mat, minPxSize: numb
       dstImg.drawRectangle(
         new cv.Point2(x1, y1),
         new cv.Point2(x2, y2),
-        blue, thickness
+        blue,
+        thickness,
       );
     }
   }
@@ -140,7 +151,7 @@ export const drawRect = (image: Mat, rect: Rect, color: Vec3, opts = { thickness
     rect,
     color,
     opts.thickness,
-    cv.LINE_8
+    cv.LINE_8,
   );
 
 const { HEADLESS } = process.env;

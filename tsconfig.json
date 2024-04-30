@@ -1,15 +1,12 @@
 {
+  "extends": "./tsconfig-common.json",
   "compilerOptions": {
-    "target": "ES2019",
     "module": "commonjs",
-    "strict": false,
-    "esModuleInterop": false,
-    "noImplicitReturns": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "declaration": true,
-    "declarationMap": true,
-  },
-  //"files": [ "./install/install.ts", "./install/parseEnv.ts" ]
-  "include": [ "./install/*.ts", "./lib/**/*.ts"]
+    "declaration": false,
+    "strict": true,
+    // "declarationMap": false,
+    // "declarationDir": "types",
+    "outDir": "cjs",
+    "moduleResolution": "Node10",
+  }
 }

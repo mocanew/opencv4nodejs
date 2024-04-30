@@ -1,7 +1,8 @@
 import { cv as realCV, Mat } from '@u4/opencv4nodejs';
 import fs from 'fs';
 import path from 'path';
-import generateClassMethodTestsFactory from '../utils/generateClassMethodTests';
+import { getDirName } from '@u4/opencv4nodejs';
+import generateClassMethodTestsFactory from '../utils/generateClassMethodTests.js';
 
 export type OpenCV = typeof realCV
 
@@ -65,8 +66,7 @@ export class TestContext {
   private maskLerna512?: Mat;
 
   public get dataPrefix(): string {
-    return path.join(__dirname, '..', '..', 'data');
-//     return path.join(__dirname, 'io', 'data');
+    return path.join(getDirName(), '..', '..', 'data');
   }
 
   constructor(public cv: OpenCV) {
@@ -75,7 +75,7 @@ export class TestContext {
 
   public getTestImg: () => Mat = () => {
     if (!this.lerna512) {
-      const file = path.resolve(__dirname, '../utils/Lenna.data');
+      const file = path.resolve(getDirName(), '../../test/utils/Lenna.data');
       this.lerna512 = new this.cv.Mat(fs.readFileSync(file), 512, 512, this.cv.CV_8UC3);
     }
     return this.lerna512;
@@ -100,7 +100,7 @@ export class TestContext {
 
   public getPeoplesTestImg: () => Mat = () => {
     if (!this.people360) {
-      const file = path.resolve(__dirname, '../utils/people.data');
+      const file = path.resolve(getDirName(), '../../test/utils/people.data');
       this.people360 = new this.cv.Mat(fs.readFileSync(file), 360, 640, this.cv.CV_8UC3);
     }
     return this.people360;

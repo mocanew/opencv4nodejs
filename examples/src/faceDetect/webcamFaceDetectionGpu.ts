@@ -1,6 +1,6 @@
 import { Mat } from '@u4/opencv4nodejs';
-import { cv } from '../utils';
-import { runVideoFaceDetection } from './commons';
+import { cv } from '../utils.js';
+import { runVideoFaceDetection } from './commons.js';
 
 const classifier = new cv.CascadeClassifier(cv.HAAR_FRONTALFACE_ALT2);
 

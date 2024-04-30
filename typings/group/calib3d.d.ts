@@ -188,6 +188,7 @@ export interface FindHomographyRet {
 }
 
 export function findHomography(srcPoints: Point2[], dstPoints: Point2[], method?: number, ransacReprojThreshold?: number, maxIters?: number, confidence?: number): FindHomographyRet;
+export function findHomographyAsync(srcPoints: Point2[], dstPoints: Point2[], method?: number, ransacReprojThreshold?: number, maxIters?: number, confidence?: number): Promise<FindHomographyRet>;
 
 // 	Finds a perspective transformation between two planes. More...
 // 
@@ -300,6 +301,15 @@ export function solvePnPRansac(objectPoints: Point3[], imagePoints: Point2[], ca
     flags: number,
 }): SolvePnPRansacRet;
 
+export function solvePnPRansacAsync(objectPoints: Point3[], imagePoints: Point2[], cameraMatrix: Mat, distCoeffs: number[], args: {
+    rvec: Vec3,
+    tvec: Vec3,
+    useExtrinsicGuess: boolean,
+    iterationsCount: number,
+    reprojectionError: number,
+    confidence: number,
+    flags: number,
+}): Promise<SolvePnPRansacRet>;
 
 
 //void 	cv::solvePnPRefineLM (InputArray objectPoints, InputArray imagePoints, InputArray cameraMatrix, InputArray distCoeffs, InputOutputArray rvec, InputOutputArray tvec, TermCriteria criteria=TermCriteria(TermCriteria::EPS+TermCriteria::COUNT, 20, FLT_EPSILON))

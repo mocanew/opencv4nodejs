@@ -81,7 +81,7 @@ export default (args: TestContext) => (Facemark: typeof FacemarkLBF | typeof Fac
     }
 
     before(() => {
-      const params = new FacemarkParams() as any;
+      const params = new FacemarkParams() as FacemarkLBFParams;
       params.cascadeFace = '../lib/haarcascades/haarcascade_frontalcatface.xml';
       params.modelFilename = 'modelFilename.model';
       params.nLandmarks = 68;

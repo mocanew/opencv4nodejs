@@ -42,7 +42,7 @@ export default function (args: TestContext) {
           customProps.args.forEach((arg: string, i) => {
             props[arg] = customProps.values[i];
           });
-          /* eslint-disable new-parens */
+           
           const detector = new (Detector.bind.apply(Detector, [null].concat(customProps.values)));
           assertPropsWithValue(detector, props);
         });

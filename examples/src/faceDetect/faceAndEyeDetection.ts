@@ -1,6 +1,5 @@
 import { Rect } from '@u4/opencv4nodejs';
-import { cv, getResourcePath, drawBlueRect, drawGreenRect, wait4key } from '../utils';
-
+import { cv, getResourcePath, drawBlueRect, drawGreenRect, wait4key } from '../utils.js';
 
 export async function faceAndEyeDetection() {
 

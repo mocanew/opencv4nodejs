@@ -1,11 +1,10 @@
 // # This code is written at BigVision LLC. It is based on the OpenCV project. It is subject to the license terms in the LICENSE file found in this distribution and at http://opencv.org/license.html
 
+import fs from "node:fs";
+import assert from 'node:assert';
 import mri from "mri";
-import fs from "fs";
-import path from "path";
-import assert from 'assert';
-import { cv } from "../utils";
 import { Net, Mat, VideoCapture, VideoWriter, Size, Point2, Vec3, Rect } from '@u4/opencv4nodejs';
+import { cv, getExampleDirname } from "../utils.js";
 
 // # Usage example:  python3 object_detection_yolo.py --video=run.mp4
 // #                 python3 object_detection_yolo.py --image=bird.jpg
@@ -18,13 +17,13 @@ import { Net, Mat, VideoCapture, VideoWriter, Size, Point2, Vec3, Rect } from '@
 
 //  Initialize the parameters
 const conf = {
-    confThreshold: 0.5,//  #Confidence threshold
-    nmsThreshold: 0.4,//  #Non-maximum suppression threshold
+    confThreshold: 0.5, //  #Confidence threshold
+    nmsThreshold: 0.4, //  #Non-maximum suppression threshold
 }
-const inpWidth = 416;//  #608     #Width of network's input image
-const inpHeight = 416;// #608     #Height of network's input image
+const inpWidth = 416; //  #608     #Width of network's input image
+const inpHeight = 416; // #608     #Height of network's input image
 
-const args: { image?: string, video?: string, device?: string, help?: boolean } = mri(process.argv.slice(2), { default: { device: 'cpu' }, alias: { h: 'help' } }) as any;
+const args: { image?: string, video?: string, device?: string, help?: boolean } = mri(process.argv.slice(2), { default: { device: 'cpu' }, alias: { h: 'help' } });
 
 if (args.help) {
     console.log('Object Detection using YOLO in OPENCV');
@@ -41,8 +40,8 @@ const classes = fs.readFileSync(classesFile, { encoding: 'utf8' }).trim().split(
 
 //  Give the configuration and weight files for the model and load the network using them.
 
-const modelConfiguration = path.join(__dirname, 'darknet-yolov3.cfg');
-const modelWeights = path.join(__dirname, 'weights', 'darknet-yolov3_final.weights'); // "/data-ssd/sunita/snowman/darknet-yolov3_final.weights";
+const modelConfiguration = getExampleDirname("YOLOv3-Training-Snowman-Detector", 'darknet-yolov3.cfg');
+const modelWeights = getExampleDirname("YOLOv3-Training-Snowman-Detector", 'weights', 'darknet-yolov3_final.weights'); // "/data-ssd/sunita/snowman/darknet-yolov3_final.weights";
 
 const net = cv.readNetFromDarknet(modelConfiguration, modelWeights)
 if (args.device == "cpu") {

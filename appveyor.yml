@@ -15,10 +15,10 @@ shallow_clone: true
 # what combinations to test
 environment:
   OPENCV3_N0: 3.4.16 # 2021-10-11
-  #OPENCV4_N_0: 4.6.0 # 2022-06-12
-  OPENCV4_N0: 4.5.5 # 2022-06-12
-  OPENCV4_N1: 4.5.0 # 2021-12-30
-  OPENCV4_N2: 4.4.0 # 2020-07-18
+  OPENCV4_N0: 4.9.0 # 2022-06-12
+  # OPENCV4_N0: 4.5.5 # 2022-06-12
+  # OPENCV4_N1: 4.5.0 # 2021-12-30
+  # OPENCV4_N2: 4.4.0 # 2020-07-18
 
   # OPENCV4_N0: 4.5.3 #
   # OPENCV4_N1: 4.5.2 #
@@ -69,8 +69,8 @@ environment:
 install:
   - cmd: choco install OpenCV -y --version %OPENCVV%
   - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_INCLUDE_DIR=c:\tools\opencv\build\include
-  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_LIB_DIR=c:\tools\opencv\build\x64\vc14\lib
-  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_BIN_DIR=c:\tools\opencv\build\x64\vc14\bin
+  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_LIB_DIR=c:\tools\opencv\build\x64\vc16\lib
+  - if not "%BUILD_TASK%" == "ENVS" SET OPENCV_BIN_DIR=c:\tools\opencv\build\x64\vc16\bin
   - if not "%BUILD_TASK%" == "ENVS" SET PATH=%PATH%;%OPENCV_BIN_DIR%;
   - ps: Install-Product node $env:NODEV x64
   # - node --version
@@ -86,6 +86,7 @@ test_script:
   - cd c:\projects\opencv4nodejs
   - pnpm install --frozen-lockfile
   - pnpm run prepack
+  - pnpm run rebuild
   # - npm link
   # - build-opencv rebuild
   # - cd c:\projects\opencv4nodejs\ci\envs && build-opencv rebuild && pnpm install && pnpm test

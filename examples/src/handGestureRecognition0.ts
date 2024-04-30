@@ -1,8 +1,7 @@
-import path from 'path';
+import path from 'node:path';
 import type { Contour, Mat } from '@u4/opencv4nodejs';
 import { Point2 } from '@u4/opencv4nodejs';
-import { cv, getResourcePath } from './utils';
-import { grabFrames } from './utils';
+import { cv, getResourcePath, grabFrames } from './utils.js';
 
 interface PointWithIdx {
   pt: Point2;
@@ -75,7 +74,7 @@ const getRoughHull = (contour: Contour, maxDist: number) => {
     const center: Point2 = getCenterPt(pointGroup.map(ptWithIdx => ptWithIdx.pt));
     // sort ascending by distance to center
     return pointGroup.sort(
-      (ptWithIdx1, ptWithIdx2) => ptDist(ptWithIdx1.pt, center) - ptDist(ptWithIdx2.pt, center)
+      (ptWithIdx1, ptWithIdx2) => ptDist(ptWithIdx1.pt, center) - ptDist(ptWithIdx2.pt, center),
     )[0];
   };
   const pointGroups = Array.from(pointsByLabel.values());
@@ -160,7 +159,7 @@ grabFrames(video, delay, (frame) => {
     [handContour.getPoints()],
     0,
     blue,
-    { thickness: 6 }
+    { thickness: 6 },
   );
 
   // draw points and vertices
@@ -168,20 +167,20 @@ grabFrames(video, delay, (frame) => {
     resizedImg.drawLine(
       v.pt,
       v.d1,
-      { color: green, thickness: 2 }
+      { color: green, thickness: 2 },
     );
     resizedImg.drawLine(
       v.pt,
       v.d2,
-      { color: green, thickness: 2 }
+      { color: green, thickness: 2 },
     );
     resizedImg.drawEllipse(
       new cv.RotatedRect(v.pt, new cv.Size(20, 20), 0),
-      { color: red, thickness: 2 }
+      { color: red, thickness: 2 },
     );
     result.drawEllipse(
       new cv.RotatedRect(v.pt, new cv.Size(20, 20), 0),
-      { color: red, thickness: 2 }
+      { color: red, thickness: 2 },
     );
   }
 
@@ -190,7 +189,7 @@ grabFrames(video, delay, (frame) => {
   result.drawRectangle(
     new cv.Point2(10, 10),
     new cv.Point2(70, 70),
-    { color: green, thickness: 2 }
+    { color: green, thickness: 2 },
   );
 
   const fontScale = 2;
@@ -199,7 +198,7 @@ grabFrames(video, delay, (frame) => {
     new cv.Point2(20, 60),
     cv.FONT_ITALIC,
     fontScale,
-    { color: green, thickness: 2 }
+    { color: green, thickness: 2 },
   );
 
   const { rows, cols } = result;

@@ -1,5 +1,14 @@
 # changelog
 
+## Version 7.0.0
+- Updated code to ESM.
+- Introduced new exports model.
+- Fixed typing errors.
+- Added missing types.
+- Removed typing duplication in codebase.
+- Native code is now generated directly by the default node-gyp rebuild.
+- GitHub actions now test all available Windows, macOS, and Linux environments.
+
 ## Version 6.6.0
 - update gcc flag to enable C++ 17
 - fix code to support latest onpenCV version up to 4.9

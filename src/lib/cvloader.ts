@@ -1,15 +1,15 @@
-import { OpenCVBuilder, type OpenCVBuildEnvParams } from '@u4/opencv-build';
-import * as fs from 'fs';
-import * as path from 'path';
-import { isElectronWebpack, resolvePath } from './commons.js';
-import * as pc from 'picocolors'
-import { info } from 'npmlog';
-import type * as openCV from '..';
+import { pc, Log, OpenCVBuilder, type OpenCVBuildEnvParams } from '@u4/opencv-build';
+import fs from 'fs';
+import path from 'path';
+import { isElectronWebpack } from './commons.js';
+import type * as openCV from '../../typings/index.js';
+import { getDirName, getRequire } from './meta.js';
+
 declare type OpenCVType = typeof openCV;
 
-const logDebug = process.env.OPENCV4NODES_DEBUG_REQUIRE ? info : () => { /* ignore */ }
+const logDebug = process.env.OPENCV4NODES_DEBUG_REQUIRE ? (prefix: string, message: string, ...args: unknown[]) => Log.log('info', prefix, message, ...args) : () => { /* ignore */ }
 
-function tryGetOpencvBinDir(builder: OpenCVBuilder) {
+function tryGetOpencvBinDir(builder: OpenCVBuilder): string {
   if (process.env.OPENCV_BIN_DIR) {
     logDebug('tryGetOpencvBinDir', `${pc.yellow('OPENCV_BIN_DIR')} environment variable is set`)
     return process.env.OPENCV_BIN_DIR
@@ -34,7 +34,7 @@ function tryGetOpencvBinDir(builder: OpenCVBuilder) {
     return builder.env.opencvBinDir as string
   }
   logDebug('tryGetOpencvBinDir', 'failed to find opencv binary environment variable in package.json')
-  return null
+  return "";
 }
 
 export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
@@ -42,24 +42,25 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
     opt = { prebuild: 'latestBuild' }
   const builder = new OpenCVBuilder(opt);
 
-  let opencvBuild: OpenCVType = null;
+  let opencvBuild: OpenCVType | null = null;
   let requirePath = '';
   if (isElectronWebpack()) {
-    requirePath = '../build/Release/opencv4nodejs.node';
+    requirePath = '../../build/Release/opencv4nodejs.node';
   } else {
-    requirePath = path.join(__dirname, '../build/Debug/opencv4nodejs.node');
+    const dirname = getDirName();
+    requirePath = path.join(dirname, '../../build/Debug/opencv4nodejs.node');
     if (!fs.existsSync(requirePath)) {
-      requirePath = path.join(__dirname, '../build/Release/opencv4nodejs.node');
+      requirePath = path.join(dirname, '../../build/Release/opencv4nodejs.node');
     }
     requirePath = requirePath.replace(/\.node$/, '');
-    // path.join(__dirname, process.env.BINDINGS_DEBUG ? '../build/Debug/opencv4nodejs' : '../build/Release/opencv4nodejs')
   }
   try {
     logDebug('require', `require path is ${pc.yellow(requirePath)}`)
-    opencvBuild = require(requirePath);
+      opencvBuild = getRequire()(requirePath);
+
   } catch (err) {
     // err.code === 'ERR_DLOPEN_FAILED'
-    logDebug('require', `failed to require cv with exception: ${pc.red(err.toString())}`)
+    logDebug('require', `failed to require cv with exception: ${pc.red((err as Error).toString())}`)
     logDebug('require', 'attempting to add opencv binaries to path')
 
     if (!process.env.path) {
@@ -78,7 +79,7 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
     }
     logDebug('require', 'process.env.path: ' + process.env.path)
     try {
-      opencvBuild = require(requirePath);
+        opencvBuild = getRequire()(requirePath);
     } catch (e) {
       if (e instanceof Error) {
         let msg = '';
@@ -108,14 +109,8 @@ export function getOpenCV(opt?: OpenCVBuildEnvParams): OpenCVType {
       throw e;
     }
   }
-
-  // resolve haarcascade files
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { haarCascades, lbpCascades } = opencvBuild as any;
-  Object.keys(haarCascades).forEach(
-    key => opencvBuild[key] = resolvePath(path.join(__dirname, 'haarcascades'), haarCascades[key]));
-  Object.keys(lbpCascades).forEach(
-    key => opencvBuild[key] = resolvePath(path.join(__dirname, 'lbpcascades'), lbpCascades[key]));
+  if (!opencvBuild)
+    throw new Error('Failed to require opencv4nodejs.node');
   return opencvBuild;
 }
 

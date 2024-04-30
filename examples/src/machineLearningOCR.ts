@@ -1,13 +1,12 @@
-import path from 'path';
-import fs from 'fs';
-import { cv, getResourcePath } from './utils';
-import { lccs, centerLetterInImage, saveConfusionMatrix } from './OCRTools';
+import fs from 'node:fs';
+import path from 'node:path';
 import { Mat } from '@u4/opencv4nodejs';
+import { cv, getResourcePath } from './utils.js';
+import { lccs, centerLetterInImage, saveConfusionMatrix } from './OCRTools.js';
 
 const outPath = getResourcePath('ocr');
 const trainDataPath = path.join(outPath, 'traindata');
 const testDataPath = path.join(outPath, 'testdata');
-
 
 const SVMFile = 'lcletters.xml';
 
@@ -67,7 +66,7 @@ const trainSVM = (trainDataFiles: string[][], isAuto = false) => {
   const trainData = new cv.TrainData(
     new cv.Mat(samples, cv.CV_32F),
     cv.ml.ROW_SAMPLE,
-    new cv.Mat([labels], cv.CV_32S)
+    new cv.Mat([labels], cv.CV_32S),
   );
   svm[isAuto ? 'trainAuto' : 'train'](trainData);
 };
@@ -113,10 +112,9 @@ console.log('prediction result:');
 errs.forEach((err, l) => console.log(lccs[l], err, 1 - (err / numTestImagesPerClass)));
 console.log('average: ', 1 - (errs.reduce((e1, e2) => e1 + e2) / (lccs.length * numTestImagesPerClass)));
 
-
 saveConfusionMatrix(
   testDataFiles,
   (img, isIorJ) => svm.predict(computeHOGDescriptorFromImage(img, isIorJ) as number[]),
   numTestImagesPerClass,
-  path.join(outPath, 'confusionmatrix.csv')
+  path.join(outPath, 'confusionmatrix.csv'),
 );

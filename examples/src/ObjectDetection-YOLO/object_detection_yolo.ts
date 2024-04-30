@@ -1,9 +1,8 @@
-import { assert } from 'console';
-import fs from 'fs';
+import fs from 'node:fs';
+import { assert } from 'node:console';
 import mri from 'mri';
 import { Mat, Net, Point2, Rect, Size, Vec3, VideoCapture, VideoWriter } from '@u4/opencv4nodejs';
-import { cv, getCachedFile } from '../utils';
-import path from 'path';
+import { cv, getCachedFile, getExampleDirname } from '../utils.js';
 
 // ported from https://github.com/spmallick/learnopencv/blob/master/ObjectDetection-YOLO/object_detection_yolo.py
 
@@ -18,22 +17,23 @@ const args = mri(process.argv.slice(2), { default: { device: 'cpu' }, alias: { h
 
 if (args.help) {
     console.log('Object Detection using YOLO in OPENCV');
-    console.log('--device Device to perform inference on \'cpu\' or \'gpu\'. (default is cpu)');
+    console.log('--device Device to perform inference on \'cpu\' or \'cuda\' or \'opencl\'. (default is cpu)');
     console.log('--image  Path to image file.');
     console.log('--video  Path to video file.');
-    process.exit(0);
+    console.log('OpenCV getBuildInformation:', cv.getBuildInformation());
+   process.exit(0);
 }
 
 const device = args.device || 'cpu';
 
 async function main() {
     // # Load names of classes
-    const classesFile = path.resolve(__dirname, "coco.names");
+    const classesFile = getExampleDirname("ObjectDetection-YOLO", "coco.names");
     // classes = None
     const classes = fs.readFileSync(classesFile, 'utf8').split(/[\r\n]+/);
 
     // Give the configuration and weight files for the model and load the network using them.
-    const modelConfiguration = path.resolve(__dirname, "yolov3.cfg")
+    const modelConfiguration = getExampleDirname("ObjectDetection-YOLO", "yolov3.cfg")
     const modelWeights = await getCachedFile("yolov3.weights", 'https://pjreddie.com/media/files/yolov3.weights')
 
     const net: Net = cv.readNetFromDarknet(modelConfiguration, modelWeights)
@@ -42,7 +42,11 @@ async function main() {
         net.setPreferableBackend(cv.DNN_BACKEND_OPENCV)
         net.setPreferableTarget(cv.DNN_TARGET_CPU)
         console.log('Using CPU device.')
-    } else if (device == 'gpu') {
+    } else if (device == 'opencl' ) {
+        net.setPreferableBackend(cv.DNN_BACKEND_OPENCV)
+        net.setPreferableTarget(cv.DNN_TARGET_OPENCL)
+        console.log('Using GPU device.')
+    } else if (device == 'gpu' || device == 'cuda' ) {
         net.setPreferableBackend(cv.DNN_BACKEND_CUDA)
         net.setPreferableTarget(cv.DNN_TARGET_CUDA)
         console.log('Using GPU device.')

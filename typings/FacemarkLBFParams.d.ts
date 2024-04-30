@@ -3,7 +3,7 @@ import { Rect } from "./Rect.d";
 export interface IFacemarkLBFParams {
   baggingOverlap: number;
   cascadeFile: string;
-  // cascadeFace: string;
+  cascadeFace?: string;
   detectROI: Rect;
   featsM: number[];
   initShapeN: number;
@@ -20,24 +20,23 @@ export interface IFacemarkLBFParams {
   verbose: boolean;
 }
 
-
 export class FacemarkLBFParams {
   readonly baggingOverlap: number;
   readonly cascadeFile: string;
-  // readonly cascadeFace: string;
+  cascadeFace?: string;
   readonly detectROI: Rect;
   readonly featsM: number[];
-  readonly initShapeN: number;
-  readonly modelFilename: string;
-  readonly nLandmarks: number;
+  initShapeN: number;
+  modelFilename: string;
+  nLandmarks: number;
   readonly pupils: number[][];
   readonly radiusM: number[];
   readonly saveModel: boolean;
   readonly seed: number;
   readonly shapeOffset: number;
-  readonly stagesN: number;
-  readonly treeDepth: number;
-  readonly treeN: number;
+  stagesN: number;
+  treeDepth: number;
+  treeN: number;
   readonly verbose: boolean;
-  constructor(params?: Partial<IFacemarkLBFParams>);
+  constructor(params?: Partial<IFacemarkLBFParams>): FacemarkLBFParams;
 }

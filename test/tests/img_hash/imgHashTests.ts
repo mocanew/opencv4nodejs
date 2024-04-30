@@ -1,10 +1,10 @@
-import chai, { expect } from 'chai';
+import { use, expect } from 'chai';
 import chaiArrays from 'chai-arrays';
 import { PHash } from '../../../typings';
 import { generateAPITests } from '../../utils/generateAPITests';
 import { getTestContext } from '../model';
 
-chai.use(chaiArrays);
+use(chaiArrays);
 
 export default () => (ImgHash: typeof PHash) => {
   const { getTestImg } = getTestContext();

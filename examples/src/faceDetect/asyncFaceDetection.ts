@@ -1,4 +1,4 @@
-import { cv, getResourcePath, drawBlueRect, wait4key } from '../utils';
+import { cv, getResourcePath, drawBlueRect, wait4key } from '../utils.js';
 
 export async function asyncFaceDetection() {
   const classifier = new cv.CascadeClassifier(cv.HAAR_FRONTALFACE_ALT2);

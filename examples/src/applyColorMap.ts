@@ -1,6 +1,6 @@
 // using default import
 import cv from '@u4/opencv4nodejs';
-import { cv_imshow, cv_setWindowProperty, getResourcePath, wait4key } from './utils';
+import { cv_imshow, cv_setWindowProperty, getResourcePath, wait4key } from './utils.js';
 
 export async function applyColorMap() {
     const file = getResourcePath('Lenna.png');

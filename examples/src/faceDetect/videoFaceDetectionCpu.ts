@@ -1,6 +1,6 @@
 import { Mat } from '@u4/opencv4nodejs';
-import { cv, getResourcePath } from '../utils';
-import { runVideoFaceDetection } from './commons';
+import { cv, getResourcePath } from '../utils.js';
+import { runVideoFaceDetection } from './commons.js';
 
 const videoFile = getResourcePath('people.mp4');
 

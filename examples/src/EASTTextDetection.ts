@@ -1,6 +1,6 @@
-import path from 'path';
-import { cv, drawBlueRect, getCachedFile, getResourcePath, wait4key } from './utils';
+import path from 'node:path';
 import type { Mat, Rect } from '@u4/opencv4nodejs';
+import { cv, drawBlueRect, getCachedFile, getResourcePath, wait4key } from './utils.js';
 
 /**
  * Text detection simple code example.
@@ -45,7 +45,7 @@ function decode(scores: Mat, geometry: Mat, confThreshold = MIN_CONFIDENCE) {
         startX,
         startY,
         endX - startX,
-        endY - startY
+        endY - startY,
       ));
       confidences.push(score);
     }
@@ -81,7 +81,8 @@ async function detection(modelPath: string, imgAbsPath: string): Promise<void> {
   const indices = cv.NMSBoxes(
     boxes,
     confidences,
-    MIN_CONFIDENCE, NMS_THRESHOLD
+    MIN_CONFIDENCE,
+    NMS_THRESHOLD,
   );
 
   indices.forEach((i) => {
@@ -90,7 +91,7 @@ async function detection(modelPath: string, imgAbsPath: string): Promise<void> {
       rect.x * widthRatio,
       rect.y * heightRatio,
       rect.width * widthRatio,
-      rect.height * heightRatio
+      rect.height * heightRatio,
     )
     drawBlueRect(img, imgRect);
   });

@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import cv, { Mat } from '@u4/opencv4nodejs';
-import { getResourcePath, wait4key } from './utils';
+import { getResourcePath, wait4key } from './utils.js';
 
 async function main() {
   if (!cv.xmodules || !cv.xmodules.face) {
@@ -57,7 +57,7 @@ async function main() {
     const rect = cv.drawDetection(
       twoFacesImg,
       faceRect,
-      { color: new cv.Vec3(255, 0, 0), segmentFraction: 4 }
+      { color: new cv.Vec3(255, 0, 0), segmentFraction: 4 },
     );
 
     const alpha = 0.4;
@@ -65,7 +65,7 @@ async function main() {
       twoFacesImg,
       new cv.Point2(rect.x, rect.y + rect.height + 10),
       [{ text: who }],
-      alpha
+      alpha,
     );
   });
 

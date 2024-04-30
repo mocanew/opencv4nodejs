@@ -38,6 +38,7 @@ export function calcHist(img: Mat, histAxes: HistAxes[], mask?: Mat): Mat;
 export function calcHistAsync(img: Mat, histAxes: HistAxes[], mask?: Mat): Promise<Mat>;
 
 export function canny(dx: Mat, dy: Mat, threshold1: number, threshold2: number, L2gradient?: boolean): Mat;
+export function cannyAsync(dx: Mat, dy: Mat, threshold1: number, threshold2: number, L2gradient?: boolean): Promise<Mat>;
 
 export function computeCorrespondEpilines(points: Point2[], whichImage: number, F: Mat): Vec3[];
 export function computeCorrespondEpilinesAsync(points: Point2[], whichImage: number, F: Mat): Promise<Vec3[]>;
@@ -48,6 +49,7 @@ export function drawKeyPoints(img: Mat, keyPoints: KeyPoint[]): Mat;
 export function drawMatches(img1: Mat, img2: Mat, keyPoints1: KeyPoint[], keyPoints2: KeyPoint[], matches: DescriptorMatch[]): Mat;
 
 export function fastNlMeansDenoisingColored(src: Mat, h?: number, hColor?: number, templateWindowSize?: number, searchWindowSize?: number): Mat;
+export function fastNlMeansDenoisingColoredAsync(src: Mat, h?: number, hColor?: number, templateWindowSize?: number, searchWindowSize?: number): Promise<Mat>;
 export function inpaint(src: Mat, mask: Mat, inpaintRadius: number, flags: number): Mat;
 export function inpaintAsync(src: Mat, mask: Mat, inpaintRadius: number, flags: number): Promise<Mat>;
 
@@ -149,70 +151,16 @@ export function dangerousEnableCustomMatAllocator(): boolean;
 export function dangerousDisableCustomMatAllocator(): boolean;
 export function getMemMetrics(): { TotalAlloc: number, TotalKnownByJS: number, NumAllocations: number, NumDeAllocations: number };
 
-export type DrawParams = {
-  thickness?: number;
-  lineType?: number;
-  color?: Vec3;
-}
-
-export interface DrawDetectionParams extends DrawParams {
-  segmentFraction?: number;
-}
-
-export interface FontParams extends DrawParams {
-  fontType?: number;
-  fontSize?: number;
-}
-
-export interface TextLine extends FontParams {
-  text: string;
-}
-
 /**
  * All non-native functions signatures go here.
  * Implementation are injected fron lib/src/index.ts
  */
 
-/**
- * return openCV version as an array containing Major, minor, patch
- */
-export function getVersion(): [number, number, number];
+// drawDetection TextLines type FontParams, type DrawDetectionParams, type DrawParams
+export * from '../types/lib/src/drawUtils';
 
-/**
- * return openCV version as a string
- */
-export function getVersionString(): string;
-
-// non Natif
-export function drawDetection(img: Mat, inputRect: Rect, opts?: DrawDetectionParams): Rect;
-// non Natif
-export function drawTextBox(img: Mat, upperLeft: { x: number, y: number }, textLines: TextLine[], alpha: number): Mat;
-/**
- * Convert a Mat type to string for easy read
- * non Natif code
- * @param type Mat type as int value
- */
-export function toMatTypeName(type: number): string | undefined;
-/**
- * Find values greater than threshold in a 32bit float matrix and return a list of matchs formated as [[x1, y1, score1]. [x2, y2, score2], [x3, y3, score3]]
- * add to be used with matchTemplate
- * non Natif code
- * @param scoreMat Matric containing scores as 32Bit float (CV_32F)
- * @param threshold Minimal score to collect
- * @param region search region
- * @returns a list of matchs
- */
-export function getScoreMax(scoreMat: Mat, threshold: number, region?: Rect): Array<[number, number, number]>;
-
-/**
- * Drop overlaping zones, keeping best one
- * add to be used with matchTemplate
- * non Natif code
- * @param template template Matrix used to get dimentions.
- * @param matches list of matches as a list in [x,y,score]. (this data will be altered)
- * @returns best match without colisions
- */
-export function dropOverlappingZone(template: Mat, matches: Array<[number, number, number]>): Array<[number, number, number]>;
+// dropOverlappingZone getScoreMax toMatTypeName
+export * from '../types/lib/src/misc'
 
 // experimental, need improvements / rewrite
 export function min(src1: Mat, src2: Mat, dst: Mat): Mat;
@@ -223,3 +171,38 @@ export function maxAsync(src1: Mat, src2: Mat, dst: Mat): Promise<Mat>;
 
 export function magnitude(x: Mat, y: Mat, magnitude: Mat): Mat;
 export function magnitudeAsync(x: Mat, y: Mat, magnitude: Mat): Promise<Mat>;
+
+export const haarCascades: {
+  HAAR_EYE: string;
+  HAAR_EYE_TREE_EYEGLASSES: string;
+  HAAR_FRONTALCATFACE: string;
+  HAAR_FRONTALCATFACE_EXTENDED: string;
+  HAAR_FRONTALFACE_ALT: string;
+  HAAR_FRONTALFACE_ALT2: string;
+  HAAR_FRONTALFACE_ALT_TREE: string;
+  HAAR_FRONTALFACE_DEFAULT: string;
+  HAAR_FULLBODY: string;
+  HAAR_LEFTEYE_2SPLITS: string;
+  HAAR_LICENCE_PLATE_RUS_16STAGES: string;
+  HAAR_LOWERBODY: string;
+  HAAR_PROFILEFACE: string;
+  HAAR_RIGHTEYE_2SPLITS: string;
+  HAAR_RUSSIAN_PLATE_NUMBER: string;
+  HAAR_SMILE: string;
+  HAAR_UPPERBODY: string;
+};
+export const lbpCascades: {
+  LBP_FRONTALCATFACE: string;
+  LBP_FRONTALFACE: string;
+  LBP_FRONTALFACE_IMPROVED: string;
+  LBP_PROFILEFACE: string;
+  LBP_SILVERWARE: string;
+};
+export const HOGHistogramNormType: { L2Hys: string};
+// TODO Fill this types
+export class KeyPointMatch {
+  distance: number;
+  kpTo?: Object;
+  kpFrom?: Object;
+}
+export class StatModel {}

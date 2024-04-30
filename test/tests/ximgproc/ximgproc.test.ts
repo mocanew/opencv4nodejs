@@ -1,4 +1,4 @@
-/* eslint-disable camelcase */
+ 
 import { assert, expect } from 'chai';
 import { assertMetaData } from '../../utils/matTestUtils';
 import { assertPropsWithValue } from '../../utils/testUtils';
