@@ -7,6 +7,8 @@
 Opencv4nodejs can be linked to a prebuild openCV 3 or 4. or can build its own openCV using [@u4/opencv-build](https://www.npmjs.com/package/@u4/opencv-build),
 In this case, you have to choose which version you want to link.
 
+> Since version 7, you should be able to use this module directly without any configuration if you have OpenCV installed from your package manager (Chocolatey / Brew / apt).
+
 ### To use your OWN openCV build
 
 **3 way to use your own openCV (Without automatic building)**
@@ -54,7 +56,7 @@ OPENCV_BUILD_ROOT=~/opencv
 
 #### 1) Environment variable
 Define environment variable:
-- `OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION`="4.6.0"
+- `OPENCV4NODEJS_AUTOBUILD_OPENCV_VERSION`="4.9.0"
 
 #### 2) package.json
 Define an opencv4nodejs section in your package.json like:
