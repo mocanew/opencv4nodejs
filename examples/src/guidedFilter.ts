@@ -1,5 +1,4 @@
-import { cv, getResourcePath, wait4key } from './utils';
-
+import { cv, getResourcePath, wait4key } from './utils.js';
 
 export async function guidedFilter() {
     const image = cv.imread(getResourcePath('Lenna.png'));

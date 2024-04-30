@@ -1,4 +1,4 @@
-import { cv, grabFrames, drawRectAroundBlobs, getResourcePath } from './utils';
+import { cv, grabFrames, drawRectAroundBlobs, getResourcePath } from './utils.js';
 
 const delay = 100;
 grabFrames(getResourcePath('horses.mp4'), delay, (frame) => {

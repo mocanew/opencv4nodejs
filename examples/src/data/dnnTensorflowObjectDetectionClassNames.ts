@@ -1,4 +1,4 @@
-export = {
+const dnnTensorflowObjectDetectionClassNames = {
   0: "background",
   1: "person",
   2: "bicycle",
@@ -81,3 +81,5 @@ export = {
   89: "hair drier",
   90: "toothbrush",
 } as {[key: number]: string};
+
+export default dnnTensorflowObjectDetectionClassNames;

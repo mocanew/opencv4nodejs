@@ -1,4 +1,4 @@
-import { cv, grabFrames, drawRectAroundBlobs, getResourcePath } from './utils';
+import { cv, grabFrames, drawRectAroundBlobs, getResourcePath } from './utils.js';
 
 const bgSubtractor = new cv.BackgroundSubtractorMOG2();
 

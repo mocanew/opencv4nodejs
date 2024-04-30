@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import cv, { Mat } from '@u4/opencv4nodejs';
-import { getResourcePath, wait4key } from './utils';
+import { getResourcePath, wait4key } from './utils.js';
 
 async function main() {
   if (!cv.xmodules || !cv.xmodules.face) {

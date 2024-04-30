@@ -1,6 +1,6 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import { Mat } from '@u4/opencv4nodejs';
-import { cv } from './utils';
+import { cv } from './utils.js';
 
 // a - z
 export const lccs: Array<string> = Array(26).fill(97).map((v, i) => v + i).map(ascii => String.fromCharCode(ascii));

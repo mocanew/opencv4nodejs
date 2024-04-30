@@ -1,13 +1,12 @@
-
 /**
  * Please refer to the python version of "ExploreOpencvDnn" by Saumya Shovan Roy.
  * For more detail: https://github.com/rdeepc/ExploreOpencvDnn
  */
-import fs from "fs";
-import path from "path";
+import fs from "node:fs";
+import path from "node:path";
 import { Mat } from '@u4/opencv4nodejs';
-import classNames from "./data/dnnTensorflowObjectDetectionClassNames";
-import { cv, getCachedFile, getResourcePath, runVideoDetection } from "./utils";
+import classNames from "./data/dnnTensorflowObjectDetectionClassNames.js";
+import { cv, getCachedFile, getResourcePath, runVideoDetection } from './utils.js';
 
 async function main() {
   if (!cv.xmodules || !cv.xmodules.dnn) {

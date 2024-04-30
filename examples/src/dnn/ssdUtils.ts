@@ -1,5 +1,5 @@
 import type { Mat, Rect } from '@u4/opencv4nodejs';
-import { cv } from '../utils';
+import { cv } from '../utils.js';
 
 export type Prediction = {
   classLabel: number

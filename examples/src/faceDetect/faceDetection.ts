@@ -1,4 +1,4 @@
-import { cv, getResourcePath, drawBlueRect, wait4key } from '../utils';
+import { cv, getResourcePath, drawBlueRect, wait4key } from '../utils.js';
 
 export async function faceDetection() {
   const image = cv.imread(getResourcePath('got.jpg'));

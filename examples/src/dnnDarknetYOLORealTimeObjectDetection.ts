@@ -4,7 +4,7 @@
  */
 import fs from "fs";
 import { Mat, Net, Rect } from '@u4/opencv4nodejs';
-import { cv, getCachedFile, runVideoDetection } from "./utils";
+import { cv, getCachedFile, runVideoDetection } from './utils.js';
 
 class dnnDarknetYOLORealTimeObjectDetection {
   // set webcam port

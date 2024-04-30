@@ -1,6 +1,6 @@
 import { Mat } from '@u4/opencv4nodejs';
-import { cv, grabFrames } from '../utils';
-import { makeRunDetectFacenetSSD } from './commons';
+import { cv, grabFrames } from '../utils.js';
+import { makeRunDetectFacenetSSD } from './commons.js';
 
 const runDetection = makeRunDetectFacenetSSD();
 

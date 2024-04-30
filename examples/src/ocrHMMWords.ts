@@ -1,6 +1,6 @@
-import path from 'path';
+import path from 'node:path';
 import { cv } from '@u4/opencv4nodejs';
-import { getResourcePath, wait4key } from './utils';
+import { getResourcePath, wait4key } from './utils.js';
 
 
 export async function ocrHMMWords() {

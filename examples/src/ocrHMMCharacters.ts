@@ -1,6 +1,6 @@
-import { cv, getResourcePath, wait4key } from './utils';
-import path from 'path';
+import path from 'node:path';
 import type { Mat } from '@u4/opencv4nodejs';
+import { cv, getResourcePath, wait4key } from './utils.js';
 
 /**
  * OCR One by one using OCRHMMClassifier

@@ -1,13 +1,12 @@
-import path from 'path';
-import fs from 'fs';
-import { cv, getResourcePath } from './utils';
-import { lccs, centerLetterInImage, saveConfusionMatrix } from './OCRTools';
+import fs from 'node:fs';
+import path from 'node:path';
 import { Mat } from '@u4/opencv4nodejs';
+import { cv, getResourcePath } from './utils.js';
+import { lccs, centerLetterInImage, saveConfusionMatrix } from './OCRTools.js';
 
 const outPath = getResourcePath('ocr');
 const trainDataPath = path.join(outPath, 'traindata');
 const testDataPath = path.join(outPath, 'testdata');
-
 
 const SVMFile = 'lcletters.xml';
 

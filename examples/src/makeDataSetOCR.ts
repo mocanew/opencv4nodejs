@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import fs from 'fs';
-import { cv, getResourcePath } from './utils';
+import fs from 'node:fs';
+import path from 'node:path';
 import type { Mat } from '@u4/opencv4nodejs';
-import path from 'path';
+import { cv, getResourcePath } from './utils.js';
 
 const labeledDataPath = path.join(getResourcePath('ocr-nocommit'), 'letters');
 const outputDataPath = path.join(getResourcePath('ocr-nocommit'), 'letters_generated');

@@ -1,5 +1,5 @@
 import { DescriptorMatch, FeatureDetector, Mat } from '@u4/opencv4nodejs';
-import { cv, getResourcePath, wait4key } from './utils';
+import { cv, getResourcePath, wait4key } from './utils.js';
 
 const matchFeaturesPass = (arg: { img1: Mat, img2: Mat, detector: FeatureDetector, matchFunc: (descs1: Mat, descs2: Mat) => DescriptorMatch[] }) => {
   const { img1, img2, detector, matchFunc } = arg;

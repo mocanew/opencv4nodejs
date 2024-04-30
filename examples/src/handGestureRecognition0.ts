@@ -1,8 +1,7 @@
-import path from 'path';
+import path from 'node:path';
 import type { Contour, Mat } from '@u4/opencv4nodejs';
 import { Point2 } from '@u4/opencv4nodejs';
-import { cv, getResourcePath } from './utils';
-import { grabFrames } from './utils';
+import { cv, getResourcePath, grabFrames } from './utils.js';
 
 interface PointWithIdx {
   pt: Point2;

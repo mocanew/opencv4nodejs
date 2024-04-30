@@ -1,11 +1,12 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'node:path';
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import cv, { Mat, Rect, Vec3 } from '@u4/opencv4nodejs';
 export { default as cv } from '@u4/opencv4nodejs';
 import Axios from 'axios';
 import ProgressBar from 'progress';
 import pc from 'picocolors';
-import crypto from 'crypto';
 
 export const delay = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms));
 

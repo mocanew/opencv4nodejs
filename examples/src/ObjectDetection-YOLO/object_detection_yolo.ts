@@ -1,9 +1,8 @@
-import { assert } from 'console';
-import fs from 'fs';
+import fs from 'node:fs';
+import { assert } from 'node:console';
 import mri from 'mri';
 import { Mat, Net, Point2, Rect, Size, Vec3, VideoCapture, VideoWriter } from '@u4/opencv4nodejs';
-import { cv, getCachedFile, getExampleDirname } from '../utils';
-import path from 'path';
+import { cv, getCachedFile, getExampleDirname } from '../utils.js';
 
 // ported from https://github.com/spmallick/learnopencv/blob/master/ObjectDetection-YOLO/object_detection_yolo.py
 

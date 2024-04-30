@@ -1,6 +1,6 @@
-import { cv, grabFrames, drawBlueRect } from '../utils';
-import loadFacenet from '../dnn/loadFacenet';
-import { extractResults } from '../dnn/ssdUtils';
+import { cv, grabFrames, drawBlueRect } from '../utils.js';
+import loadFacenet from '../dnn/loadFacenet.js';
+import { extractResults } from '../dnn/ssdUtils.js';
 import { Mat, Net, Rect } from '@u4/opencv4nodejs';
 
 /**

@@ -1,5 +1,5 @@
-import { cv, getResourcePath, wait4key } from '../utils';
-import { makeRunDetectFacenetSSD } from './commons';
+import { cv, getResourcePath, wait4key } from '../utils.js';
+import { makeRunDetectFacenetSSD } from './commons.js';
 
 export async function facenetSSD() {
     const runDetection = makeRunDetectFacenetSSD();

@@ -1,9 +1,8 @@
-import { getCachedFile, getExampleDirname } from "../utils";
-import fs from 'fs';
-import path from 'path';
-// import rimraf from 'rimraf';
-import readline from 'readline';
+import fs from 'node:fs';
+import path from 'node:path';
+import readline from 'node:readline';
 import pLimit from 'p-limit';
+import { getCachedFile, getExampleDirname } from "../utils.js";
 
 /**
  * imported from https://github.com/spmallick/learnopencv/blob/master/YOLOv3-Training-Snowman-Detector/getDataFromOpenImages_snowman.py

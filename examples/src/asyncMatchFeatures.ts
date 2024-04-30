@@ -1,5 +1,5 @@
-import { cv, getResourcePath, wait4key } from './utils';
 import { FeatureDetector, Mat } from '@u4/opencv4nodejs';
+import { cv, getResourcePath, wait4key } from './utils.js';
 
 const detectAndComputeAsync = (det: FeatureDetector, img: Mat) =>
   det.detectAsync(img)

@@ -1,9 +1,8 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import mri from 'mri';
 import { Mat, Net, Point2, Rect, Size, Vec3, VideoCapture } from '@u4/opencv4nodejs';
-import { cv, getCachedFile, getExampleDirname, wait4key } from '../utils';
-import path from 'path';
-import NetIdentifier from './NetIdentifier';
+import { cv, getCachedFile, getExampleDirname, wait4key } from '../utils.js';
+import NetIdentifier from './NetIdentifier.js';
 
 // ported from https://github.com/spmallick/learnopencv/blob/master/AgeGender/AgeGender.py
 

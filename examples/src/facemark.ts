@@ -1,6 +1,5 @@
 import { Mat } from '@u4/opencv4nodejs';
-import { cv, getCachedFile, getResourcePath, wait4key } from './utils';
-
+import { cv, getCachedFile, getResourcePath, wait4key } from './utils.js';
 
 async function main() {
   if (!cv.xmodules || !cv.xmodules.face) {
