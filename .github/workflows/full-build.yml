@@ -10,7 +10,7 @@ on:
     inputs:
       cv_version:
         description: 'build all from source'
-        default: '4.7.0'
+        default: '4.9.0'
         required: true
         type: string
 
@@ -41,8 +41,11 @@ jobs:
     - name: run pnpm install
       run: pnpm install --frozen-lockfile
 
-    - name: pnpm run prepack
+    - name: build CJS + ESM files
       run: pnpm run prepack
+
+    - name: build native modules using node-gyp
+      run: pnpm run rebuild
 
     - name: install deps in test
       working-directory: ./test
