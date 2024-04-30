@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import mri from 'mri';
+import * as openCV from '@u4/opencv4nodejs';
 import { Mat, Net, Point2, Rect, Size, Vec3, VideoCapture } from '@u4/opencv4nodejs';
 import { cv, getCachedFile, getExampleDirname, wait4key } from '../utils.js';
 import NetIdentifier from './NetIdentifier.js';
@@ -62,8 +63,13 @@ const main = async () => {
 
     // Load network
     if (!fs.existsSync(ageModel)) {
-        throw Error(`fail to read ${ageModel}`);
+        throw Error(`fail to read ${ageModel} please download if from https://www.dropbox.com/s/xfb20y596869vbb/age_net.caffemodel?dl=0`);
     }
+
+    if (!fs.existsSync(genderModel)) {
+        throw Error(`fail to read ${genderModel} please download if from https://www.dropbox.com/s/iyv483wz7ztr9gh/gender_net.caffemodel?dl=0`);
+    }
+
     if (!fs.existsSync(ageProto)) {
         throw Error(`fail to read ${ageProto}`);
     }
