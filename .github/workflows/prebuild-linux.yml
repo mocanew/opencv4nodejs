@@ -38,7 +38,8 @@ jobs:
         node_version:
           # - 16
           # - 18
-          - 20
+          # - 20
+          - 22
 
     steps:
     - uses: actions/checkout@v4
