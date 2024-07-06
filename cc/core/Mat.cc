@@ -979,11 +979,11 @@ NAN_METHOD(Mat::Col) {
   try {
     if (mat.type() == CV_32FC1) {
       for (int r = 0;  r < mat.rows; r++) {
-		    Nan::Set(r, col, Nan::New(mat.at<float>(r, c)));
+		    Nan::Set(col, r, Nan::New(mat.at<float>(r, c)));
       }
     } else if (mat.type() == CV_8UC1) {
       for (int r = 0;  r < mat.rows; r++) {
-        Nan::Set(r, col, Nan::New((uint)mat.at<uchar>(r, c)));
+        Nan::Set(col, r, Nan::New((uint)mat.at<uchar>(r, c)));
       }
     } else if (mat.type() == CV_8UC3) {
       for (int r = 0;  r < mat.rows; r++) {
@@ -992,7 +992,7 @@ NAN_METHOD(Mat::Col) {
         for (int i = 0; i < 3; i++) {
 			    Nan::Set(jsVec, i, Nan::New(vec[i]));
         }
-        Nan::Set(r, col, jsVec);
+        Nan::Set(col, r, jsVec);
       }
     } else {
       return tryCatch.throwError("not implemented yet - mat type:" + std::to_string(mat.type()));
@@ -1019,11 +1019,11 @@ NAN_METHOD(Mat::ColRange) {
       v8::Local<v8::Array> col = Nan::New<v8::Array>(mat.rows);
       if (mat.type() == CV_32FC1) {
         for (int r = 0;  r < mat.rows; r++) {
-          Nan::Set(r, col, Nan::New(mat.at<float>(r, c)));
+          Nan::Set(col, r, Nan::New(mat.at<float>(r, c)));
         }
       } else if (mat.type() == CV_8UC1) {
         for (int r = 0;  r < mat.rows; r++) {
-          Nan::Set(r, col, Nan::New((uint)mat.at<uchar>(r, c)));
+          Nan::Set(col, r, Nan::New((uint)mat.at<uchar>(r, c)));
         }
       } else if (mat.type() == CV_8UC3) {
         for (int r = 0;  r < mat.rows; r++) {
@@ -1032,7 +1032,7 @@ NAN_METHOD(Mat::ColRange) {
           for (int i = 0; i < 3; i++) {
             Nan::Set(jsVec, i, Nan::New(vec[i]));
           }
-          Nan::Set(r, col, jsVec);
+          Nan::Set(col, r, jsVec);
         }
       } else {
         return tryCatch.throwError("not implemented yet - mat type:" + std::to_string(mat.type()));
