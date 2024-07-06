@@ -144,6 +144,9 @@ NAN_MODULE_INIT(Mat::Init) {
   Nan::SetPrototypeMethod(ctor, "setData", SetData);
   Nan::SetPrototypeMethod(ctor, "getRegion", GetRegion);
   Nan::SetPrototypeMethod(ctor, "row", Row);
+  Nan::SetPrototypeMethod(ctor, "rowRange", RowRange);
+  Nan::SetPrototypeMethod(ctor, "col", Col);
+  Nan::SetPrototypeMethod(ctor, "colRange", ColRange);
   Nan::SetPrototypeMethod(ctor, "copy", Copy);
   Nan::SetPrototypeMethod(ctor, "copyAsync", CopyAsync);
   Nan::SetPrototypeMethod(ctor, "copyTo", CopyTo);
@@ -897,7 +900,7 @@ NAN_METHOD(Mat::Row) {
   try {
     if (mat.type() == CV_32FC1) {
       for (int c = 0;  c < mat.cols; c++) {
-		Nan::Set(row, c, Nan::New(mat.at<float>(r, c)));
+		    Nan::Set(row, c, Nan::New(mat.at<float>(r, c)));
       }
     } else if (mat.type() == CV_8UC1) {
       for (int c = 0;  c < mat.cols; c++) {
@@ -908,7 +911,7 @@ NAN_METHOD(Mat::Row) {
         cv::Vec3b vec = mat.at<cv::Vec3b>(r, c);
         v8::Local<v8::Array> jsVec = Nan::New<v8::Array>(3);
         for (int i = 0; i < 3; i++) {
-			Nan::Set(jsVec, i, Nan::New(vec[i]));
+			    Nan::Set(jsVec, i, Nan::New(vec[i]));
         }
         Nan::Set(row, c, jsVec);
       }
@@ -921,6 +924,127 @@ NAN_METHOD(Mat::Row) {
     return tryCatch.throwError("... Exception");
   }
   info.GetReturnValue().Set(row);
+}
+
+NAN_METHOD(Mat::RowRange) {
+  FF::TryCatch tryCatch("Mat::RowRange");
+  if (!info[0]->IsNumber() || !info[1]->IsNumber()) {
+    return tryCatch.throwError("usage: rowRange(int start, int end)");
+  }
+  int start = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+  int end = (int)info[1]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+  cv::Mat mat = Mat::unwrapSelf(info);
+  v8::Local<v8::Array> rows = Nan::New<v8::Array>(end - start);
+  try {
+    for (int r = start; r < end; r++) {
+      v8::Local<v8::Array> row = Nan::New<v8::Array>(mat.cols);
+      if (mat.type() == CV_32FC1) {
+        for (int c = 0;  c < mat.cols; c++) {
+          Nan::Set(row, c, Nan::New(mat.at<float>(r, c)));
+        }
+      } else if (mat.type() == CV_8UC1) {
+        for (int c = 0;  c < mat.cols; c++) {
+          Nan::Set(row, c, Nan::New((uint)mat.at<uchar>(r, c)));
+        }
+      } else if (mat.type() == CV_8UC3) {
+        for (int c = 0;  c < mat.cols; c++) {
+          cv::Vec3b vec = mat.at<cv::Vec3b>(r, c);
+          v8::Local<v8::Array> jsVec = Nan::New<v8::Array>(3);
+          for (int i = 0; i < 3; i++) {
+            Nan::Set(jsVec, i, Nan::New(vec[i]));
+          }
+          Nan::Set(row, c, jsVec);
+        }
+      } else {
+        return tryCatch.throwError("not implemented yet - mat type:" + std::to_string(mat.type()));
+      }
+      Nan::Set(rows, r - start, row);
+    }
+  } catch(std::exception &e) {
+    return tryCatch.throwError(e.what());
+  } catch(...) {
+    return tryCatch.throwError("... Exception");
+  }
+  info.GetReturnValue().Set(rows);
+}
+
+NAN_METHOD(Mat::Col) {
+	FF::TryCatch tryCatch("Mat::Col");
+  if (!info[0]->IsNumber()) {
+    return tryCatch.throwError("usage: col(int c)");
+  }
+  int c = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+  cv::Mat mat = Mat::unwrapSelf(info);
+  v8::Local<v8::Array> col = Nan::New<v8::Array>(mat.rows);
+  try {
+    if (mat.type() == CV_32FC1) {
+      for (int r = 0;  r < mat.rows; r++) {
+		    Nan::Set(r, col, Nan::New(mat.at<float>(r, c)));
+      }
+    } else if (mat.type() == CV_8UC1) {
+      for (int r = 0;  r < mat.rows; r++) {
+        Nan::Set(r, col, Nan::New((uint)mat.at<uchar>(r, c)));
+      }
+    } else if (mat.type() == CV_8UC3) {
+      for (int r = 0;  r < mat.rows; r++) {
+        cv::Vec3b vec = mat.at<cv::Vec3b>(r, c);
+        v8::Local<v8::Array> jsVec = Nan::New<v8::Array>(3);
+        for (int i = 0; i < 3; i++) {
+			    Nan::Set(jsVec, i, Nan::New(vec[i]));
+        }
+        Nan::Set(r, col, jsVec);
+      }
+    } else {
+      return tryCatch.throwError("not implemented yet - mat type:" + std::to_string(mat.type()));
+    }
+  } catch(std::exception &e) {
+    return tryCatch.throwError(e.what());
+  } catch(...) {
+    return tryCatch.throwError("... Exception");
+  }
+  info.GetReturnValue().Set(col);
+}
+
+NAN_METHOD(Mat::ColRange) {
+  FF::TryCatch tryCatch("Mat::ColRange");
+  if (!info[0]->IsNumber() || !info[1]->IsNumber()) {
+    return tryCatch.throwError("usage: colRange(int start, int end)");
+  }
+  int start = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+  int end = (int)info[1]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+  cv::Mat mat = Mat::unwrapSelf(info);
+  v8::Local<v8::Array> cols = Nan::New<v8::Array>(end - start);
+  try {
+    for (int c = start; c < end; c++) {
+      v8::Local<v8::Array> col = Nan::New<v8::Array>(mat.rows);
+      if (mat.type() == CV_32FC1) {
+        for (int r = 0;  r < mat.rows; r++) {
+          Nan::Set(r, col, Nan::New(mat.at<float>(r, c)));
+        }
+      } else if (mat.type() == CV_8UC1) {
+        for (int r = 0;  r < mat.rows; r++) {
+          Nan::Set(r, col, Nan::New((uint)mat.at<uchar>(r, c)));
+        }
+      } else if (mat.type() == CV_8UC3) {
+        for (int r = 0;  r < mat.rows; r++) {
+          cv::Vec3b vec = mat.at<cv::Vec3b>(r, c);
+          v8::Local<v8::Array> jsVec = Nan::New<v8::Array>(3);
+          for (int i = 0; i < 3; i++) {
+            Nan::Set(jsVec, i, Nan::New(vec[i]));
+          }
+          Nan::Set(r, col, jsVec);
+        }
+      } else {
+        return tryCatch.throwError("not implemented yet - mat type:" + std::to_string(mat.type()));
+      }
+      Nan::Set(cols, c - start, col);
+    }
+  } catch(std::exception &e) {
+    return tryCatch.throwError(e.what());
+  } catch(...) {
+    return tryCatch.throwError("... Exception");
+  }
+  info.GetReturnValue().Set(cols);
 }
 
 NAN_METHOD(Mat::Release) {
