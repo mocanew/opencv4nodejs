@@ -892,7 +892,7 @@ NAN_METHOD(Mat::Norm) {
 NAN_METHOD(Mat::Row) {
 	FF::TryCatch tryCatch("Mat::Row");
   if (!info[0]->IsNumber()) {
-    return tryCatch.throwError("Mat::Row - Error: Expected argument 0 to be a number");
+    return tryCatch.throwError("Mat::Row - Error: expected argument 0 to be a number");
   }
   int r = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
   cv::Mat mat = Mat::unwrapSelf(info);
@@ -929,7 +929,7 @@ NAN_METHOD(Mat::Row) {
 NAN_METHOD(Mat::RowRange) {
   FF::TryCatch tryCatch("Mat::RowRange");
   if (!info[0]->IsNumber() || !info[1]->IsNumber()) {
-    return tryCatch.throwError("Mat::RowRange - Error: Expected argument 0 and 1 to be numbers");
+    return tryCatch.throwError("Mat::RowRange - Error: expected argument 0 and 1 to be numbers");
   }
   int start = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
   int end = (int)info[1]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
@@ -971,7 +971,7 @@ NAN_METHOD(Mat::RowRange) {
 NAN_METHOD(Mat::Col) {
 	FF::TryCatch tryCatch("Mat::Col");
   if (!info[0]->IsNumber()) {
-    return tryCatch.throwError("Mat::Col - Error: Expected argument 0 to be a number");
+    return tryCatch.throwError("Mat::Col - Error: expected argument 0 to be a number");
   }
   int c = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
   cv::Mat mat = Mat::unwrapSelf(info);
@@ -1008,7 +1008,7 @@ NAN_METHOD(Mat::Col) {
 NAN_METHOD(Mat::ColRange) {
   FF::TryCatch tryCatch("Mat::ColRange");
   if (!info[0]->IsNumber() || !info[1]->IsNumber()) {
-    return tryCatch.throwError("Mat::ColRange - Error: Expected argument 0 and 1 to be numbers");
+    return tryCatch.throwError("Mat::ColRange - Error: expected argument 0 and 1 to be numbers");
   }
   int start = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
   int end = (int)info[1]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
