@@ -327,7 +327,7 @@ NAN_MODULE_INIT(Mat::Init) {
 }
 
 // std::cout << "loop line " << cur[0] << "/" << sizes[1] << std::endl;
-// std::cout << "loop cell " << cur[0] << "/" << sizes[0] << ", " << cur[1] << "/" << sizes[1] << std::endl; 
+// std::cout << "loop cell " << cur[0] << "/" << sizes[0] << ", " << cur[1] << "/" << sizes[1] << std::endl;
 // std::cout << "loop cell " << cur[0] << "/" << sizes[0] << ", " << cur[1] << "/" << sizes[1] << ", " << cur[2] << "/" << sizes[2]<< std::endl;
 // std::cout << "loop pos " << cur[0] << ", " << cur[1] << ", " << cur[2] << ", " << cur[3] << std::endl;
 
@@ -502,9 +502,9 @@ NAN_METHOD(Mat::New) {
   else if (info[0]->IsNumber() && info[1]->IsNumber() && info[2]->IsInt32()) {
     int type = info[2]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
     if (info.Length() == 3 || info[3]->IsArray() || info[3]->IsNumber()) {
-      
+
       cv::Mat mat(info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), type);
-          
+
       /* fill vector */
       // TODO by Vec
       if (info[3]->IsArray()) {
@@ -527,8 +527,8 @@ NAN_METHOD(Mat::New) {
       if(info[4]->IsNumber()){
         int step = info[4]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
         cv::Mat mat(
-          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
-          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
+          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
+          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
           type,
           data,
           step
@@ -536,8 +536,8 @@ NAN_METHOD(Mat::New) {
         self->setNativeObject(mat);
       } else {
         cv::Mat mat(
-          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
-          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
+          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
+          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
           type,
           data
         );
@@ -814,7 +814,7 @@ NAN_METHOD(Mat::GetDataAsArray) {
 	FF::TryCatch tryCatch("Mat::GetDataAsArray");
   cv::Mat mat = Mat::unwrapSelf(info);
   v8::Local<v8::Array> rowArray = Nan::New<v8::Array>(mat.size[0]);
-  
+
 	switch (mat.dims) {
 	case 2:  FF_MAT_APPLY_TYPED_OPERATOR(mat, rowArray, mat.type(), FF_JS_ARRAY_FROM_MAT_2D, FF::matGet);  break;
 	case 3:  FF_MAT_APPLY_TYPED_OPERATOR(mat, rowArray, mat.type(), FF_JS_ARRAY_FROM_MAT_3D, FF::matGet);  break;
