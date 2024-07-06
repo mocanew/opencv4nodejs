@@ -244,6 +244,9 @@ export class Mat {
   canny(threshold1: number, threshold2: number, apertureSize?: number, L2gradient?: boolean): Mat;
   cannyAsync(threshold1: number, threshold2: number, apertureSize?: number, L2gradient?: boolean): Promise<Mat>;
 
+  col(c: number): Mat;
+  colRange(startCol: number, endCol: number): Mat;
+
   compareHist(H2: Mat, method: number): number;
   compareHistAsync(H2: Mat, method: number): Promise<number>;
 
@@ -616,6 +619,10 @@ export class Mat {
   rodriguesAsync(): Promise<{ dst: Mat, jacobian: Mat }>;
   rotate(rotateCode: number): Mat;
   rotateAsync(rotateCode: number): Promise<Mat>;
+
+  row(r: number): Mat;
+  rowRange(startRow: number, endRow: number): Mat;
+
   rqDecomp3x3(): RqDecomp3x3Ret;
   rqDecomp3x3Async(): Promise<RqDecomp3x3Ret>;
   scharr(ddepth: number, dx: number, dy: number, scale?: number, delta?: number, borderType?: number): Mat;
