@@ -88,6 +88,71 @@ if (toTest.core) {
     generateIts('should return correct values at each pixel position', createAndAssertAtReturnsCorrectValues);
   });
 
+  describe("row", () => {
+    it("should return a new Mat with the correct row", () => {
+      const type = cv.CV_8U;
+      const mat = new cv.Mat(
+        [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9],
+        ],
+        type
+      );
+      const row = mat.row(1);
+      assertDataDeepEquals([[4, 5, 6]], row.getDataAsArray());
+    });
+  });
+
+  describe("col", () => {
+    it("should return a new Mat with the correct col", () => {
+      const type = cv.CV_8U;
+      const mat = new cv.Mat(
+        [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9],
+        ],
+        type
+      );
+      const col = mat.col(1);
+      assertDataDeepEquals([[2], [5], [8]], col.getDataAsArray());
+    });
+  });
+
+  describe("rowRange", () => {
+    it("should return a new Mat with the correct row range", () => {
+      const type = cv.CV_8U;
+      const mat = new cv.Mat(
+        [
+          [1, 2, 3],
+          [4, 5, 6],
+          [7, 8, 9],
+          [10, 11, 12],
+        ],
+        type
+      );
+      const rowRange = mat.rowRange(1, 3);
+      assertDataDeepEquals([[4, 5, 6], [7, 8, 9]], rowRange.getDataAsArray());
+    });
+  });
+
+  describe("colRange", () => {
+    it("should return a new Mat with the correct col range", () => {
+      const type = cv.CV_8U;
+      const mat = new cv.Mat(
+        [
+          [1, 2, 3, 4],
+          [5, 6, 7, 8],
+          [9, 10, 11, 12],
+        ],
+        type
+      );
+      const colRange = mat.colRange(1, 3);
+      assertDataDeepEquals([[2, 3], [6, 7], [10, 11]], colRange.getDataAsArray());
+    });
+  });
+
   describe.skip('atRaw', () => {
     it('atRaw', () => {
       expect(true).to.be.false;
