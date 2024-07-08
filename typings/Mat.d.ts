@@ -244,7 +244,21 @@ export class Mat {
   canny(threshold1: number, threshold2: number, apertureSize?: number, L2gradient?: boolean): Mat;
   cannyAsync(threshold1: number, threshold2: number, apertureSize?: number, L2gradient?: boolean): Promise<Mat>;
 
+  /**
+   * The method makes a new header for the specified matrix column and returns it. This is an O(1)
+   * operation, regardless of the matrix size. The underlying data of the new matrix is shared with the
+   * original matrix. See also the Mat::row description.
+   * @param c the zero-based index of the column to extract.
+   */
   col(c: number): Mat;
+  /**
+   * The method makes a new header for the specified column span of the matrix. Similarly to Mat::row and
+   * Mat::col , this is an O(1) operation.
+   *
+   * Pay attention to the fact that the endCol argument is `not zero-based`.
+   * @param startRow the zero-based start index of the col span to extract
+   * @param endRow the 1-based ending index of the col span to extract
+   */
   colRange(startCol: number, endCol: number): Mat;
 
   compareHist(H2: Mat, method: number): number;
@@ -620,7 +634,21 @@ export class Mat {
   rotate(rotateCode: number): Mat;
   rotateAsync(rotateCode: number): Promise<Mat>;
 
+  /**
+   * The method makes a new header for the specified matrix row and returns it. This is an O(1)
+   * operation, regardless of the matrix size. The underlying data of the new matrix is shared with the
+   * original matrix.
+   * @param r the 0-based index of the row to extract
+   */
   row(r: number): Mat;
+  /**
+   * The method makes a new header for the specified row span of the matrix. Similarly to Mat::row and
+   * Mat::col , this is an O(1) operation.
+   *
+   * Pay attention to the fact that the endRow argument is `not zero-based`.
+   * @param startRow the zero-based start index of the row span to extract
+   * @param endRow the 1-based ending index of the row span to extract
+   */
   rowRange(startRow: number, endRow: number): Mat;
 
   rqDecomp3x3(): RqDecomp3x3Ret;
