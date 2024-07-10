@@ -1,5 +1,9 @@
 # changelog
 
+## Version 7.1.0
+- update deps versions
+- Add bindings for row, rowRange, col, colRange [PR-108](https://github.com/UrielCh/opencv4nodejs/pull/150)
+
 ## Version 7.0.0
 - Updated code to ESM.
 - Introduced new exports model.
