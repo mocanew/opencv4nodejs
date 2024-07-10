@@ -144,6 +144,9 @@ NAN_MODULE_INIT(Mat::Init) {
   Nan::SetPrototypeMethod(ctor, "setData", SetData);
   Nan::SetPrototypeMethod(ctor, "getRegion", GetRegion);
   Nan::SetPrototypeMethod(ctor, "row", Row);
+  Nan::SetPrototypeMethod(ctor, "rowRange", RowRange);
+  Nan::SetPrototypeMethod(ctor, "col", Col);
+  Nan::SetPrototypeMethod(ctor, "colRange", ColRange);
   Nan::SetPrototypeMethod(ctor, "copy", Copy);
   Nan::SetPrototypeMethod(ctor, "copyAsync", CopyAsync);
   Nan::SetPrototypeMethod(ctor, "copyTo", CopyTo);
@@ -327,7 +330,7 @@ NAN_MODULE_INIT(Mat::Init) {
 }
 
 // std::cout << "loop line " << cur[0] << "/" << sizes[1] << std::endl;
-// std::cout << "loop cell " << cur[0] << "/" << sizes[0] << ", " << cur[1] << "/" << sizes[1] << std::endl; 
+// std::cout << "loop cell " << cur[0] << "/" << sizes[0] << ", " << cur[1] << "/" << sizes[1] << std::endl;
 // std::cout << "loop cell " << cur[0] << "/" << sizes[0] << ", " << cur[1] << "/" << sizes[1] << ", " << cur[2] << "/" << sizes[2]<< std::endl;
 // std::cout << "loop pos " << cur[0] << ", " << cur[1] << ", " << cur[2] << ", " << cur[3] << std::endl;
 
@@ -502,9 +505,9 @@ NAN_METHOD(Mat::New) {
   else if (info[0]->IsNumber() && info[1]->IsNumber() && info[2]->IsInt32()) {
     int type = info[2]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
     if (info.Length() == 3 || info[3]->IsArray() || info[3]->IsNumber()) {
-      
+
       cv::Mat mat(info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), type);
-          
+
       /* fill vector */
       // TODO by Vec
       if (info[3]->IsArray()) {
@@ -527,8 +530,8 @@ NAN_METHOD(Mat::New) {
       if(info[4]->IsNumber()){
         int step = info[4]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
         cv::Mat mat(
-          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
-          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
+          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
+          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
           type,
           data,
           step
@@ -536,8 +539,8 @@ NAN_METHOD(Mat::New) {
         self->setNativeObject(mat);
       } else {
         cv::Mat mat(
-          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
-          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), 
+          info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
+          info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value(),
           type,
           data
         );
@@ -814,7 +817,7 @@ NAN_METHOD(Mat::GetDataAsArray) {
 	FF::TryCatch tryCatch("Mat::GetDataAsArray");
   cv::Mat mat = Mat::unwrapSelf(info);
   v8::Local<v8::Array> rowArray = Nan::New<v8::Array>(mat.size[0]);
-  
+
 	switch (mat.dims) {
 	case 2:  FF_MAT_APPLY_TYPED_OPERATOR(mat, rowArray, mat.type(), FF_JS_ARRAY_FROM_MAT_2D, FF::matGet);  break;
 	case 3:  FF_MAT_APPLY_TYPED_OPERATOR(mat, rowArray, mat.type(), FF_JS_ARRAY_FROM_MAT_3D, FF::matGet);  break;
@@ -886,41 +889,50 @@ NAN_METHOD(Mat::Norm) {
   info.GetReturnValue().Set(norm);
 }
 
+// The method makes a new header for the specified matrix row and returns it. This is an O(1)
+// operation, regardless of the matrix size. The underlying data of the new matrix is shared with the
+// original matrix.
 NAN_METHOD(Mat::Row) {
-	FF::TryCatch tryCatch("Mat::Row");
-  if (!info[0]->IsNumber()) {
-    return tryCatch.throwError("usage: row(int r)");
+  FF::TryCatch tryCatch("Mat::Row");
+  int row;
+  if (FF::IntConverter::arg(0, &row, info)) {
+    return tryCatch.reThrow();
   }
-  int r = (int)info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value();
-  cv::Mat mat = Mat::unwrapSelf(info);
-  v8::Local<v8::Array> row = Nan::New<v8::Array>(mat.cols);
-  try {
-    if (mat.type() == CV_32FC1) {
-      for (int c = 0;  c < mat.cols; c++) {
-		Nan::Set(row, c, Nan::New(mat.at<float>(r, c)));
-      }
-    } else if (mat.type() == CV_8UC1) {
-      for (int c = 0;  c < mat.cols; c++) {
-        Nan::Set(row, c, Nan::New((uint)mat.at<uchar>(r, c)));
-      }
-    } else if (mat.type() == CV_8UC3) {
-      for (int c = 0;  c < mat.cols; c++) {
-        cv::Vec3b vec = mat.at<cv::Vec3b>(r, c);
-        v8::Local<v8::Array> jsVec = Nan::New<v8::Array>(3);
-        for (int i = 0; i < 3; i++) {
-			Nan::Set(jsVec, i, Nan::New(vec[i]));
-        }
-        Nan::Set(row, c, jsVec);
-      }
-    } else {
-      return tryCatch.throwError("not implemented yet - mat type:" + std::to_string(mat.type()));
-    }
-  } catch(std::exception &e) {
-    return tryCatch.throwError(e.what());
-  } catch(...) {
-    return tryCatch.throwError("... Exception");
+  info.GetReturnValue().Set(Mat::Converter::wrap(Mat::unwrapSelf(info).row(row)));
+}
+
+// The method makes a new header for the specified matrix column and returns it. This is an O(1)
+// operation, regardless of the matrix size. The underlying data of the new matrix is shared with the
+// original matrix. See also the Mat::row description.
+NAN_METHOD(Mat::Col) {
+  FF::TryCatch tryCatch("Mat::Col");
+  int col;
+  if (FF::IntConverter::arg(0, &col, info)) {
+    return tryCatch.reThrow();
   }
-  info.GetReturnValue().Set(row);
+  info.GetReturnValue().Set(Mat::Converter::wrap(Mat::unwrapSelf(info).col(col)));
+}
+
+// The method makes a new header for the specified row span of the matrix. Similarly to Mat::row and
+// Mat::col , this is an O(1) operation.
+NAN_METHOD(Mat::RowRange) {
+  FF::TryCatch tryCatch("Mat::RowRange");
+  int start, end;
+  if (FF::IntConverter::arg(0, &start, info) || FF::IntConverter::arg(1, &end, info)) {
+    return tryCatch.reThrow();
+  }
+  info.GetReturnValue().Set(Mat::Converter::wrap(Mat::unwrapSelf(info).rowRange(start, end)));
+}
+
+// The method makes a new header for the specified column span of the matrix. Similarly to Mat::row and
+// Mat::col , this is an O(1) operation.
+NAN_METHOD(Mat::ColRange) {
+  FF::TryCatch tryCatch("Mat::ColRange");
+  int start, end;
+  if (FF::IntConverter::arg(0, &start, info) || FF::IntConverter::arg(1, &end, info)) {
+    return tryCatch.reThrow();
+  }
+  info.GetReturnValue().Set(Mat::Converter::wrap(Mat::unwrapSelf(info).colRange(start, end)));
 }
 
 NAN_METHOD(Mat::Release) {

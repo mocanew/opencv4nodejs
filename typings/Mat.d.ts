@@ -174,7 +174,7 @@ export class Mat {
   /**
    * Create a Mat having the given size.
    * The constructor build n-Dimmentional Mat
-   * 
+   *
    * added in opencv4node 6.2.0
    */
   constructor(sizes: number[], type: number);
@@ -230,11 +230,11 @@ export class Mat {
 
   /**
    * Computes useful camera characteristics from the camera intrinsic matrix.
-   * 
+   *
    * Do keep in mind that the unity measure 'mm' stands for whatever unit of measure one chooses for the chessboard pitch (it can thus be any value).
-   * 
+   *
    * https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga87955f4330d5c20e392b265b7f92f691
-   * 
+   *
    * @param imageSize Input image size in pixels.
    * @param apertureWidth Physical width in mm of the sensor.
    * @param apertureHeight Physical height in mm of the sensor.
@@ -243,6 +243,23 @@ export class Mat {
   calibrationMatrixValuesAsync(imageSize: Size, apertureWidth: number, apertureHeight: number): Promise<CalibrationMatrixValues>;
   canny(threshold1: number, threshold2: number, apertureSize?: number, L2gradient?: boolean): Mat;
   cannyAsync(threshold1: number, threshold2: number, apertureSize?: number, L2gradient?: boolean): Promise<Mat>;
+
+  /**
+   * The method makes a new header for the specified matrix column and returns it. This is an O(1)
+   * operation, regardless of the matrix size. The underlying data of the new matrix is shared with the
+   * original matrix. See also the Mat::row description.
+   * @param c the zero-based index of the column to extract.
+   */
+  col(c: number): Mat;
+  /**
+   * The method makes a new header for the specified column span of the matrix. Similarly to Mat::row and
+   * Mat::col , this is an O(1) operation.
+   *
+   * Pay attention to the fact that the endCol argument is `not zero-based`.
+   * @param startRow the zero-based start index of the col span to extract
+   * @param endRow the 1-based ending index of the col span to extract
+   */
+  colRange(startCol: number, endCol: number): Mat;
 
   compareHist(H2: Mat, method: number): number;
   compareHistAsync(H2: Mat, method: number): Promise<number>;
@@ -327,11 +344,11 @@ export class Mat {
   // alternate signature
   /**
    * Draws contours outlines or filled contours.
-   * 
+   *
    * The function draws contour outlines in the image if thickness≥0 or fills the area bounded by the contours if thickness<0 . The example below shows how to retrieve connected components from the binary image and label them: :
-   * 
+   *
    * https://docs.opencv.org/4.5.4/d6/d6e/group__imgproc__draw.html#ga746c0625f1781f1ffc9056259103edbc
-   * 
+   *
    * MatImgprocBindings.h
    * @param contours list of contours
    * @param contourIdx 0 based contour index to draw
@@ -353,13 +370,13 @@ export class Mat {
   drawRectangle(pt0: Point2, pt1: Point2, color?: Vec3, thickness?: number, lineType?: number, shift?: number): void;
   // alternate signature
   /**
-   * 
+   *
    * @param pt0 Vertex of the rectangle.
-   * @param pt1 Vertex of the rectangle opposite to pt1 . 
-   * @param opt.color 	Rectangle color or brightness (grayscale image). 
+   * @param pt1 Vertex of the rectangle opposite to pt1 .
+   * @param opt.color 	Rectangle color or brightness (grayscale image).
    * @param opt.thickness 	Thickness of lines that make up the rectangle. Negative values, like FILLED, mean that the function has to draw a filled rectangle. {@see https://docs.opencv.org/4.x/d6/d6e/group__imgproc__draw.html#ggaf076ef45de481ac96e0ab3dc2c29a777a89c5f6beef080e6df347167f85e07b9e}
    * @param opt.lineType	Type of the line. See LineTypes {@see https://docs.opencv.org/4.x/d6/d6e/group__imgproc__draw.html#gaf076ef45de481ac96e0ab3dc2c29a777}
-   * @param opt.shift	shift	Number of fractional bits in the point coordinates. 
+   * @param opt.shift	shift	Number of fractional bits in the point coordinates.
    */
   drawRectangle(pt0: Point2, pt1: Point2, opt: { color?: Vec3, thickness?: number, lineType?: number, shift?: number }): void;
   drawRectangle(rect: Rect, color?: Vec3, thickness?: number, lineType?: number, shift?: number): void;
@@ -369,7 +386,7 @@ export class Mat {
 
   equalizeHist(this: Mat): Mat;
   equalizeHistAsync(this: Mat): Promise<Mat>;
-  
+
   erode(kernel: Mat, anchor?: Point2, iterations?: number, borderType?: number): Mat;
   erodeAsync(kernel: Mat, anchor?: Point2, iterations?: number, borderType?: number): Promise<Mat>;
   exp(): Mat;
@@ -427,9 +444,9 @@ export class Mat {
 
   /**
    * if Mat.dims <= 2
-   * 
+   *
    * @see https://github.com/justadudewhohacks/opencv4nodejs/issues/329
-   * 
+   *
    * Note this method offer low performances, use getData instead.
    */
   getDataAsArray(): number[][];
@@ -439,9 +456,9 @@ export class Mat {
   getDataAsArray(): number[][][];
   /**
    * The function computes and returns the optimal new camera intrinsic matrix based on the free scaling parameter. By varying this parameter, you may retrieve only sensible pixels alpha=0 , keep all the original image pixels if there is valuable information in the corners alpha=1 , or get something in between. When alpha>0 , the undistorted result is likely to have some black pixels corresponding to "virtual" pixels outside of the captured distorted image. The original camera intrinsic matrix, distortion coefficients, the computed new camera intrinsic matrix, and newImageSize should be passed to initUndistortRectifyMap to produce the maps for remap.
-   * 
+   *
    * https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga7a6c4e032c97f03ba747966e6ad862b1
-   * 
+   *
    * @param distCoeffs 	Input vector of distortion coefficients (k1,k2,p1,p2[,k3[,k4,k5,k6[,s1,s2,s3,s4[,τx,τy]]]]) of 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.
    * @param imageSize Original image size.
    * @param alpha Free scaling parameter between 0 (when all the pixels in the undistorted image are valid) and 1 (when all the source image pixels are retained in the undistorted image). See stereoRectify for details.
@@ -513,7 +530,7 @@ export class Mat {
    * @param template Searched template. It must be not greater than the source image and have the same data type.
    * @param method Parameter specifying the comparison method, can be one of TM_SQDIFF, TM_SQDIFF_NORMED, TM_CCORR, TM_CCORR_NORMED, TM_CCOEFF, TM_CCOEFF_NORMED.
    * @param mask Optional mask. It must have the same size as templ. It must either have the same number of channels as template or only one channel, which is then used for all template and image channels. If the data type is CV_8U, the mask is interpreted as a binary mask, meaning only elements where mask is nonzero are used and are kept unchanged independent of the actual mask value (weight equals 1). For data tpye CV_32F, the mask values are used as weights. The exact formulas are documented in TemplateMatchModes.
-   * 
+   *
    * @return Map of comparison results. It must be single-channel 32-bit floating-point. If image is W×H and templ is w×h , then result is (W−w+1)×(H−h+1) .
    */
   matchTemplate(template: Mat, method: number, mask?: Mat): Mat;
@@ -616,6 +633,24 @@ export class Mat {
   rodriguesAsync(): Promise<{ dst: Mat, jacobian: Mat }>;
   rotate(rotateCode: number): Mat;
   rotateAsync(rotateCode: number): Promise<Mat>;
+
+  /**
+   * The method makes a new header for the specified matrix row and returns it. This is an O(1)
+   * operation, regardless of the matrix size. The underlying data of the new matrix is shared with the
+   * original matrix.
+   * @param r the 0-based index of the row to extract
+   */
+  row(r: number): Mat;
+  /**
+   * The method makes a new header for the specified row span of the matrix. Similarly to Mat::row and
+   * Mat::col , this is an O(1) operation.
+   *
+   * Pay attention to the fact that the endRow argument is `not zero-based`.
+   * @param startRow the zero-based start index of the row span to extract
+   * @param endRow the 1-based ending index of the row span to extract
+   */
+  rowRange(startRow: number, endRow: number): Mat;
+
   rqDecomp3x3(): RqDecomp3x3Ret;
   rqDecomp3x3Async(): Promise<RqDecomp3x3Ret>;
   scharr(ddepth: number, dx: number, dy: number, scale?: number, delta?: number, borderType?: number): Mat;
@@ -673,9 +708,9 @@ export class Mat {
   sqrt(): Mat;
   /**
    * Computes rectification transforms for each head of a calibrated stereo camera.
-   * 
+   *
    * https://docs.opencv.org/4.x/d9/d0c/group__calib3d.html#ga617b1685d4059c6040827800e72ad2b6
-   * 
+   *
    * @param distCoeffs1 First camera distortion parameters.
    * @param cameraMatrix2 Second camera intrinsic matrix.
    * @param distCoeffs2 Second camera distortion parameters.
@@ -755,11 +790,11 @@ export class Mat {
   warpPerspectiveAsync(transforMationMatrix: Mat, size?: Size, flags?: number, borderMode?: number, borderValue?: Vec3): Promise<Mat>;
   /**
    * Performs a marker-based image segmentation using the watershed algorithm.
-   * 
+   *
    * The function implements one of the variants of watershed, non-parametric marker-based segmentation algorithm, described in [173] .
-   * 
+   *
    * Before passing the image to the function, you have to roughly outline the desired regions in the image markers with positive (>0) indices. So, every region is represented as one or more connected components with the pixel values 1, 2, 3, and so on. Such markers can be retrieved from a binary mask using findContours and drawContours (see the watershed.cpp demo). The markers are "seeds" of the future image regions. All the other pixels in markers , whose relation to the outlined regions is not known and should be defined by the algorithm, should be set to 0's. In the function output, each pixel in markers is set to a value of the "seed" components or to -1 at boundaries between the regions.
-   * 
+   *
    * Note
    * Any two neighbor connected components are not necessarily separated by a watershed boundary (-1's pixels); for example, they can touch each other in the initial marker image passed to the function.
    * https://docs.opencv.org/4.6.0/d3/d47/group__imgproc__segmentation.html#ga3267243e4d3f95165d55a618c65ac6e1
@@ -769,9 +804,9 @@ export class Mat {
   watershedAsync(markers: Mat): Promise<Mat>;
   /**
    * Decrements the reference counter and deallocates the matrix if needed.
-   * 
+   *
    * The method decrements the reference counter associated with the matrix data. When the reference counter reaches 0, the matrix data is deallocated and the data and the reference counter pointers are set to NULL's. If the matrix header points to an external data set (see Mat::Mat ), the reference counter is NULL, and the method has no effect in this case.
-   * 
+   *
    * This method can be called manually to force the matrix data deallocation. But since this method is automatically called in the destructor, or by any other method that changes the data pointer, it is usually not needed. The reference counter decrement and check for 0 is an atomic operation on the platforms that support it. Thus, it is safe to operate on the same matrices asynchronously in different threads.
    * https://docs.opencv.org/4.6.0/d3/d63/classcv_1_1Mat.html#ae48d4913285518e2c21a3457017e716e
    */
@@ -793,28 +828,28 @@ export class Mat {
   static eye(rows: number, cols: number, type: number): Mat;
   /**
    * Returns an array of all 1's of the specified size and type.
-   * 
+   *
    * The method returns a Matlab-style 1's array initializer, similarly to Mat::zeros. Note that using this method you can initialize an array with an arbitrary value, using the following Matlab idiom:
-   * 
+   *
    * Mat A = Mat::ones(100, 100, CV_8U)*3; // make 100x100 matrix filled with 3.
    * The above operation does not form a 100x100 matrix of 1's and then multiply it by 3. Instead, it just remembers the scale factor (3 in this case) and use it when actually invoking the matrix initializer.
-   * 
+   *
    * Note
    * In case of multi-channels type, only the first channel will be initialized with 1's, the others will be set to 0's.
    * https://docs.opencv.org/4.x/d3/d63/classcv_1_1Mat.html#a5e10227b777425407986727e2d26fcdc
-   * @param rows 
-   * @param cols 
-   * @param type 
+   * @param rows
+   * @param cols
+   * @param type
    */
   static ones(rows: number, cols: number, type: number): Mat;
   /**
    * Returns a zero array of the specified size and type.
-   * 
+   *
    * The method returns a Matlab-style zero array initializer. It can be used to quickly form a constant array as a function parameter, part of a matrix expression, or as a matrix initializer:
-   * 
+   *
    * Mat A;
    * A = Mat::zeros(3, 3, CV_32F);
-   * 
+   *
    * In the example above, a new matrix is allocated only if A is not a 3x3 floating-point matrix. Otherwise, the existing matrix A is filled with zeros.
    * https://docs.opencv.org/4.x/d3/d63/classcv_1_1Mat.html#a56daa006391a670e9cb0cd08e3168c99
    * @param rows Number of rows.

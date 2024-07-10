@@ -65,6 +65,9 @@ public:
   static NAN_METHOD(GetRegion);
   static NAN_METHOD(Norm);
   static NAN_METHOD(Row);
+  static NAN_METHOD(RowRange);
+  static NAN_METHOD(Col);
+  static NAN_METHOD(ColRange);
   static NAN_METHOD(Release);
   static NAN_METHOD(PushBack);
   static NAN_METHOD(PushBackAsync);
