@@ -76,10 +76,10 @@
     "nan": "^2.20.0",
     "node-gyp": "^10.2.0",
     "picocolors": "^1.0.1",
-    "typescript-eslint": "8.0.0-alpha.30"
+    "typescript-eslint": "8.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.6.0",
+    "@eslint/js": "^9.9.0",
     "@types/node": "^20.14.10",
     "@types/progress": "^2.0.7",
     "axios": "^1.7.4",
@@ -87,7 +87,7 @@
     "progress": "^2.0.3",
     "rimraf": "^6.0.1",
     "shx": "^0.3.4",
-    "typescript": "^5.5.3"
+    "typescript": "^5.5.4"
   },
   "files": [
     "cc",
