@@ -1,12 +1,12 @@
-#include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
-#include "macros.h"
+#include "Contour.h"
+#include "HistAxes.h"
+#include "Mat.h"
+#include "Moments.h"
 #include "Point.h"
 #include "Size.h"
-#include "Mat.h"
-#include "Contour.h"
-#include "Moments.h"
-#include "HistAxes.h"
+#include "macros.h"
+#include <opencv2/core.hpp>
+#include <opencv2/imgproc.hpp>
 
 #ifndef __FF_IMGPROC_H__
 #define __FF_IMGPROC_H__

@@ -5,82 +5,81 @@
 
 namespace VideoCaptureBindings {
 
-	struct GetWorker : public CatchCvExceptionWorker {
-	public:
-		cv::VideoCapture self;
-		GetWorker(cv::VideoCapture self) {
-			this->self = self;
-		}
-	  virtual ~GetWorker() {}
-   	int prop;
-		double val;
+struct GetWorker : public CatchCvExceptionWorker {
+public:
+  cv::VideoCapture self;
+  GetWorker(cv::VideoCapture self) {
+    this->self = self;
+  }
+  virtual ~GetWorker() {
+  }
+  int prop;
+  double val;
 
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (
-          FF::IntConverter::arg(0, &prop, info)
-      );
-    }
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (
+        FF::IntConverter::arg(0, &prop, info));
+  }
 
-		std::string executeCatchCvExceptionWorker() {
-			val = self.get(prop);
-			return "";
-		}
+  std::string executeCatchCvExceptionWorker() {
+    val = self.get(prop);
+    return "";
+  }
 
-		v8::Local<v8::Value> getReturnValue() {
-			return FF::DoubleConverter::wrap(val);
-		}
-	};
+  v8::Local<v8::Value> getReturnValue() {
+    return FF::DoubleConverter::wrap(val);
+  }
+};
 
-  struct ReadWorker : public CatchCvExceptionWorker {
-  public:
-    cv::VideoCapture self;
-    ReadWorker(cv::VideoCapture self) {
-      this->self = self;
-    }
-	  virtual ~ReadWorker() {}
-    cv::Mat frame;
+struct ReadWorker : public CatchCvExceptionWorker {
+public:
+  cv::VideoCapture self;
+  ReadWorker(cv::VideoCapture self) {
+    this->self = self;
+  }
+  virtual ~ReadWorker() {
+  }
+  cv::Mat frame;
 
-    std::string executeCatchCvExceptionWorker() {
-      self.read(frame);
-      return "";
-    }
+  std::string executeCatchCvExceptionWorker() {
+    self.read(frame);
+    return "";
+  }
 
-    v8::Local<v8::Value> getReturnValue() {
-      return Mat::Converter::wrap(frame);
-    }
-  };
+  v8::Local<v8::Value> getReturnValue() {
+    return Mat::Converter::wrap(frame);
+  }
+};
 
-  struct SetWorker : public CatchCvExceptionWorker {
-  public:
-    cv::VideoCapture self;
-    SetWorker(cv::VideoCapture self) {
-      this->self = self;
-    }
-	  virtual ~SetWorker() {}
+struct SetWorker : public CatchCvExceptionWorker {
+public:
+  cv::VideoCapture self;
+  SetWorker(cv::VideoCapture self) {
+    this->self = self;
+  }
+  virtual ~SetWorker() {
+  }
 
-    // required fn args
-    int prop;
-    double value;
-    bool ret;
+  // required fn args
+  int prop;
+  double value;
+  bool ret;
 
-    std::string executeCatchCvExceptionWorker() {
-      ret = this->self.set(prop, value);
-      return "";
-    }
+  std::string executeCatchCvExceptionWorker() {
+    ret = this->self.set(prop, value);
+    return "";
+  }
 
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (
-          FF::IntConverter::arg(0, &prop, info) ||
-          FF::DoubleConverter::arg(1, &value, info)
-      );
-    }
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (
+        FF::IntConverter::arg(0, &prop, info) || FF::DoubleConverter::arg(1, &value, info));
+  }
 
-    v8::Local<v8::Value> getReturnValue() {
-      return Nan::New(ret);
-    }
-  };
+  v8::Local<v8::Value> getReturnValue() {
+    return Nan::New(ret);
+  }
+};
 
-
-}
+} // namespace VideoCaptureBindings
 
 #endif

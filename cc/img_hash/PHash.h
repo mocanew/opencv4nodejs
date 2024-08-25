@@ -11,7 +11,9 @@ public:
   static NAN_METHOD(New);
 
   static Nan::Persistent<v8::FunctionTemplate> constructor;
-  cv::Ptr<cv::img_hash::ImgHashBase> getImgHashBase() { return imgHashBase; }
+  cv::Ptr<cv::img_hash::ImgHashBase> getImgHashBase() {
+    return imgHashBase;
+  }
 };
 
 #endif

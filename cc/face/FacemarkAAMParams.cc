@@ -28,13 +28,13 @@ NAN_MODULE_INIT(FacemarkAAMParams::Init) {
   Nan::SetAccessor(instanceTemplate, FF::newString("texture_max_m"), texture_max_m_getter, texture_max_m_setter);
   Nan::SetAccessor(instanceTemplate, FF::newString("verbose"), verbose_getter, verbose_setter);
 
-  Nan::Set(target,FF::newString("FacemarkAAMParams"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("FacemarkAAMParams"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(FacemarkAAMParams::New) {
-	FF::TryCatch tryCatch("FacemarkAAMParams::New");
-	FF_ASSERT_CONSTRUCT_CALL();
-  FacemarkAAMParams *self = new FacemarkAAMParams();
+  FF::TryCatch tryCatch("FacemarkAAMParams::New");
+  FF_ASSERT_CONSTRUCT_CALL();
+  FacemarkAAMParams* self = new FacemarkAAMParams();
   self->self = cv::face::FacemarkAAM::Params();
   self->Wrap(info.Holder());
   info.GetReturnValue().Set(info.Holder());

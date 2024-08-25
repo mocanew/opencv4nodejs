@@ -1,6 +1,6 @@
-#include "macros.h"
 #include "NativeNodeUtils.h"
 #include "Point2.h"
+#include "macros.h"
 #include <opencv2/core.hpp>
 #include <opencv2/face.hpp>
 
@@ -11,10 +11,10 @@
 
 class FacemarkAAMData : public FF::ObjectWrap<FacemarkAAMData, cv::face::FacemarkAAM::Data> {
 public:
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
-	static const char* getClassName() {
-		return "FacemarkAAMData";
-	}
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static const char* getClassName() {
+    return "FacemarkAAMData";
+  }
 
   static NAN_MODULE_INIT(Init);
   static NAN_METHOD(New);

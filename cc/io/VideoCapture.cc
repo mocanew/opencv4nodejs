@@ -20,21 +20,19 @@ NAN_MODULE_INIT(VideoCapture::Init) {
   Nan::SetPrototypeMethod(ctor, "set", Set);
   Nan::SetPrototypeMethod(ctor, "setAsync", SetAsync);
   Nan::SetPrototypeMethod(ctor, "release", Release);
-  Nan::Set(target,FF::newString("VideoCapture"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("VideoCapture"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(VideoCapture::New) {
-	FF::TryCatch tryCatch("VideoCapture::New");
+  FF::TryCatch tryCatch("VideoCapture::New");
   FF_ASSERT_CONSTRUCT_CALL();
   VideoCapture* self = new VideoCapture();
   if (info[0]->IsString()) {
     self->path = FF::StringConverter::unwrapUnchecked(info[0]);
     self->self.open(self->path);
-  }
-  else if (info[0]->IsUint32()) {
+  } else if (info[0]->IsUint32()) {
     self->self.open(info[0]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value());
-  }
-  else {
+  } else {
     return tryCatch.throwError("expected arg 0 to be path or device port");
   }
   if (!self->self.isOpened()) {
@@ -46,65 +44,59 @@ NAN_METHOD(VideoCapture::New) {
 }
 
 NAN_METHOD(VideoCapture::Reset) {
-	FF::TryCatch tryCatch("VideoCapture::Reset");
+  FF::TryCatch tryCatch("VideoCapture::Reset");
   VideoCapture* self = Nan::ObjectWrap::Unwrap<VideoCapture>(info.This());
   self->self.release();
   self->self.open(self->path);
   if (!self->self.isOpened()) {
-	return tryCatch.throwError("failed to reset capture");
+    return tryCatch.throwError("failed to reset capture");
   }
 }
 
 NAN_METHOD(VideoCapture::Release) {
-	Nan::ObjectWrap::Unwrap<VideoCapture>(info.This())->self.release();
+  Nan::ObjectWrap::Unwrap<VideoCapture>(info.This())->self.release();
 }
 
 NAN_METHOD(VideoCapture::Get) {
-	FF::executeSyncBinding(
-		std::make_shared<VideoCaptureBindings::GetWorker>(VideoCapture::unwrapSelf(info)),
-		"VideoCapture::Get",
-		info
-	);
+  FF::executeSyncBinding(
+      std::make_shared<VideoCaptureBindings::GetWorker>(VideoCapture::unwrapSelf(info)),
+      "VideoCapture::Get",
+      info);
 }
 
 NAN_METHOD(VideoCapture::GetAsync) {
-	FF::executeAsyncBinding(
-		std::make_shared<VideoCaptureBindings::GetWorker>(VideoCapture::unwrapSelf(info)),
-		"VideoCapture::GetAsync",
-		info
-	);
+  FF::executeAsyncBinding(
+      std::make_shared<VideoCaptureBindings::GetWorker>(VideoCapture::unwrapSelf(info)),
+      "VideoCapture::GetAsync",
+      info);
 }
 
 NAN_METHOD(VideoCapture::Read) {
   FF::executeSyncBinding(
-    std::make_shared<VideoCaptureBindings::ReadWorker>(VideoCapture::unwrapSelf(info)),
-    "VideoCapture::Read",
-    info
-  );
+      std::make_shared<VideoCaptureBindings::ReadWorker>(VideoCapture::unwrapSelf(info)),
+      "VideoCapture::Read",
+      info);
 }
 
 NAN_METHOD(VideoCapture::ReadAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<VideoCaptureBindings::ReadWorker>(VideoCapture::unwrapSelf(info)),
-    "VideoCapture::ReadAsync",
-    info
-  );
+      std::make_shared<VideoCaptureBindings::ReadWorker>(VideoCapture::unwrapSelf(info)),
+      "VideoCapture::ReadAsync",
+      info);
 }
 
 NAN_METHOD(VideoCapture::Set) {
   FF::executeSyncBinding(
-    std::make_shared<VideoCaptureBindings::SetWorker>(VideoCapture::unwrapSelf(info)),
-    "VideoCapture::Set",
-    info
-  );
+      std::make_shared<VideoCaptureBindings::SetWorker>(VideoCapture::unwrapSelf(info)),
+      "VideoCapture::Set",
+      info);
 }
 
 NAN_METHOD(VideoCapture::SetAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<VideoCaptureBindings::SetWorker>(VideoCapture::unwrapSelf(info)),
-    "VideoCapture::SetAsync",
-    info
-  );
+      std::make_shared<VideoCaptureBindings::SetWorker>(VideoCapture::unwrapSelf(info)),
+      "VideoCapture::SetAsync",
+      info);
 }
 
 #endif

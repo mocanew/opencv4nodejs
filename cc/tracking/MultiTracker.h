@@ -17,23 +17,23 @@ class MultiTracker : public FF::ObjectWrap<MultiTracker, cv::Ptr<cv::legacy::Mul
 class MultiTracker : public FF::ObjectWrap<MultiTracker, cv::Ptr<cv::MultiTracker>> {
 #endif
 public:
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
 
-	static const char* getClassName() {
-		return "MultiTracker";
-	}
+  static const char* getClassName() {
+    return "MultiTracker";
+  }
 
-	static NAN_MODULE_INIT(Init);
+  static NAN_MODULE_INIT(Init);
 
-	static NAN_METHOD(New);
-	static NAN_METHOD(AddMIL);
-	static NAN_METHOD(AddBOOSTING);
-	static NAN_METHOD(AddMEDIANFLOW);
-	static NAN_METHOD(AddTLD);
-	static NAN_METHOD(AddKCF);
-	static NAN_METHOD(AddMOSSE);
-	static NAN_METHOD(AddCSRT);
-	static NAN_METHOD(Update);
+  static NAN_METHOD(New);
+  static NAN_METHOD(AddMIL);
+  static NAN_METHOD(AddBOOSTING);
+  static NAN_METHOD(AddMEDIANFLOW);
+  static NAN_METHOD(AddTLD);
+  static NAN_METHOD(AddKCF);
+  static NAN_METHOD(AddMOSSE);
+  static NAN_METHOD(AddCSRT);
+  static NAN_METHOD(Update);
 };
 
 #endif

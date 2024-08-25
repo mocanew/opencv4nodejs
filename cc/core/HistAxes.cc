@@ -29,7 +29,7 @@ NAN_METHOD(HistAxes::New) {
     return tryCatch.throwError("expected arg0 to be an object");
   }
 
-  HistAxes *self = new HistAxes();
+  HistAxes* self = new HistAxes();
 
   auto jsAxis = Nan::To<v8::Object>(info[0]).ToLocalChecked();
 
@@ -47,10 +47,7 @@ NAN_METHOD(HistAxes::New) {
   v8::Local<v8::Array> jsRanges = v8::Local<v8::Array>::Cast(jsRangesVal);
 
   if (
-      jsRanges->Length() != 2 ||
-      !Nan::Get(jsRanges, 0).ToLocalChecked()->IsNumber() ||
-      !Nan::Get(jsRanges, 1).ToLocalChecked()->IsNumber()
-      ) {
+      jsRanges->Length() != 2 || !Nan::Get(jsRanges, 0).ToLocalChecked()->IsNumber() || !Nan::Get(jsRanges, 1).ToLocalChecked()->IsNumber()) {
     return tryCatch.throwError("expected ranges to be an array with 2 numbers");
   }
 

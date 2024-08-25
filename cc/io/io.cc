@@ -86,7 +86,7 @@ NAN_METHOD(Io::Imshow) {
 }
 
 NAN_METHOD(Io::ImshowWait) {
-	FF::TryCatch tryCatch("Io::ImshowWait");
+  FF::TryCatch tryCatch("Io::ImshowWait");
   if (!info[0]->IsString()) {
     return tryCatch.throwError("expected arg0 to be the window name");
   }
@@ -101,7 +101,7 @@ NAN_METHOD(Io::WaitKey) {
   int key;
   if (info[0]->IsNumber()) {
     key = cv::waitKey(info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value());
-  } else{
+  } else {
     key = cv::waitKey();
   }
   info.GetReturnValue().Set(Nan::New(key));
@@ -112,7 +112,7 @@ NAN_METHOD(Io::WaitKeyEx) {
   int key;
   if (info[0]->IsNumber()) {
     key = cv::waitKeyEx(info[0]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value());
-  } else{
+  } else {
     key = cv::waitKeyEx();
   }
   info.GetReturnValue().Set(Nan::New(key));
@@ -120,11 +120,11 @@ NAN_METHOD(Io::WaitKeyEx) {
 #endif
 
 NAN_METHOD(Io::DestroyWindow) {
-	FF::TryCatch tryCatch("Io::DestroyWindow");
-	std::string winName;
-	if (FF::StringConverter::arg(0, &winName, info)) {
-		return tryCatch.reThrow();
-	}
+  FF::TryCatch tryCatch("Io::DestroyWindow");
+  std::string winName;
+  if (FF::StringConverter::arg(0, &winName, info)) {
+    return tryCatch.reThrow();
+  }
   cv::destroyWindow(winName);
 }
 
@@ -133,18 +133,18 @@ NAN_METHOD(Io::DestroyAllWindows) {
 }
 
 NAN_METHOD(Io::Imdecode) {
-	FF::TryCatch tryCatch("Io::Imdecode");
+  FF::TryCatch tryCatch("Io::Imdecode");
 
   if (!info[0]->IsUint8Array()) {
-	return tryCatch.throwError("expected arg 0 to be a Buffer of Uint8 Values");
+    return tryCatch.throwError("expected arg 0 to be a Buffer of Uint8 Values");
   }
 
   int flags = cv::IMREAD_ANYCOLOR;
   if (FF::IntConverter::optArg(1, &flags, info)) {
-	  return tryCatch.reThrow();
+    return tryCatch.reThrow();
   }
 
-  char *data = static_cast<char *>(node::Buffer::Data(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()));
+  char* data = static_cast<char*>(node::Buffer::Data(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()));
   size_t size = node::Buffer::Length(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked());
   std::vector<uchar> vec(size);
   memcpy(vec.data(), data, size);
@@ -153,7 +153,7 @@ NAN_METHOD(Io::Imdecode) {
 }
 
 NAN_METHOD(Io::ImdecodeAsync) {
-	FF::TryCatch tryCatch("Io::ImdecodeAsync");
+  FF::TryCatch tryCatch("Io::ImdecodeAsync");
 
   if (!info[0]->IsUint8Array()) {
     return tryCatch.throwError("expected arg 0 to be a Buffer of Uint8 Values");
@@ -163,76 +163,68 @@ NAN_METHOD(Io::ImdecodeAsync) {
 
   v8::Local<v8::Function> cbFunc;
   if (FF::hasArg(info, 1) && FF::IntConverterImpl::assertType(info[1])) {
-	worker->flags = info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
-	if (!info[2]->IsFunction()) {
-		return tryCatch.throwError("expected argument 2 to be of type Function");
-	}
-	cbFunc = v8::Local<v8::Function>::Cast(info[2]);
-  }
-  else {
-	if (!info[1]->IsFunction()) {
-		return tryCatch.throwError("expected argument 1 to be of type Function");
-	}
-	cbFunc = v8::Local<v8::Function>::Cast(info[1]);
+    worker->flags = info[1]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+    if (!info[2]->IsFunction()) {
+      return tryCatch.throwError("expected argument 2 to be of type Function");
+    }
+    cbFunc = v8::Local<v8::Function>::Cast(info[2]);
+  } else {
+    if (!info[1]->IsFunction()) {
+      return tryCatch.throwError("expected argument 1 to be of type Function");
+    }
+    cbFunc = v8::Local<v8::Function>::Cast(info[1]);
     worker->flags = cv::IMREAD_ANYCOLOR;
   }
 
   v8::Local<v8::Object> jsBuf = info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-  worker->data = static_cast<char *>(node::Buffer::Data(jsBuf));
+  worker->data = static_cast<char*>(node::Buffer::Data(jsBuf));
   worker->dataSize = node::Buffer::Length(jsBuf);
 
   Nan::AsyncQueueWorker(new FF::AsyncWorker(
-    new Nan::Callback(cbFunc),
-    worker
-  ));
+      new Nan::Callback(cbFunc),
+      worker));
 }
 
 NAN_METHOD(Io::Imread) {
   FF::executeSyncBinding(
-    std::make_shared<IoBindings::ImreadWorker>(),
-    "Io::Imread",
-    info
-  );
+      std::make_shared<IoBindings::ImreadWorker>(),
+      "Io::Imread",
+      info);
 }
 
 NAN_METHOD(Io::ImreadAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<IoBindings::ImreadWorker>(),
-    "Io::ImreadAsync",
-    info
-  );
+      std::make_shared<IoBindings::ImreadWorker>(),
+      "Io::ImreadAsync",
+      info);
 }
 
 NAN_METHOD(Io::Imwrite) {
   FF::executeSyncBinding(
-    std::make_shared<IoBindings::ImwriteWorker>(),
-    "Io::Imwrite",
-    info
-  );
+      std::make_shared<IoBindings::ImwriteWorker>(),
+      "Io::Imwrite",
+      info);
 }
 
 NAN_METHOD(Io::ImwriteAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<IoBindings::ImwriteWorker>(),
-    "Io::ImwriteAsync",
-    info
-  );
+      std::make_shared<IoBindings::ImwriteWorker>(),
+      "Io::ImwriteAsync",
+      info);
 }
 
 NAN_METHOD(Io::Imencode) {
   FF::executeSyncBinding(
-    std::make_shared<IoBindings::ImencodeWorker>(),
-    "Io::Imencode",
-    info
-  );
+      std::make_shared<IoBindings::ImencodeWorker>(),
+      "Io::Imencode",
+      info);
 }
 
 NAN_METHOD(Io::ImencodeAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<IoBindings::ImencodeWorker>(),
-    "Io::ImencodeAsync",
-    info
-  );
+      std::make_shared<IoBindings::ImencodeWorker>(),
+      "Io::ImencodeAsync",
+      info);
 }
 
 #endif

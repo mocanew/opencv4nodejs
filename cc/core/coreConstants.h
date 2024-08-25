@@ -5,7 +5,7 @@
 #define __FF_CORE_CONSTANTS_H__
 
 #define FF_SET_CONST_WITH_VALUE(obj, constant, val) \
-	FF_SET_JS_PROP(obj, constant, val);
+  FF_SET_JS_PROP(obj, constant, val);
 
 class CoreConstants {
 public:

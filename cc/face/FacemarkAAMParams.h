@@ -1,5 +1,5 @@
-#include "macros.h"
 #include "NativeNodeUtils.h"
+#include "macros.h"
 #include <opencv2/face.hpp>
 
 #if CV_VERSION_GREATER_EQUAL(3, 4, 0)
@@ -9,11 +9,11 @@
 
 class FacemarkAAMParams : public FF::ObjectWrap<FacemarkAAMParams, cv::face::FacemarkAAM::Params> {
 public:
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
 
-	static const char* getClassName() {
-		return "FacemarkAAMParams";
-	}
+  static const char* getClassName() {
+    return "FacemarkAAMParams";
+  }
 
   static NAN_MODULE_INIT(Init);
   static NAN_METHOD(New);

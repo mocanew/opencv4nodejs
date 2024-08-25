@@ -124,861 +124,759 @@ void MatImgproc::Init(v8::Local<v8::FunctionTemplate> ctor) {
 };
 
 NAN_METHOD(MatImgproc::DrawContours) {
-	FF::executeSyncBinding(
-		std::make_shared<MatImgprocBindings::DrawContoursWorker>(Mat::unwrapSelf(info)),
-		"Mat::DrawContours",
-		info
-	);
+  FF::executeSyncBinding(
+      std::make_shared<MatImgprocBindings::DrawContoursWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawContours",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawContoursAsync) {
-	FF::executeAsyncBinding(
-		std::make_shared<MatImgprocBindings::DrawContoursWorker>(Mat::unwrapSelf(info)),
-		"Mat::DrawContoursAsync",
-		info
-	);
+  FF::executeAsyncBinding(
+      std::make_shared<MatImgprocBindings::DrawContoursWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawContoursAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Rescale) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::RescaleWorker>(Mat::unwrapSelf(info)),
-    "Mat::Rescale",
-    info
-  );
+      std::make_shared<MatImgprocBindings::RescaleWorker>(Mat::unwrapSelf(info)),
+      "Mat::Rescale",
+      info);
 }
 
 NAN_METHOD(MatImgproc::RescaleAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::RescaleWorker>(Mat::unwrapSelf(info)),
-    "Mat::RescaleAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::RescaleWorker>(Mat::unwrapSelf(info)),
+      "Mat::RescaleAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Resize) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::ResizeWorker>(Mat::unwrapSelf(info)),
-    "Mat::Resize",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ResizeWorker>(Mat::unwrapSelf(info)),
+      "Mat::Resize",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ResizeAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::ResizeWorker>(Mat::unwrapSelf(info)),
-    "Mat::ResizeAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ResizeWorker>(Mat::unwrapSelf(info)),
+      "Mat::ResizeAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ResizeToMax) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::ResizeToMaxWorker>(Mat::unwrapSelf(info)),
-    "Mat::ResizeToMax",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ResizeToMaxWorker>(Mat::unwrapSelf(info)),
+      "Mat::ResizeToMax",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ResizeToMaxAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::ResizeToMaxWorker>(Mat::unwrapSelf(info)),
-    "Mat::ResizeToMaxAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ResizeToMaxWorker>(Mat::unwrapSelf(info)),
+      "Mat::ResizeToMaxAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Threshold) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::ThresholdWorker>(Mat::unwrapSelf(info)),
-    "Mat::Threshold",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ThresholdWorker>(Mat::unwrapSelf(info)),
+      "Mat::Threshold",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ThresholdAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::ThresholdWorker>(Mat::unwrapSelf(info)),
-    "Mat::ThresholdAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ThresholdWorker>(Mat::unwrapSelf(info)),
+      "Mat::ThresholdAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::AdaptiveThreshold) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::AdaptiveThresholdWorker>(Mat::unwrapSelf(info)),
-    "Mat::AdaptiveThreshold",
-    info
-  );
+      std::make_shared<MatImgprocBindings::AdaptiveThresholdWorker>(Mat::unwrapSelf(info)),
+      "Mat::AdaptiveThreshold",
+      info);
 }
 
 NAN_METHOD(MatImgproc::AdaptiveThresholdAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::AdaptiveThresholdWorker>(Mat::unwrapSelf(info)),
-    "Mat::AdaptiveThresholdAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::AdaptiveThresholdWorker>(Mat::unwrapSelf(info)),
+      "Mat::AdaptiveThresholdAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::InRange) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::InRangeWorker>(Mat::unwrapSelf(info)),
-    "Mat::InRange",
-    info
-  );
+      std::make_shared<MatImgprocBindings::InRangeWorker>(Mat::unwrapSelf(info)),
+      "Mat::InRange",
+      info);
 }
 
 NAN_METHOD(MatImgproc::InRangeAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::InRangeWorker>(Mat::unwrapSelf(info)),
-    "Mat::InRangeAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::InRangeWorker>(Mat::unwrapSelf(info)),
+      "Mat::InRangeAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CvtColor) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::CvtColorWorker>(Mat::unwrapSelf(info)),
-    "Mat::CvtColor",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CvtColorWorker>(Mat::unwrapSelf(info)),
+      "Mat::CvtColor",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CvtColorAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::CvtColorWorker>(Mat::unwrapSelf(info)),
-    "Mat::CvtColorAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CvtColorWorker>(Mat::unwrapSelf(info)),
+      "Mat::CvtColorAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BgrToGray) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::BgrToGrayWorker>(Mat::unwrapSelf(info)),
-    "Mat::BgrToGray",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BgrToGrayWorker>(Mat::unwrapSelf(info)),
+      "Mat::BgrToGray",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BgrToGrayAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::BgrToGrayWorker>(Mat::unwrapSelf(info)),
-    "Mat::BgrToGrayAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BgrToGrayWorker>(Mat::unwrapSelf(info)),
+      "Mat::BgrToGrayAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::WarpAffine) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::WarpAffineWorker>(Mat::unwrapSelf(info)),
-    "Mat::WarpAffine",
-    info
-  );
+      std::make_shared<MatImgprocBindings::WarpAffineWorker>(Mat::unwrapSelf(info)),
+      "Mat::WarpAffine",
+      info);
 }
 
 NAN_METHOD(MatImgproc::WarpAffineAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::WarpAffineWorker>(Mat::unwrapSelf(info)),
-    "Mat::WarpAffineAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::WarpAffineWorker>(Mat::unwrapSelf(info)),
+      "Mat::WarpAffineAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::WarpPerspective) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::WarpPerspectiveWorker>(Mat::unwrapSelf(info)),
-    "Mat::WarpPerspective",
-    info
-  );
+      std::make_shared<MatImgprocBindings::WarpPerspectiveWorker>(Mat::unwrapSelf(info)),
+      "Mat::WarpPerspective",
+      info);
 }
 
 NAN_METHOD(MatImgproc::WarpPerspectiveAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::WarpPerspectiveWorker>(Mat::unwrapSelf(info)),
-    "Mat::WarpPerspectiveAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::WarpPerspectiveWorker>(Mat::unwrapSelf(info)),
+      "Mat::WarpPerspectiveAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Erode) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::ErodeWorker>(Mat::unwrapSelf(info)),
-    "Mat::Erode",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ErodeWorker>(Mat::unwrapSelf(info)),
+      "Mat::Erode",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ErodeAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::ErodeWorker>(Mat::unwrapSelf(info)),
-    "Mat::ErodeAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ErodeWorker>(Mat::unwrapSelf(info)),
+      "Mat::ErodeAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Dilate) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DilateWorker>(Mat::unwrapSelf(info)),
-    "Mat::Dilate",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DilateWorker>(Mat::unwrapSelf(info)),
+      "Mat::Dilate",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DilateAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::DilateWorker>(Mat::unwrapSelf(info)),
-    "Mat::DilateAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DilateWorker>(Mat::unwrapSelf(info)),
+      "Mat::DilateAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::MorphologyEx) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::MorphologyExWorker>(Mat::unwrapSelf(info)),
-    "Mat::MorphologyEx",
-    info
-  );
+      std::make_shared<MatImgprocBindings::MorphologyExWorker>(Mat::unwrapSelf(info)),
+      "Mat::MorphologyEx",
+      info);
 }
 
 NAN_METHOD(MatImgproc::MorphologyExAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::MorphologyExWorker>(Mat::unwrapSelf(info)),
-    "Mat::MorphologyExAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::MorphologyExWorker>(Mat::unwrapSelf(info)),
+      "Mat::MorphologyExAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DistanceTransform) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DistanceTransformWorker>(Mat::unwrapSelf(info)),
-    "Mat::DistanceTransform",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DistanceTransformWorker>(Mat::unwrapSelf(info)),
+      "Mat::DistanceTransform",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DistanceTransformAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::DistanceTransformWorker>(Mat::unwrapSelf(info)),
-    "Mat::DistanceTransformAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DistanceTransformWorker>(Mat::unwrapSelf(info)),
+      "Mat::DistanceTransformAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DistanceTransformWithLabels) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DistanceTransformWithLabelsWorker>(Mat::unwrapSelf(info)),
-    "Mat::DistanceTransformWithLabels",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DistanceTransformWithLabelsWorker>(Mat::unwrapSelf(info)),
+      "Mat::DistanceTransformWithLabels",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DistanceTransformWithLabelsAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::DistanceTransformWithLabelsWorker>(Mat::unwrapSelf(info)),
-    "Mat::DistanceTransformWithLabelsAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DistanceTransformWithLabelsWorker>(Mat::unwrapSelf(info)),
+      "Mat::DistanceTransformWithLabelsAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ConnectedComponents) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::ConnectedComponentsWorker>(Mat::unwrapSelf(info)),
-    "Mat::ConnectedComponents",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ConnectedComponentsWorker>(Mat::unwrapSelf(info)),
+      "Mat::ConnectedComponents",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ConnectedComponentsAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::ConnectedComponentsWorker>(Mat::unwrapSelf(info)),
-    "Mat::ConnectedComponentsAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ConnectedComponentsWorker>(Mat::unwrapSelf(info)),
+      "Mat::ConnectedComponentsAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ConnectedComponentsWithStats) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::ConnectedComponentsWithStatsWorker>(Mat::unwrapSelf(info)),
-    "Mat::ConnectedComponentsWithStats",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ConnectedComponentsWithStatsWorker>(Mat::unwrapSelf(info)),
+      "Mat::ConnectedComponentsWithStats",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ConnectedComponentsWithStatsAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::ConnectedComponentsWithStatsWorker>(Mat::unwrapSelf(info)),
-    "Mat::ConnectedComponentsWithStatsAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ConnectedComponentsWithStatsWorker>(Mat::unwrapSelf(info)),
+      "Mat::ConnectedComponentsWithStatsAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::GrabCut) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::GrabCutWorker>(Mat::unwrapSelf(info)),
-    "Mat::GrabCut",
-    info
-  );
+      std::make_shared<MatImgprocBindings::GrabCutWorker>(Mat::unwrapSelf(info)),
+      "Mat::GrabCut",
+      info);
 }
 
 NAN_METHOD(MatImgproc::GrabCutAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::GrabCutWorker>(Mat::unwrapSelf(info)),
-    "Mat::GrabCutAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::GrabCutWorker>(Mat::unwrapSelf(info)),
+      "Mat::GrabCutAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Watershed) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::WatershedWorker>(Mat::unwrapSelf(info)),
-    "Mat::Watershed",
-    info
-  );
+      std::make_shared<MatImgprocBindings::WatershedWorker>(Mat::unwrapSelf(info)),
+      "Mat::Watershed",
+      info);
 }
 
 NAN_METHOD(MatImgproc::WatershedAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::WatershedWorker>(Mat::unwrapSelf(info)),
-    "Mat::WatershedAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::WatershedWorker>(Mat::unwrapSelf(info)),
+      "Mat::WatershedAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::_Moments) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::MomentsWorker>(Mat::unwrapSelf(info)),
-    "Mat::Moments",
-    info
-  );
+      std::make_shared<MatImgprocBindings::MomentsWorker>(Mat::unwrapSelf(info)),
+      "Mat::Moments",
+      info);
 }
 
 NAN_METHOD(MatImgproc::_MomentsAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::MomentsWorker>(Mat::unwrapSelf(info)),
-    "Mat::MomentsAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::MomentsWorker>(Mat::unwrapSelf(info)),
+      "Mat::MomentsAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::FindContours) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::FindContoursWorker>(Mat::unwrapSelf(info)),
-    "Mat::FindContours",
-    info
-  );
+      std::make_shared<MatImgprocBindings::FindContoursWorker>(Mat::unwrapSelf(info)),
+      "Mat::FindContours",
+      info);
 }
 
 NAN_METHOD(MatImgproc::FindContoursAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::FindContoursWorker>(Mat::unwrapSelf(info)),
-    "Mat::FindContoursAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::FindContoursWorker>(Mat::unwrapSelf(info)),
+      "Mat::FindContoursAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawLine) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawLineWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawLine",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawLineWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawLine",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawArrowedLine) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawArrowedLineWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawArrowedLine",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawArrowedLineWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawArrowedLine",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawRectangle) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawRectangleWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawRectangle",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawRectangleWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawRectangle",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawCircle) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawCircleWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawCircle",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawCircleWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawCircle",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawEllipse) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawEllipseWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawEllipse",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawEllipseWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawEllipse",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawPolylines) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawPolylinesWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawPolylines",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawPolylinesWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawPolylines",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawFillPoly) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawFillPolyWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawFillPoly",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawFillPolyWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawFillPoly",
+      info);
 }
 
 NAN_METHOD(MatImgproc::DrawFillConvexPoly) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::DrawFillConvexPolyWorker>(Mat::unwrapSelf(info)),
-    "Mat::DrawFillConvexPoly",
-    info
-  );
+      std::make_shared<MatImgprocBindings::DrawFillConvexPolyWorker>(Mat::unwrapSelf(info)),
+      "Mat::DrawFillConvexPoly",
+      info);
 }
 
 NAN_METHOD(MatImgproc::PutText) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::PutTextWorker>(Mat::unwrapSelf(info)),
-    "Mat::PutText",
-    info
-  );
+      std::make_shared<MatImgprocBindings::PutTextWorker>(Mat::unwrapSelf(info)),
+      "Mat::PutText",
+      info);
 }
 
 NAN_METHOD(MatImgproc::PutTextAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::PutTextWorker>(Mat::unwrapSelf(info)),
-    "Mat::PutTextAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::PutTextWorker>(Mat::unwrapSelf(info)),
+      "Mat::PutTextAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::MatchTemplate) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::MatchTemplateWorker>(Mat::unwrapSelf(info)),
-    "Mat::MatchTemplate",
-    info
-  );
+      std::make_shared<MatImgprocBindings::MatchTemplateWorker>(Mat::unwrapSelf(info)),
+      "Mat::MatchTemplate",
+      info);
 }
 
 NAN_METHOD(MatImgproc::MatchTemplateAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::MatchTemplateWorker>(Mat::unwrapSelf(info)),
-    "Mat::MatchTemplateAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::MatchTemplateWorker>(Mat::unwrapSelf(info)),
+      "Mat::MatchTemplateAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Canny) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::CannyWorker>(Mat::unwrapSelf(info)),
-    "Mat::Canny",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CannyWorker>(Mat::unwrapSelf(info)),
+      "Mat::Canny",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CannyAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::CannyWorker>(Mat::unwrapSelf(info)),
-    "Mat::CannyAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CannyWorker>(Mat::unwrapSelf(info)),
+      "Mat::CannyAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Sobel) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::SobelWorker>(Mat::unwrapSelf(info), true),
-    "Mat::Sobel",
-    info
-  );
+      std::make_shared<MatImgprocBindings::SobelWorker>(Mat::unwrapSelf(info), true),
+      "Mat::Sobel",
+      info);
 }
 
 NAN_METHOD(MatImgproc::SobelAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::SobelWorker>(Mat::unwrapSelf(info), true),
-    "Mat::SobelAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::SobelWorker>(Mat::unwrapSelf(info), true),
+      "Mat::SobelAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Scharr) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::ScharrWorker>(Mat::unwrapSelf(info), false),
-    "Mat::Scharr",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ScharrWorker>(Mat::unwrapSelf(info), false),
+      "Mat::Scharr",
+      info);
 }
 
 NAN_METHOD(MatImgproc::ScharrAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::ScharrWorker>(Mat::unwrapSelf(info), false),
-    "Mat::ScharrAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::ScharrWorker>(Mat::unwrapSelf(info), false),
+      "Mat::ScharrAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Laplacian) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::LaplacianWorker>(Mat::unwrapSelf(info)),
-    "Mat::Laplacian",
-    info
-  );
+      std::make_shared<MatImgprocBindings::LaplacianWorker>(Mat::unwrapSelf(info)),
+      "Mat::Laplacian",
+      info);
 }
 
 NAN_METHOD(MatImgproc::LaplacianAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::LaplacianWorker>(Mat::unwrapSelf(info)),
-    "Mat::LaplacianAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::LaplacianWorker>(Mat::unwrapSelf(info)),
+      "Mat::LaplacianAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::PyrDown) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info)),
-    "Mat::PyrDown",
-    info
-  );
+      std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info)),
+      "Mat::PyrDown",
+      info);
 }
 
 NAN_METHOD(MatImgproc::PyrDownAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info)),
-    "Mat::PyrDownAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info)),
+      "Mat::PyrDownAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::PyrUp) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info), true),
-    "Mat::PyrUp",
-    info
-  );
+      std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info), true),
+      "Mat::PyrUp",
+      info);
 }
 
 NAN_METHOD(MatImgproc::PyrUpAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info), true),
-    "Mat::PyrUpAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::PyrWorker>(Mat::unwrapSelf(info), true),
+      "Mat::PyrUpAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BuildPyramid) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::BuildPyramidWorker>(Mat::unwrapSelf(info)),
-    "Mat::BuildPyramid",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BuildPyramidWorker>(Mat::unwrapSelf(info)),
+      "Mat::BuildPyramid",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BuildPyramidAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::BuildPyramidWorker>(Mat::unwrapSelf(info)),
-    "Mat::BuildPyramidAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BuildPyramidWorker>(Mat::unwrapSelf(info)),
+      "Mat::BuildPyramidAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::HoughLines) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::HoughLinesWorker>(Mat::unwrapSelf(info)),
-    "Mat::HoughLines",
-    info
-  );
+      std::make_shared<MatImgprocBindings::HoughLinesWorker>(Mat::unwrapSelf(info)),
+      "Mat::HoughLines",
+      info);
 }
 
 NAN_METHOD(MatImgproc::HoughLinesAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::HoughLinesWorker>(Mat::unwrapSelf(info)),
-    "Mat::HoughLinesAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::HoughLinesWorker>(Mat::unwrapSelf(info)),
+      "Mat::HoughLinesAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::HoughLinesP) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::HoughLinesPWorker>(Mat::unwrapSelf(info)),
-    "Mat::HoughLinesP",
-    info
-  );
+      std::make_shared<MatImgprocBindings::HoughLinesPWorker>(Mat::unwrapSelf(info)),
+      "Mat::HoughLinesP",
+      info);
 }
 
 NAN_METHOD(MatImgproc::HoughLinesPAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::HoughLinesPWorker>(Mat::unwrapSelf(info)),
-    "Mat::HoughLinesPAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::HoughLinesPWorker>(Mat::unwrapSelf(info)),
+      "Mat::HoughLinesPAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::HoughCircles) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::HoughCirclesWorker>(Mat::unwrapSelf(info)),
-    "Mat::HoughCircles",
-    info
-  );
+      std::make_shared<MatImgprocBindings::HoughCirclesWorker>(Mat::unwrapSelf(info)),
+      "Mat::HoughCircles",
+      info);
 }
 
 NAN_METHOD(MatImgproc::HoughCirclesAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::HoughCirclesWorker>(Mat::unwrapSelf(info)),
-    "Mat::HoughCirclesAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::HoughCirclesWorker>(Mat::unwrapSelf(info)),
+      "Mat::HoughCirclesAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::EqualizeHist) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::EqualizeHistWorker>(Mat::unwrapSelf(info)),
-    "Mat::EqualizeHist",
-    info
-  );
+      std::make_shared<MatImgprocBindings::EqualizeHistWorker>(Mat::unwrapSelf(info)),
+      "Mat::EqualizeHist",
+      info);
 }
 
 NAN_METHOD(MatImgproc::EqualizeHistAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::EqualizeHistWorker>(Mat::unwrapSelf(info)),
-    "Mat::EqualizeHistAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::EqualizeHistWorker>(Mat::unwrapSelf(info)),
+      "Mat::EqualizeHistAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CompareHist) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::CompareHistWorker>(Mat::unwrapSelf(info)),
-    "Mat::CompareHist",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CompareHistWorker>(Mat::unwrapSelf(info)),
+      "Mat::CompareHist",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CompareHistAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::CompareHistWorker>(Mat::unwrapSelf(info)),
-    "Mat::CompareHistAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CompareHistWorker>(Mat::unwrapSelf(info)),
+      "Mat::CompareHistAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::FloodFill) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::FloodFillWorker>(Mat::unwrapSelf(info)),
-    "Mat::FloodFill",
-    info
-  );
+      std::make_shared<MatImgprocBindings::FloodFillWorker>(Mat::unwrapSelf(info)),
+      "Mat::FloodFill",
+      info);
 }
 
 NAN_METHOD(MatImgproc::FloodFillAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::FloodFillWorker>(Mat::unwrapSelf(info)),
-    "Mat::FloodFillAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::FloodFillWorker>(Mat::unwrapSelf(info)),
+      "Mat::FloodFillAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BilateralFilter) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::BilateralFilterWorker>(Mat::unwrapSelf(info)),
-    "Mat::BilateralFilter",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BilateralFilterWorker>(Mat::unwrapSelf(info)),
+      "Mat::BilateralFilter",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BilateralFilterAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::BilateralFilterWorker>(Mat::unwrapSelf(info)),
-    "Mat::BilateralFilterAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BilateralFilterWorker>(Mat::unwrapSelf(info)),
+      "Mat::BilateralFilterAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BoxFilter) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::BoxFilterWorker>(Mat::unwrapSelf(info)),
-    "Mat::BoxFilter",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BoxFilterWorker>(Mat::unwrapSelf(info)),
+      "Mat::BoxFilter",
+      info);
 }
 
 NAN_METHOD(MatImgproc::BoxFilterAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::BoxFilterWorker>(Mat::unwrapSelf(info)),
-    "Mat::BoxFilterAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::BoxFilterWorker>(Mat::unwrapSelf(info)),
+      "Mat::BoxFilterAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::SqrBoxFilter) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::SqrBoxFilterWorker>(Mat::unwrapSelf(info)),
-    "Mat::SqrBoxFilter",
-    info
-  );
+      std::make_shared<MatImgprocBindings::SqrBoxFilterWorker>(Mat::unwrapSelf(info)),
+      "Mat::SqrBoxFilter",
+      info);
 }
 
 NAN_METHOD(MatImgproc::SqrBoxFilterAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::SqrBoxFilterWorker>(Mat::unwrapSelf(info)),
-    "Mat::SqrBoxFilterAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::SqrBoxFilterWorker>(Mat::unwrapSelf(info)),
+      "Mat::SqrBoxFilterAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Filter2D) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::Filter2DWorker>(Mat::unwrapSelf(info)),
-    "Mat::Filter2D",
-    info
-  );
+      std::make_shared<MatImgprocBindings::Filter2DWorker>(Mat::unwrapSelf(info)),
+      "Mat::Filter2D",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Filter2DAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::Filter2DWorker>(Mat::unwrapSelf(info)),
-    "Mat::Filter2DAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::Filter2DWorker>(Mat::unwrapSelf(info)),
+      "Mat::Filter2DAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::SepFilter2D) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::SepFilter2DWorker>(Mat::unwrapSelf(info)),
-    "Mat::SepFilter2D",
-    info
-  );
+      std::make_shared<MatImgprocBindings::SepFilter2DWorker>(Mat::unwrapSelf(info)),
+      "Mat::SepFilter2D",
+      info);
 }
 
 NAN_METHOD(MatImgproc::SepFilter2DAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::SepFilter2DWorker>(Mat::unwrapSelf(info)),
-    "Mat::SepFilter2DAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::SepFilter2DWorker>(Mat::unwrapSelf(info)),
+      "Mat::SepFilter2DAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerHarris) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::CornerHarrisWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerHarris",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerHarrisWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerHarris",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerHarrisAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::CornerHarrisWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerHarrisAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerHarrisWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerHarrisAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerSubPix) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::CornerSubPixWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerSubPix",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerSubPixWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerSubPix",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerSubPixAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::CornerSubPixWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerSubPixAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerSubPixWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerSubPixAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerMinEigenVal) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::CornerMinEigenValWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerMinEigenVal",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerMinEigenValWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerMinEigenVal",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerMinEigenValAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::CornerMinEigenValWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerMinEigenValAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerMinEigenValWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerMinEigenValAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerEigenValsAndVecs) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::CornerEigenValsAndVecsWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerEigenValsAndVecs",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerEigenValsAndVecsWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerEigenValsAndVecs",
+      info);
 }
 
 NAN_METHOD(MatImgproc::CornerEigenValsAndVecsAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::CornerEigenValsAndVecsWorker>(Mat::unwrapSelf(info)),
-    "Mat::CornerEigenValsAndVecsAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::CornerEigenValsAndVecsWorker>(Mat::unwrapSelf(info)),
+      "Mat::CornerEigenValsAndVecsAsync",
+      info);
 }
 
 NAN_METHOD(MatImgproc::Integral) {
   FF::executeSyncBinding(
-    std::make_shared<MatImgprocBindings::IntegralWorker>(Mat::unwrapSelf(info)),
-    "Mat::Integral",
-    info
-  );
+      std::make_shared<MatImgprocBindings::IntegralWorker>(Mat::unwrapSelf(info)),
+      "Mat::Integral",
+      info);
 }
 
 NAN_METHOD(MatImgproc::IntegralAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<MatImgprocBindings::IntegralWorker>(Mat::unwrapSelf(info)),
-    "Mat::IntegralAsync",
-    info
-  );
+      std::make_shared<MatImgprocBindings::IntegralWorker>(Mat::unwrapSelf(info)),
+      "Mat::IntegralAsync",
+      info);
 }
 
 #if CV_VERSION_LOWER_THAN(4, 0, 0)
 NAN_METHOD(MatImgproc::Undistort) {
-	Mat::syncBinding<MatImgprocBindings::Undistort>("Undistort", info);
+  Mat::syncBinding<MatImgprocBindings::Undistort>("Undistort", info);
 }
 
 NAN_METHOD(MatImgproc::UndistortAsync) {
-	Mat::asyncBinding<MatImgprocBindings::Undistort>("Undistort", info);
+  Mat::asyncBinding<MatImgprocBindings::Undistort>("Undistort", info);
 }
 #endif
 
 NAN_METHOD(MatImgproc::GoodFeaturesToTrack) {
-	Mat::syncBinding<ImgprocBindings::GoodFeaturesToTrack>("GoodFeaturesToTrack", info);
+  Mat::syncBinding<ImgprocBindings::GoodFeaturesToTrack>("GoodFeaturesToTrack", info);
 }
 
 NAN_METHOD(MatImgproc::GoodFeaturesToTrackAsync) {
-	Mat::asyncBinding<ImgprocBindings::GoodFeaturesToTrack>("GoodFeaturesToTrack", info);
+  Mat::asyncBinding<ImgprocBindings::GoodFeaturesToTrack>("GoodFeaturesToTrack", info);
 }
 
 NAN_METHOD(MatImgproc::Blur) {
-	Mat::syncBinding<ImgprocBindings::Blur>("Blur", info);
+  Mat::syncBinding<ImgprocBindings::Blur>("Blur", info);
 }
 
 NAN_METHOD(MatImgproc::BlurAsync) {
-	Mat::asyncBinding<ImgprocBindings::Blur>("Blur", info);
+  Mat::asyncBinding<ImgprocBindings::Blur>("Blur", info);
 }
 
 NAN_METHOD(MatImgproc::GaussianBlur) {
-	Mat::syncBinding<ImgprocBindings::GaussianBlur>("GaussianBlur", info);
+  Mat::syncBinding<ImgprocBindings::GaussianBlur>("GaussianBlur", info);
 }
 
 NAN_METHOD(MatImgproc::GaussianBlurAsync) {
-	Mat::asyncBinding<ImgprocBindings::GaussianBlur>("GaussianBlur", info);
+  Mat::asyncBinding<ImgprocBindings::GaussianBlur>("GaussianBlur", info);
 }
 
 NAN_METHOD(MatImgproc::MedianBlur) {
-	Mat::syncBinding<ImgprocBindings::MedianBlur>("MedianBlur", info);
+  Mat::syncBinding<ImgprocBindings::MedianBlur>("MedianBlur", info);
 }
 
 NAN_METHOD(MatImgproc::MedianBlurAsync) {
-	Mat::asyncBinding<ImgprocBindings::MedianBlur>("MedianBlur", info);
+  Mat::asyncBinding<ImgprocBindings::MedianBlur>("MedianBlur", info);
 }
 
 #endif

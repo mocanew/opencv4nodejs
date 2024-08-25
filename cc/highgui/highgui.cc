@@ -2,22 +2,22 @@
 
 #ifdef HAVE_OPENCV_HIGHGUI
 
-#include "opencv2/core.hpp"
-#include "macros.h"
 #include "highgui.h"
 #include "highguiBindings.h"
 #include "highguiConstants.h"
+#include "macros.h"
+#include "opencv2/core.hpp"
 
 NAN_MODULE_INIT(Highgui::Init) {
-    HighguiConstants::Init(target);
+  HighguiConstants::Init(target);
 
-    Nan::SetMethod(target, "setWindowProperty", setWindowProperty);
-    Nan::SetMethod(target, "getWindowProperty", getWindowProperty);
-    Nan::SetMethod(target, "setWindowTitle", setWindowTitle);
-    Nan::SetMethod(target, "moveWindow", moveWindow);
-    Nan::SetMethod(target, "namedWindow", namedWindow);
-    Nan::SetMethod(target, "resizeWindow", resizeWindow);
-    Nan::SetMethod(target, "startWindowThread", startWindowThread);
+  Nan::SetMethod(target, "setWindowProperty", setWindowProperty);
+  Nan::SetMethod(target, "getWindowProperty", getWindowProperty);
+  Nan::SetMethod(target, "setWindowTitle", setWindowTitle);
+  Nan::SetMethod(target, "moveWindow", moveWindow);
+  Nan::SetMethod(target, "namedWindow", namedWindow);
+  Nan::SetMethod(target, "resizeWindow", resizeWindow);
+  Nan::SetMethod(target, "startWindowThread", startWindowThread);
 };
 
 NAN_METHOD(Highgui::setWindowProperty) {
@@ -51,7 +51,7 @@ NAN_METHOD(Highgui::setWindowProperty) {
 
 NAN_METHOD(Highgui::moveWindow) {
   FF::TryCatch tryCatch("Highgui::moveWindow");
-	std::string winName;
+  std::string winName;
   int x;
   int y;
   if (!info[0]->IsString()) {
@@ -98,7 +98,7 @@ NAN_METHOD(Highgui::getWindowProperty) {
 NAN_METHOD(Highgui::namedWindow) {
   FF::TryCatch tryCatch("Highgui::namedWindow");
 
-	std::string winName;
+  std::string winName;
   int flags = cv::WINDOW_AUTOSIZE;
 
   if (!info[0]->IsString()) {

@@ -2,8 +2,8 @@
 
 #ifdef HAVE_OPENCV_IMG_HASH
 
-#include "img_hash.h"
 #include "PHash.h"
+#include "img_hash.h"
 
 NAN_MODULE_INIT(ImgHash::Init) {
   PHash::Init(target);

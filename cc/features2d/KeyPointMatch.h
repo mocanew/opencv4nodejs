@@ -1,6 +1,6 @@
+#include "KeyPoint.h"
 #include "macros.h"
 #include <opencv2/imgproc.hpp>
-#include "KeyPoint.h"
 
 #ifndef FF_KEYPOINTMATCH_H_
 #define FF_KEYPOINTMATCH_H_

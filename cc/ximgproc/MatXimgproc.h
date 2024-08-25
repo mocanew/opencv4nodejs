@@ -10,7 +10,6 @@ public:
 
   static NAN_METHOD(GuidedFilter);
   static NAN_METHOD(GuidedFilterAsync);
-
 };
 
 #endif

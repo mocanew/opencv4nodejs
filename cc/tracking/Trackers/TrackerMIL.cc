@@ -8,43 +8,42 @@
 Nan::Persistent<v8::FunctionTemplate> TrackerMIL::constructor;
 
 NAN_MODULE_INIT(TrackerMIL::Init) {
-	v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TrackerMIL::New);
-	v8::Local<v8::ObjectTemplate> instanceTemplate = ctor->InstanceTemplate();
+  v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TrackerMIL::New);
+  v8::Local<v8::ObjectTemplate> instanceTemplate = ctor->InstanceTemplate();
 
-	Tracker::Init(ctor);
-	TrackerMILParams::Init(target);
+  Tracker::Init(ctor);
+  TrackerMILParams::Init(target);
 
-	constructor.Reset(ctor);
-	ctor->SetClassName(FF::newString("TrackerMIL"));
-	instanceTemplate->SetInternalFieldCount(1);
+  constructor.Reset(ctor);
+  ctor->SetClassName(FF::newString("TrackerMIL"));
+  instanceTemplate->SetInternalFieldCount(1);
 
-	Nan::Set(target,FF::newString("TrackerMIL"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("TrackerMIL"), FF::getFunction(ctor));
 };
 
-
 NAN_METHOD(TrackerMIL::New) {
-	FF::TryCatch tryCatch("TrackerMIL::New");
-	FF_ASSERT_CONSTRUCT_CALL();
+  FF::TryCatch tryCatch("TrackerMIL::New");
+  FF_ASSERT_CONSTRUCT_CALL();
 
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	cv::legacy::TrackerMIL::Params params;
+  cv::legacy::TrackerMIL::Params params;
 #else
-	cv::TrackerMIL::Params params;
+  cv::TrackerMIL::Params params;
 #endif
-	if (TrackerMILParams::Converter::optArg(0, &params, info)) {
-		return tryCatch.reThrow();
-	}
+  if (TrackerMILParams::Converter::optArg(0, &params, info)) {
+    return tryCatch.reThrow();
+  }
 
-	TrackerMIL* self = new TrackerMIL();
+  TrackerMIL* self = new TrackerMIL();
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	self->tracker = cv::legacy::TrackerMIL::create(params);
+  self->tracker = cv::legacy::TrackerMIL::create(params);
 #elif CV_VERSION_GREATER_EQUAL(3, 3, 0)
-	self->tracker = cv::TrackerMIL::create(params);
+  self->tracker = cv::TrackerMIL::create(params);
 #else
-	self->tracker = cv::TrackerMIL::createTracker(params);
+  self->tracker = cv::TrackerMIL::createTracker(params);
 #endif
-	self->Wrap(info.Holder());
-	info.GetReturnValue().Set(info.Holder());
+  self->Wrap(info.Holder());
+  info.GetReturnValue().Set(info.Holder());
 };
 
 #endif

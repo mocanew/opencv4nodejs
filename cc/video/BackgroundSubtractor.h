@@ -7,12 +7,12 @@
 
 class BackgroundSubtractor : public FF::ObjectWrapBase<BackgroundSubtractor>, public Nan::ObjectWrap {
 public:
-	virtual cv::Ptr<cv::BackgroundSubtractor> getSubtractor() = 0;
-	cv::Mat fgMask;
+  virtual cv::Ptr<cv::BackgroundSubtractor> getSubtractor() = 0;
+  cv::Mat fgMask;
 
-	static void Init(v8::Local<v8::FunctionTemplate>);
-	static NAN_METHOD(SetBackgroundImage);
-	static NAN_METHOD(Apply);
+  static void Init(v8::Local<v8::FunctionTemplate>);
+  static NAN_METHOD(SetBackgroundImage);
+  static NAN_METHOD(Apply);
 };
 
 #endif

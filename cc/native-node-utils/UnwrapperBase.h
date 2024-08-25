@@ -5,18 +5,18 @@
 
 namespace FF {
 
-	template<typename UnwrapperImpl, class T>
-	class UnwrapperBase {
-	public:
-		static bool unwrap(T* pVal, v8::Local<v8::Value> jsVal) {
-			if (!UnwrapperImpl::assertType(jsVal)) {
-				return true;
-			}
-			*pVal = UnwrapperImpl::unwrapUnchecked(jsVal);
-			return false;
-		}
-	};
+template <typename UnwrapperImpl, class T>
+class UnwrapperBase {
+public:
+  static bool unwrap(T* pVal, v8::Local<v8::Value> jsVal) {
+    if (!UnwrapperImpl::assertType(jsVal)) {
+      return true;
+    }
+    *pVal = UnwrapperImpl::unwrapUnchecked(jsVal);
+    return false;
+  }
+};
 
-}
+} // namespace FF
 
 #endif

@@ -11,21 +11,21 @@ class TrackerGOTURN : public FF::ObjectWrapBase<TrackerGOTURN>, public Nan::Obje
 class TrackerGOTURN : public Tracker {
 #endif
 public:
-	cv::Ptr<cv::TrackerGOTURN> tracker;
+  cv::Ptr<cv::TrackerGOTURN> tracker;
 
-	static NAN_MODULE_INIT(Init);
-	static NAN_METHOD(New);
+  static NAN_MODULE_INIT(Init);
+  static NAN_METHOD(New);
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	static NAN_METHOD(Clear);
-	static NAN_METHOD(Init);
-	static NAN_METHOD(Update);
-	static NAN_METHOD(GetModel);
+  static NAN_METHOD(Clear);
+  static NAN_METHOD(Init);
+  static NAN_METHOD(Update);
+  static NAN_METHOD(GetModel);
 #endif
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
 
-	cv::Ptr<cv::Tracker> getTracker() {
-		return tracker;
-	}
+  cv::Ptr<cv::Tracker> getTracker() {
+    return tracker;
+  }
 };
 
 #endif

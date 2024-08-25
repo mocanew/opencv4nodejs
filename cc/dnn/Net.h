@@ -1,7 +1,7 @@
-#include "NativeNodeUtils.h"
-#include "opencv2/dnn.hpp"
 #include "CatchCvExceptionWorker.h"
 #include "Mat.h"
+#include "NativeNodeUtils.h"
+#include "opencv2/dnn.hpp"
 
 #ifndef __FF_NET_H__
 #define __FF_NET_H__

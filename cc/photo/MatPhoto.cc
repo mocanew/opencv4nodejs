@@ -11,11 +11,11 @@ void MatPhoto::Init(v8::Local<v8::FunctionTemplate> ctor) {
 };
 
 NAN_METHOD(MatPhoto::SeamlessClone) {
-	Mat::syncBinding<PhotoBindings::SeamlessClone>("SeamlessClone", info);
+  Mat::syncBinding<PhotoBindings::SeamlessClone>("SeamlessClone", info);
 }
 
 NAN_METHOD(MatPhoto::SeamlessCloneAsync) {
-	Mat::asyncBinding<PhotoBindings::SeamlessClone>("SeamlessClone", info);
+  Mat::asyncBinding<PhotoBindings::SeamlessClone>("SeamlessClone", info);
 }
 
 #endif

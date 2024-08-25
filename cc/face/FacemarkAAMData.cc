@@ -19,13 +19,13 @@ NAN_MODULE_INIT(FacemarkAAMData::Init) {
 
   Nan::SetAccessor(instanceTemplate, FF::newString("s0"), s0_getter, s0_setter);
 
-  Nan::Set(target,FF::newString("FacemarkAAMData"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("FacemarkAAMData"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(FacemarkAAMData::New) {
-	FF::TryCatch tryCatch("FacemarkAAMData::New");
-	FF_ASSERT_CONSTRUCT_CALL();
-  FacemarkAAMData *self = new FacemarkAAMData();
+  FF::TryCatch tryCatch("FacemarkAAMData::New");
+  FF_ASSERT_CONSTRUCT_CALL();
+  FacemarkAAMData* self = new FacemarkAAMData();
   self->self = cv::face::FacemarkAAM::Data();
   self->Wrap(info.Holder());
   info.GetReturnValue().Set(info.Holder());
