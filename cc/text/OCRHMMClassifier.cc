@@ -18,23 +18,21 @@ NAN_MODULE_INIT(OCRHMMClassifier::Init) {
   Nan::SetPrototypeMethod(ctor, "eval", Eval);
   Nan::SetPrototypeMethod(ctor, "evalAsync", EvalAsync);
 
-  Nan::Set(target,FF::newString("OCRHMMClassifier"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("OCRHMMClassifier"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(OCRHMMClassifier::Eval) {
   FF::executeSyncBinding(
-    std::make_shared<OCRHMMClassifierBindings::EvalWorker>(OCRHMMClassifier::unwrapSelf(info)),
-    "OCRHMMClassifier::Eval",
-    info
-  );
+      std::make_shared<OCRHMMClassifierBindings::EvalWorker>(OCRHMMClassifier::unwrapSelf(info)),
+      "OCRHMMClassifier::Eval",
+      info);
 }
 
 NAN_METHOD(OCRHMMClassifier::EvalAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<OCRHMMClassifierBindings::EvalWorker>(OCRHMMClassifier::unwrapSelf(info)),
-    "OCRHMMClassifier::EvalAsync",
-    info
-  );
+      std::make_shared<OCRHMMClassifierBindings::EvalWorker>(OCRHMMClassifier::unwrapSelf(info)),
+      "OCRHMMClassifier::EvalAsync",
+      info);
 }
 
 #endif

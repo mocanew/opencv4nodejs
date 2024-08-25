@@ -1,0 +1,14 @@
+BasedOnStyle: LLVM
+UseTab: Never
+# UseTab: Always
+# IndentWidth: 4
+BreakBeforeBraces: Attach
+# put a space before the opening parenthesis in control flow constructs
+BreakBeforeBinaryOperators: NonAssignment
+AllowShortFunctionsOnASingleLine: None
+IndentFunctionDeclarationAfterType: true
+PointerAlignment: Left
+# do not alter lines with trailing comments
+ColumnLimit: 0
+# do not indent public, protected, private
+IndentAccessModifiers: false

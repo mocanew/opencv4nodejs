@@ -1,54 +1,54 @@
-#include "coreUtils.h"
-#include "matUtils.h"
-#include "Vec.h"
+#include "CatchCvExceptionWorker.h"
+#include "ExternalMemTracking.h"
+#include "NativeNodeUtils.h"
 #include "Point2.h"
 #include "Rect.h"
 #include "RotatedRect.h"
-#include "CatchCvExceptionWorker.h"
+#include "Vec.h"
+#include "coreUtils.h"
 #include "macros.h"
-#include "NativeNodeUtils.h"
-#include "ExternalMemTracking.h"
+#include "matUtils.h"
 
 #ifndef __FF_MAT_H__
 #define __FF_MAT_H__
 
 class Mat : public FF::ObjectWrap<Mat, cv::Mat> {
 public:
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
 
-	static const char* getClassName() {
-		return "Mat";
-	}
+  static const char* getClassName() {
+    return "Mat";
+  }
 
-	static NAN_MODULE_INIT(Init);
+  static NAN_MODULE_INIT(Init);
 
   FF_GETTER_CUSTOM(rows, FF::IntConverter, self.rows);
   FF_GETTER_CUSTOM(cols, FF::IntConverter, self.cols);
-	FF_GETTER_CUSTOM(type, FF::IntConverter, self.type());
-	FF_GETTER_CUSTOM(channels, FF::IntConverter, self.channels());
-	FF_GETTER_CUSTOM(dims, FF::IntConverter, self.dims);
-	FF_GETTER_CUSTOM(depth, FF::IntConverter, self.depth());
-	FF_GETTER_CUSTOM(empty, FF::IntConverter, self.empty());
+  FF_GETTER_CUSTOM(type, FF::IntConverter, self.type());
+  FF_GETTER_CUSTOM(channels, FF::IntConverter, self.channels());
+  FF_GETTER_CUSTOM(dims, FF::IntConverter, self.dims);
+  FF_GETTER_CUSTOM(depth, FF::IntConverter, self.depth());
+  FF_GETTER_CUSTOM(empty, FF::IntConverter, self.empty());
 
-	static NAN_GETTER(GetElemSize) {
-		info.GetReturnValue().Set((int)Mat::unwrapSelf(info).elemSize());
-	};
-	static NAN_GETTER(GetStep) {
-		info.GetReturnValue().Set((int)Mat::unwrapSelf(info).step.operator size_t());
-	};
-	static NAN_GETTER(GetSizes) {
-		cv::Mat m = Mat::unwrapSelf(info);
-		std::vector<int> sizes;
-		for (int s = 0; s < m.dims; s++) {
-			sizes.push_back(m.size[s]);
-		}
-		info.GetReturnValue().Set(FF::IntArrayConverter::wrap(sizes));
-	};
+  static NAN_GETTER(GetElemSize) {
+    info.GetReturnValue().Set((int)Mat::unwrapSelf(info).elemSize());
+  };
+  static NAN_GETTER(GetStep) {
+    info.GetReturnValue().Set((int)Mat::unwrapSelf(info).step.operator size_t());
+  };
+  static NAN_GETTER(GetSizes) {
+    cv::Mat m = Mat::unwrapSelf(info);
+    std::vector<int> sizes;
+    for (int s = 0; s < m.dims; s++) {
+      sizes.push_back(m.size[s]);
+    }
+    info.GetReturnValue().Set(FF::IntArrayConverter::wrap(sizes));
+  };
 
-	FF_INIT_MAT_OPERATIONS();
-	static NAN_METHOD(Dot) {
-		FF_OPERATOR_RET_SCALAR(&cv::Mat::dot, FF_APPLY_CLASS_FUNC, Mat, "Dot");
-	}
+  FF_INIT_MAT_OPERATIONS();
+  static NAN_METHOD(Dot) {
+    FF_OPERATOR_RET_SCALAR(&cv::Mat::dot, FF_APPLY_CLASS_FUNC, Mat, "Dot");
+  }
 
   static NAN_METHOD(New);
   static NAN_METHOD(Eye);
@@ -133,7 +133,6 @@ public:
   static NAN_METHOD(EigenAsync);
   static NAN_METHOD(Solve);
   static NAN_METHOD(SolveAsync);
-
 };
 
 #endif

@@ -2,13 +2,13 @@
 
 #ifdef HAVE_OPENCV_DNN
 
-#include "opencv2/core.hpp"
-#include "macros.h"
 #include "dnn.h"
 #include "dnnBindings.h"
+#include "macros.h"
+#include "opencv2/core.hpp"
 
 #define FF_CONST_TYPE(CONST, VALUE) \
-	Nan::Set(target, Nan::New<v8::String>(#CONST).ToLocalChecked(), Nan::New<v8::Integer>(VALUE));
+  Nan::Set(target, Nan::New<v8::String>(#CONST).ToLocalChecked(), Nan::New<v8::Integer>(VALUE));
 
 NAN_MODULE_INIT(Dnn::Init) {
 
@@ -52,7 +52,6 @@ NAN_MODULE_INIT(Dnn::Init) {
   FF_CONST_TYPE(DNN_BACKEND_WEBNN, cv::dnn::DNN_BACKEND_WEBNN)
 #endif
 
-
   Net::Init(target);
 
   Nan::SetMethod(target, "readNetFromTensorflow", ReadNetFromTensorflow);
@@ -77,7 +76,6 @@ NAN_MODULE_INIT(Dnn::Init) {
   Nan::SetMethod(target, "readNetAsync", ReadNetAsync);
 #endif
 };
-
 
 NAN_METHOD(Dnn::ReadNetFromTensorflow) {
   FF::executeSyncBinding(std::make_shared<DnnBindings::ReadNetFromTensorflowWorker>(), "ReadNetFromTensorflow", info);

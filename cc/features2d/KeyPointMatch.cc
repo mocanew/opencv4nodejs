@@ -16,20 +16,19 @@ NAN_MODULE_INIT(KeyPointMatch::Init) {
   Nan::SetAccessor(ctor->InstanceTemplate(), Nan::New("kpTo").ToLocalChecked(), GetKpTo);
   Nan::SetAccessor(ctor->InstanceTemplate(), Nan::New("distance").ToLocalChecked(), GetDistance);
 
-  Nan::Set(target,Nan::New("KeyPointMatch").ToLocalChecked(), FF::getFunction(ctor));
+  Nan::Set(target, Nan::New("KeyPointMatch").ToLocalChecked(), FF::getFunction(ctor));
 };
 
 NAN_METHOD(KeyPointMatch::New) {
-	FF::TryCatch tryCatch("KeyPointMatch::New");
-	FF_ASSERT_CONSTRUCT_CALL();
+  FF::TryCatch tryCatch("KeyPointMatch::New");
+  FF_ASSERT_CONSTRUCT_CALL();
   if (info.Length() > 0) {
     // TODO check args
-    KeyPointMatch *keyPointMatch = new KeyPointMatch();
+    KeyPointMatch* keyPointMatch = new KeyPointMatch();
     keyPointMatch->setNativeProps(
-      Nan::ObjectWrap::Unwrap<KeyPoint>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()),
-      Nan::ObjectWrap::Unwrap<KeyPoint>(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()),
-      (float)info[2]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value()
-    );
+        Nan::ObjectWrap::Unwrap<KeyPoint>(info[0]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()),
+        Nan::ObjectWrap::Unwrap<KeyPoint>(info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked()),
+        (float)info[2]->ToNumber(Nan::GetCurrentContext()).ToLocalChecked()->Value());
     keyPointMatch->Wrap(info.Holder());
   } else {
     (new KeyPointMatch())->Wrap(info.Holder());

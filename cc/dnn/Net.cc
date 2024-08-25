@@ -2,8 +2,8 @@
 
 #ifdef HAVE_OPENCV_DNN
 
-#include "opencv2/core.hpp"
 #include "macros.h"
+#include "opencv2/core.hpp"
 
 #include "Net.h"
 #include "NetBindings.h"
@@ -42,8 +42,8 @@ NAN_MODULE_INIT(Net::Init) {
 };
 
 NAN_METHOD(Net::New) {
-	FF::TryCatch tryCatch("Net::New");
-	FF_ASSERT_CONSTRUCT_CALL();
+  FF::TryCatch tryCatch("Net::New");
+  FF_ASSERT_CONSTRUCT_CALL();
   Net* self = new Net();
   self->Wrap(info.Holder());
   info.GetReturnValue().Set(info.Holder());
@@ -51,34 +51,30 @@ NAN_METHOD(Net::New) {
 
 NAN_METHOD(Net::SetInput) {
   FF::executeSyncBinding(
-    std::make_shared<NetBindings::SetInputWorker>(Net::unwrapSelf(info)),
-    "Net::SetInput",
-    info
-  );
+      std::make_shared<NetBindings::SetInputWorker>(Net::unwrapSelf(info)),
+      "Net::SetInput",
+      info);
 }
 
 NAN_METHOD(Net::SetInputAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<NetBindings::SetInputWorker>(Net::unwrapSelf(info)),
-    "Net::SetInputAsync",
-    info
-  );
+      std::make_shared<NetBindings::SetInputWorker>(Net::unwrapSelf(info)),
+      "Net::SetInputAsync",
+      info);
 }
 
 NAN_METHOD(Net::Forward) {
   FF::executeSyncBinding(
-    std::make_shared<NetBindings::ForwardWorker>(Net::unwrapSelf(info)),
-    "Net::Forward",
-    info
-  );
+      std::make_shared<NetBindings::ForwardWorker>(Net::unwrapSelf(info)),
+      "Net::Forward",
+      info);
 }
 
 NAN_METHOD(Net::ForwardAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<NetBindings::ForwardWorker>(Net::unwrapSelf(info)),
-    "Net::ForwardAsync",
-    info
-  );
+      std::make_shared<NetBindings::ForwardWorker>(Net::unwrapSelf(info)),
+      "Net::ForwardAsync",
+      info);
 }
 
 NAN_METHOD(Net::GetLayerNames) {
@@ -119,7 +115,7 @@ NAN_METHOD(Net::SetPreferableBackend) {
   FF::TryCatch tryCatch("Core::SetPreferableBackend");
   cv::dnn::Net self = Net::unwrapSelf(info);
   int backendId;
-  if(FF::IntConverter::arg(0, &backendId, info)) {
+  if (FF::IntConverter::arg(0, &backendId, info)) {
     return tryCatch.reThrow();
   }
   self.setPreferableBackend(backendId);
@@ -129,19 +125,19 @@ NAN_METHOD(Net::SetPreferableTarget) {
   FF::TryCatch tryCatch("Core::SetPreferableTarget");
   cv::dnn::Net self = Net::unwrapSelf(info);
   int targetId;
-  if(FF::IntConverter::arg(0, &targetId, info)) {
+  if (FF::IntConverter::arg(0, &targetId, info)) {
     return tryCatch.reThrow();
   }
   self.setPreferableTarget(targetId);
 }
 
-// ret {	retval: number, timings: number[] } 
+// ret {	retval: number, timings: number[] }
 
 NAN_METHOD(Net::GetPerfProfile) {
   FF::TryCatch tryCatch("Core::GetPerfProfile");
   cv::dnn::Net self = Net::unwrapSelf(info);
 
-  // int64 cv::dnn::Net::getPerfProfile	(	std::vector< double > & 	timings	)	
+  // int64 cv::dnn::Net::getPerfProfile	(	std::vector< double > & 	timings	)
   std::vector<double> layersTimes;
   int64 time = self.getPerfProfile(layersTimes);
 
@@ -152,6 +148,5 @@ NAN_METHOD(Net::GetPerfProfile) {
 
   info.GetReturnValue().Set(obj);
 }
-
 
 #endif

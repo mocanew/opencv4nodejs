@@ -6,23 +6,24 @@
 class TrackerTLD : public Tracker {
 public:
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	cv::Ptr<cv::legacy::TrackerTLD> tracker;
+  cv::Ptr<cv::legacy::TrackerTLD> tracker;
 #else
-	cv::Ptr<cv::TrackerTLD> tracker;
+  cv::Ptr<cv::TrackerTLD> tracker;
 #endif
 
-	static NAN_MODULE_INIT(Init);
-	static NAN_METHOD(New);
+  static NAN_MODULE_INIT(Init);
+  static NAN_METHOD(New);
 
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
 
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	cv::Ptr<cv::legacy::Tracker> getTracker() {
+  cv::Ptr<cv::legacy::Tracker> getTracker(){
 #else
-	cv::Ptr<cv::Tracker> getTracker() {
+  cv::Ptr<cv::Tracker> getTracker() {
 #endif
-		return tracker;
-	}
-};
+      return tracker;
+}
+}
+;
 
 #endif

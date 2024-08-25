@@ -7,42 +7,42 @@
 Nan::Persistent<v8::FunctionTemplate> TrackerMedianFlow::constructor;
 
 NAN_MODULE_INIT(TrackerMedianFlow::Init) {
-	v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TrackerMedianFlow::New);
-	v8::Local<v8::ObjectTemplate> instanceTemplate = ctor->InstanceTemplate();
+  v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TrackerMedianFlow::New);
+  v8::Local<v8::ObjectTemplate> instanceTemplate = ctor->InstanceTemplate();
 
-	Tracker::Init(ctor);
+  Tracker::Init(ctor);
 
-	constructor.Reset(ctor);
-	ctor->SetClassName(FF::newString("TrackerMedianFlow"));
-	instanceTemplate->SetInternalFieldCount(1);
+  constructor.Reset(ctor);
+  ctor->SetClassName(FF::newString("TrackerMedianFlow"));
+  instanceTemplate->SetInternalFieldCount(1);
 
-	Nan::Set(target,FF::newString("TrackerMedianFlow"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("TrackerMedianFlow"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(TrackerMedianFlow::New) {
-	FF::TryCatch tryCatch("TrackerMedianFlow::New");
-	FF_ASSERT_CONSTRUCT_CALL();
+  FF::TryCatch tryCatch("TrackerMedianFlow::New");
+  FF_ASSERT_CONSTRUCT_CALL();
 
-	TrackerMedianFlow* self = new TrackerMedianFlow();
+  TrackerMedianFlow* self = new TrackerMedianFlow();
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	cv::legacy::TrackerMedianFlow::Params params;
+  cv::legacy::TrackerMedianFlow::Params params;
 #else
-	cv::TrackerMedianFlow::Params params;
+  cv::TrackerMedianFlow::Params params;
 #endif
-	if (FF::hasArg(info, 0) && FF::IntConverterImpl::assertType(info[0])) {
-		params.pointsInGrid = info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
-	}
+  if (FF::hasArg(info, 0) && FF::IntConverterImpl::assertType(info[0])) {
+    params.pointsInGrid = info[0]->ToInt32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+  }
 
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	self->tracker = cv::legacy::TrackerMedianFlow::create(params);
+  self->tracker = cv::legacy::TrackerMedianFlow::create(params);
 #elif CV_VERSION_GREATER_EQUAL(3, 3, 0)
-	self->tracker = cv::TrackerMedianFlow::create(params);
+  self->tracker = cv::TrackerMedianFlow::create(params);
 #else
-	self->tracker = cv::TrackerMedianFlow::createTracker(params);
+  self->tracker = cv::TrackerMedianFlow::createTracker(params);
 #endif
 
-	self->Wrap(info.Holder());
-	info.GetReturnValue().Set(info.Holder());
+  self->Wrap(info.Holder());
+  info.GetReturnValue().Set(info.Holder());
 };
 
 #endif

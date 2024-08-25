@@ -2,10 +2,10 @@
 
 #ifdef HAVE_OPENCV_FACE
 
-#include "face.h"
 #include "EigenFaceRecognizer.h"
 #include "FisherFaceRecognizer.h"
 #include "LBPHFaceRecognizer.h"
+#include "face.h"
 
 #if CV_VERSION_GREATER_EQUAL(3, 4, 0)
 #include "FacemarkAAM.h"

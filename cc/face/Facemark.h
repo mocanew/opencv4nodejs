@@ -1,5 +1,5 @@
-#include "NativeNodeUtils.h"
 #include "Mat.h"
+#include "NativeNodeUtils.h"
 #include "Point.h"
 #include "Rect.h"
 #include "macros.h"
@@ -36,7 +36,7 @@ public:
   static NAN_METHOD(Load);
 
   static bool detector(cv::InputArray image, cv::OutputArray faces,
-                       Nan::Callback *callback);
+                       Nan::Callback* callback);
 };
 
 #endif

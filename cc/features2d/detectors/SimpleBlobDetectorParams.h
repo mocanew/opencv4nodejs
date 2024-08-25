@@ -5,13 +5,13 @@
 #ifndef __FF_SIMPLEBLOBDETECTORPARAMS_H__
 #define __FF_SIMPLEBLOBDETECTORPARAMS_H__
 
-class SimpleBlobDetectorParams : public FF::ObjectWrap <SimpleBlobDetectorParams, cv::SimpleBlobDetector::Params> {
+class SimpleBlobDetectorParams : public FF::ObjectWrap<SimpleBlobDetectorParams, cv::SimpleBlobDetector::Params> {
 public:
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
 
-	static const char* getClassName() {
-		return "SimpleBlobDetector";
-	}
+  static const char* getClassName() {
+    return "SimpleBlobDetector";
+  }
 
   static NAN_MODULE_INIT(Init);
   static NAN_METHOD(New);

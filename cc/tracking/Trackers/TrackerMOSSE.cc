@@ -9,31 +9,30 @@
 Nan::Persistent<v8::FunctionTemplate> TrackerMOSSE::constructor;
 
 NAN_MODULE_INIT(TrackerMOSSE::Init) {
-	v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TrackerMOSSE::New);
-	v8::Local<v8::ObjectTemplate> instanceTemplate = ctor->InstanceTemplate();
+  v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TrackerMOSSE::New);
+  v8::Local<v8::ObjectTemplate> instanceTemplate = ctor->InstanceTemplate();
 
-	Tracker::Init(ctor);
+  Tracker::Init(ctor);
 
-	constructor.Reset(ctor);
-	ctor->SetClassName(FF::newString("TrackerMOSSE"));
-	instanceTemplate->SetInternalFieldCount(1);
+  constructor.Reset(ctor);
+  ctor->SetClassName(FF::newString("TrackerMOSSE"));
+  instanceTemplate->SetInternalFieldCount(1);
 
-	Nan::Set(target,FF::newString("TrackerMOSSE"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("TrackerMOSSE"), FF::getFunction(ctor));
 };
 
-
 NAN_METHOD(TrackerMOSSE::New) {
-	FF::TryCatch tryCatch("TrackerMOSSE::New");
-	FF_ASSERT_CONSTRUCT_CALL();
+  FF::TryCatch tryCatch("TrackerMOSSE::New");
+  FF_ASSERT_CONSTRUCT_CALL();
 
-	TrackerMOSSE* self = new TrackerMOSSE();
+  TrackerMOSSE* self = new TrackerMOSSE();
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-	self->tracker = cv::legacy::TrackerMOSSE::create();
+  self->tracker = cv::legacy::TrackerMOSSE::create();
 #else
-	self->tracker = cv::TrackerMOSSE::create();
+  self->tracker = cv::TrackerMOSSE::create();
 #endif
-	self->Wrap(info.Holder());
-	info.GetReturnValue().Set(info.Holder());
+  self->Wrap(info.Holder());
+  info.GetReturnValue().Set(info.Holder());
 };
 
 #endif

@@ -13,20 +13,20 @@ class TrackerBoostingParams : public FF::ObjectWrap<TrackerBoostingParams, cv::l
 class TrackerBoostingParams : public FF::ObjectWrap<TrackerBoostingParams, cv::TrackerBoosting::Params> {
 #endif
 public:
-	static Nan::Persistent<v8::FunctionTemplate> constructor;
+  static Nan::Persistent<v8::FunctionTemplate> constructor;
 
-	static const char* getClassName() {
-		return "TrackerBoostingParams";
-	}
+  static const char* getClassName() {
+    return "TrackerBoostingParams";
+  }
 
   static NAN_MODULE_INIT(Init);
   static NAN_METHOD(New);
 
-	FF_ACCESSORS(numClassifiers, FF::IntConverter);
-	FF_ACCESSORS(samplerOverlap, FF::FloatConverter);
-	FF_ACCESSORS(samplerSearchFactor, FF::FloatConverter);
-	FF_ACCESSORS(iterationInit, FF::IntConverter);
-	FF_ACCESSORS(featureSetNumFeatures, FF::IntConverter);
+  FF_ACCESSORS(numClassifiers, FF::IntConverter);
+  FF_ACCESSORS(samplerOverlap, FF::FloatConverter);
+  FF_ACCESSORS(samplerSearchFactor, FF::FloatConverter);
+  FF_ACCESSORS(iterationInit, FF::IntConverter);
+  FF_ACCESSORS(featureSetNumFeatures, FF::IntConverter);
 };
 
 #endif

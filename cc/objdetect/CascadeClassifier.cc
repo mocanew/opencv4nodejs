@@ -22,73 +22,67 @@ NAN_MODULE_INIT(CascadeClassifier::Init) {
   Nan::SetPrototypeMethod(ctor, "detectMultiScaleWithRejectLevelsAsync", DetectMultiScaleWithRejectLevelsAsync);
   Nan::SetPrototypeMethod(ctor, "detectMultiScaleWithRejectLevelsGpu", DetectMultiScaleWithRejectLevelsGpu);
 
-  Nan::Set(target,FF::newString("CascadeClassifier"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("CascadeClassifier"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(CascadeClassifier::New) {
-	FF::TryCatch tryCatch("CascadeClassifier::New");
-	FF_ASSERT_CONSTRUCT_CALL();
-	CascadeClassifierBindings::NewWorker worker;
+  FF::TryCatch tryCatch("CascadeClassifier::New");
+  FF_ASSERT_CONSTRUCT_CALL();
+  CascadeClassifierBindings::NewWorker worker;
 
-	if (worker.applyUnwrappers(info)) {
-		return tryCatch.reThrow();
-	}
+  if (worker.applyUnwrappers(info)) {
+    return tryCatch.reThrow();
+  }
 
-	CascadeClassifier* self = new CascadeClassifier();
-	self->setNativeObject(cv::CascadeClassifier(worker.xmlFilePath));
-	if (worker.applyUnwrappers(info)) {
-		return tryCatch.throwError(std::string("failed to load cascade.xml file: " + worker.xmlFilePath));
-	}
-	self->Wrap(info.Holder());
-	info.GetReturnValue().Set(info.Holder());
+  CascadeClassifier* self = new CascadeClassifier();
+  self->setNativeObject(cv::CascadeClassifier(worker.xmlFilePath));
+  if (worker.applyUnwrappers(info)) {
+    return tryCatch.throwError(std::string("failed to load cascade.xml file: " + worker.xmlFilePath));
+  }
+  self->Wrap(info.Holder());
+  info.GetReturnValue().Set(info.Holder());
 }
 
 NAN_METHOD(CascadeClassifier::DetectMultiScale) {
   FF::executeSyncBinding(
-    std::make_shared<CascadeClassifierBindings::DetectMultiScaleWorker>(CascadeClassifier::unwrapSelf(info)),
-    "CascadeClassifier::DetectMultiScale",
-    info
-  );
+      std::make_shared<CascadeClassifierBindings::DetectMultiScaleWorker>(CascadeClassifier::unwrapSelf(info)),
+      "CascadeClassifier::DetectMultiScale",
+      info);
 }
 
 NAN_METHOD(CascadeClassifier::DetectMultiScaleAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<CascadeClassifierBindings::DetectMultiScaleWorker>(CascadeClassifier::unwrapSelf(info)),
-    "CascadeClassifier::DetectMultiScaleAsync",
-    info
-  );
+      std::make_shared<CascadeClassifierBindings::DetectMultiScaleWorker>(CascadeClassifier::unwrapSelf(info)),
+      "CascadeClassifier::DetectMultiScaleAsync",
+      info);
 }
 
 NAN_METHOD(CascadeClassifier::DetectMultiScaleGpu) {
   FF::executeSyncBinding(
-    std::make_shared<CascadeClassifierBindings::DetectMultiScaleWorker>(CascadeClassifier::unwrapSelf(info)),
-    "CascadeClassifier::DetectMultiScaleGpu",
-    info
-  );
+      std::make_shared<CascadeClassifierBindings::DetectMultiScaleWorker>(CascadeClassifier::unwrapSelf(info)),
+      "CascadeClassifier::DetectMultiScaleGpu",
+      info);
 }
 
 NAN_METHOD(CascadeClassifier::DetectMultiScaleWithRejectLevels) {
   FF::executeSyncBinding(
-    std::make_shared<CascadeClassifierBindings::DetectMultiScaleWithRejectLevelsWorker>(CascadeClassifier::unwrapSelf(info)),
-    "CascadeClassifier::DetectMultiScaleWithRejectLevels",
-    info
-  );
+      std::make_shared<CascadeClassifierBindings::DetectMultiScaleWithRejectLevelsWorker>(CascadeClassifier::unwrapSelf(info)),
+      "CascadeClassifier::DetectMultiScaleWithRejectLevels",
+      info);
 }
 
 NAN_METHOD(CascadeClassifier::DetectMultiScaleWithRejectLevelsAsync) {
   FF::executeAsyncBinding(
-    std::make_shared<CascadeClassifierBindings::DetectMultiScaleWithRejectLevelsWorker>(CascadeClassifier::unwrapSelf(info)),
-    "CascadeClassifier::DetectMultiScaleWithRejectLevelsAsync",
-    info
-  );
+      std::make_shared<CascadeClassifierBindings::DetectMultiScaleWithRejectLevelsWorker>(CascadeClassifier::unwrapSelf(info)),
+      "CascadeClassifier::DetectMultiScaleWithRejectLevelsAsync",
+      info);
 }
 
 NAN_METHOD(CascadeClassifier::DetectMultiScaleWithRejectLevelsGpu) {
   FF::executeSyncBinding(
-    std::make_shared<CascadeClassifierBindings::DetectMultiScaleWithRejectLevelsWorker>(CascadeClassifier::unwrapSelf(info)),
-    "CascadeClassifier::DetectMultiScaleWithRejectLevelsGpu",
-    info
-  );
+      std::make_shared<CascadeClassifierBindings::DetectMultiScaleWithRejectLevelsWorker>(CascadeClassifier::unwrapSelf(info)),
+      "CascadeClassifier::DetectMultiScaleWithRejectLevelsGpu",
+      info);
 }
 
 #endif

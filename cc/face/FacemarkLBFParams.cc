@@ -34,13 +34,13 @@ NAN_MODULE_INIT(FacemarkLBFParams::Init) {
   Nan::SetAccessor(instanceTemplate, FF::newString("tree_n"), tree_n_getter, tree_n_setter);
   Nan::SetAccessor(instanceTemplate, FF::newString("verbose"), verbose_getter, verbose_setter);
 
-  Nan::Set(target,FF::newString("FacemarkLBFParams"), FF::getFunction(ctor));
+  Nan::Set(target, FF::newString("FacemarkLBFParams"), FF::getFunction(ctor));
 };
 
 NAN_METHOD(FacemarkLBFParams::New) {
-	FF::TryCatch tryCatch("FacemarkLBFParams::New");
-	FF_ASSERT_CONSTRUCT_CALL();
-  FacemarkLBFParams *self = new FacemarkLBFParams();
+  FF::TryCatch tryCatch("FacemarkLBFParams::New");
+  FF_ASSERT_CONSTRUCT_CALL();
+  FacemarkLBFParams* self = new FacemarkLBFParams();
   self->self = cv::face::FacemarkLBF::Params();
   self->Wrap(info.Holder());
   info.GetReturnValue().Set(info.Holder());

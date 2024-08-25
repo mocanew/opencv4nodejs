@@ -6,40 +6,40 @@
 namespace DnnBindings {
 
 #if CV_VERSION_GREATER_EQUAL(3, 4, 0)
-  struct ReadNetFromDarknetWorker: public CatchCvExceptionWorker {
-  public:
-    std::string cfgFile;
-    std::string darknetModelFile = "";
+struct ReadNetFromDarknetWorker : public CatchCvExceptionWorker {
+public:
+  std::string cfgFile;
+  std::string darknetModelFile = "";
 
-    cv::dnn::Net net;
+  cv::dnn::Net net;
 
-    virtual ~ReadNetFromDarknetWorker() {}
-    std::string executeCatchCvExceptionWorker() {
-      net = cv::dnn::readNetFromDarknet(cfgFile, darknetModelFile);
-      if (net.empty()) {
-        return std::string("failed to cfgFile: " + cfgFile + ", darknetModelFile: " + darknetModelFile).data();
-      }
-      return "";
+  virtual ~ReadNetFromDarknetWorker() {
+  }
+  std::string executeCatchCvExceptionWorker() {
+    net = cv::dnn::readNetFromDarknet(cfgFile, darknetModelFile);
+    if (net.empty()) {
+      return std::string("failed to cfgFile: " + cfgFile + ", darknetModelFile: " + darknetModelFile).data();
     }
+    return "";
+  }
 
-    v8::Local<v8::Value> getReturnValue() {
-      return Net::Converter::wrap(net);
-    }
+  v8::Local<v8::Value> getReturnValue() {
+    return Net::Converter::wrap(net);
+  }
 
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (FF::StringConverter::arg(0, &cfgFile, info));
-    }
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (FF::StringConverter::arg(0, &cfgFile, info));
+  }
 
-    bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (FF::StringConverter::optArg(1, &darknetModelFile, info));
-    }
-  };
+  bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (FF::StringConverter::optArg(1, &darknetModelFile, info));
+  }
+};
 #endif
-
 
 #if CV_VERSION_GREATER_EQUAL(3, 4, 2)
 
-struct ReadNetWorker: public CatchCvExceptionWorker {
+struct ReadNetWorker : public CatchCvExceptionWorker {
 public:
   std::string model;
   std::string config = "";
@@ -47,7 +47,8 @@ public:
 
   cv::dnn::Net net;
 
-  virtual ~ReadNetWorker() {}
+  virtual ~ReadNetWorker() {
+  }
 
   std::string executeCatchCvExceptionWorker() {
     net = cv::dnn::readNet(model, config, framework);
@@ -70,237 +71,217 @@ public:
   }
 
   bool hasOptArgsObject(Nan::NAN_METHOD_ARGS_TYPE info) {
-	  return FF::isArgObject(info, 1);
-	}
+    return FF::isArgObject(info, 1);
+  }
 
-	bool unwrapOptionalArgsFromOpts(Nan::NAN_METHOD_ARGS_TYPE info) {
-	  v8::Local<v8::Object> opts = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-	  return (
-		  FF::StringConverter::optProp(&config, "config", opts) ||
-		  FF::StringConverter::optProp(&framework, "framework", opts)
-    );
-	 }
+  bool unwrapOptionalArgsFromOpts(Nan::NAN_METHOD_ARGS_TYPE info) {
+    v8::Local<v8::Object> opts = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+    return (
+        FF::StringConverter::optProp(&config, "config", opts) || FF::StringConverter::optProp(&framework, "framework", opts));
+  }
 };
-# endif
+#endif
 
 #if CV_VERSION_GREATER_EQUAL(4, 0, 0)
-  struct ReadNetFromONNXWorker: public CatchCvExceptionWorker {
-  public:
-    std::string onnxFile;
+struct ReadNetFromONNXWorker : public CatchCvExceptionWorker {
+public:
+  std::string onnxFile;
 
-    cv::dnn::Net net;
+  cv::dnn::Net net;
 
-    virtual ~ReadNetFromONNXWorker() {}
+  virtual ~ReadNetFromONNXWorker() {
+  }
 
-    std::string executeCatchCvExceptionWorker() {
-      net = cv::dnn::readNetFromONNX(onnxFile);
-      if (net.empty()) {
-        return std::string("failed to load network model: " + onnxFile).data();
-      }
-      return "";
+  std::string executeCatchCvExceptionWorker() {
+    net = cv::dnn::readNetFromONNX(onnxFile);
+    if (net.empty()) {
+      return std::string("failed to load network model: " + onnxFile).data();
     }
+    return "";
+  }
 
-    v8::Local<v8::Value> getReturnValue() {
-      return Net::Converter::wrap(net);
-    }
+  v8::Local<v8::Value> getReturnValue() {
+    return Net::Converter::wrap(net);
+  }
 
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return FF::StringConverter::arg(0, &onnxFile, info);
-    }
-  };
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return FF::StringConverter::arg(0, &onnxFile, info);
+  }
+};
 #endif
 
-  struct ReadNetFromTensorflowWorker: public CatchCvExceptionWorker {
-  public:
-    std::string modelFile;
-    std::string configFile = "";
+struct ReadNetFromTensorflowWorker : public CatchCvExceptionWorker {
+public:
+  std::string modelFile;
+  std::string configFile = "";
 
-    cv::dnn::Net net;
+  cv::dnn::Net net;
 
-    virtual ~ReadNetFromTensorflowWorker() {}
+  virtual ~ReadNetFromTensorflowWorker() {
+  }
 
-    std::string executeCatchCvExceptionWorker() {
+  std::string executeCatchCvExceptionWorker() {
 #if CV_VERSION_GREATER_EQUAL(3, 4, 0)
-      net = cv::dnn::readNetFromTensorflow(modelFile, configFile);
+    net = cv::dnn::readNetFromTensorflow(modelFile, configFile);
 #else
-      net = cv::dnn::readNetFromTensorflow(modelFile);
+    net = cv::dnn::readNetFromTensorflow(modelFile);
 #endif
-      if (net.empty()) {
-        return std::string("failed to load net: " + modelFile + "failed to load config: " + configFile).data();
-      }
-      return "";
+    if (net.empty()) {
+      return std::string("failed to load net: " + modelFile + "failed to load config: " + configFile).data();
     }
+    return "";
+  }
 
-    v8::Local<v8::Value> getReturnValue() {
-      return Net::Converter::wrap(net);
+  v8::Local<v8::Value> getReturnValue() {
+    return Net::Converter::wrap(net);
+  }
+
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (FF::StringConverter::arg(0, &modelFile, info));
+  }
+
+  bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (FF::StringConverter::optArg(1, &configFile, info));
+  }
+};
+
+struct ReadNetFromCaffeWorker : public CatchCvExceptionWorker {
+public:
+  std::string prototxt;
+  std::string modelFile = "";
+
+  cv::dnn::Net net;
+
+  virtual ~ReadNetFromCaffeWorker() {
+  }
+
+  std::string executeCatchCvExceptionWorker() {
+    net = cv::dnn::readNetFromCaffe(prototxt, modelFile);
+    if (net.empty()) {
+      return std::string("failed to prototxt: " + prototxt + ", modelFile: " + modelFile).data();
     }
+    return "";
+  }
 
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (FF::StringConverter::arg(0, &modelFile, info));
-    }
+  v8::Local<v8::Value> getReturnValue() {
+    return Net::Converter::wrap(net);
+  }
 
-    bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (FF::StringConverter::optArg(1, &configFile, info));
-    }
-  };
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (
+        FF::StringConverter::arg(0, &prototxt, info));
+  }
 
-  struct ReadNetFromCaffeWorker: public CatchCvExceptionWorker {
-  public:
-    std::string prototxt;
-    std::string modelFile = "";
+  bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (FF::StringConverter::optArg(1, &modelFile, info));
+  }
+};
 
-    cv::dnn::Net net;
+struct BlobFromImageWorker : public CatchCvExceptionWorker {
+public:
+  bool isSingleImage;
+  BlobFromImageWorker(bool isSingleImage = true) {
+    this->isSingleImage = isSingleImage;
+  }
+  virtual ~BlobFromImageWorker() {
+  }
 
-    virtual ~ReadNetFromCaffeWorker() {}
+  cv::Mat image;
+  std::vector<cv::Mat> images;
 
-    std::string executeCatchCvExceptionWorker() {
-      net = cv::dnn::readNetFromCaffe(prototxt, modelFile);
-      if (net.empty()) {
-        return std::string("failed to prototxt: " + prototxt + ", modelFile: " + modelFile).data();
-      }
-      return "";
-    }
+  double scalefactor = 1.0;
+  cv::Size2d size = cv::Size2d();
+  cv::Vec3d mean = cv::Vec3d();
+  bool swapRB = true;
+  bool crop = true;
+  int ddepth = CV_32F;
+  cv::Mat returnValue;
 
-    v8::Local<v8::Value> getReturnValue() {
-      return Net::Converter::wrap(net);
-    }
-
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (
-        FF::StringConverter::arg(0, &prototxt, info)
-      );
-    }
-
-    bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (FF::StringConverter::optArg(1, &modelFile, info));
-    }
-  };
-
-  struct BlobFromImageWorker : public CatchCvExceptionWorker {
-  public:
-    bool isSingleImage;
-    BlobFromImageWorker(bool isSingleImage = true) {
-      this->isSingleImage = isSingleImage;
-    }
-    virtual ~BlobFromImageWorker() {}
-
-    cv::Mat image;
-    std::vector<cv::Mat> images;
-  
-    double scalefactor = 1.0;
-    cv::Size2d size = cv::Size2d();
-    cv::Vec3d mean = cv::Vec3d();
-    bool swapRB = true;
-    bool crop = true;
-    int ddepth = CV_32F;
-    cv::Mat returnValue;
-
-    std::string executeCatchCvExceptionWorker() {
+  std::string executeCatchCvExceptionWorker() {
 #if CV_VERSION_GREATER_EQUAL(3, 4, 0) && CV_VERSION_REVISION > 2
-      if (isSingleImage) {
-        returnValue = cv::dnn::blobFromImage(image, scalefactor, size, mean, swapRB, crop, ddepth);
-      }
-      else {
-        returnValue = cv::dnn::blobFromImages(images, scalefactor, size, mean, swapRB, crop, ddepth);
-      }
+    if (isSingleImage) {
+      returnValue = cv::dnn::blobFromImage(image, scalefactor, size, mean, swapRB, crop, ddepth);
+    } else {
+      returnValue = cv::dnn::blobFromImages(images, scalefactor, size, mean, swapRB, crop, ddepth);
+    }
 #else
-      if (isSingleImage) {
-        returnValue = cv::dnn::blobFromImage(image, scalefactor, size, mean, swapRB);
-      }
-      else {
-        returnValue = cv::dnn::blobFromImages(images, scalefactor, size, mean, swapRB);
-      }
+    if (isSingleImage) {
+      returnValue = cv::dnn::blobFromImage(image, scalefactor, size, mean, swapRB);
+    } else {
+      returnValue = cv::dnn::blobFromImages(images, scalefactor, size, mean, swapRB);
+    }
 #endif
-      return "";
-    }
+    return "";
+  }
 
-    v8::Local<v8::Value> getReturnValue() {
-      return Mat::Converter::wrap(returnValue);
-    }
+  v8::Local<v8::Value> getReturnValue() {
+    return Mat::Converter::wrap(returnValue);
+  }
 
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (
-        (isSingleImage && Mat::Converter::arg(0, &image, info)) ||
-        (!isSingleImage && Mat::ArrayConverter::arg(0, &images, info))
-      );
-    }
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (
+        (isSingleImage && Mat::Converter::arg(0, &image, info)) || (!isSingleImage && Mat::ArrayConverter::arg(0, &images, info)));
+  }
 
-    bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (
-        FF::DoubleConverter::optArg(1, &scalefactor, info) ||
-        Size::Converter::optArg(2, &size, info) ||
-        Vec3::Converter::optArg(3, &mean, info) ||
-        FF::BoolConverter::optArg(4, &swapRB, info) ||
-        FF::BoolConverter::optArg(5, &crop, info) ||
-        FF::IntConverter::optArg(6, &ddepth, info)
-      );
-    }
+  bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (
+        FF::DoubleConverter::optArg(1, &scalefactor, info) || Size::Converter::optArg(2, &size, info) || Vec3::Converter::optArg(3, &mean, info) || FF::BoolConverter::optArg(4, &swapRB, info) || FF::BoolConverter::optArg(5, &crop, info) || FF::IntConverter::optArg(6, &ddepth, info));
+  }
 
-    bool hasOptArgsObject(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return FF::isArgObject(info, 1);
-    }
+  bool hasOptArgsObject(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return FF::isArgObject(info, 1);
+  }
 
-    bool unwrapOptionalArgsFromOpts(Nan::NAN_METHOD_ARGS_TYPE info) {
-      v8::Local<v8::Object> opts = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-      return (
-        FF::DoubleConverter::optProp(&scalefactor, "scalefactor", opts) ||
-        FF::BoolConverter::optProp(&swapRB, "swapRB", opts) ||
-        Size::Converter::optProp(&size, "size", opts) ||
-        Vec3::Converter::optProp(&mean, "mean", opts) ||
-        FF::BoolConverter::optProp(&crop, "crop", opts) ||
-        FF::IntConverter::optProp(&ddepth, "ddepth", opts)
-      );
-    }
-  };
+  bool unwrapOptionalArgsFromOpts(Nan::NAN_METHOD_ARGS_TYPE info) {
+    v8::Local<v8::Object> opts = info[1]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+    return (
+        FF::DoubleConverter::optProp(&scalefactor, "scalefactor", opts) || FF::BoolConverter::optProp(&swapRB, "swapRB", opts) || Size::Converter::optProp(&size, "size", opts) || Vec3::Converter::optProp(&mean, "mean", opts) || FF::BoolConverter::optProp(&crop, "crop", opts) || FF::IntConverter::optProp(&ddepth, "ddepth", opts));
+  }
+};
 
 #if CV_VERSION_GREATER_EQUAL(3, 4, 0)
-  struct NMSBoxes : public CatchCvExceptionWorker {
-  public:
-    std::vector<cv::Rect> bboxes;
-    std::vector<float> scores;
-    float score_threshold;
-    float nms_threshold;
-    std::vector<int> indices;
-    float eta = 1.0f;
-    int top_k = 0;
+struct NMSBoxes : public CatchCvExceptionWorker {
+public:
+  std::vector<cv::Rect> bboxes;
+  std::vector<float> scores;
+  float score_threshold;
+  float nms_threshold;
+  std::vector<int> indices;
+  float eta = 1.0f;
+  int top_k = 0;
 
-    virtual ~NMSBoxes() {}
+  virtual ~NMSBoxes() {
+  }
 
-    std::string executeCatchCvExceptionWorker() {
-      cv::dnn::NMSBoxes(bboxes, scores, score_threshold, nms_threshold, indices);
-      return "";
-    }
+  std::string executeCatchCvExceptionWorker() {
+    cv::dnn::NMSBoxes(bboxes, scores, score_threshold, nms_threshold, indices);
+    return "";
+  }
 
-    v8::Local<v8::Value> getReturnValue() {
-      return FF::IntArrayConverter::wrap(indices);
-    }
+  v8::Local<v8::Value> getReturnValue() {
+    return FF::IntArrayConverter::wrap(indices);
+  }
 
-    bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-      return (
-        Rect::ArrayWithCastConverter<cv::Rect>::arg(0, &bboxes, info) ||
-        FF::FloatArrayConverter::arg(1, &scores, info) ||
-        FF::FloatConverter::arg(2, &score_threshold, info) ||
-        FF::FloatConverter::arg(3, &nms_threshold, info)
-      );
-    }
+  bool unwrapRequiredArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return (
+        Rect::ArrayWithCastConverter<cv::Rect>::arg(0, &bboxes, info) || FF::FloatArrayConverter::arg(1, &scores, info) || FF::FloatConverter::arg(2, &score_threshold, info) || FF::FloatConverter::arg(3, &nms_threshold, info));
+  }
 
-    bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
-        return FF::FloatConverter::optArg(4, &eta, info) || FF::IntConverter::optArg(5, &top_k, info);
-    }
+  bool unwrapOptionalArgs(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return FF::FloatConverter::optArg(4, &eta, info) || FF::IntConverter::optArg(5, &top_k, info);
+  }
 
-    bool hasOptArgsObject(Nan::NAN_METHOD_ARGS_TYPE info) {
-		  return FF::isArgObject(info, 4);
-	  }
+  bool hasOptArgsObject(Nan::NAN_METHOD_ARGS_TYPE info) {
+    return FF::isArgObject(info, 4);
+  }
 
-    bool unwrapOptionalArgsFromOpts(Nan::NAN_METHOD_ARGS_TYPE info) {
-		  v8::Local<v8::Object> opts = info[4]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
-		  return (
-        FF::FloatConverter::optProp(&eta, "eta", opts) ||
-        FF::IntConverter::optProp(&top_k, "topK", opts)
-      );
-	  }
-  };
+  bool unwrapOptionalArgsFromOpts(Nan::NAN_METHOD_ARGS_TYPE info) {
+    v8::Local<v8::Object> opts = info[4]->ToObject(Nan::GetCurrentContext()).ToLocalChecked();
+    return (
+        FF::FloatConverter::optProp(&eta, "eta", opts) || FF::IntConverter::optProp(&top_k, "topK", opts));
+  }
+};
 #endif
-}
+} // namespace DnnBindings
 
 #endif

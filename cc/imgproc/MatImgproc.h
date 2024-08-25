@@ -1,8 +1,8 @@
-#include "Mat.h"
-#include <opencv2/imgproc.hpp>
-#include "Moments.h"
 #include "Contour.h"
+#include "Mat.h"
+#include "Moments.h"
 #include "TermCriteria.h"
+#include <opencv2/imgproc.hpp>
 
 #ifndef __FF_MATIMGPROC_H__
 #define __FF_MATIMGPROC_H__

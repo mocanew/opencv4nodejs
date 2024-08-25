@@ -9,7 +9,9 @@ class FacemarkLBF : public Facemark {
 public:
   cv::Ptr<cv::face::Facemark> facemark;
 
-  void save(std::string path) { facemark->save(path); }
+  void save(std::string path) {
+    facemark->save(path);
+  }
 
   void load(std::string path) {
     cv::Algorithm::load<cv::face::FacemarkLBF>(path);
@@ -19,7 +21,9 @@ public:
   static NAN_METHOD(New);
 
   static Nan::Persistent<v8::FunctionTemplate> constructor;
-  cv::Ptr<cv::face::Facemark> getFacemark() { return facemark; }
+  cv::Ptr<cv::face::Facemark> getFacemark() {
+    return facemark;
+  }
 };
 
 #endif

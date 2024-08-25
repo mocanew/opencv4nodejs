@@ -5,7 +5,7 @@
 
 class XFeatures2d {
 public:
-	static NAN_MODULE_INIT(Init);
+  static NAN_MODULE_INIT(Init);
 };
 
 #endif
