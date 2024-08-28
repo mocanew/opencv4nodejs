@@ -23,7 +23,7 @@ if (toTest.io && !process.env.DOCKER_BUILD && !process.env.BINDINGS_DEBUG) {
 
   describe('constructor with specified caps', () => {
     it(`should throw when using wrong caps and valid video file ${path.resolve(getTestVideoPath())}`, () => {
-      expect(() => new cv.VideoCapture(getTestVideoPath(), cv.CAP_AVFOUNDATION)).to.throw();
+      expect(() => new cv.VideoCapture(getTestVideoPath(), cv.CAP_FIREWIRE)).to.throw();
     });
   });
 
