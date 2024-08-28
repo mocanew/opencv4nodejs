@@ -28,18 +28,18 @@ NAN_METHOD(VideoCapture::New) {
   FF_ASSERT_CONSTRUCT_CALL();
   VideoCapture* self = new VideoCapture();
 
-  uint32_t cap = cv::CAP_ANY;
+  uint32_t apiPreference = cv::CAP_ANY;
   if (info.Length() == 2) {
     if (info[1]->IsUint32()) {
-      cap = info[1]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+      apiPreference = info[1]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
     }
   }
 
   if (info[0]->IsString()) {
     self->path = FF::StringConverter::unwrapUnchecked(info[0]);
-    self->self.open(self->path, cap);
+    self->self.open(self->path, apiPreference);
   } else if (info[0]->IsUint32()) {
-    self->self.open(info[0]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), cap);
+    self->self.open(info[0]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), apiPreference);
   } else {
     return tryCatch.throwError("expected arg 0 to be path or device port");
   }
