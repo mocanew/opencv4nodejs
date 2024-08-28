@@ -29,10 +29,16 @@ NAN_METHOD(VideoCapture::New) {
   VideoCapture* self = new VideoCapture();
 
   uint32_t apiPreference = cv::CAP_ANY;
-  if (info.Length() == 2) {
+  if (info.Length() >= 2) {
     if (info[1]->IsUint32()) {
       apiPreference = info[1]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+    } else {
+      return tryCatch.throwError("Support for 'params' not implemented");
     }
+  }
+
+  if (info.Length() == 3) {
+    return tryCatch.throwError("Support for 'params' not implemented");
   }
 
   if (info[0]->IsString()) {
