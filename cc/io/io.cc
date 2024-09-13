@@ -42,6 +42,21 @@ NAN_MODULE_INIT(Io::Init) {
   FF_SET_JS_PROP(target, IMWRITE_JPEG_RST_INTERVAL, Nan::New<v8::Integer>(cv::IMWRITE_JPEG_RST_INTERVAL));
   FF_SET_JS_PROP(target, IMWRITE_JPEG_LUMA_QUALITY, Nan::New<v8::Integer>(cv::IMWRITE_JPEG_LUMA_QUALITY));
   FF_SET_JS_PROP(target, IMWRITE_JPEG_CHROMA_QUALITY, Nan::New<v8::Integer>(cv::IMWRITE_JPEG_CHROMA_QUALITY));
+
+  FF_SET_JS_PROP(target, IMWRITE_JPEG_SAMPLING_FACTOR, Nan::New<v8::Integer>(7)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_EXR_TYPE, Nan::New<v8::Integer>((3 << 4) + 0)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_HDR_COMPRESSION, Nan::New<v8::Integer>((5 << 4) + 0)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_TIFF_RESUNIT, Nan::New<v8::Integer>(256)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_TIFF_XDPI, Nan::New<v8::Integer>(257)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_TIFF_YDPI, Nan::New<v8::Integer>(258)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_TIFF_COMPRESSION, Nan::New<v8::Integer>(259)); // added 2024-13-09
+
+  FF_SET_JS_PROP(target, IMWRITE_JPEG_SAMPLING_FACTOR_411, Nan::New<v8::Integer>(0x411111)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_JPEG_SAMPLING_FACTOR_420, Nan::New<v8::Integer>(0x221111)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_JPEG_SAMPLING_FACTOR_422, Nan::New<v8::Integer>(0x211111)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_JPEG_SAMPLING_FACTOR_440, Nan::New<v8::Integer>(0x121111)); // added 2024-13-09
+  FF_SET_JS_PROP(target, IMWRITE_JPEG_SAMPLING_FACTOR_444, Nan::New<v8::Integer>(0x111111)); // added 2024-13-09
+
   FF_SET_JS_PROP(target, IMWRITE_PNG_COMPRESSION, Nan::New<v8::Integer>(cv::IMWRITE_PNG_COMPRESSION));
   FF_SET_JS_PROP(target, IMWRITE_PNG_STRATEGY, Nan::New<v8::Integer>(cv::IMWRITE_PNG_STRATEGY));
   FF_SET_JS_PROP(target, IMWRITE_PNG_BILEVEL, Nan::New<v8::Integer>(cv::IMWRITE_PNG_BILEVEL));

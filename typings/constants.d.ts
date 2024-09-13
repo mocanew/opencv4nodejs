@@ -717,25 +717,36 @@ export const IMREAD_ANYDEPTH: number;
 export const IMREAD_ANYCOLOR: number;
 export const IMREAD_LOAD_GDAL: number;
 
-export const IMWRITE_JPEG_QUALITY: number;
-export const IMWRITE_JPEG_PROGRESSIVE: number;
-export const IMWRITE_JPEG_OPTIMIZE: number;
-export const IMWRITE_JPEG_RST_INTERVAL: number;
-export const IMWRITE_JPEG_LUMA_QUALITY: number;
-export const IMWRITE_JPEG_CHROMA_QUALITY: number;
-export const IMWRITE_PNG_COMPRESSION: number;
-export const IMWRITE_PNG_STRATEGY: number;
-export const IMWRITE_PNG_BILEVEL: number;
-export const IMWRITE_PXM_BINARY: number;
-export const IMWRITE_WEBP_QUALITY: number;
+export const IMWRITE_JPEG_QUALITY: number; // 1
+export const IMWRITE_JPEG_PROGRESSIVE: number; // 2
+export const IMWRITE_JPEG_OPTIMIZE: number; // 3
+export const IMWRITE_JPEG_RST_INTERVAL: number; // 4
+export const IMWRITE_JPEG_LUMA_QUALITY: number; // 5
+export const IMWRITE_JPEG_CHROMA_QUALITY: number; // 6
+export const IMWRITE_JPEG_SAMPLING_FACTOR: number; // 7 added 2024-13-09
+export const IMWRITE_PNG_COMPRESSION: number; // 16
+export const IMWRITE_PNG_STRATEGY: number; // 17
+export const IMWRITE_PNG_BILEVEL: number; // 18
+export const IMWRITE_PXM_BINARY: number; // 32
+export const IMWRITE_EXR_TYPE: number; // (3 << 4) + 0 added 2024-13-09
+export const IMWRITE_WEBP_QUALITY: number; // 64
+export const IMWRITE_HDR_COMPRESSION: number; // (5 << 4) + 0 added 2024-13-09
+export const IMWRITE_TIFF_RESUNIT: number; // 256 added 2024-13-09
+export const IMWRITE_TIFF_XDPI: number; // 257 added 2024-13-09
+export const IMWRITE_TIFF_YDPI: number; // 258 added 2024-13-09
+export const IMWRITE_TIFF_COMPRESSION: number; // 259  added 2024-13-09
 
+export const IMWRITE_PNG_STRATEGY_DEFAULT: number; // 0
+export const IMWRITE_PNG_STRATEGY_FILTERED: number; // 1
+export const IMWRITE_PNG_STRATEGY_HUFFMAN_ONLY: number; // 2
+export const IMWRITE_PNG_STRATEGY_RLE: number; // 3
+export const IMWRITE_PNG_STRATEGY_FIXED: number; // 4
 
-export const IMWRITE_PNG_STRATEGY_DEFAULT: number;
-export const IMWRITE_PNG_STRATEGY_FILTERED: number;
-export const IMWRITE_PNG_STRATEGY_HUFFMAN_ONLY: number;
-export const IMWRITE_PNG_STRATEGY_RLE: number;
-export const IMWRITE_PNG_STRATEGY_FIXED: number;
-
+export const IMWRITE_JPEG_SAMPLING_FACTOR_411: number;
+export const IMWRITE_JPEG_SAMPLING_FACTOR_420: number;
+export const IMWRITE_JPEG_SAMPLING_FACTOR_422: number;
+export const IMWRITE_JPEG_SAMPLING_FACTOR_440: number;
+export const IMWRITE_JPEG_SAMPLING_FACTOR_444: number;
 
 export const IMREAD_REDUCED_GRAYSCALE_2: number;
 export const IMREAD_REDUCED_COLOR_2: number;
@@ -745,7 +756,7 @@ export const IMREAD_REDUCED_GRAYSCALE_8: number;
 export const IMREAD_REDUCED_COLOR_8: number;
 
 export const IMREAD_IGNORE_ORIENTATION: number;
-export const IMWRITE_PAM_TUPLETYPE: number;
+export const IMWRITE_PAM_TUPLETYPE: number; // 128
 export const IMWRITE_PAM_FORMAT_NULL: number;
 
 export const IMWRITE_PAM_FORMAT_BLACKANDWHITE: number;

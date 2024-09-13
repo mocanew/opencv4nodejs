@@ -81,12 +81,13 @@ test_script:
   - python --version
   - node --version
   # - choco install python --version=%PYTHON_VERSION% -y
-  - npm install -g pnpm@9.3.0
+  - npm install -g pnpm@9.10.0
   # - pnpm install -g node-gyp
   - cd c:\projects\opencv4nodejs
   - pnpm install --frozen-lockfile
   - pnpm run prepack
-  - pnpm run rebuild
+  # rebuild is already called im npm install
+  # - pnpm run rebuild
   # - npm link
   # - build-opencv rebuild
   # - cd c:\projects\opencv4nodejs\ci\envs && build-opencv rebuild && pnpm install && pnpm test
