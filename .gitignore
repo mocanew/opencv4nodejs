@@ -55,7 +55,6 @@ examples/src/YOLOv3-Training-Snowman-Detector/weights
 docs/
 lib/*.d.ts.map
 install/*.d.ts.map
-cjs/install/
 cjs/lib/
 esm/install/
 esm/lib/
