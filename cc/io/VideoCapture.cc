@@ -27,11 +27,25 @@ NAN_METHOD(VideoCapture::New) {
   FF::TryCatch tryCatch("VideoCapture::New");
   FF_ASSERT_CONSTRUCT_CALL();
   VideoCapture* self = new VideoCapture();
+
+  uint32_t apiPreference = cv::CAP_ANY;
+  if (info.Length() >= 2) {
+    if (info[1]->IsUint32()) {
+      apiPreference = info[1]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value();
+    } else {
+      return tryCatch.throwError("Support for 'params' not implemented");
+    }
+  }
+
+  if (info.Length() == 3) {
+    return tryCatch.throwError("Support for 'params' not implemented");
+  }
+
   if (info[0]->IsString()) {
     self->path = FF::StringConverter::unwrapUnchecked(info[0]);
-    self->self.open(self->path);
+    self->self.open(self->path, apiPreference);
   } else if (info[0]->IsUint32()) {
-    self->self.open(info[0]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value());
+    self->self.open(info[0]->ToUint32(Nan::GetCurrentContext()).ToLocalChecked()->Value(), apiPreference);
   } else {
     return tryCatch.throwError("expected arg 0 to be path or device port");
   }

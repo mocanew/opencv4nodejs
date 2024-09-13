@@ -1,7 +1,7 @@
 import { Mat } from './Mat.d';
 
 export class VideoCapture {
-  constructor(filePathOrdevicePort: string | number);
+  constructor(filePathOrdevicePort: string | number, apiPreference?: number);
   get(property: number): number;
   read(): Mat;
   readAsync(): Promise<Mat>;
