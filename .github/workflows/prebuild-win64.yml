@@ -2,7 +2,7 @@ name: Use openCV from Chocolatey
 
 on:
   push:
-    branches: [ "master", "dev" ]
+    branches: [ "master", "dev", "*" ]
     paths:
       - "cc/**"
       - "install/**"
