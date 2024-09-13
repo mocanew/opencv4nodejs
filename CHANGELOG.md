@@ -1,5 +1,8 @@
 # changelog
 
+## Version 7.1.2
+- @see github
+
 ## Version 7.1.1
 - update deps versions
 - support for vcpkg binary
