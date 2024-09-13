@@ -86,7 +86,8 @@ test_script:
   - cd c:\projects\opencv4nodejs
   - pnpm install --frozen-lockfile
   - pnpm run prepack
-  - pnpm run rebuild
+  # rebuild is already called im npm install
+  # - pnpm run rebuild
   # - npm link
   # - build-opencv rebuild
   # - cd c:\projects\opencv4nodejs\ci\envs && build-opencv rebuild && pnpm install && pnpm test
