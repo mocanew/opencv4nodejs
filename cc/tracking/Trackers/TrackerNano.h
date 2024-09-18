@@ -14,7 +14,7 @@ public:
   cv::Ptr<cv::TrackerNano> tracker;
 
   static NAN_MODULE_INIT(Init);
-  static NAN_METHOD(New);
+  static NAN_METHOD(New);   // The New method can accept model paths as parameters
 #if CV_VERSION_GREATER_EQUAL(4, 5, 2)
   static NAN_METHOD(Clear);
   static NAN_METHOD(Init);

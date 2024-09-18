@@ -77,17 +77,25 @@ NAN_METHOD(TrackerNano::New) {
   FF::TryCatch tryCatch("TrackerNano::New");
   FF_ASSERT_CONSTRUCT_CALL();
 
-  // Default model paths
+  // Initialize default model paths
   std::string backboneModelPath = "backbone.onnx";
   std::string neckheadModelPath = "neckhead.onnx";
 
-  // Initialize TrackerNano with default models
+  // Check if user passed model paths as arguments
+  if (info.Length() > 0 && info[0]->IsString()) {
+    backboneModelPath = *v8::String::Utf8Value(info[0]->ToString());
+  }
+  if (info.Length() > 1 && info[1]->IsString()) {
+    neckheadModelPath = *v8::String::Utf8Value(info[1]->ToString());
+  }
+
+  // Initialize TrackerNano with provided or default models
   TrackerNano* self = new TrackerNano();
 #if CV_VERSION_GREATER_EQUAL(3, 3, 0)
-  // Create tracker with default ONNX models
+  // Create tracker with provided ONNX models
   cv::TrackerNano::Params params;
-  params.backbone = backboneModelPath;  // Setting the default backbone model
-  params.neckhead = neckheadModelPath;  // Setting the default neck-head model
+  params.backbone = backboneModelPath;  // Setting the backbone model from argument or default
+  params.neckhead = neckheadModelPath;  // Setting the neck-head model from argument or default
 
   // Create the tracker instance with these parameters
   self->tracker = cv::TrackerNano::create(params);
