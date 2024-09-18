@@ -86,8 +86,8 @@ NAN_METHOD(TrackerNano::New) {
 #if CV_VERSION_GREATER_EQUAL(3, 3, 0)
   // Create tracker with default ONNX models
   cv::TrackerNano::Params params;
-  params.backboneModel = backboneModelPath;  // Setting the default backbone model
-  params.neckheadModel = neckheadModelPath;  // Setting the default neck-head model
+  params.backbone = backboneModelPath;  // Setting the default backbone model
+  params.neckhead = neckheadModelPath;  // Setting the default neck-head model
 
   // Create the tracker instance with these parameters
   self->tracker = cv::TrackerNano::create(params);
