@@ -77,16 +77,21 @@ NAN_METHOD(TrackerNano::New) {
   FF::TryCatch tryCatch("TrackerNano::New");
   FF_ASSERT_CONSTRUCT_CALL();
 
-  // Initialize default model paths
+  // Default model paths
   std::string backboneModelPath = "backbone.onnx";
   std::string neckheadModelPath = "neckhead.onnx";
 
-  // Check if user passed model paths as arguments
-  if (info.Length() > 0 && info[0]->IsString()) {
-    backboneModelPath = *v8::String::Utf8Value(info[0]->ToString());
+  // Check if the user passed model paths as arguments
+  if (info.Length() > 0) {
+    if (FF::StringConverter::arg(0, &backboneModelPath, info)) {
+      return tryCatch.reThrow();
+    }
   }
-  if (info.Length() > 1 && info[1]->IsString()) {
-    neckheadModelPath = *v8::String::Utf8Value(info[1]->ToString());
+
+  if (info.Length() > 1) {
+    if (FF::StringConverter::arg(1, &neckheadModelPath, info)) {
+      return tryCatch.reThrow();
+    }
   }
 
   // Initialize TrackerNano with provided or default models
@@ -105,7 +110,7 @@ NAN_METHOD(TrackerNano::New) {
 
   self->Wrap(info.Holder());
   info.GetReturnValue().Set(info.Holder());
-};
+}
 
 #endif
 
