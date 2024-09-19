@@ -4,14 +4,10 @@
 
 #include "TrackerNano.h"
 
-#if CV_VERSION_GREATER_EQUAL(3, 2, 0)
+// Ensure that this code is only compiled if OpenCV is 4.7.0 or greater
+#if CV_VERSION_GREATER_EQUAL(4, 7, 0)
 
 Nan::Persistent<v8::FunctionTemplate> TrackerNano::constructor;
-
-#if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-
-NAN_METHOD(TrackerNano::Clear) {
-}
 
 NAN_METHOD(TrackerNano::Init) {
   FF::TryCatch tryCatch("TrackerNano::Init");
@@ -48,24 +44,13 @@ NAN_METHOD(TrackerNano::Update) {
   }
 }
 
-NAN_METHOD(TrackerNano::GetModel) {
-  // TBD
-}
-
-#endif
-
 NAN_MODULE_INIT(TrackerNano::Init) {
   v8::Local<v8::FunctionTemplate> ctor = Nan::New<v8::FunctionTemplate>(TrackerNano::New);
   v8::Local<v8::ObjectTemplate> instanceTemplate = ctor->InstanceTemplate();
 
-#if CV_VERSION_GREATER_EQUAL(4, 5, 2)
-  Nan::SetPrototypeMethod(ctor, "clear", TrackerNano::Clear);
   Nan::SetPrototypeMethod(ctor, "init", TrackerNano::Init);
   Nan::SetPrototypeMethod(ctor, "update", TrackerNano::Update);
-  Nan::SetPrototypeMethod(ctor, "getModel", TrackerNano::GetModel);
-#else
-  Tracker::Init(ctor);
-#endif
+
   constructor.Reset(ctor);
   ctor->SetClassName(FF::newString("TrackerNano"));
   instanceTemplate->SetInternalFieldCount(1);
@@ -96,17 +81,14 @@ NAN_METHOD(TrackerNano::New) {
 
   // Initialize TrackerNano with provided or default models
   TrackerNano* self = new TrackerNano();
-#if CV_VERSION_GREATER_EQUAL(3, 3, 0)
+
   // Create tracker with provided ONNX models
   cv::TrackerNano::Params params;
-  params.backbone = backboneModelPath;  // Setting the backbone model from argument or default
-  params.neckhead = neckheadModelPath;  // Setting the neck-head model from argument or default
+  params.backbone = backboneModelPath;
+  params.neckhead = neckheadModelPath;
 
   // Create the tracker instance with these parameters
   self->tracker = cv::TrackerNano::create(params);
-#else
-  self->tracker = cv::TrackerNano::createTracker();
-#endif
 
   self->Wrap(info.Holder());
   info.GetReturnValue().Set(info.Holder());
