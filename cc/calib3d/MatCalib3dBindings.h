@@ -781,10 +781,11 @@ public:
   void setup(cv::Mat self) {
     auto cameraMatrix = req<Mat::Converter>();
     auto distCoeffs = req<Mat::Converter>();
+    auto cameraMatrixNew = opt<Mat::Converter>("newCameraMatrix", cv::noArray().getMat());
     auto undistortedMat = ret<Mat::Converter>("undistortedMat");
 
     executeBinding = [=]() {
-      cv::undistort(self, undistortedMat->ref(), cameraMatrix->ref(), distCoeffs->ref());
+      cv::undistort(self, undistortedMat->ref(), cameraMatrix->ref(), distCoeffs->ref(), cameraMatrixNew->ref());
     };
   };
 };

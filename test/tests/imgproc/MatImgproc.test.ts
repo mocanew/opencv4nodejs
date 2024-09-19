@@ -1499,11 +1499,13 @@ if (toTest.imgproc) {
     describe('undistort', () => {
       const cameraMatrix = new cv.Mat([[1, 0, 10], [0, 1, 10], [0, 0, 1]], cv.CV_32F);
       const distCoeffs = new cv.Mat([[0.1, 0.1, 1, 1]], cv.CV_32F);
+      const cameraMatrixNew = new cv.Mat([[1, 0, 10], [0, 1, 10], [0, 0, 1]], cv.CV_32F);
       generateAPITests({
         getDut: () => new cv.Mat(20, 20, cv.CV_8U, 0.5),
         methodName: 'undistort',
         methodNameSpace: 'Mat',
         getRequiredArgs: () => ([cameraMatrix, distCoeffs]),
+        getOptionalArg: () => cameraMatrixNew,
         expectOutput: (res: unknown) => {
           expect(res).to.be.instanceOf(cv.Mat);
         },
