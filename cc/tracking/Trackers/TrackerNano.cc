@@ -13,13 +13,22 @@ NAN_METHOD(TrackerNano::Init) {
   FF::TryCatch tryCatch("TrackerNano::Init");
   cv::Mat image;
   cv::Rect2d boundingBox;
-  if (
-      Mat::Converter::arg(0, &image, info) || Rect::Converter::arg(1, &boundingBox, info)) {
+
+  // Check if the arguments are correctly passed
+  if (Mat::Converter::arg(0, &image, info) || Rect::Converter::arg(1, &boundingBox, info)) {
     return tryCatch.reThrow();
   }
 
-  TrackerNano::unwrapThis(info)->getTracker()->init(image, boundingBox);
+  try {
+    TrackerNano::unwrapThis(info)->getTracker()->init(image, boundingBox);
+    
+    // If no error is thrown, return true
+    info.GetReturnValue().Set(Nan::True());
+  } catch (const std::exception& e) {
+    return tryCatch.throwError(e.what());
+  }
 }
+
 
 NAN_METHOD(TrackerNano::Update) {
   FF::TryCatch tryCatch("TrackerNano::Update");
