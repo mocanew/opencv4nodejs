@@ -779,9 +779,10 @@ export class Mat {
    *
    * @param cameraMatrix Input camera matrix
    * @param distCoeffs 	Input vector of distortion coefficients (k1,k2,p1,p2[,k3[,k4,k5,k6[,s1,s2,s3,s4[,τx,τy]]]]) of 4, 5, 8, 12 or 14 elements. If the vector is NULL/empty, the zero distortion coefficients are assumed.
+   * @param newCameraMatrix Camera matrix of the distorted image. By default, it is the same as cameraMatrix but you may additionally scale and shift the result by using a different matrix.
    */
-  undistort(cameraMatrix: Mat, distCoeffs: Mat): Mat;
-  undistortAsync(cameraMatrix: Mat, distCoeffs: Mat): Promise<Mat>;
+  undistort(cameraMatrix: Mat, distCoeffs: Mat, newCameraMatrix?: Mat): Mat;
+  undistortAsync(cameraMatrix: Mat, distCoeffs: Mat, newCameraMatrix?: Mat): Promise<Mat>;
   validateDisparity(cost: Mat, minDisparity: number, numberOfDisparities: number, disp12MaxDisp?: number): void;
   validateDisparityAsync(cost: Mat, minDisparity: number, numberOfDisparities: number, disp12MaxDisp?: number): Promise<void>;
   warpAffine(transforMationMatrix: Mat, size?: Size, flags?: number, borderMode?: number, borderValue?: Vec3): Mat;
