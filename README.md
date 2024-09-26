@@ -2,7 +2,7 @@
 
 [![NPM Version](https://img.shields.io/npm/v/@u4/opencv4nodejs.svg?style=flat)](https://www.npmjs.org/package/@u4/opencv4nodejs)
 
-## Getting starts
+## Getting started
 
 Opencv4nodejs can be linked to a prebuild openCV 3 or 4. or can build its own openCV using [@u4/opencv-build](https://www.npmjs.com/package/@u4/opencv-build),
 In this case, you have to choose which version you want to link.

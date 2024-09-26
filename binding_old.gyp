@@ -90,6 +90,7 @@
 			"cc/tracking/Trackers/TrackerMedianFlow.cc",
 			"cc/tracking/Trackers/TrackerTLD.cc",
 			"cc/tracking/Trackers/TrackerGOTURN.cc",
+			"cc/tracking/Trackers/TrackerNano.cc",
 			"cc/tracking/Trackers/TrackerCSRT.cc",
 			"cc/tracking/Trackers/TrackerCSRTParams.cc",
 			"cc/tracking/Trackers/TrackerMOSSE.cc",
