@@ -24,6 +24,10 @@
 #include "./Trackers/TrackerCSRT.h"
 #endif
 
+#if CV_VERSION_GREATER_EQUAL(4, 7, 0)
+#include "./Trackers/TrackerNano.h"
+#endif
+
 NAN_MODULE_INIT(Tracking::Init) {
   TrackerBoosting::Init(target);
   TrackerMedianFlow::Init(target);
@@ -49,6 +53,10 @@ NAN_MODULE_INIT(Tracking::Init) {
 #endif
 #if CV_VERSION_GREATER_EQUAL(3, 4, 1)
   TrackerCSRT::Init(target);
+#endif
+
+#if CV_VERSION_GREATER_EQUAL(4, 7 , 0)
+  TrackerNano::Init(target);
 #endif
 };
 
