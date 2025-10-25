@@ -855,6 +855,34 @@ export const QT_CHECKBOX: number;
 export const QT_RADIOBOX: number;
 export const QT_NEW_BUTTONBAR: number;
 
+// Aruco
+export declare const DICT_4X4_50: number;
+export declare const DICT_4X4_100: number;
+export declare const DICT_4X4_250: number;
+export declare const DICT_4X4_1000: number;
+export declare const DICT_5X5_50: number;
+export declare const DICT_5X5_100: number;
+export declare const DICT_5X5_250: number;
+export declare const DICT_5X5_1000: number;
+export declare const DICT_6X6_50: number;
+export declare const DICT_6X6_100: number;
+export declare const DICT_6X6_250: number;
+export declare const DICT_6X6_1000: number;
+export declare const DICT_7X7_50: number;
+export declare const DICT_7X7_100: number;
+export declare const DICT_7X7_250: number;
+export declare const DICT_7X7_1000: number;
+export declare const DICT_ARUCO_ORIGINAL: number;
+export declare const DICT_APRILTAG_16h5: number;
+export declare const DICT_APRILTAG_25h9: number;
+export declare const DICT_APRILTAG_36h10: number;
+export declare const DICT_APRILTAG_36h11: number;
+export declare const DICT_ARUCO_MIP_36h12: number;
+
+export declare const CORNER_REFINE_NONE: number;
+export declare const CORNER_REFINE_SUBPIX: number;
+export declare const CORNER_REFINE_CONTOUR: number;
+export declare const CORNER_REFINE_APRILTAG: number;
 
 export const termCriteria: {
   COUNT: number;

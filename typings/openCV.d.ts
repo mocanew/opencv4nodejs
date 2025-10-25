@@ -1,5 +1,6 @@
 export * from './AGASTDetector';
 export * from './AKAZEDetector';
+export * from './aruco';
 export * from './BFMatcher';
 export * from './BRISKDetector';
 export * from './BackgroundSubtractorKNN';
